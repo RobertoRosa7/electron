@@ -20,7 +20,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/primeiro-app",
+            "outputPath": "dist",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -127,5 +127,8 @@
       }
     }
   },
-  "defaultProject": "primeiro-app"
+  "defaultProject": "primeiro-app",
+  "cli": {
+    "analytics": "ea295eb6-2ff5-4299-b81d-57b744a47e77"
+  }
 }
