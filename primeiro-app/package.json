@@ -11,15 +11,13 @@
   "description": "the first app in electron using angular",
   "scripts": {
     "ng": "ng",
-    "start": "electron-forge start",
+    "start": "ng serve",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
     "electron": "electron .",
-    "build:electron": "ng build --base-href ./ && electron-forge start",
-    "package": "electron-forge package",
-    "make": "electron-forge make",
+    "build:electron": "ng build --base-href ./ && electron .",
     "build:linux": "electron-builder --linux"
   },
   "private": true,
@@ -32,7 +30,6 @@
     "@angular/platform-browser": "~11.0.5",
     "@angular/platform-browser-dynamic": "~11.0.5",
     "@angular/router": "~11.0.5",
-    "electron-squirrel-startup": "^1.0.0",
     "rxjs": "~6.6.0",
     "tslib": "^2.0.0",
     "zone.js": "~0.10.2"
@@ -41,11 +38,6 @@
     "@angular-devkit/build-angular": "~0.1100.5",
     "@angular/cli": "~11.0.5",
     "@angular/compiler-cli": "~11.0.5",
-    "@electron-forge/cli": "^6.0.0-beta.54",
-    "@electron-forge/maker-deb": "^6.0.0-beta.54",
-    "@electron-forge/maker-rpm": "^6.0.0-beta.54",
-    "@electron-forge/maker-squirrel": "^6.0.0-beta.54",
-    "@electron-forge/maker-zip": "^6.0.0-beta.54",
     "@types/jasmine": "~3.6.0",
     "@types/node": "^12.11.1",
     "aws-sdk": "^2.828.0",
@@ -71,7 +63,7 @@
         {
           "name": "@electron-forge/maker-squirrel",
           "config": {
-            "name": "primeiro_app"
+            "name": "Primeito App"
           }
         },
         {

@@ -6,13 +6,11 @@ const S3 = require("aws-sdk/clients/s3");
 // console.log(S3); // show all methods and service from nodes
 // console.log(root); // print all list dir
 
-let win;
-
 // create a window
 function createWindow() {
   // new instance of window
-  win = new BrowserWindow({
-    width: 1358,
+  let win = new BrowserWindow({
+    width: 1368,
     height: 768,
     backgroundColor: "#FFFFFF",
     icon: `file://${__dirname}/dist/assets/logo-angular.png`,
@@ -32,13 +30,15 @@ function createWindow() {
   win.on("closed", function () {
     win = null;
   });
+
+  // win.setProgressBar(0.5); // set progress bar on icon dock
 }
 
 // create a new notification
 function createNotification() {
   const notification = {
-    title: "Simple notification",
-    body: "This is a simple notification from Electron App",
+    title: "Bem vindo(a) ao Primeiro App",
+    body: "Seu aplicativo foi inicializado com sucesso.",
   };
   new Notification(notification).show();
 }
@@ -60,6 +60,18 @@ app.on("activate", () => {
     createWindow();
   }
 });
+
+// BUG - app.setUserTasks is not a function
+// app.setUserTasks([
+//   {
+//     program: process.execPath,
+//     arguments: "--new-window",
+//     iconPath: process.execPath,
+//     iconIndex: 0,
+//     title: "New Window",
+//     description: "Create a new window",
+//   }
+// ]);
 
 // app.on("activate", function () {
 //   // on macOS specific close process
