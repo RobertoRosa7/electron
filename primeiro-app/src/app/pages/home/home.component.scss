@@ -1,5 +1,3 @@
-@import '../../../styles.scss';
-
 .home {
   .title h1 {
     width: 100%;
@@ -8,10 +6,8 @@
   }
   .content-box{
     margin: 20px auto 0 auto;
-    background-color: $light-bg-card-theme;
     border-radius: 8px;
     padding: 30px 30px 40px 30px;
     max-width: 800px;
-    color: $light-color-theme
   }
 }
