@@ -1,13 +1,17 @@
 <mat-drawer-container class="container">
-  <mat-drawer mode="side" opened>Menu</mat-drawer>
+  <mat-drawer mode="side" opened>
+    <!-- dentro do sidebaer -->
+    Menu
+  </mat-drawer>
   <mat-drawer-content>
     <mat-toolbar>
       <mat-toolbar-row>
-        <span>My app</span>
+        <!-- <span>My app</span> -->
         <span style="flex: 1 1 auto"></span>
         <mat-slide-toggle [checked]="isDark" (change)="toggleDarkMode($event)">Dark Mode</mat-slide-toggle>
       </mat-toolbar-row>
     </mat-toolbar>
+    <!-- dentro do conteudo geral -->
     <router-outlet></router-outlet>
   </mat-drawer-content>
 </mat-drawer-container>
