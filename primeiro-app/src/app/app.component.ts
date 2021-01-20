@@ -1,4 +1,4 @@
-import { Component, HostBinding } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-root',
@@ -6,22 +6,8 @@ import { Component, HostBinding } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  // private storedTheme: string | null = localStorage.getItem('switch-theme')
   private isDark: boolean = false
 
-  @HostBinding('class')
-  get themeMode() {
-    return this.isDark ? 'theme-dark' : 'theme-light'
+  constructor() {
   }
-  // public switchTheme() {
-  //   if (this.storedTheme === 'theme-dark') {
-  //     // toggle update local storage
-  //     localStorage.setItem('switch-theme', 'theme-light')
-  //     this.storedTheme = localStorage.getItem('switch-theme')
-  //   } else {
-  //     // toggle update local storage
-  //     localStorage.setItem('switch-theme', 'theme-light')
-  //     this.storedTheme = localStorage.getItem('switch-theme')
-  //   }
-  // }
 }
