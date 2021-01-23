@@ -1,17 +1,25 @@
+<mat-toolbar>
+  <mat-toolbar-row class="app-custom-toolbar-row">
+    <button mat-icon-button (click)="drawer.toggle()">
+      <mat-icon>menu</mat-icon>
+    </button>
+    <!-- <span style="flex: 1 1 auto"></span> -->
+    <mat-slide-toggle [checked]="isDark" (change)="toggleDarkMode($event)">Dark Mode</mat-slide-toggle>
+  </mat-toolbar-row>
+</mat-toolbar>
+
 <mat-drawer-container class="container">
-  <mat-drawer mode="side" opened>
-    <!-- dentro do sidebaer -->
-    Menu
+  <mat-drawer #drawer mode="side" opened>
+    <ul class="app-menu-list">
+      <li *ngFor="let item of menuList" [routerLink]="item.link">
+        <a>
+          <mat-icon>{{item.icon}}</mat-icon>
+        </a>
+        <span>{{item.name}}</span>
+      </li>
+    </ul>
   </mat-drawer>
   <mat-drawer-content>
-    <mat-toolbar>
-      <mat-toolbar-row>
-        <!-- <span>My app</span> -->
-        <span style="flex: 1 1 auto"></span>
-        <mat-slide-toggle [checked]="isDark" (change)="toggleDarkMode($event)">Dark Mode</mat-slide-toggle>
-      </mat-toolbar-row>
-    </mat-toolbar>
-    <!-- dentro do conteudo geral -->
     <router-outlet></router-outlet>
   </mat-drawer-content>
 </mat-drawer-container>

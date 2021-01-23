@@ -64,13 +64,23 @@ $mat-accent-pallete: mat-palette($mat-accent-schema);
 $app-light-theme: mat-light-theme($mat-primary-pallete, $mat-accent-pallete);
 $app-dark-theme: mat-dark-theme($mat-primary-pallete, $mat-accent-pallete);
 
+$bg-dark-mode: #303030;
+$color-dark-mode: white;
+
 .light-mode {
   @include angular-material-theme($app-light-theme);
+  li:active {
+    background: #c3c3c350;
+  }
 }
+
 .dark-mode {
   @include angular-material-theme($app-dark-theme);
-  background: #303030;
-  color: white;
+  background: $bg-dark-mode;
+  color: $color-dark-mode;
+  li:active {
+    background: #10101050;
+  }
 }
 
 * {
@@ -80,6 +90,19 @@ $app-dark-theme: mat-dark-theme($mat-primary-pallete, $mat-accent-pallete);
 }
 
 body {
-  margin: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+::-webkit-scrollbar-track {
+  background: #ff408190;
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #c2bcbc;
+  border-radius: 10px;
 }

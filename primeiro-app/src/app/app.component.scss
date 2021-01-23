@@ -1,3 +1,40 @@
+.app-custom-toolbar-row {
+  display: flex;
+  justify-content: space-between;
+}
 .container {
-  height: inherit;
+  height: 100vh;
+  ::ng-deep .mat-drawer-inner-container {
+    min-width: 75px;
+  }
+
+  .app-menu-list {
+    list-style: none;
+    flex-direction: column;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    li:active,
+    li:focus,
+    li a:focus,
+    li a:active {
+      outline: none;
+      border: none;
+    }
+    li {
+     width: 100%;
+     text-align: center;
+    }
+    li a {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 60px;
+      cursor: pointer;
+    }
+    li span {
+      font-size: 12px;
+    }
+  }
 }

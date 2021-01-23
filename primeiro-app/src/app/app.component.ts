@@ -10,6 +10,13 @@ export class AppComponent {
   public isDark: boolean
   private renderer: Renderer2
   private colorTheme: string = ''
+  public menuList: any[] = [
+    {
+      link: '/',
+      name: 'Dashboard',
+      icon: 'dashboard'
+    },
+  ]
 
   constructor(
     private renderedFactory: RendererFactory2

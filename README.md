@@ -10,3 +10,7 @@
 - [x] Preparação para o build em Linux platform
 - [x] Criando os primeiros components - page home
 - [x] Configurando notificação com electron
+
+###### 23/01/2021
+
+- [x] Custom sidebar com icon e menu
