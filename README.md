@@ -14,3 +14,7 @@
 ###### 23/01/2021
 
 - [x] Custom sidebar com icon e menu
+
+##### 26/01/2021
+
+- [x] Abstraindo módulos e criando componentização

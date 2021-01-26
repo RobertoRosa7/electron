@@ -1,4 +1,7 @@
-const { app, BrowserWindow, Notification } = require("electron");
+const { app, BrowserWindow } = require("electron");
+const createWindow = require("./electron/window/window");
+const createNotification = require("./electron/notification/notification");
+
 const fs = require("fs");
 const root = fs.readdirSync("./");
 const S3 = require("aws-sdk/clients/s3");
@@ -6,44 +9,6 @@ const S3 = require("aws-sdk/clients/s3");
 // console.log(S3); // show all methods and service from nodes
 // console.log(root); // print all list dir
 
-// create a window
-function createWindow() {
-  // new instance of window
-  let win = new BrowserWindow({
-    width: 1368,
-    height: 768,
-    backgroundColor: "#FFFFFF",
-    icon: `file://${__dirname}/dist/assets/logo-angular.png`,
-    webPreferences: {
-      nodeIntegration: true,
-    },
-  });
-
-  // console.log(`file://${__dirname}/dist/assets/favicon.ico`)
-
-  win.loadURL(`file://${__dirname}/dist/index.html`);
-
-  // uncomment this line to open devtools
-  // win.webContents.openDevTools()
-
-  // Event when the window is closed
-  win.on("closed", function () {
-    win = null;
-  });
-
-  // win.setProgressBar(0.5); // set progress bar on icon dock
-}
-
-// create a new notification
-function createNotification() {
-  const notification = {
-    title: "Bem vindo(a) ao Primeiro App",
-    body: "Seu aplicativo foi inicializado com sucesso.",
-  };
-  new Notification(notification).show();
-}
-
-// create window on electrion initialization
 // app.on("ready", createWindow);
 app.whenReady().then(createWindow).then(createNotification);
 
