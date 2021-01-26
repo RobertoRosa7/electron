@@ -1,7 +1,4 @@
 .home {
-  max-width: 1920px;
-  margin: 0 auto;
-
   .title h1 {
     width: 100%;
     text-align: center;
@@ -10,7 +7,6 @@
   .content-box{
     margin: 20px auto 0 auto;
     border-radius: 8px;
-    padding: 30px 30px 40px 30px;
-    max-width: 800px;
+    max-width: 1024px;
   }
 }
