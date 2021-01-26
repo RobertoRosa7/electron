@@ -10,6 +10,8 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon'
+import { NgxElectronModule } from 'ngx-electron'
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -24,7 +26,8 @@ import { MatIconModule } from '@angular/material/icon'
     MatButtonModule,
     MatDialogModule,
     MatToolbarModule,
-    MatIconModule
+    MatIconModule,
+    NgxElectronModule
   ],
   providers: [],
   bootstrap: [AppComponent]

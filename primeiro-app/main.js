@@ -1,4 +1,4 @@
-const { app, BrowserWindow } = require("electron");
+const { app, BrowserWindow, ipcMain, ipcRenderer } = require("electron");
 const createWindow = require("./electron/window/window");
 const createNotification = require("./electron/notification/notification");
 
@@ -11,6 +11,15 @@ const S3 = require("aws-sdk/clients/s3");
 
 // app.on("ready", createWindow);
 app.whenReady().then(createWindow).then(createNotification);
+
+ipcMain.on("ping", (event, messageFromAngular) => {
+  console.log("this is a message from Angular: ", messageFromAngular);
+
+  let user = { email: "desenvolvedor@1245.com.br", password: "teste001" };
+  event.sender.send("pong", "data from electron");
+});
+
+// ipcRenderer.send('ping', 'This is a message to Angular')
 
 // Quit when all windows are closed
 app.on("window-all-closed", () => {

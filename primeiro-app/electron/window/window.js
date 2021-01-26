@@ -18,15 +18,15 @@ module.exports = function createDefaultWindow() {
 
   // console.log(`file://${__dirname}/dist/assets/favicon.ico`)
 
-  // win.loadURL(`file://${__dirname}/../../dist/index.html`);
-  win.loadURL("http://localhost:4200");
+  win.loadURL(`file://${__dirname}/../../dist/index.html`);
+  // win.loadURL("http://localhost:4200");
 
   // menu statusbar
   // menu();
   win.setMenu(null)
 
   // uncomment this line to open devtools
-  // win.webContents.openDevTools()
+  win.webContents.openDevTools()
 
   // system tray - mini icon on system tray
   new Tray(`${__dirname}/../../dist/assets/logo-angular.png`);
