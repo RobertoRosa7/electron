@@ -2,10 +2,11 @@ const { BrowserWindow, Tray } = require("electron");
 const menu = require("../menu/menu");
 
 const windowSettings = {
-  width: 1368,
-  height: 768,
+  width: 800,
+  height: 600,
   backgroundColor: "#FFFFFF",
-  icon: `file://${__dirname}/../../dist/assets/logo-angular.png`,
+  name: "Primeiro App",
+  icon: `${__dirname}/../../dist/assets/logo-angular.png`,
   webPreferences: {
     nodeIntegration: true,
   },
@@ -17,13 +18,15 @@ module.exports = function createDefaultWindow() {
 
   // console.log(`file://${__dirname}/dist/assets/favicon.ico`)
 
-  win.loadURL(`file://${__dirname}/../../dist/index.html`);
+  // win.loadURL(`file://${__dirname}/../../dist/index.html`);
+  win.loadURL("http://localhost:4200");
 
   // menu statusbar
-  menu();
+  // menu();
+  win.setMenu(null)
 
   // uncomment this line to open devtools
-  // win.webContents.openDevTools()
+  win.webContents.openDevTools()
 
   // system tray - mini icon on system tray
   new Tray(`${__dirname}/../../dist/assets/logo-angular.png`);

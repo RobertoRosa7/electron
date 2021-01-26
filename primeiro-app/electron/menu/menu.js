@@ -1,4 +1,4 @@
-const { Menu } = require("electron");
+const { Menu, shell } = require("electron");
 
 module.exports = function menu() {
   const isMac = process.platform === "darwin";
@@ -10,15 +10,15 @@ module.exports = function menu() {
           {
             label: app.name,
             submenu: [
-              { role: "about" },
+              { role: "about", label: "sobre" },
               { type: "separator" },
-              { role: "services" },
+              { role: "services", label: "serviços" },
               { type: "separator" },
-              { role: "hide" },
-              { role: "hideothers" },
-              { role: "unhide" },
-              { type: "separator" },
-              { role: "quit" },
+              { role: "hide", label: "esconder" },
+              // { role: "hideothers" },
+              // { role: "unhide" },
+              // { type: "separator" },
+              { role: "quit", label: "Sair" },
             ],
           },
         ]
@@ -28,8 +28,8 @@ module.exports = function menu() {
       label: "Arquivo",
       submenu: [
         isMac
-          ? { role: "close", label: "Fechar" }
-          : { role: "quit", label: "Fechar" },
+          ? { role: "close", label: "Sair" }
+          : { role: "quit", label: "Sair" },
       ],
     },
     // { role: 'editMenu' }
@@ -62,43 +62,46 @@ module.exports = function menu() {
     },
     // { role: 'viewMenu' }
     {
-      label: "Visualizar",
+      label: "Ver",
       submenu: [
-        { role: "reload" },
-        { role: "forceReload" },
-        { role: "toggleDevTools" },
+        { role: "reload", label: "Recarregar" },
+        // { role: "forceReload",  },
+        { role: "toggleDevTools", label: "Ferramenta de desenvolvimento" },
         { type: "separator" },
-        { role: "resetZoom" },
-        { role: "zoomIn" },
-        { role: "zoomOut" },
+        // { role: "resetZoom" },
+        // { role: "zoomIn" },
+        // { role: "zoomOut" },
         { type: "separator" },
-        { role: "togglefullscreen" },
+        { role: "togglefullscreen", label: "Tela inteira" },
       ],
     },
     // { role: 'windowMenu' }
     {
       label: "Janela",
       submenu: [
-        { role: "minimize" },
-        { role: "zoom" },
-        ...(isMac
-          ? [
-              { type: "separator" },
-              { role: "front" },
-              { type: "separator" },
-              { role: "window" },
-            ]
-          : [{ role: "close" }]),
+        { role: "minimize", label: "Minimizar" },
+        // { role: "zoom" },
+        // ...(isMac ? [
+        //       { type: "separator" },
+        //       { role: "front" },
+        //       { type: "separator" },
+        //       { role: "window" },
+        //     ]
+        //   : [{ role: "close" }]),
       ],
     },
     {
-      role: "Ajuda",
+      role: "help",
+      label: "Ajuda",
       submenu: [
         {
           label: "Saiba mais",
-          click: async () => {
-            const { shell } = require("electron");
-            await shell.openExternal("https://electronjs.org");
+          click: async () => await shell.openExternal("https://electronjs.org"),
+        },
+        {
+          label: "Sobre",
+          click: async (e) => {
+            console.log("Bingo só funciona aqui no console do nodejs:\n", e);
           },
         },
       ],
