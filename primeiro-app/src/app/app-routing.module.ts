@@ -2,10 +2,12 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { HomeComponent } from './pages/home/home.component';
+import { SettingsComponent } from './pages/settings/settings.component';
 
 const routes: Routes = [
-  { path: '', component: DashboardComponent },
-  { path: 'app', component: HomeComponent },
+  { path: '', component: HomeComponent },
+  { path: 'app', component: DashboardComponent },
+  { path: 'settings', component: SettingsComponent },
   { path: '**', redirectTo: '', pathMatch: 'prefix' }
 ];
 

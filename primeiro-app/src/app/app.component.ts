@@ -12,17 +12,17 @@ export class AppComponent {
   private colorTheme: string = ''
   public menuList: any[] = [
     {
-      link: '/app',
+      link: '/',
       name: 'Home',
       icon: 'home'
     },
     {
-      link: '/',
+      link: '/app',
       name: 'Dashboard',
       icon: 'dashboard'
     },
     {
-      link: '/',
+      link: '/settings',
       name: 'Settings',
       icon: 'settings'
     },
@@ -31,46 +31,23 @@ export class AppComponent {
   constructor(
     private renderedFactory: RendererFactory2
   ) {
-    this.renderer = renderedFactory.createRenderer(null, null)
+    this.renderer = this.renderedFactory.createRenderer(null, null)
     this.initTheme()
     this.isDark = this.isDarkMode()
   }
+  
   // init theme
   public initTheme(): void {
-    this.getColorTheme()
-    this.renderer.addClass(document.body, this.colorTheme)
-  }
-
-  // update theme
-  public updateColorTheme(theme: 'dark-mode' | 'light-mode'): void {
-    this.defineColorTheme(theme)
-    const previousColorTheme = (theme === 'dark-mode' ? 'light-mode' : 'dark-mode')
-    this.renderer.removeClass(document.body, previousColorTheme)
-    this.renderer.addClass(document.body, theme)
-  }
-
-  // define color
-  private defineColorTheme(theme: string): void {
-    this.colorTheme = theme
-    localStorage.setItem('user-theme', theme)
-  }
-
-  // get color
-  private getColorTheme(): void {
     if (localStorage.getItem('user-theme')) {
       this.colorTheme = localStorage.getItem('user-theme') || ''
     } else {
       this.colorTheme = 'light-mode'
     }
+    this.renderer.addClass(document.body, this.colorTheme)
   }
 
   // is dark or light
   public isDarkMode(): boolean {
     return this.colorTheme === 'dark-mode'
-  }
-
-  // alterna entre light and dark mode
-  public toggleDarkMode(event: MatSlideToggleChange) {
-    this.updateColorTheme(event.checked ? 'dark-mode' : 'light-mode')
   }
 }
