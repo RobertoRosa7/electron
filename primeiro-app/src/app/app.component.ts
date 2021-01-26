@@ -12,6 +12,11 @@ export class AppComponent {
   private colorTheme: string = ''
   public menuList: any[] = [
     {
+      link: '/app',
+      name: 'Home',
+      icon: 'home'
+    },
+    {
       link: '/',
       name: 'Dashboard',
       icon: 'dashboard'
