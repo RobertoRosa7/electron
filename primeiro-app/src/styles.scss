@@ -65,10 +65,12 @@ $app-light-theme: mat-light-theme($mat-primary-pallete, $mat-accent-pallete);
 $app-dark-theme: mat-dark-theme($mat-primary-pallete, $mat-accent-pallete);
 
 $bg-dark-mode: #303030;
+$bg-light-mode: #fafafa;
 $color-dark-mode: white;
 
 .light-mode {
   @include angular-material-theme($app-light-theme);
+  background: $bg-light-mode;
   li:active {
     background: #c3c3c350;
   }
@@ -88,7 +90,10 @@ $color-dark-mode: white;
   margin: 0;
   padding: 0;
 }
-
+html,
+body {
+  height: 100%;
+}
 body {
   font-family: Roboto, "Helvetica Neue", sans-serif;
 }

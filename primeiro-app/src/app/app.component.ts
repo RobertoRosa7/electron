@@ -16,6 +16,11 @@ export class AppComponent {
       name: 'Dashboard',
       icon: 'dashboard'
     },
+    {
+      link: '/',
+      name: 'Settings',
+      icon: 'settings'
+    },
   ]
 
   constructor(

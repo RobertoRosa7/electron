@@ -4,7 +4,7 @@ const menu = require("../menu/menu");
 const windowSettings = {
   width: 800,
   height: 600,
-  backgroundColor: "#FFFFFF",
+  backgroundColor: "#FAFAFA",
   name: "Primeiro App",
   icon: `${__dirname}/../../dist/assets/logo-angular.png`,
   webPreferences: {
