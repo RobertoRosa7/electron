@@ -24,8 +24,13 @@ export class AppComponent {
       icon: 'dashboard'
     },
     {
+      link: '/registers',
+      name: 'Cadastro',
+      icon: 'create'
+    },
+    {
       link: '/settings',
-      name: 'Settings',
+      name: 'Configurações',
       icon: 'settings'
     },
   ]
@@ -38,10 +43,6 @@ export class AppComponent {
     this.renderer = this._rf.createRenderer(null, null)
     this.initTheme()
     this.isDark = this.isDarkMode()
-    this._ipc.on('pong', (event: Electron.IpcMessageEvent, message: any) => {
-      console.log(message)
-    })
-    this._ipc.send('ping', 'teste')
   }
 
   // init theme

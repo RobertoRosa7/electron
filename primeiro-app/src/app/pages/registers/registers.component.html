@@ -1,0 +1,9 @@
+<section class="registers">
+  <h2 class="welcome-subtitle">Registre suas entradas e saídas.</h2>
+  <app-grid [cols]="'12 6'">
+    <app-form-incoming [type]="'incoming'" [label]="'Entrada'" [placeholder]="'R$ 0,00'"></app-form-incoming>
+  </app-grid>
+  <app-grid [cols]="'12 6'">
+    <app-form-incoming [type]="'outcoming'" [label]="'Saída'" [placeholder]="'R$ 0,00'"></app-form-incoming>
+  </app-grid>
+</section>

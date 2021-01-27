@@ -1,0 +1,11 @@
+.form-incoming {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  // max-width: 450px;
+  flex-wrap: wrap;
+  margin: 8px 0;
+  .form {
+    width: 100%;
+  }
+}

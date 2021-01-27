@@ -63,7 +63,7 @@ $mat-accent-schema: (
 $mat-primary-pallete: mat-palette($mat-cyan);
 $mat-accent-pallete: mat-palette($mat-pink);
 
-$mat-dark-primary: mat-palette($mat-deep-orange);
+$mat-dark-primary: mat-palette($mat-green);
 $mat-dark-accent: mat-palette($mat-red);
 
 $app-light-theme: mat-light-theme($mat-primary-pallete, $mat-accent-pallete);
@@ -143,6 +143,13 @@ body {
 }
 body {
   font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+h2.welcome-subtitle {
+  font-weight: 200;
+  font-size: 2em;
+  text-align: center;
+  margin: 15px 0;
 }
 
 ::-webkit-scrollbar-track {
