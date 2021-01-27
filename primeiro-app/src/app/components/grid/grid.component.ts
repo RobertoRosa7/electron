@@ -6,7 +6,7 @@ import { Component, Input, OnInit } from '@angular/core';
   styleUrls: ['./grid.component.scss']
 })
 export class GridComponent implements OnInit {
-  @Input('cols') public cols: string = ''
+  @Input('cols') public cols: string = '12'
 
   constructor() { }
 
