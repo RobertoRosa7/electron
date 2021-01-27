@@ -7,6 +7,7 @@ import { GridComponent } from '../components/grid/grid.component';
 import { CardsComponent } from '../components/cards/cards.component';
 import { MatCardModule } from '@angular/material/card';
 import { CommonModule } from "@angular/common";
+import { MatIconModule } from '@angular/material/icon'
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { CommonModule } from "@angular/common";
   imports: [
     MatSlideToggleModule,
     MatCardModule,
-    CommonModule
+    CommonModule,
+    MatIconModule
   ],
   // exports: [],
   // providers: [],

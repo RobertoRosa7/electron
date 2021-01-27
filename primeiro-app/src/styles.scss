@@ -60,20 +60,50 @@ $mat-accent-schema: (
 
 /* You can add global styles to this file, and also import other style files */
 
-$mat-primary-pallete: mat-palette($mat-primary-schema);
-$mat-accent-pallete: mat-palette($mat-accent-schema);
+$mat-primary-pallete: mat-palette($mat-cyan);
+$mat-accent-pallete: mat-palette($mat-pink);
+
+$mat-dark-primary: mat-palette($mat-deep-orange);
+$mat-dark-accent: mat-palette($mat-red);
+
 $app-light-theme: mat-light-theme($mat-primary-pallete, $mat-accent-pallete);
-$app-dark-theme: mat-dark-theme($mat-primary-pallete, $mat-accent-pallete);
+$app-dark-theme: mat-dark-theme($mat-dark-primary, $mat-dark-accent);
 
 $bg-dark-mode: #303030;
 $bg-light-mode: #fafafa;
 $color-dark-mode: white;
+
+$text-dark: #d65a31;
+$text-light: #585858;
+
+@mixin span-cash {
+  font-size: 35px;
+  font-weight: 500;
+  display: inline-block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
 
 .light-mode {
   @include angular-material-theme($app-light-theme);
   background: $bg-light-mode;
   li:active {
     background: #c3c3c350;
+  }
+  mat-card span.cards-money {
+    @include span-cash;
+    color: #585858;
+  }
+
+  mat-card span.cards-money-on {
+    @include span-cash;
+    color: #00af91;
+  }
+
+  mat-card span.cards-money-off {
+    @include span-cash;
+    color: #f50057;
   }
 }
 
@@ -84,6 +114,21 @@ $color-dark-mode: white;
   li:active {
     background: #10101050;
   }
+
+  mat-card span.cards-money {
+    @include span-cash;
+    color: #eee;
+  }
+
+  mat-card span.cards-money-on {
+    @include span-cash;
+    color: #00af91;
+  }
+
+  mat-card span.cards-money-off {
+    @include span-cash;
+    color: #f50057;
+  }
 }
 
 * {
@@ -91,6 +136,7 @@ $color-dark-mode: white;
   margin: 0;
   padding: 0;
 }
+
 html,
 body {
   height: 100%;

@@ -9,6 +9,7 @@ export class CardsComponent implements OnInit {
   @Input('cols') public cols: string = ''
   @Input('title') public title: string = ''
   @Input('color') public color: string = ''
+  @Input('icon') public icon: string = ''
   @Input('value') public value: number = 0
 
   constructor() { }

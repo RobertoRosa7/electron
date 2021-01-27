@@ -9,18 +9,17 @@ export class DashboardComponent implements OnInit {
   public cards: any[] = [
     {
       title: 'Entrada',
-      icon: '',
-      value: 0,
-      color: 'primary'
+      icon: 'monetization_on',
+      value: 29.99,
     },
     {
       title: 'Saída',
-      icon: '',
-      value: 0
+      icon: 'money_off',
+      value: -23.99
     },
     {
       title: 'Consolidado',
-      icon: '',
+      icon: 'account_balance',
       value: 0
     }
   ]

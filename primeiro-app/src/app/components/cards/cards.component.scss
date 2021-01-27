@@ -1,10 +1,40 @@
 .cards {
-  min-width: 235px;
   min-height: 78.33px;
   margin-top: 8px;
   margin-bottom: 8px;
+  overflow: hidden;
 
   h1 {
     font-weight: 500;
+  }
+  .cards-header {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+  }
+  .cards-title {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  .cards-title span {
+    font-size: 18px;
+    font-weight: 300;
+    margin-right: 8px;
+    display: inline-block;
+  }
+  .cards-cash {
+    display: flex;
+    justify-content: flex-start;
+    width: 100%;
+    flex-direction: column;
+    margin: 16px 0;
+  }
+  .cards-label {
+    font-size: 12px;
+    font-weight: 100;
   }
 }
