@@ -4,4 +4,6 @@ export interface PeriodicElement {
   date: number
   value: number
   type: string
+  status: string
+  id?: number
 }
