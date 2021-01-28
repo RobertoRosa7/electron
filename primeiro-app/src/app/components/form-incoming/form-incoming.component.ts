@@ -1,5 +1,5 @@
 import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-form-incoming',
@@ -17,7 +17,7 @@ export class FormIncomingComponent implements OnInit {
   constructor(
     private _fb: FormBuilder
   ) {
-    this.form = this._fb.group({ value: [] })
+    this.form = this._fb.group({ value: ['', Validators.required] })
   }
 
   public ngOnInit(): void {

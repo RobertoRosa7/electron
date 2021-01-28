@@ -1,11 +1,20 @@
 .registers {
   max-width: 992px;
   margin: 0 auto;
-}
 
-.histories {
-  margin: 30px 0;
-  table {
-    width: 100%;
+  .histories {
+    margin: 30px 0;
+    table {
+      width: 100%;
+      tr {
+        cursor: pointer;
+        &:hover {
+          opacity: 0.5;
+        }
+      }
+    }
+    .outcoming td {
+      color: var(--text-accent);
+    }
   }
 }

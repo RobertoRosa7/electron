@@ -75,6 +75,11 @@ $color-dark-mode: white;
 
 $text-dark: #d65a31;
 $text-light: #585858;
+$text-accent: #f50057;
+
+:root {
+  --text-accent: #ff4081;
+}
 
 @mixin span-cash {
   font-size: 35px;
