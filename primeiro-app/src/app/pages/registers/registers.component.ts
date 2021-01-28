@@ -35,7 +35,7 @@ export class RegistersComponent implements OnInit, AfterViewInit {
   }
 
   public ngOnInit(): void {
-   
+
   }
 
   public ngAfterViewInit(): void {
@@ -44,10 +44,11 @@ export class RegistersComponent implements OnInit, AfterViewInit {
 
   public listeningEventForm(event: any): void {
     let name: string = event['operation'] === 'incoming' ? 'Entrada' : 'Saída'
+    let position = ((this.ELEMENT_DATA.length - 1) < 0) ? 1 : (this.ELEMENT_DATA.length + 1)
+
     this._sn.open(`Registro de "${name}" foi criado com sucesso.`, 'Ok', { duration: 3000 })
-    
     this.ELEMENT_DATA.push({
-      position: (this.ELEMENT_DATA.length -1) + 1,
+      position,
       category: 'Alimentação',
       date: event['created_at'],
       type: event['operation'],

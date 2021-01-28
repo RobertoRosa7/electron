@@ -13,15 +13,16 @@ export class FormIncomingComponent implements OnInit {
   @Output() public send = new EventEmitter()
 
   public form: FormGroup
+  public isDisabled: boolean = true
 
   constructor(
     private _fb: FormBuilder
   ) {
-    this.form = this._fb.group({ value: ['', Validators.required] })
+    this.form = this._fb.group({ value: [''] })
   }
 
   public ngOnInit(): void {
-
+    this.form.get('value')?.valueChanges.subscribe(val => this.isDisabled = !val)
   }
 
   public onSubmit(_: any, type: string): void {

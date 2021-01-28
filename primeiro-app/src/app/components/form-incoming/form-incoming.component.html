@@ -1,10 +1,10 @@
 <form [formGroup]="form" (ngSubmit)="onSubmit($event, type)" class="form-incoming">
   <mat-form-field class="form" floatLabel="always" appearance="outline">
     <mat-label>{{label}}</mat-label>
-    <input required autocomplete="off" formControlName="value" currencyMask [options]="{prefix:'R$ ', suffix:'', precison:'2', align:'left', allowNegative:'false', decimal:',', thousands:'.'}" matInput [placeholder]="placeholder">
+    <input autocomplete="off" formControlName="value" currencyMask [options]="{prefix:'R$ ', suffix:'', precison:'2', align:'left', allowNegative:'false', decimal:',', thousands:'.'}" matInput [placeholder]="placeholder">
     <!-- <mat-icon matSuffix>sentiment_very_satisfied</mat-icon> -->
     <!-- <mat-hint>Hint</mat-hint> -->
     <mat-error>Digite um valor</mat-error>
   </mat-form-field>
-  <button [disabled]="form.invalid" mat-raised-button type="submit">Registrar</button>
+  <button [disabled]="isDisabled" mat-raised-button type="submit">Registrar</button>
 </form>
