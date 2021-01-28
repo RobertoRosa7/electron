@@ -14,7 +14,11 @@ import { MatFormFieldModule } from '@angular/material/form-field'
 import { MatInputModule } from '@angular/material/input'
 import { FormsModule, ReactiveFormsModule } from '@angular/forms'
 import { MatButtonModule } from '@angular/material/button'
-import { CurrencyMaskModule } from "ng2-currency-mask";
+import { CurrencyMaskModule } from "ng2-currency-mask"
+import { MatSnackBarModule } from '@angular/material/snack-bar'
+import { MatSortModule } from '@angular/material/sort'
+import {MatTableModule} from '@angular/material/table'
+
 
 @NgModule({
   declarations: [
@@ -36,7 +40,10 @@ import { CurrencyMaskModule } from "ng2-currency-mask";
     MatFormFieldModule,
     MatInputModule,
     MatButtonModule,
-    CurrencyMaskModule
+    CurrencyMaskModule,
+    MatSnackBarModule,
+    MatSortModule,
+    MatTableModule
   ],
   // exports: [],
   // providers: [],
