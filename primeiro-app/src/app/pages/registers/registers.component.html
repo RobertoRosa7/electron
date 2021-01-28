@@ -38,7 +38,7 @@
       </ng-container>
 
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-      <tr [ngClass]="{'outcoming': (row.type === 'outcoming') }"  (click)="getRowTable(row)" mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      <tr [ngClass]="{'outcoming': (row.type === 'outcoming'), 'pending': (row.status === 'pending') }"  (click)="getRowTable(row)" mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
     </table>
   </div>
 

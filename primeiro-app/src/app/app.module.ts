@@ -19,10 +19,10 @@ import { PrimeiroAppStore } from './store/primeiroapp.store';
 import { RegistersEffect } from './effects/registers.effects';
 
 const indexedConfig: DBConfig = {
-  name: 'primeiroApp',
+  name: 'PrimeiroApp',
   version: 3, // only work on this version
   objectStoresMeta: [{
-    store: 'primeiroApp',
+    store: 'PrimeiroApp',
     storeConfig: { keyPath: 'id', autoIncrement: true },
     storeSchema: []
   }],

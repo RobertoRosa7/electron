@@ -5,6 +5,7 @@ import { MatTableDataSource } from '@angular/material/table'
 import { PeriodicElement } from '../../models/models'
 import { Store } from '@ngrx/store'
 import * as actions from '../../actions/registers.actions'
+import { IndexdbService } from 'src/app/services/indexedbs.service'
 
 @Component({
   selector: 'app-registers',
@@ -22,21 +23,20 @@ export class RegistersComponent implements OnInit, AfterViewInit {
 
   constructor(
     private _sn: MatSnackBar,
-    private _st: Store
+    private _st: Store,
   ) {
-    this._st.dispatch(actions.GET_REGISTERS())
+    this._st.dispatch(actions.INIT())
   }
 
   public ngOnInit(): void {
     this._st.select(({ registers }: any) => [...registers.all]).subscribe(register => {
       this.ELEMENT_DATA = register
       this.dataSource = new MatTableDataSource(this.ELEMENT_DATA)
+      this.dataSource.sort = this.sort
     })
   }
 
-  public ngAfterViewInit(): void {
-    this.dataSource.sort = this.sort
-  }
+  public ngAfterViewInit(): void { }
 
   public listeningEventForm(event: any): void {
     let name: string = event['operation'] === 'incoming' ? 'Entrada' : 'Saída'

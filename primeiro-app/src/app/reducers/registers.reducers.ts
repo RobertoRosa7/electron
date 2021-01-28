@@ -7,7 +7,8 @@ const initializeState = {
 
 const registersReducers = createReducer(
   initializeState,
-  on(actions.SET_REGISTERS, (states, { payload }) => ({ ...states, all: states.all.concat(payload) }))
+  on(actions.SET_REGISTERS, (states, { payload }) => ({ ...states, all: states.all.concat(payload) })),
+  on(actions.GET_REGISTERS, (states, { payload }) => ({ ...states, all: payload })),
 )
 
 export function reducer(state: any, action: any) {
