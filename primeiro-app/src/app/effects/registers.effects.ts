@@ -39,6 +39,17 @@ export class RegistersEffect {
     catchError(err => of(err))
   )
 
+  @Effect()
+  public deleteRegisters$: Observable<Actions> = this._action.pipe(
+    ofType(actions.actionsTypes.DELETE_REGISTERS),
+    mergeMap(({ payload }: any) => this._indexedb.getById('collection_registers').pipe(map((registers) => this.removeItemFromIndexedb(registers, payload)))),
+    mergeMap((payload: any) => {
+      this._indexedb.update(payload)
+      return [actions.INIT()]
+    }),
+    catchError(err => of(err))
+  )
+
   public saveRegisters(payload: any): Promise<any> {
     return new Promise(resolve => {
       this._indexedb.getById('collection_registers').subscribe(registers => {
@@ -50,6 +61,14 @@ export class RegistersEffect {
         }
       })
     })
+  }
+
+  private removeItemFromIndexedb(registers: any, payload: any) {
+    const newPayload = [...registers.registers]
+    const index = newPayload.findIndex((i: any) => i.id === payload.id)
+    if (index >= 0) newPayload.splice(index, 1)
+
+    return { ...registers, registers: newPayload }
   }
 
 }

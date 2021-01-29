@@ -66,7 +66,7 @@ export class RegistersComponent implements OnInit, AfterViewInit {
 
   public del(event: Event, payload: Register): void {
     event.stopPropagation()
-    console.log('delete: ', payload)
+    this._store.dispatch(actions.DELETE_REGISTERS({ payload }))
   }
 
 }

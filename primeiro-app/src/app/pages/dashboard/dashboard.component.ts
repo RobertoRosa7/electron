@@ -38,7 +38,6 @@ export class DashboardComponent implements OnInit {
   public ngOnInit(): void {
     this._store.select(({ dashboard }: any) => ({ ...dashboard }))
       .subscribe(dash => {
-        console.log(dash)
         this.cards.forEach(value => {
           switch (value.type) {
             case 'incoming':
