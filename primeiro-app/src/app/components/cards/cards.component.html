@@ -8,7 +8,7 @@
   <div class="cards-content">
     <div class="cards-cash">
       <span class="cards-label">Valor Total:</span>
-      <span class="cards-money" [ngClass]="{'cards-money-on': (value > 0), 'cards-money-off': (value < 0) }">{{ value | currency:'BRL':'symbol':'1.2-2'}}</span>
+      <span [ngClass]="returnClass()"> {{ value | currency:'BRL':'symbol':'1.2-2'}} </span>
     </div>
   </div>
 </mat-card>

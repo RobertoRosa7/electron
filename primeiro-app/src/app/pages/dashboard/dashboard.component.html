@@ -1,5 +1,5 @@
 <div class="dashboard">
   <app-grid *ngFor="let item of cards;" [cols]="'12 6 4'">
-    <app-cards [icon]="item.icon" [value]="item.value" [title]="item.title"></app-cards>
+    <app-cards [type]="item.type" [icon]="item.icon" [value]="item.value" [title]="item.title"></app-cards>
   </app-grid>
 </div>
