@@ -5,7 +5,6 @@ import { MatTableDataSource } from '@angular/material/table'
 import { PeriodicElement } from '../../models/models'
 import { Store } from '@ngrx/store'
 import * as actions from '../../actions/registers.actions'
-import { IndexdbService } from 'src/app/services/indexedbs.service'
 
 @Component({
   selector: 'app-registers',

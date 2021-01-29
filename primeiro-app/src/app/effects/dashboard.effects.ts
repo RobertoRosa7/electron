@@ -19,10 +19,7 @@ export class DashboardEffect {
   @Effect()
   public init$: Observable<Actions> = this._action.pipe(
     ofType(actions.actionsTypes.INIT),
-    mergeMap(() => forkJoin([
-      this._indexedb.getById('collection_dashboard'),
-      from(this.buildTotals())
-    ])),
+    mergeMap(() => forkJoin([this._indexedb.getById('collection_dashboard'), from(this.buildTotals())])),
     mergeMap(([collection, totals]) => {
       this.saveTotals(collection)
       return [actions.GET_TOTALS({ payload: totals })]
