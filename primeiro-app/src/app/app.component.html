@@ -9,9 +9,9 @@
 </mat-toolbar>
 
 <mat-drawer-container class="container">
-  <mat-drawer #drawer mode="push" opened="false">
+  <mat-drawer #drawer mode="over" opened="false">
     <ul class="app-menu-list">
-      <li *ngFor="let item of menuList" [routerLink]="item.link">
+      <li (click)="drawer.toggle()" *ngFor="let item of menuList" [routerLink]="item.link">
         <a><mat-icon>{{item.icon}}</mat-icon></a>
         <span>{{item.name}}</span>
       </li>
