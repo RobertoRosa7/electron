@@ -22,14 +22,14 @@ export class RegistersComponent implements OnInit, AfterViewInit {
   @ViewChild(MatSort) public sort: MatSort
 
   constructor(
-    private _sn: MatSnackBar,
-    private _st: Store,
+    private _snackbar: MatSnackBar,
+    private _store: Store,
   ) {
-    this._st.dispatch(actions.INIT())
+    this._store.dispatch(actions.INIT())
   }
 
   public ngOnInit(): void {
-    this._st.select(({ registers }: any) => [...registers.all]).subscribe(register => {
+    this._store.select(({ registers }: any) => [...registers.all]).subscribe(register => {
       this.ELEMENT_DATA = register
       this.dataSource = new MatTableDataSource(this.ELEMENT_DATA)
       this.dataSource.sort = this.sort
@@ -41,8 +41,8 @@ export class RegistersComponent implements OnInit, AfterViewInit {
   public listeningEventForm(event: any): void {
     let name: string = event['operation'] === 'incoming' ? 'Entrada' : 'Saída'
     let position = ((this.ELEMENT_DATA.length - 1) < 0) ? 1 : (this.ELEMENT_DATA.length + 1)
-    this._sn.open(`Registro de "${name}" foi criado com sucesso.`, 'Ok', { duration: 3000 })
-    this._st.dispatch(actions.ADD_REGISTERS({
+    this._snackbar.open(`Registro de "${name}" foi criado com sucesso.`, 'Ok', { duration: 3000 })
+    this._store.dispatch(actions.ADD_REGISTERS({
       payload: {
         position,
         category: 'Outros',

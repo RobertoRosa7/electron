@@ -17,6 +17,7 @@ import { EffectsModule } from '@ngrx/effects'
 import { StoreDevtoolsModule } from '@ngrx/store-devtools'
 import { PrimeiroAppStore } from './store/primeiroapp.store';
 import { RegistersEffect } from './effects/registers.effects';
+import { DashboardEffect } from './effects/dashboard.effects';
 
 const indexedConfig: DBConfig = {
   name: 'PrimeiroApp',
@@ -46,7 +47,7 @@ const indexedConfig: DBConfig = {
     NgxIndexedDBModule.forRoot(indexedConfig),
     StoreModule.forRoot(PrimeiroAppStore),
     StoreDevtoolsModule.instrument({ maxAge: 45 }),
-    EffectsModule.forRoot([RegistersEffect])
+    EffectsModule.forRoot([RegistersEffect, DashboardEffect])
 
   ],
   providers: [],
