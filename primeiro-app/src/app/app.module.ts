@@ -1,23 +1,27 @@
-import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
-import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
-import { PageModule } from './pages/pages.module';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatSidenavModule } from '@angular/material/sidenav';
-import { MatSlideToggleModule } from '@angular/material/slide-toggle';
-import { MatToolbarModule } from '@angular/material/toolbar';
-import { MatDialogModule } from '@angular/material/dialog';
-import { MatButtonModule } from '@angular/material/button';
+import { BrowserModule } from '@angular/platform-browser'
+import { NgModule } from '@angular/core'
+import { AppRoutingModule } from './app-routing.module'
+import { AppComponent } from './app.component'
+import { PageModule } from './pages/pages.module'
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
+import { MatSidenavModule } from '@angular/material/sidenav'
+import { MatSlideToggleModule } from '@angular/material/slide-toggle'
+import { MatToolbarModule } from '@angular/material/toolbar'
+import { MatDialogModule } from '@angular/material/dialog'
+import { MatButtonModule } from '@angular/material/button'
 import { MatIconModule } from '@angular/material/icon'
 import { NgxElectronModule } from 'ngx-electron'
 import { DBConfig, NgxIndexedDBModule } from 'ngx-indexed-db'
 import { StoreModule } from '@ngrx/store'
 import { EffectsModule } from '@ngrx/effects'
 import { StoreDevtoolsModule } from '@ngrx/store-devtools'
-import { PrimeiroAppStore } from './store/primeiroapp.store';
-import { RegistersEffect } from './effects/registers.effects';
-import { DashboardEffect } from './effects/dashboard.effects';
+import { PrimeiroAppStore } from './store/primeiroapp.store'
+import { RegistersEffect } from './effects/registers.effects'
+import { DashboardEffect } from './effects/dashboard.effects'
+import { registerLocaleData } from '@angular/common'
+import localePt from '@angular/common/locales/pt'
+
+registerLocaleData(localePt, 'pt-BR')
 
 const indexedConfig: DBConfig = {
   name: 'PrimeiroApp',

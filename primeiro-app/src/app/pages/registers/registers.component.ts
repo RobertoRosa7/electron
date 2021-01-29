@@ -5,6 +5,7 @@ import { MatTableDataSource } from '@angular/material/table'
 import { Register } from '../../models/models'
 import { Store } from '@ngrx/store'
 import * as actions from '../../actions/registers.actions'
+import { UtilsService } from 'src/app/utils/utis.service'
 
 @Component({
   selector: 'app-registers',
@@ -15,7 +16,7 @@ import * as actions from '../../actions/registers.actions'
 export class RegistersComponent implements OnInit, AfterViewInit {
   public ELEMENT_DATA: Register[] = []
 
-  public displayedColumns: string[] = ['position', 'category', 'value', 'date', 'actions']
+  public displayedColumns: string[] = ['position', 'category', 'value', 'created_at', 'actions']
   public dataSource: any
 
   @ViewChild(MatSort) public sort: MatSort
@@ -23,6 +24,7 @@ export class RegistersComponent implements OnInit, AfterViewInit {
   constructor(
     private _snackbar: MatSnackBar,
     private _store: Store,
+    private _utils: UtilsService
   ) {
     this._store.dispatch(actions.INIT())
   }
@@ -33,25 +35,26 @@ export class RegistersComponent implements OnInit, AfterViewInit {
       this.dataSource = new MatTableDataSource(this.ELEMENT_DATA)
       this.dataSource.sort = this.sort
     })
+
   }
 
   public ngAfterViewInit(): void { }
 
-  public listeningEventForm(event: any): void {
-    let name: string = event['operation'] === 'incoming' ? 'Entrada' : 'Saída'
+  public listeningEventForm(event: Register): void {
+    let name: string = event.type === 'incoming' ? 'Entrada' : 'Saída'
     let position = ((this.ELEMENT_DATA.length - 1) < 0) ? 1 : (this.ELEMENT_DATA.length + 1)
     this._snackbar.open(`Registro de "${name}" foi criado com sucesso.`, 'Ok', { duration: 3000 })
-    this._store.dispatch(actions.ADD_REGISTERS({
-      payload: {
-        position,
-        category: 'Outros',
-        date: event.created_at,
-        type: event.operation,
-        value: event.value,
-        status: 'pending',
-        id: position
-      }
-    }))
+
+    const payload: Register = {
+      position,
+      category: 'Outros',
+      created_at: event.created_at,
+      type: event.type,
+      value: event.value,
+      status: 'pending',
+      id: this._utils.generateUid()
+    }
+    this._store.dispatch(actions.ADD_REGISTERS({ payload }))
   }
 
   public openDetails(event: Event, payload: Register): void {
@@ -67,6 +70,10 @@ export class RegistersComponent implements OnInit, AfterViewInit {
   public del(event: Event, payload: Register): void {
     event.stopPropagation()
     this._store.dispatch(actions.DELETE_REGISTERS({ payload }))
+  }
+
+  public formatarValor(valor: number): string {
+    return new Intl.NumberFormat('pt-BR', { currency: 'BRL', minimumFractionDigits: 2 }).format(valor)
   }
 
 }

@@ -1,10 +1,24 @@
 <form [formGroup]="form" (ngSubmit)="onSubmit($event, type)" class="form-incoming">
-  <mat-form-field class="form" floatLabel="always" appearance="outline">
-    <mat-label>{{label}}</mat-label>
-    <input autocomplete="off" formControlName="value" currencyMask [options]="{prefix:'R$ ', suffix:'', precison:'2', align:'left', allowNegative:'false', decimal:',', thousands:'.'}" matInput [placeholder]="placeholder">
-    <!-- <mat-icon matSuffix>sentiment_very_satisfied</mat-icon> -->
-    <!-- <mat-hint>Hint</mat-hint> -->
-    <mat-error>Digite um valor</mat-error>
-  </mat-form-field>
+  <div class="form-inline">
+    <mat-form-field class="form" floatLabel="always" appearance="outline">
+      <mat-label>{{label}}</mat-label>
+      <input autocomplete="off" formControlName="value" currencyMask
+        [options]="{prefix:'R$ ', suffix:'', precison:'2', align:'left', allowNegative:'false', decimal:',', thousands:'.'}"
+        matInput [placeholder]="placeholder">
+      <!-- <mat-icon matSuffix>sentiment_very_satisfied</mat-icon> -->
+      <!-- <mat-hint>Hint</mat-hint> -->
+      <!-- <mat-error>Digite um valor</mat-error> -->
+    </mat-form-field>
+
+    <mat-form-field (click)="$event.preventDefault(); picker.open()" class="form" floatLabel="always" appearance="outline">
+      <mat-label>Data</mat-label>
+      <input autocomplete="off" formControlName="date" matInput [matDatepicker]="picker" placeholder="Data">
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker [touchUi]="isMobile" #picker>
+      </mat-datepicker>
+    </mat-form-field>
+  </div>
+
+
   <button [disabled]="isDisabled" mat-raised-button type="submit">Registrar</button>
 </form>

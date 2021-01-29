@@ -1,3 +1,4 @@
+import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 
@@ -14,11 +15,15 @@ export class FormIncomingComponent implements OnInit {
 
   public form: FormGroup
   public isDisabled: boolean = true
+  public isMobile: boolean
 
   constructor(
-    private _fb: FormBuilder
+    private _fb: FormBuilder,
+    private _breakpoint: BreakpointObserver
+
   ) {
-    this.form = this._fb.group({ value: [''] })
+    this.form = this._fb.group({ value: [''], date: [new Date()] })
+    this._breakpoint.observe([Breakpoints.XSmall]).subscribe(result => this.isMobile = !!result.matches)
   }
 
   public ngOnInit(): void {
@@ -27,17 +32,16 @@ export class FormIncomingComponent implements OnInit {
 
   public onSubmit(_: any, type: string): void {
     const payload = {
-      created_at: new Date().getTime(),
+      created_at: new Date(this.form.value.date).getTime(),
       value: this.form.value.value,
-      operation: type
+      type
     }
 
     switch (type) {
       case this.type:
-        this.form.reset()
+        this.form.get('value')?.reset()
         break
     }
-
     this.send.emit(payload)
   }
 
