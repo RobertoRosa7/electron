@@ -2,7 +2,7 @@ import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core'
 import { MatSnackBar } from '@angular/material/snack-bar'
 import { MatSort } from '@angular/material/sort'
 import { MatTableDataSource } from '@angular/material/table'
-import { PeriodicElement } from '../../models/models'
+import { Register } from '../../models/models'
 import { Store } from '@ngrx/store'
 import * as actions from '../../actions/registers.actions'
 
@@ -13,9 +13,9 @@ import * as actions from '../../actions/registers.actions'
 })
 
 export class RegistersComponent implements OnInit, AfterViewInit {
-  public ELEMENT_DATA: PeriodicElement[] = []
+  public ELEMENT_DATA: Register[] = []
 
-  public displayedColumns: string[] = ['position', 'category', 'value', 'date']
+  public displayedColumns: string[] = ['position', 'category', 'value', 'date', 'actions']
   public dataSource: any
 
   @ViewChild(MatSort) public sort: MatSort
@@ -45,17 +45,28 @@ export class RegistersComponent implements OnInit, AfterViewInit {
       payload: {
         position,
         category: 'Outros',
-        date: event['created_at'],
-        type: event['operation'],
-        value: event['value'],
+        date: event.created_at,
+        type: event.operation,
+        value: event.value,
         status: 'pending',
         id: position
       }
     }))
   }
 
-  public getRowTable(row: any): void {
-    console.log(row)
+  public openDetails(event: Event, payload: Register): void {
+    event.stopPropagation()
+    console.log('open details: ', payload)
+  }
+
+  public edit(event: Event, payload: Register): void {
+    event.stopPropagation()
+    console.log('edit: ', payload)
+  }
+
+  public del(event: Event, payload: Register): void {
+    event.stopPropagation()
+    console.log('delete: ', payload)
   }
 
 }

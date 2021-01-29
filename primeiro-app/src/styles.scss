@@ -79,6 +79,7 @@ $text-accent: #f50057;
 
 :root {
   --text-accent: #ff4081;
+  --text-light: #303030;
 }
 
 @mixin span-cash {
@@ -110,6 +111,10 @@ $text-accent: #f50057;
     @include span-cash;
     color: #f50057;
   }
+
+  table tr .table-delete-icon {
+    color: $bg-dark-mode
+  }
 }
 
 .dark-mode {
@@ -133,6 +138,9 @@ $text-accent: #f50057;
   mat-card span.cards-money-off {
     @include span-cash;
     color: #f50057;
+  }
+  table tr .table-delete-icon {
+    color: $bg-light-mode
   }
 }
 

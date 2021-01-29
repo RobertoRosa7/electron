@@ -6,18 +6,28 @@
     margin: 30px 15px;
     table {
       width: 100%;
+      position: relative;
       tr {
         cursor: pointer;
-        &:hover {
-          opacity: 0.5;
+        &:hover .table-delete-icon {
+          display: flex;
         }
       }
     }
-    .outcoming td {
+    .outcoming td:not(.table-delete-icon) {
       color: var(--text-accent);
     }
     .pending {
       opacity: 0.5;
+    }
+    .table-delete-icon {
+      display: none;
+      position: absolute;
+      border: none;
+      align-items: center;
+      justify-content: space-between;
+      height: 48px;
+      right: 0
     }
   }
 }

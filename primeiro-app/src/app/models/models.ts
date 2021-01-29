@@ -1,4 +1,4 @@
-export interface PeriodicElement {
+export interface Register {
   position: number
   category: string
   date: number

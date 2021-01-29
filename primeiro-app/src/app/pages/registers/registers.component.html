@@ -37,8 +37,20 @@
         <td mat-cell *matCellDef="let element"> {{element.date | date:'dd/MM/yyyy'}} </td>
       </ng-container>
 
+      <ng-container matColumnDef="actions">
+        <th style="display: none;" mat-header-cell *matHeaderCellDef></th>
+        <td class="table-delete-icon" mat-cell *matCellDef="let element">
+          <button mat-icon-button (click)="edit($event, element)">
+            <mat-icon>edit</mat-icon>
+          </button>
+          <button mat-icon-button (click)="del($event, element)">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </td>
+      </ng-container>
+
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-      <tr [ngClass]="{'outcoming': (row.type === 'outcoming'), 'pending': (row.status === 'pending') }"  (click)="getRowTable(row)" mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      <tr (click)="openDetails($event, row)" [ngClass]="{'outcoming': (row.type === 'outcoming'), 'pending': (row.status === 'pending') }" mat-row  *matRowDef="let row; columns: displayedColumns;"></tr>
     </table>
   </div>
 
