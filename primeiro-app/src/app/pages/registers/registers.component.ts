@@ -6,6 +6,10 @@ import { Register } from '../../models/models'
 import { Store } from '@ngrx/store'
 import * as actions from '../../actions/registers.actions'
 import { UtilsService } from 'src/app/utils/utis.service'
+import { MatDialog } from '@angular/material/dialog'
+import { FormIncomingComponent } from 'src/app/components/form-incoming/form-incoming.component'
+import { DialogFormIncomingComponent } from 'src/app/components/dialog-form-incoming/dialog-form-incoming.component'
+import { DialogConfirmComponent } from 'src/app/components/dialog-confirm/dialog-confirm.component'
 
 @Component({
   selector: 'app-registers',
@@ -24,7 +28,8 @@ export class RegistersComponent implements OnInit, AfterViewInit {
   constructor(
     private _snackbar: MatSnackBar,
     private _store: Store,
-    private _utils: UtilsService
+    private _utils: UtilsService,
+    private _dialog: MatDialog
   ) {
     this._store.dispatch(actions.INIT())
   }
@@ -43,7 +48,6 @@ export class RegistersComponent implements OnInit, AfterViewInit {
   public listeningEventForm(event: Register): void {
     let name: string = event.type === 'incoming' ? 'Entrada' : 'Saída'
     let position = ((this.ELEMENT_DATA.length - 1) < 0) ? 1 : (this.ELEMENT_DATA.length + 1)
-    this._snackbar.open(`Registro de "${name}" foi criado com sucesso.`, 'Ok', { duration: 3000 })
 
     const payload: Register = {
       position,
@@ -54,7 +58,9 @@ export class RegistersComponent implements OnInit, AfterViewInit {
       status: 'pending',
       id: this._utils.generateUid()
     }
+
     this._store.dispatch(actions.ADD_REGISTERS({ payload }))
+    this._snackbar.open(`Registro de "${name}" foi criado com sucesso.`, 'Ok', { duration: 3000 })
   }
 
   public openDetails(event: Event, payload: Register): void {
@@ -65,11 +71,18 @@ export class RegistersComponent implements OnInit, AfterViewInit {
   public edit(event: Event, payload: Register): void {
     event.stopPropagation()
     console.log('edit: ', payload)
+    this._dialog.open(DialogFormIncomingComponent, { data: payload })
   }
 
   public del(event: Event, payload: Register): void {
     event.stopPropagation()
-    this._store.dispatch(actions.DELETE_REGISTERS({ payload }))
+    this._dialog.open(DialogConfirmComponent, { data: payload, width: '450px' })
+      .beforeClosed().subscribe(response => {
+        if (response) {
+          this._store.dispatch(actions.DELETE_REGISTERS({ payload }))
+          this._snackbar.open(`Registro de "${payload.category}" foi excluído com sucesso.`, 'Ok', { duration: 3000 })
+        }
+      })
   }
 
   public formatarValor(valor: number): string {

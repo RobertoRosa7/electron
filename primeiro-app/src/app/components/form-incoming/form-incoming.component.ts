@@ -1,6 +1,7 @@
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
-import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, Input, OnInit, Output, EventEmitter, Inject } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-form-incoming',
@@ -18,6 +19,7 @@ export class FormIncomingComponent implements OnInit {
   public isMobile: boolean
 
   constructor(
+    // @Inject(MAT_DIALOG_DATA) public data: any,
     private _fb: FormBuilder,
     private _breakpoint: BreakpointObserver
 

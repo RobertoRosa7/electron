@@ -20,7 +20,9 @@ import { MatSortModule } from '@angular/material/sort'
 import { MatTableModule } from '@angular/material/table'
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { DateAdapter, MatNativeDateModule, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
-import { MomentDateAdapter, MomentDateModule } from '@angular/material-moment-adapter'
+import { MomentDateAdapter, MomentDateModule } from '@angular/material-moment-adapter';
+import { DialogFormIncomingComponent } from '../components/dialog-form-incoming/dialog-form-incoming.component';
+import { DialogConfirmComponent } from '../components/dialog-confirm/dialog-confirm.component'
 
 export const MY_FORMATS = {
   parse: { dateInput: 'DD MM YYYY' },
@@ -41,6 +43,8 @@ export const MY_FORMATS = {
     CardsComponent,
     RegistersComponent,
     FormIncomingComponent,
+    DialogFormIncomingComponent,
+    DialogConfirmComponent,
   ],
   imports: [
     MatSlideToggleModule,
@@ -59,6 +63,10 @@ export const MY_FORMATS = {
     MatDatepickerModule,
     MatNativeDateModule,
     MomentDateModule
+  ],
+  entryComponents: [
+    DialogFormIncomingComponent,
+    DialogConfirmComponent
   ],
   // exports: [],
   providers: [

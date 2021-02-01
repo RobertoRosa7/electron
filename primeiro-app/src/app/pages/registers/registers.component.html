@@ -2,12 +2,10 @@
   <div class="incoming-outcomming">
     <h2 class="welcome-subtitle">Registre suas entradas e saídas</h2>
     <app-grid [cols]="'12 6'">
-      <app-form-incoming (send)="listeningEventForm($event)" [type]="'incoming'" [label]="'Entrada'"
-        [placeholder]="'R$ 0,00'"></app-form-incoming>
+      <app-form-incoming (send)="listeningEventForm($event)" [type]="'incoming'" [label]="'Entrada'" [placeholder]="'R$ 0,00'"></app-form-incoming>
     </app-grid>
     <app-grid [cols]="'12 6'">
-      <app-form-incoming (send)="listeningEventForm($event)" [type]="'outcoming'" [label]="'Saída'"
-        [placeholder]="'R$ 0,00'"></app-form-incoming>
+      <app-form-incoming (send)="listeningEventForm($event)" [type]="'outcoming'" [label]="'Saída'" [placeholder]="'R$ 0,00'"></app-form-incoming>
     </app-grid>
   </div>
 
