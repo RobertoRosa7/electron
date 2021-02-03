@@ -6,7 +6,7 @@ const windowSettings = {
   height: 600,
   backgroundColor: "#FAFAFA",
   name: "Primeiro App",
-  icon: `${__dirname}/../../dist/assets/logo-angular.png`,
+  icon: `${__dirname}/../../dist/assets/icon-512x512-default-android.png`,
   webPreferences: {
     nodeIntegration: true,
   },
@@ -29,7 +29,7 @@ module.exports = function createDefaultWindow() {
   // win.webContents.openDevTools()
 
   // system tray - mini icon on system tray
-  new Tray(`${__dirname}/../../dist/assets/logo-angular.png`);
+  new Tray(`${__dirname}/../../dist/assets/icon-512x512-default-android.png`);
 
   // Event when the window is closed
   win.on("closed", () => (win = null));

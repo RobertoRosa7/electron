@@ -6,7 +6,7 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle'
 import { GridComponent } from '../components/grid/grid.component'
 import { CardsComponent } from '../components/cards/cards.component'
 import { MatCardModule } from '@angular/material/card'
-import { CommonModule } from "@angular/common"
+import { CommonModule, registerLocaleData } from "@angular/common"
 import { MatIconModule } from '@angular/material/icon'
 import { RegistersComponent } from '../pages/registers/registers.component'
 import { FormIncomingComponent } from '../components/form-incoming/form-incoming.component'
@@ -23,6 +23,7 @@ import { DateAdapter, MatNativeDateModule, MAT_DATE_FORMATS, MAT_DATE_LOCALE } f
 import { MomentDateAdapter, MomentDateModule } from '@angular/material-moment-adapter';
 import { DialogFormIncomingComponent } from '../components/dialog-form-incoming/dialog-form-incoming.component';
 import { DialogConfirmComponent } from '../components/dialog-confirm/dialog-confirm.component'
+import localePt from '@angular/common/locales/pt'
 
 export const MY_FORMATS = {
   parse: { dateInput: 'DD MM YYYY' },
@@ -33,6 +34,8 @@ export const MY_FORMATS = {
     monthYearA11yLabel: 'MMMM YYYY',
   }
 }
+
+registerLocaleData(localePt, 'pt-BR')
 
 @NgModule({
   declarations: [
