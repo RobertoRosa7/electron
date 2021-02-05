@@ -1,5 +1,26 @@
 <div class="dashboard">
-  <app-grid *ngFor="let item of cards;" [cols]="'12 6 4'">
-    <app-cards [type]="item.type" [icon]="item.icon" [value]="item.value" [title]="item.title"></app-cards>
-  </app-grid>
+
+
+  <mat-drawer-container class="container" style="height: 100vh;">
+    <mat-drawer #drawer mode="over" opened="false">
+      <ul class="app-menu-list">
+        <li (click)="drawer.toggle()" *ngFor="let item of menuList" [routerLink]="item.link">
+          <a>
+            <mat-icon>{{item.icon}}</mat-icon>
+          </a>
+          <span>{{item.name}}</span>
+        </li>
+      </ul>
+    </mat-drawer>
+    <mat-drawer-content>
+      <mat-toolbar>
+        <mat-toolbar-row class="app-custom-toolbar-row">
+          <button mat-icon-button (click)="drawer.open()">
+            <mat-icon>menu</mat-icon>
+          </button>
+        </mat-toolbar-row>
+      </mat-toolbar>
+      <router-outlet></router-outlet>
+    </mat-drawer-content>
+  </mat-drawer-container>
 </div>

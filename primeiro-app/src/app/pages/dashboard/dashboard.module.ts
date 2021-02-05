@@ -1,15 +1,8 @@
 import { NgModule } from "@angular/core"
-import { HomeComponent } from "./home/home.component"
-import { DashboardComponent } from './dashboard/dashboard.component'
-import { SettingsComponent } from './settings/settings.component'
 import { MatSlideToggleModule } from '@angular/material/slide-toggle'
-import { GridComponent } from '../components/grid/grid.component'
-import { CardsComponent } from '../components/cards/cards.component'
 import { MatCardModule } from '@angular/material/card'
 import { CommonModule, registerLocaleData } from "@angular/common"
 import { MatIconModule } from '@angular/material/icon'
-import { RegistersComponent } from '../pages/registers/registers.component'
-import { FormIncomingComponent } from '../components/form-incoming/form-incoming.component'
 import { MatFormFieldModule } from '@angular/material/form-field'
 import { MatInputModule } from '@angular/material/input'
 import { FormsModule, ReactiveFormsModule } from '@angular/forms'
@@ -21,9 +14,25 @@ import { MatTableModule } from '@angular/material/table'
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { DateAdapter, MatNativeDateModule, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
 import { MomentDateAdapter, MomentDateModule } from '@angular/material-moment-adapter';
-import { DialogFormIncomingComponent } from '../components/dialog-form-incoming/dialog-form-incoming.component';
-import { DialogConfirmComponent } from '../components/dialog-confirm/dialog-confirm.component'
 import localePt from '@angular/common/locales/pt'
+import { MatToolbarModule } from '@angular/material/toolbar'
+import { RouterModule, Routes } from "@angular/router"
+import { MatSidenavModule } from '@angular/material/sidenav'
+import { SettingsComponent } from "./settings/settings.component"
+import { RegistersComponent } from "./registers/registers.component"
+import { FormIncomingComponent } from "src/app/components/form-incoming/form-incoming.component"
+import { GridComponent } from "src/app/components/grid/grid.component"
+import { DashboardComponent } from "./dashboard.component"
+import { CardsComponent } from "src/app/components/cards/cards.component"
+
+const routes: Routes = [
+  {
+    path: '', component: DashboardComponent, children: [
+      { path: 'settings', component: SettingsComponent },
+      { path: 'registers', component: RegistersComponent },
+    ]
+  },
+];
 
 export const MY_FORMATS = {
   parse: { dateInput: 'DD MM YYYY' },
@@ -39,17 +48,15 @@ registerLocaleData(localePt, 'pt-BR')
 
 @NgModule({
   declarations: [
-    HomeComponent,
     DashboardComponent,
     SettingsComponent,
-    GridComponent,
-    CardsComponent,
     RegistersComponent,
     FormIncomingComponent,
-    DialogFormIncomingComponent,
-    DialogConfirmComponent,
+    GridComponent,
+    CardsComponent
   ],
   imports: [
+    RouterModule.forChild(routes),
     MatSlideToggleModule,
     FormsModule,
     ReactiveFormsModule,
@@ -65,11 +72,11 @@ registerLocaleData(localePt, 'pt-BR')
     MatTableModule,
     MatDatepickerModule,
     MatNativeDateModule,
-    MomentDateModule
+    MomentDateModule,
+    MatToolbarModule,
+    MatSidenavModule
   ],
   entryComponents: [
-    DialogFormIncomingComponent,
-    DialogConfirmComponent
   ],
   // exports: [],
   providers: [
@@ -78,4 +85,4 @@ registerLocaleData(localePt, 'pt-BR')
   ],
   // entryComponents: []
 })
-export class PageModule { }
+export class DashboardModule { }

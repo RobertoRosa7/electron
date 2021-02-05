@@ -1,74 +1,66 @@
-@import "../styles.scss";
+// @import "../styles.scss";
 
-::ng-deep mat-toolbar {
-  position: fixed;
-  z-index: 99;
-}
+// ::ng-deep mat-toolbar {
+//   position: fixed;
+//   z-index: 99;
+// }
 
-.app-custom-toolbar-row {
-  display: flex;
-  justify-content: space-between;
-}
-.container.mat-drawer-container {
-  height: 100%;
-}
-.container {
-  padding-top: 64px;
-  .mat-drawer-container ::ng-deep .mat-drawer-inner-container {
-    min-width: 75px;
-  }
-  .mat-drawer {
-    padding-top: 64px;
-  }
-  .mat-drawer-side {
-    border: none;
-  }
-  .mat-drawer-content {
-    // padding-left: 15px;
-    // padding-right: 15px;
-  }
+// .app-custom-toolbar-row {
+//   display: flex;
+//   justify-content: space-between;
+// }
+// .container.mat-drawer-container {
+//   height: 100%;
+// }
+// .container {
+//   .mat-drawer-container ::ng-deep .mat-drawer-inner-container {
+//     min-width: 75px;
+//   }
+//   .mat-drawer-side {
+//     border: none;
+//   }
 
-  .app-menu-list {
-    list-style: none;
-    flex-direction: column;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+//   .app-menu-list {
+//     list-style: none;
+//     flex-direction: column;
+//     display: flex;
+//     justify-content: center;
+//     align-items: center;
 
-    li:active,
-    li:focus,
-    li a:focus,
-    li a:active {
-      outline: none;
-      border: none;
-    }
-    li {
-      width: 100%;
-      text-align: center;
-      min-width: 200px;
-      min-height: 64px;
-      display: flex;
-      justify-content: flex-start;
-      align-items: center;
-      cursor: pointer;
-      padding: 0 16px;
-      overflow: hidden;
-    }
-    li a {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 40px;
-      width: 40px;
-    }
-    li span {
-      font-size: 12px;
-      white-space: nowrap;
-      text-transform: uppercase;
-      text-overflow: ellipsis;
-      overflow: hidden;
-      display: inline-block;
-      max-width: 200px;
-    }
-  }
-}
+//     li:active,
+//     li:focus,
+//     li a:focus,
+//     li a:active {
+//       outline: none;
+//       border: none;
+//     }
+//     li {
+//       width: 100%;
+//       text-align: center;
+//       min-width: 200px;
+//       min-height: 64px;
+//       display: flex;
+//       justify-content: flex-start;
+//       align-items: center;
+//       cursor: pointer;
+//       padding: 0 16px;
+//       overflow: hidden;
+//     }
+//     li a {
+//       display: flex;
+//       justify-content: center;
+//       align-items: center;
+//       height: 40px;
+//       width: 40px;
+//     }
+//     li span {
+//       font-size: 12px;
+//       white-space: nowrap;
+//       text-transform: uppercase;
+//       text-overflow: ellipsis;
+//       overflow: hidden;
+//       display: inline-block;
+//       max-width: 200px;
+//     }
+//   }
+// }

@@ -2,7 +2,6 @@ import { BrowserModule } from '@angular/platform-browser'
 import { NgModule } from '@angular/core'
 import { AppRoutingModule } from './app-routing.module'
 import { AppComponent } from './app.component'
-import { PageModule } from './pages/pages.module'
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
 import { MatSidenavModule } from '@angular/material/sidenav'
 import { MatSlideToggleModule } from '@angular/material/slide-toggle'
@@ -20,6 +19,7 @@ import { RegistersEffect } from './effects/registers.effects'
 import { DashboardEffect } from './effects/dashboard.effects'
 import { registerLocaleData } from '@angular/common'
 import localePt from '@angular/common/locales/pt'
+import { HomeComponent } from './pages/home/home.component'
 
 registerLocaleData(localePt, 'pt-BR')
 
@@ -35,11 +35,10 @@ const indexedConfig: DBConfig = {
 @NgModule({
   declarations: [
     AppComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule,
-    PageModule,
     BrowserAnimationsModule,
     MatSidenavModule,
     MatSlideToggleModule,
@@ -48,6 +47,7 @@ const indexedConfig: DBConfig = {
     MatToolbarModule,
     MatIconModule,
     NgxElectronModule,
+    AppRoutingModule,
     NgxIndexedDBModule.forRoot(indexedConfig),
     StoreModule.forRoot(PrimeiroAppStore),
     StoreDevtoolsModule.instrument({ maxAge: 45 }),

@@ -12,28 +12,7 @@ export class AppComponent {
   public isDark: boolean
   private renderer: Renderer2
   private colorTheme: string = ''
-  public menuList: any[] = [
-    {
-      link: '/',
-      name: 'Home',
-      icon: 'home'
-    },
-    {
-      link: '/app',
-      name: 'Dashboard',
-      icon: 'dashboard'
-    },
-    {
-      link: '/registers',
-      name: 'Cadastro',
-      icon: 'create'
-    },
-    {
-      link: '/settings',
-      name: 'Configurações',
-      icon: 'settings'
-    },
-  ]
+
 
   constructor(
     private _rf: RendererFactory2,

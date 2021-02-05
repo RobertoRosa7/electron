@@ -9,6 +9,28 @@ import * as actionRegisters from '../../actions/registers.actions'
   styleUrls: ['./dashboard.component.scss']
 })
 export class DashboardComponent implements OnInit {
+  public menuList: any[] = [
+    {
+      link: '/',
+      name: 'Home',
+      icon: 'home'
+    },
+    {
+      link: '/dashboard',
+      name: 'Dashboard',
+      icon: 'dashboard'
+    },
+    {
+      link: '/dashboard/registers',
+      name: 'Cadastro',
+      icon: 'create'
+    },
+    {
+      link: '/dashboard/settings',
+      name: 'Configurações',
+      icon: 'settings'
+    },
+  ]
   public cards: any[] = [
     {
       title: 'Entrada',

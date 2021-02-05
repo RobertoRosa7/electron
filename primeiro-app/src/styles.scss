@@ -60,10 +60,10 @@ $mat-accent-schema: (
 
 /* You can add global styles to this file, and also import other style files */
 
-$mat-primary-pallete: mat-palette($mat-cyan);
+$mat-primary-pallete: mat-palette($mat-deep-orange);
 $mat-accent-pallete: mat-palette($mat-pink);
 
-$mat-dark-primary: mat-palette($mat-green);
+$mat-dark-primary: mat-palette($mat-deep-orange);
 $mat-dark-accent: mat-palette($mat-red);
 
 $app-light-theme: mat-light-theme($mat-primary-pallete, $mat-accent-pallete);
