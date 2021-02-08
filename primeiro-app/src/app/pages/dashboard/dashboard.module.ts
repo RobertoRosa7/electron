@@ -23,11 +23,13 @@ import { RegistersComponent } from "./registers/registers.component"
 import { FormIncomingComponent } from "src/app/components/form-incoming/form-incoming.component"
 import { GridComponent } from "src/app/components/grid/grid.component"
 import { DashboardComponent } from "./dashboard.component"
-import { CardsComponent } from "src/app/components/cards/cards.component"
+import { CardsComponent } from "src/app/components/cards/cards.component";
+import { MainComponent } from './main/main.component'
 
 const routes: Routes = [
   {
     path: '', component: DashboardComponent, children: [
+      { path: '', component: MainComponent },
       { path: 'settings', component: SettingsComponent },
       { path: 'registers', component: RegistersComponent },
     ]
@@ -53,7 +55,8 @@ registerLocaleData(localePt, 'pt-BR')
     RegistersComponent,
     FormIncomingComponent,
     GridComponent,
-    CardsComponent
+    CardsComponent,
+    MainComponent
   ],
   imports: [
     RouterModule.forChild(routes),

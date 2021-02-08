@@ -1,64 +1,5 @@
-// Custom Theming for Angular Material
-// For more information: https://material.angular.io/guide/theming
 @import "~@angular/material/theming";
-// @import ""
-// Plus imports for other components in your app.
-
-// Include the common styles for Angular Material. We include this here so that you only
-// have to load a single css file for Angular Material in your app.
-// Be sure that you only ever include this mixin once!
 @include mat-core();
-
-// Define the palettes for your theme using the Material Design palettes available in palette.scss
-// (imported above). For each palette, you can optionally specify a default, lighter, and darker
-// hue. Available color palettes: https://material.io/design/color/
-// $primeiro-app-primary: mat-palette($mat-indigo);
-// $primeiro-app-accent: mat-palette($mat-pink, A200, A100, A400);
-
-// The warn palette is optional (defaults to red).
-// $primeiro-app-warn: mat-palette($mat-red);
-
-$mat-primary-schema: (
-  100: #c5cae9,
-  500: #61699a,
-  700: #303f9f,
-  contrast: (
-    100: rgba(0, 0, 0, 0.87),
-    500: #ffffff,
-    700: #ffffff,
-  ),
-);
-
-$mat-accent-schema: (
-  100: #ff80ab,
-  500: #ff4081,
-  700: #f50057,
-  contrast: (
-    100: rgba(0, 0, 0, 0.87),
-    500: rgba(0, 0, 0, 0.87),
-    700: #ffffff,
-  ),
-);
-
-// Create the theme object. A theme consists of configurations for individual
-// theming systems such as "color" or "typography".
-// $primeiro-app-theme: mat-light-theme(
-//   (
-//     color: (
-//       primary: $primeiro-app-primary,
-//       accent: $primeiro-app-accent,
-//       warn: $primeiro-app-warn,
-//     ),
-//   )
-// );
-
-// Include theme styles for core and each component used in your app.
-// Alternatively, you can import and @include the theme mixins for each component
-// that you are using.
-// @include angular-material-theme($primeiro-app-theme);
-// @include angular-material-theme($primeiro-app-theme);
-
-/* You can add global styles to this file, and also import other style files */
 
 $mat-primary-pallete: mat-palette($mat-deep-orange);
 $mat-accent-pallete: mat-palette($mat-pink);
@@ -80,6 +21,8 @@ $text-accent: #f50057;
 :root {
   --text-accent: #ff4081;
   --text-light: #303030;
+  --bg-light-color: #fafafa;
+  --bg-dark-color: #505050;
 }
 
 @mixin span-cash {
@@ -113,7 +56,7 @@ $text-accent: #f50057;
   }
 
   table tr .table-delete-icon {
-    color: $bg-dark-mode
+    color: $bg-dark-mode;
   }
 }
 
@@ -140,7 +83,7 @@ $text-accent: #f50057;
     color: #f50057;
   }
   table tr .table-delete-icon {
-    color: $bg-light-mode
+    color: $bg-light-mode;
   }
 }
 

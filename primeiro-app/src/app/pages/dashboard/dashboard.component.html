@@ -1,7 +1,5 @@
 <div class="dashboard">
-
-
-  <mat-drawer-container class="container" style="height: 100vh;">
+  <mat-drawer-container class="container">
     <mat-drawer #drawer mode="over" opened="false">
       <ul class="app-menu-list">
         <li (click)="drawer.toggle()" *ngFor="let item of menuList" [routerLink]="item.link">
@@ -18,9 +16,21 @@
           <button mat-icon-button (click)="drawer.open()">
             <mat-icon>menu</mat-icon>
           </button>
+          <div class="menu-toolbar">
+            <mat-form-field class="form" appearance="outline">
+              <input autocomplete="off" matInput placeholder="Procurar">
+            </mat-form-field>
+            <button mat-icon-button>
+              <mat-icon>account_circle</mat-icon>
+            </button>
+          </div>
         </mat-toolbar-row>
       </mat-toolbar>
-      <router-outlet></router-outlet>
+
+      <!-- router-outlet só funciona se existir router children -->
+      <div class="pages">
+        <router-outlet></router-outlet>
+      </div>
     </mat-drawer-content>
   </mat-drawer-container>
 </div>
