@@ -12,6 +12,9 @@ export class FormIncomingComponent implements OnInit {
   @Input('label') public label: string = ''
   @Input('placeholder') public placeholder: string = ''
   @Input('type') public type: string = ''
+  @Input('value') public value: string | number
+  @Input('edit') public edit: boolean | undefined
+
   @Output() public send = new EventEmitter()
 
   public form: FormGroup
@@ -19,17 +22,17 @@ export class FormIncomingComponent implements OnInit {
   public isMobile: boolean
 
   constructor(
-    // @Inject(MAT_DIALOG_DATA) public data: any,
     private _fb: FormBuilder,
     private _breakpoint: BreakpointObserver
-
   ) {
     this.form = this._fb.group({ value: [''], date: [new Date()] })
     this._breakpoint.observe([Breakpoints.XSmall]).subscribe(result => this.isMobile = !!result.matches)
+
   }
 
   public ngOnInit(): void {
     this.form.get('value')?.valueChanges.subscribe(val => this.isDisabled = !val)
+    if (this.edit) this.form.patchValue({ value: this.value })
   }
 
   public onSubmit(_: any, type: string): void {

@@ -26,6 +26,7 @@ import { DashboardComponent } from "./dashboard.component"
 import { CardsComponent } from "src/app/components/cards/cards.component";
 import { MainComponent } from './main/main.component';
 import { ResultSearchComponent } from './result-search/result-search.component'
+import { DialogFormIncomingComponent } from "src/app/components/dialog-form-incoming/dialog-form-incoming.component"
 
 const routes: Routes = [
   {
@@ -59,7 +60,8 @@ registerLocaleData(localePt, 'pt-BR')
     GridComponent,
     CardsComponent,
     MainComponent,
-    ResultSearchComponent
+    ResultSearchComponent,
+    DialogFormIncomingComponent
   ],
   imports: [
     RouterModule.forChild(routes),
@@ -83,6 +85,7 @@ registerLocaleData(localePt, 'pt-BR')
     MatSidenavModule
   ],
   entryComponents: [
+    DialogFormIncomingComponent
   ],
   // exports: [],
   providers: [

@@ -78,8 +78,7 @@ export class RegistersComponent implements OnInit, AfterViewInit {
 
   public edit(event: Event, payload: Register): void {
     event.stopPropagation()
-    console.log('edit: ', payload)
-    this._dialog.open(DialogFormIncomingComponent, { data: payload })
+    this._dialog.open(DialogFormIncomingComponent, { data: { ...payload, edit: true } })
   }
 
   public del(event: Event, payload: Register): void {
