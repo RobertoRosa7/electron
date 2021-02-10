@@ -17,17 +17,21 @@
             <mat-icon>menu</mat-icon>
           </button>
           <div class="menu-toolbar">
-            <mat-form-field class="form" appearance="outline">
-              <input autocomplete="off"
-                    matInput 
-                    placeholder="Procurar" 
-                    [(ngModel)]="searchTerms">
-              <mat-icon *ngIf="!searchTerms" matSuffix>search</mat-icon>
-              <mat-icon (click)="searchTerms = ''" 
-                        *ngIf="searchTerms"
-                        style="cursor: pointer;"
-                        matSuffix>close</mat-icon>
-            </mat-form-field>
+            <form (ngSubmit)="onSubmit()">
+              <mat-form-field class="form" appearance="outline">
+                <input autocomplete="off"
+                      name="searchTerms"
+                      matInput 
+                      placeholder="Procurar" 
+                      [(ngModel)]="searchTerms">
+                <mat-icon *ngIf="!searchTerms" matSuffix>search</mat-icon>
+                <mat-icon (click)="searchTerms = ''" 
+                          *ngIf="searchTerms"
+                          style="cursor: pointer;"
+                          matSuffix>close</mat-icon>
+              </mat-form-field>  
+            </form>
+            
             <button mat-icon-button>
               <mat-icon>account_circle</mat-icon>
             </button>

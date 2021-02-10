@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Store } from '@ngrx/store'
 import * as actionDashboard from '../../actions/dashboard.actions'
 
@@ -54,7 +55,8 @@ export class DashboardComponent implements OnInit {
   public searchTerms: string | number
 
   constructor(
-    private _store: Store
+    private _store: Store,
+    private _router: Router
   ) {
     this._store.dispatch(actionDashboard.INIT())
   }
@@ -78,7 +80,8 @@ export class DashboardComponent implements OnInit {
       })
   }
 
-  public valuesChanges(event: any): void {
-    console.log(event.target.value)
+  public onSubmit(): void {
+    this._router.navigate(['dashboard/result-search', { search: this.searchTerms }])
+    this.searchTerms = ''
   }
 }
