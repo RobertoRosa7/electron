@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store'
 import * as actionDashboard from '../../actions/dashboard.actions'
-import * as actionRegisters from '../../actions/registers.actions'
 
 @Component({
   selector: 'app-dashboard',
@@ -51,6 +50,9 @@ export class DashboardComponent implements OnInit {
       type: 'consolidado'
     }
   ]
+
+  public searchTerms: string | number
+
   constructor(
     private _store: Store
   ) {
@@ -74,5 +76,9 @@ export class DashboardComponent implements OnInit {
           }
         })
       })
+  }
+
+  public valuesChanges(event: any): void {
+    console.log(event.target.value)
   }
 }
