@@ -1,6 +1,4 @@
-import { Component, NgZone, Renderer2, RendererFactory2 } from '@angular/core';
-import { ElectronService } from 'ngx-electron'
-import { IpcService } from './services/ipc.service';
+import { Component, Renderer2, RendererFactory2 } from '@angular/core';
 
 @Component({
   selector: 'app-root',
@@ -16,8 +14,6 @@ export class AppComponent {
 
   constructor(
     private _rendereFactory: RendererFactory2,
-    private _electronService: ElectronService,
-    private _ipcService: IpcService
   ) {
     this.renderer = this._rendereFactory.createRenderer(null, null)
     this.initTheme()
