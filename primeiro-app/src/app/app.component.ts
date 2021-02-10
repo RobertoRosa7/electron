@@ -15,11 +15,11 @@ export class AppComponent {
 
 
   constructor(
-    private _rf: RendererFactory2,
-    private _el: ElectronService,
-    private _ipc: IpcService
+    private _rendereFactory: RendererFactory2,
+    private _electronService: ElectronService,
+    private _ipcService: IpcService
   ) {
-    this.renderer = this._rf.createRenderer(null, null)
+    this.renderer = this._rendereFactory.createRenderer(null, null)
     this.initTheme()
     this.isDark = this.isDarkMode()
   }
