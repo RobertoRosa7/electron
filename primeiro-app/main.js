@@ -1,7 +1,7 @@
 const { app, BrowserWindow, ipcMain, ipcRenderer } = require("electron");
 const createWindow = require("./electron/window/window");
 const createNotification = require("./electron/notification/notification");
-const { get_registers } = require("./electron/endpoints");
+const { get, post } = require("./electron/endpoints");
 
 const fs = require("fs");
 const root = fs.readdirSync("./");
@@ -13,12 +13,13 @@ const S3 = require("aws-sdk/clients/s3");
 // app.on("ready", createWindow);
 app.whenReady().then(createWindow).then(createNotification);
 
-ipcMain.on("ping", (event, messageFromAngular) => {
-  console.log("this is a message from Angular: ", messageFromAngular);
-  get_registers(messageFromAngular).then((registers) =>
-    event.sender.send("pong", registers)
-  );
-});
+ipcMain.on("get", (_, payload) =>
+  get(payload).then((res) => _.sender.send("got", res))
+);
+
+ipcMain.on("post", (_, payload) =>
+  post(payload).then((res) => _.sender.send("posted", res))
+);
 
 // ipcRenderer.send('ping', 'This is a message to Angular')
 
