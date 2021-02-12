@@ -1,4 +1,5 @@
 import { Component, Renderer2, RendererFactory2 } from '@angular/core';
+import { IpcService } from './services/ipc.service';
 
 @Component({
   selector: 'app-root',

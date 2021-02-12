@@ -1,6 +1,7 @@
 const { app, BrowserWindow, ipcMain, ipcRenderer } = require("electron");
 const createWindow = require("./electron/window/window");
 const createNotification = require("./electron/notification/notification");
+const { get_registers } = require("./electron/endpoints");
 
 const fs = require("fs");
 const root = fs.readdirSync("./");
@@ -14,9 +15,9 @@ app.whenReady().then(createWindow).then(createNotification);
 
 ipcMain.on("ping", (event, messageFromAngular) => {
   console.log("this is a message from Angular: ", messageFromAngular);
-
-  let user = { email: "desenvolvedor@1245.com.br", password: "teste001" };
-  event.sender.send("pong", "data from electron");
+  get_registers(messageFromAngular).then((registers) =>
+    event.sender.send("pong", registers)
+  );
 });
 
 // ipcRenderer.send('ping', 'This is a message to Angular')

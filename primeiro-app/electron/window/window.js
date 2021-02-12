@@ -23,10 +23,10 @@ module.exports = function createDefaultWindow() {
 
   // menu statusbar
   // menu();
-  win.setMenu(null)
+  win.setMenu(null);
 
   // uncomment this line to open devtools
-  // win.webContents.openDevTools()
+  win.webContents.openDevTools()
 
   // system tray - mini icon on system tray
   new Tray(`${__dirname}/../../dist/assets/icon-512x512-default-android.png`);

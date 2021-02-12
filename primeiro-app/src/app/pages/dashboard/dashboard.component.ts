@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { IpcService } from 'src/app/services/ipc.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -33,12 +34,19 @@ export class DashboardComponent implements OnInit {
   public searchTerms: string | number
 
   constructor(
-    private _router: Router
+    private _router: Router,
+    private _ipcService: IpcService
   ) {
+
   }
 
   public ngOnInit(): void {
-    
+    this._ipcService.send('ping', 'initialize app')
+    this._ipcService.on('pong', (event: Electron.IpcMessageEvent, message: any) => {
+      if (message) {
+        setTimeout(() => console.log(JSON.parse(message)), 1000)
+      }
+    })
   }
 
   public onSubmit(): void {
