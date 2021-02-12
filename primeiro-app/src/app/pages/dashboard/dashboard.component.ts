@@ -41,7 +41,7 @@ export class DashboardComponent implements OnInit {
   }
 
   public ngOnInit(): void {
-    this._ipcService.send('ping', 'initialize app')
+    this._ipcService.send('ping', 'collection_dashboard')
     this._ipcService.on('pong', (event: Electron.IpcMessageEvent, message: any) => {
       if (message) {
         setTimeout(() => console.log(JSON.parse(message)), 1000)
