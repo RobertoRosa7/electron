@@ -1,12 +1,9 @@
 const { app, BrowserWindow, ipcMain, ipcRenderer } = require("electron");
 const createWindow = require("./electron/window/window");
 const createNotification = require("./electron/notification/notification");
-const { get, post } = require("./electron/endpoints");
+const db = require("./electron/endpoints");
 
-const fs = require("fs");
-const root = fs.readdirSync("./");
-const S3 = require("aws-sdk/clients/s3");
-
+// const S3 = require("aws-sdk/clients/s3");
 // console.log(S3); // show all methods and service from nodes
 // console.log(root); // print all list dir
 
@@ -14,11 +11,15 @@ const S3 = require("aws-sdk/clients/s3");
 app.whenReady().then(createWindow).then(createNotification);
 
 ipcMain.on("get", (_, payload) =>
-  get(payload).then((res) => _.sender.send("got", res))
+  db.get(payload).then((res) => _.sender.send("got", res))
 );
 
 ipcMain.on("post", (_, payload) =>
-  post(payload).then((res) => _.sender.send("posted", res))
+  db.post(payload).then((res) => _.sender.send("posted", res))
+);
+
+ipcMain.on("search", (_, payload) =>
+  db.search(payload).then((res) => _.sender.send("searched", res))
 );
 
 // ipcRenderer.send('ping', 'This is a message to Angular')

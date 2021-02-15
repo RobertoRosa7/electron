@@ -54,15 +54,15 @@ export class DashboardComponent implements OnInit {
 
   public onSubmit(): void {
     // this._router.navigate(['dashboard/result-search', { search: this.searchTerms }])
-    this._ipcService.send('post', JSON.stringify({
-      collection_dashboard: 'collection_dashboard',
-      method: "POST",
-      payload: this.searchTerms
-    }))
-
-    this._ipcService.on('posted', (event: Electron.IpcMessageEvent, message: any) => {
-      console.log(message)
-    })
+    if (this.searchTerms != '') {
+      this._ipcService.send('search', JSON.stringify({
+        collection_dashboard: 'collection_registers',
+        search: this.searchTerms
+      }))
+      this._ipcService.on('searched', (event: Electron.IpcMessageEvent, message: any) => {
+        console.log(message)
+      })
+    }
     this.searchTerms = ''
   }
 }
