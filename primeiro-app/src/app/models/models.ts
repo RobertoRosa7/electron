@@ -33,3 +33,9 @@ export interface Login {
 export interface CreditCard {
   brand: string
 }
+
+export interface Consolidado {
+  total_credit: number
+  total_debit: number
+  total_consolidado: number
+}

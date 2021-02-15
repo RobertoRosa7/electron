@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Register } from '../models/models';
+import { Consolidado, Register } from '../models/models';
 import { Constants } from './constants';
 
 @Injectable({
@@ -20,6 +20,10 @@ export class DashboardService {
 
   public newRegister(payload: Register): Observable<Register> {
     return this.http.post<Register>(this.constants.get('new_register'), payload)
+  }
+
+  public fetchConsolidado(): Observable<Consolidado> {
+    return this.http.get<Consolidado>(this.constants.get('fetch_consolidado'))
   }
 
 }

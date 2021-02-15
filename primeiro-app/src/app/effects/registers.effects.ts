@@ -53,7 +53,6 @@ export class RegistersEffect {
     ofType(actions.actionsTypes.ADD_REGISTERS),
     map(({ payload }: any) => {
       this.saveRegisters(payload).then(() => this._store.dispatch(actions.INIT()))
-      console.log(payload)
       return actions.SET_REGISTERS({ payload })
     }),
     catchError(err => of(err))
@@ -70,9 +69,9 @@ export class RegistersEffect {
     catchError(err => of(err))
   )
 
-  public saveRegisters(payload: Register): Promise<Register> {
+  public saveRegisters(payload: Register): Promise<any> {
     return new Promise(resolve => {
-      this._dashboardService.newRegister(payload).subscribe()
+      setTimeout(() => this._dashboardService.newRegister(payload).subscribe(res => resolve(res)), 1000)
       // this._indexedb.getById('collection_registers').subscribe(registers => {
       //   if (!registers) {
       //     const state = { id: 'collection_registers', registers: [] }

@@ -20,11 +20,13 @@
 - [x] Abstraindo módulos e criando componentização
 
 ###### 12/02/2021
-
 - [x] Integração do python com electron
 - [x] Integração do nrgx, effect e indexedb
 - [x] Restruturação básica dos diretórios
 
-######
+###### 15/02/2021
 
 - [x] Integrando constants
+- [x] Criando endpoint de busca e cadastro para registro
+- [x] Endpoint para calcular consolidado
+- [x] Reset no effect para se adaptar ao endpoint inves do indexdeb

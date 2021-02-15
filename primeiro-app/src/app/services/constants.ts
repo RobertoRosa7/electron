@@ -13,7 +13,8 @@ export class Constants {
 
   public readonly paths: any = {
     fetch_registers: 'dashboard/fetch_registers',
-    new_register: 'dashboard/new_register'
+    fetch_consolidado: 'dashboard/calc_consolidado',
+    new_register: 'dashboard/new_register',
   }
 
   public get(key: string, host?: string): string {

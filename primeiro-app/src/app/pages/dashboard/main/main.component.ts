@@ -9,18 +9,6 @@ import * as actionDashboard from '../../../actions/dashboard.actions'
 })
 export class MainComponent implements OnInit {
   public cards: any[] = [
-    // {
-    //   title: 'Entrada',
-    //   icon: 'monetization_on',
-    //   value: 0,
-    //   type: 'incoming'
-    // },
-    // {
-    //   title: 'Saída',
-    //   icon: 'money_off',
-    //   value: 0,
-    //   type: 'outcoming'
-    // },
     {
       title: 'Consolidado',
       icon: 'account_balance',
@@ -30,7 +18,7 @@ export class MainComponent implements OnInit {
   ]
 
   constructor(
-    private _store: Store
+    private _store: Store,
   ) {
     this._store.dispatch(actionDashboard.INIT())
   }

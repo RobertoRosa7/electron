@@ -6,24 +6,35 @@ import { catchError, filter, map, mergeMap, tap } from 'rxjs/operators'
 import * as actions from '../actions/dashboard.actions'
 import { IndexdbService } from '../services/indexedbs.service'
 import { SET_ERRORS } from '../actions/errors.actions'
+import { Consolidado, Register } from '../models/models'
+import { DashboardService } from '../services/dashboard.service'
 
 @Injectable()
 export class DashboardEffect {
   constructor(
     private _store: Store,
     private _action: Actions,
-    private _indexedb: IndexdbService
+    private _indexedb: IndexdbService,
+    private _dashboardService: DashboardService
   ) {
   }
 
+  // @Effect()
+  // public init$: Observable<Actions> = this._action.pipe(
+  //   ofType(actions.actionsTypes.INIT),
+  //   mergeMap(() => forkJoin([this._indexedb.getById('collection_dashboard'), from(this.buildTotals())])),
+  //   mergeMap(([collection, totals]) => {
+  //     this.saveTotals(collection)
+  //     return [actions.GET_TOTALS({ payload: totals })]
+  //   }),
+  //   catchError(err => of(err))
+  // )
+
+  // backend
   @Effect()
   public init$: Observable<Actions> = this._action.pipe(
     ofType(actions.actionsTypes.INIT),
-    mergeMap(() => forkJoin([this._indexedb.getById('collection_dashboard'), from(this.buildTotals())])),
-    mergeMap(([collection, totals]) => {
-      this.saveTotals(collection)
-      return [actions.GET_TOTALS({ payload: totals })]
-    }),
+    mergeMap(() => this._dashboardService.fetchConsolidado().pipe(map((payload: Consolidado) => actions.GET_TOTALS({ payload })))),
     catchError(err => of(err))
   )
 
@@ -43,10 +54,12 @@ export class DashboardEffect {
       total_debit: 0,
       total_consolidado: 0
     }
+
     return new Promise(resolve => {
-      this._indexedb.getById('collection_registers').subscribe(collection => {
-        if (collection) {
-          collection.registers.forEach((value: any) => {
+      this._store.select(({ registers }: any) => [...registers.all])
+        .subscribe((registers: Register[]) => {
+          const register: Register[] = [...registers]
+          register.forEach((value: any) => {
             switch (value.type) {
               case 'incoming':
                 payloads.total_credit += value.value
@@ -57,11 +70,9 @@ export class DashboardEffect {
             }
           })
           payloads.total_consolidado += (payloads.total_credit - payloads.total_debit)
+          console.log(payloads)
           resolve(payloads)
-        } else {
-          resolve(payloads)
-        }
-      })
+        })
     })
   }
 }
