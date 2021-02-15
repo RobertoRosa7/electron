@@ -20,6 +20,11 @@
 - [x] Abstraindo módulos e criando componentização
 
 ###### 12/02/2021
+
 - [x] Integração do python com electron
 - [x] Integração do nrgx, effect e indexedb
 - [x] Restruturação básica dos diretórios
+
+######
+
+- [x] Integrando constants

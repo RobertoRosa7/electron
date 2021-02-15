@@ -20,6 +20,8 @@ import { DashboardEffect } from './effects/dashboard.effects'
 import { registerLocaleData } from '@angular/common'
 import localePt from '@angular/common/locales/pt'
 import { HomeComponent } from './pages/home/home.component'
+import { HttpClientModule } from '@angular/common/http'
+import { Constants } from './services/constants'
 
 registerLocaleData(localePt, 'pt-BR')
 
@@ -48,13 +50,15 @@ const indexedConfig: DBConfig = {
     MatIconModule,
     NgxElectronModule,
     AppRoutingModule,
+    HttpClientModule,
     NgxIndexedDBModule.forRoot(indexedConfig),
     StoreModule.forRoot(PrimeiroAppStore),
     StoreDevtoolsModule.instrument({ maxAge: 45 }),
     EffectsModule.forRoot([RegistersEffect, DashboardEffect])
-
   ],
-  providers: [],
+  providers: [
+    {provide: Constants}
+  ],
   bootstrap: [AppComponent]
 })
 

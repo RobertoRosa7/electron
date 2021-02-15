@@ -6,7 +6,6 @@ export interface Register {
   value: number
   type: string
   status: string
-  id?: number | string
   description?: string
   operation?: string
   brand?: string
@@ -17,7 +16,6 @@ export interface Register {
 export interface User {
   name: string
   email: string
-  id: string | number | object
   created_at: number
   updated_at?: number
   edit?: boolean

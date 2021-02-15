@@ -27,6 +27,8 @@ import { CardsComponent } from "src/app/components/cards/cards.component";
 import { MainComponent } from './main/main.component';
 import { ResultSearchComponent } from './result-search/result-search.component'
 import { DialogFormIncomingComponent } from "src/app/components/dialog-form-incoming/dialog-form-incoming.component"
+import { DashboardService } from "src/app/services/dashboard.service"
+import { HttpClientModule } from "@angular/common/http"
 
 const routes: Routes = [
   {
@@ -82,7 +84,8 @@ registerLocaleData(localePt, 'pt-BR')
     MatNativeDateModule,
     MomentDateModule,
     MatToolbarModule,
-    MatSidenavModule
+    MatSidenavModule,
+    HttpClientModule
   ],
   entryComponents: [
     DialogFormIncomingComponent
@@ -90,7 +93,7 @@ registerLocaleData(localePt, 'pt-BR')
   // exports: [],
   providers: [
     { provide: DateAdapter, useClass: MomentDateAdapter, deps: [MAT_DATE_LOCALE] },
-    { provide: MAT_DATE_FORMATS, useValue: MY_FORMATS }
+    { provide: MAT_DATE_FORMATS, useValue: MY_FORMATS },
   ],
   // entryComponents: []
 })

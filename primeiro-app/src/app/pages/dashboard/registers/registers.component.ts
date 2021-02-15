@@ -22,8 +22,7 @@ export class RegistersComponent implements OnInit, AfterViewInit {
   private user_temp: User = {
     name: 'Anominous',
     email: 'anonimous@gmail.com',
-    created_at: new Date('26-01-1987').getTime(),
-    id: this._utils.generateUid(),
+    created_at: new Date('10-01-2003').getTime(),
     edit: false,
     credit_card: { brand: 'visa' }
   }
@@ -61,7 +60,6 @@ export class RegistersComponent implements OnInit, AfterViewInit {
       value: event.value,
       status: 'pending',
       brand: event.brand || this.user_temp.credit_card?.brand,
-      id: this._utils.generateUid(),
       edit: false,
       user: this.user_temp,
       description: event.description || 'Sem descrição'
