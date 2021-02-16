@@ -14,6 +14,18 @@ export class MainComponent implements OnInit {
       icon: 'account_balance',
       value: 0,
       type: 'consolidado'
+    },
+    {
+      title: 'Credito',
+      icon: 'account_balance',
+      value: 0,
+      type: 'incoming'
+    },
+    {
+      title: 'Debito',
+      icon: 'account_balance',
+      value: 0,
+      type: 'outcoming'
     }
   ]
 

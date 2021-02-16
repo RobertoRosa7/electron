@@ -1,8 +1,6 @@
 <section class="main">
-  <app-grid [cols]="'12 6 6'">
-    <app-cards *ngFor="let item of cards" 
-                [title]="item.tile"
-                [value]="item.value"
-                [type]="item.type"></app-cards>
-  </app-grid>
+  <div class="cards-main">
+    <app-cards style="width: 100%" *ngFor="let item of cards" [title]="item.tile" [value]="item.value"
+      [type]="item.type"></app-cards>
+  </div>
 </section>
