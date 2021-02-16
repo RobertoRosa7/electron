@@ -27,8 +27,12 @@ import { CardsComponent } from "src/app/components/cards/cards.component";
 import { MainComponent } from './main/main.component';
 import { ResultSearchComponent } from './result-search/result-search.component'
 import { DialogFormIncomingComponent } from "src/app/components/dialog-form-incoming/dialog-form-incoming.component"
-import { DashboardService } from "src/app/services/dashboard.service"
 import { HttpClientModule } from "@angular/common/http"
+import { TitleComponent } from "src/app/components/title/title.component";
+import { TabsComponent } from '../../components/tabs/tabs.component';
+import { TabMenuComponent } from '../../components/tabs/tab-menu/tab-menu.component';
+import { TabContentComponent } from '../../components/tabs/tab-content/tab-content.component';
+import { TabHeaderComponent } from '../../components/tabs/tab-header/tab-header.component'
 
 const routes: Routes = [
   {
@@ -63,7 +67,12 @@ registerLocaleData(localePt, 'pt-BR')
     CardsComponent,
     MainComponent,
     ResultSearchComponent,
-    DialogFormIncomingComponent
+    DialogFormIncomingComponent,
+    TitleComponent,
+    TabsComponent,
+    TabMenuComponent,
+    TabContentComponent,
+    TabHeaderComponent
   ],
   imports: [
     RouterModule.forChild(routes),
@@ -85,7 +94,7 @@ registerLocaleData(localePt, 'pt-BR')
     MomentDateModule,
     MatToolbarModule,
     MatSidenavModule,
-    HttpClientModule
+    HttpClientModule,
   ],
   entryComponents: [
     DialogFormIncomingComponent

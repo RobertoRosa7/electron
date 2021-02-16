@@ -1,6 +1,10 @@
 <section class="main">
+  <app-title title="Dashboard" subtitle="geral"></app-title>
   <div class="cards-main">
-    <app-cards style="width: 100%" *ngFor="let item of cards" [title]="item.tile" [value]="item.value"
-      [type]="item.type"></app-cards>
+    <app-cards style="width: 100%" 
+              *ngFor="let item of cards" 
+              [title]="item.title" 
+              [value]="item.value"
+              [type]="item.type"></app-cards>
   </div>
 </section>
