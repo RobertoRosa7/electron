@@ -10,7 +10,6 @@
     <app-tab-content style="display: block; margin: 15px 0; height: 100%;">
       <div *ngIf="tab === 'read'" read>
         <div *ngIf="ELEMENT_DATA.length > 0; else noneOfExtracts" class="histories">
-          <h2 class="welcome-subtitle">Extratos</h2>
           <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
 
             <ng-container matColumnDef="position">
@@ -35,7 +34,7 @@
 
             <ng-container matColumnDef="actions">
               <th style="display: none;" mat-header-cell *matHeaderCellDef></th>
-              <td class="table-delete-icon" mat-cell *matCellDef="let element">
+              <td class="table-delete-icon bg-mode-custom" mat-cell *matCellDef="let element">
                 <button mat-icon-button (click)="edit($event, element)">
                   <mat-icon>edit</mat-icon>
                 </button>
@@ -57,82 +56,22 @@
           <h2 class="welcome-subtitle">Não há extratos</h2>
         </ng-template>
       </div>
-      <div *ngIf="tab === 'create'" create>
-        <app-grid [cols]="'12 6'">
-          <app-form-incoming (send)="listeningEventForm($event)" 
-                              [type]="'incoming'"
-                              [label]="'Entrada'"
-                              [placeholder]="'R$ 0,00'"></app-form-incoming>
-        </app-grid>
-        <app-grid [cols]="'12 6'">
-          <app-form-incoming (send)="listeningEventForm($event)" 
-                              [type]="'outcoming'" 
-                              [label]="'Saída'"
-                              [placeholder]="'R$ 0,00'"></app-form-incoming>
-        </app-grid>
-      </div>
+
+      <mat-card *ngIf="tab === 'create'" class="create" create>
+        <div class="form-group">
+          <app-title title="Receita"></app-title>
+          <app-form-incoming (send)="listeningEventForm($event)" [type]="'incoming'" [label]="'Entrada'"
+            [placeholder]="'R$ 0,00'"></app-form-incoming>
+        </div>
+        <div class="form-group">
+          <app-title title="Despesa"></app-title>
+          <app-form-incoming (send)="listeningEventForm($event)" [type]="'outcoming'" [label]="'Saída'"
+            [placeholder]="'R$ 0,00'"></app-form-incoming>
+        </div>
+      </mat-card>
+
       <div *ngIf="tab === 'update'" update>atualizar</div>
       <div *ngIf="tab === 'delete'" delete>deletar</div>
     </app-tab-content>
   </app-tabs>
-
-  <!-- <div class="incoming-outcomming">
-    <h2 class="welcome-subtitle">Registre suas entradas e saídas</h2>
-    <app-grid [cols]="'12 6'">
-      <app-form-incoming (send)="listeningEventForm($event)" [type]="'incoming'" [label]="'Entrada'" [placeholder]="'R$ 0,00'"></app-form-incoming>
-    </app-grid>
-    <app-grid [cols]="'12 6'">
-      <app-form-incoming (send)="listeningEventForm($event)" [type]="'outcoming'" [label]="'Saída'" [placeholder]="'R$ 0,00'"></app-form-incoming>
-    </app-grid>
-  </div>
-
-  <ng-container *ngFor="let i of [0,1,2,3,4,5,6,7]"><br></ng-container>
-
-  <div *ngIf="ELEMENT_DATA.length > 0; else noneOfExtracts" class="histories">
-    <h2 class="welcome-subtitle">Extratos</h2>
-    <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
-
-      <ng-container matColumnDef="position">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> No. </th>
-        <td mat-cell *matCellDef="let element"> {{element.position}} </td>
-      </ng-container>
-
-      <ng-container matColumnDef="category">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> Categoria </th>
-        <td mat-cell *matCellDef="let element"> {{element.category}} </td>
-      </ng-container>
-
-      <ng-container matColumnDef="value">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> Valor </th>
-        <td mat-cell *matCellDef="let element"> R$ {{ formatarValor(element.value) }} </td>
-      </ng-container>
-
-      <ng-container matColumnDef="created_at">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> Data </th>
-        <td mat-cell *matCellDef="let element"> {{element.created_at | date:'dd/MM/yyyy'}} </td>
-      </ng-container>
-
-      <ng-container matColumnDef="actions">
-        <th style="display: none;" mat-header-cell *matHeaderCellDef></th>
-        <td class="table-delete-icon" mat-cell *matCellDef="let element">
-          <button mat-icon-button (click)="edit($event, element)">
-            <mat-icon>edit</mat-icon>
-          </button>
-          <button mat-icon-button (click)="del($event, element)">
-            <mat-icon>delete</mat-icon>
-          </button>
-        </td>
-      </ng-container>
-
-      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-      <tr (click)="openDetails($event, row)"
-        [ngClass]="{'outcoming': (row.type === 'outcoming'), 'pending': (row.status === 'pending') }" mat-row
-        *matRowDef="let row; columns: displayedColumns;"></tr>
-    </table>
-  </div>
-
-  <ng-template #noneOfExtracts>
-    <ng-container *ngFor="let i of [0,1,2,3,4,5,6,7]"><br></ng-container>
-    <h2 class="welcome-subtitle">Não há extratos</h2>
-  </ng-template> -->
 </div>

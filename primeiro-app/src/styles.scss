@@ -61,6 +61,13 @@ $text-accent: #f50057;
   .bg-mode {
     background: whitesmoke;
   }
+  .bg-mode-custom {
+    background: linear-gradient(-90deg, whitesmoke, transparent);
+
+    button:hover {
+      background: white;
+    }
+  }
 }
 
 .dark-mode {
@@ -90,6 +97,12 @@ $text-accent: #f50057;
   }
   .bg-mode {
     background: #212121;
+  }
+  .bg-mode-custom {
+    background: linear-gradient(-90deg, #393939, #42424290);
+    button:hover {
+      background: $bg-dark-mode;
+    }
   }
 }
 

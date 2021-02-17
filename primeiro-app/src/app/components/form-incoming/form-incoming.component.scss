@@ -16,4 +16,14 @@
   .form {
     width: 49%;
   }
+  .container-button {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+
+    button {
+      width: 100%;
+      max-width: 300px;
+    }
+  }
 }

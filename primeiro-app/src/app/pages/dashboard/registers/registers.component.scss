@@ -22,9 +22,20 @@
       position: absolute;
       border: none;
       align-items: center;
-      justify-content: space-between;
+      justify-content: center;
       height: 48px;
-      right: 0
+      right: 0;
+      width: 130px;
     }
+  }
+  .create {
+    display: flex;
+    justify-content: space-between;
+  }
+}
+
+@media (max-width: 768px) {
+  .registers .create {
+    flex-direction: column;
   }
 }

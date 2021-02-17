@@ -97,5 +97,5 @@ export class RegistersComponent implements OnInit, AfterViewInit {
   public formatarValor(valor: number): string {
     return new Intl.NumberFormat('pt-BR', { currency: 'BRL', minimumFractionDigits: 2 }).format(valor)
   }
-
+  
 }

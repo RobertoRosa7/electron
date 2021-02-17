@@ -50,4 +50,7 @@ export class FormIncomingComponent implements OnInit {
     this.send.emit(payload)
   }
 
+  public close() {
+    this.send.emit('close')
+  }
 }

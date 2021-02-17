@@ -27,6 +27,8 @@ export class DialogFormIncomingComponent implements OnInit {
   }
 
   public listeningEventForm(event: any): void {
-    console.log(event)
+    if (event === 'close') {
+      this._dialogRef.close()
+    }
   }
 }
