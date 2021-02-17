@@ -18,7 +18,7 @@ import { DialogConfirmComponent } from 'src/app/components/dialog-confirm/dialog
 
 export class RegistersComponent implements OnInit, AfterViewInit {
   public ELEMENT_DATA: Register[] = []
-  public tab: string = 'read'
+  public tab: string = ''
 
   private user_temp: User = {
     name: 'Anominous',
@@ -40,6 +40,7 @@ export class RegistersComponent implements OnInit, AfterViewInit {
     private _dialog: MatDialog
   ) {
     this._store.dispatch(actions.INIT())
+    this._store.dispatch(actions.GET_TAB({ payload: 'read' }))
   }
 
   public ngOnInit(): void {
@@ -48,9 +49,8 @@ export class RegistersComponent implements OnInit, AfterViewInit {
       this.dataSource = new MatTableDataSource(this.ELEMENT_DATA)
       this.dataSource.sort = this.sort
     })
-    this._store.select(({ registers }: any) => registers.tab).subscribe(tab => this.tab = tab)
 
-    console.log(this.tab)
+    this._store.select(({ registers }: any) => registers.tab).subscribe(tab => this.tab = tab)
   }
 
   public ngAfterViewInit(): void { }

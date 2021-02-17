@@ -91,4 +91,14 @@ export class RegistersEffect {
     return { ...registers, registers: newPayload }
   }
 
+  @Effect()
+  public showTab$: Observable<Actions> = this._action.pipe(
+    ofType(actions.actionsTypes.GET_SHOWTAB),
+    map(({ payload }: any) => {
+      const showtabs: any = {}
+      payload.forEach((e: any) => showtabs[e] = true)
+      return actions.SET_SHOWTAB({ payload: showtabs })
+    }),
+    catchError(err => of(err))
+  )
 }
