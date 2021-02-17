@@ -58,6 +58,9 @@ $text-accent: #f50057;
   table tr .table-delete-icon {
     color: $bg-dark-mode;
   }
+  .bg-mode {
+    background: whitesmoke;
+  }
 }
 
 .dark-mode {
@@ -84,6 +87,9 @@ $text-accent: #f50057;
   }
   table tr .table-delete-icon {
     color: $bg-light-mode;
+  }
+  .bg-mode {
+    background: #212121;
   }
 }
 

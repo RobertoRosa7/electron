@@ -7,47 +7,11 @@
     flex-wrap: wrap;
   }
 
-  ::ng-deep mat-toolbar {
-    position: fixed;
-    z-index: 99;
-  }
-
-  .app-custom-toolbar-row {
-    display: flex;
-
-    .menu-toolbar {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      flex: 1
-    }
-
-    .form {
-      margin-left: 16px;
-
-      mat-icon {
-        font-size: 20px;
-      }
-    }
-    ::ng-deep .mat-form-field-appearance-outline .mat-form-field-flex {
-      padding: 12px;
-    }
-    ::ng-deep .mat-form-field-appearance-outline .mat-form-field-infix {
-      padding: 0;
-    }
-    ::ng-deep .mat-form-field-wrapper {
-      padding-bottom: 0;
-    }
-    ::ng-deep .mat-form-field-infix {
-      border-top: 0;
-    }
-    ::ng-deep .mat-input-element {
-      font-size: 14px;
-      height: 20px;
-    }
-  }
   .container.mat-drawer-container {
     height: 100%;
+  }
+  .mat-drawer-content {
+    display: flex;
   }
   .container {
     height: 100vh;
@@ -106,10 +70,59 @@
     margin-top: 85px;
     padding: 0 15px 0 15px;
   }
+  .sidebar {
+    width: 200px;
+  }
+  .content-pages {
+    flex: 1;
+    overflow-x: hidden !important;
+    position: relative;
+    ::ng-deep mat-toolbar {
+      // position: fixed;
+      z-index: 99;
+      // position: absolute;
+      // top: 0;
+      // left: 0;
+    }
+    .app-custom-toolbar-row {
+      width: 100%;
+      .menu-toolbar {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        flex: 1;
+        .form {
+          margin-left: 16px;
+          mat-icon {
+            font-size: 20px;
+          }
+        }
+      }
+      ::ng-deep .mat-form-field-appearance-outline .mat-form-field-flex {
+        padding: 12px;
+      }
+      ::ng-deep .mat-form-field-appearance-outline .mat-form-field-infix {
+        padding: 0;
+      }
+      ::ng-deep .mat-form-field-wrapper {
+        padding-bottom: 0;
+      }
+      ::ng-deep .mat-form-field-infix {
+        border-top: 0;
+      }
+      ::ng-deep .mat-input-element {
+        font-size: 14px;
+        height: 20px;
+      }
+    }
+  }
 }
 
 @media (max-width: 768px) {
   .dashboard .cards {
     flex-direction: column;
+  }
+  .dashboard .sidebar {
+    display: none;
   }
 }
