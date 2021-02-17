@@ -58,6 +58,9 @@ $text-accent: #f50057;
   table tr .table-delete-icon {
     color: $bg-dark-mode;
   }
+  table tr:nth-child(even) {
+    background: linear-gradient(-90deg, whitesmoke 100%, transparent);
+  }
   .bg-mode {
     background: whitesmoke;
   }
@@ -95,6 +98,11 @@ $text-accent: #f50057;
   table tr .table-delete-icon {
     color: $bg-light-mode;
   }
+  
+  table tr:nth-child(even) {
+    background: linear-gradient(-90deg, #393939 100%, #42424290 0);
+  }
+
   .bg-mode {
     background: #212121;
   }
