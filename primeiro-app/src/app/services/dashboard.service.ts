@@ -26,4 +26,8 @@ export class DashboardService {
     return this.http.get<Consolidado>(this.constants.get('fetch_consolidado'))
   }
 
+  public deleteRegister(payload: Register): Observable<Register> {
+    return this.http.post<Register>(this.constants.get('delete_register'), payload)
+  }
+
 }

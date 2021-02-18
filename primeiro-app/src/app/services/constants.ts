@@ -15,6 +15,7 @@ export class Constants {
     fetch_registers: 'dashboard/fetch_registers',
     fetch_consolidado: 'dashboard/calc_consolidado',
     new_register: 'dashboard/new_register',
+    delete_register: 'dashboard/delete_register'
   }
 
   public get(key: string, host?: string): string {
