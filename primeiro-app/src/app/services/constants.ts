@@ -5,9 +5,9 @@ export class Constants {
 
   constructor() {
     if (environment) {
-      this.host = 'http://localhost:6000/'
+      this.host = 'http://127.0.0.1:3000/'
     } else {
-      this.host = 'http://localhost:6000/'
+      this.host = 'http://127.0.0.1:3000/'
     }
   }
 

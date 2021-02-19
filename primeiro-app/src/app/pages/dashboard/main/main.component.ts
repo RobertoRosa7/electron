@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Store } from '@ngrx/store';
 import * as actionDashboard from '../../../actions/dashboard.actions'
+import { DashboardComponent } from '../dashboard.component';
 
 @Component({
   selector: 'app-main',
@@ -31,6 +33,7 @@ export class MainComponent implements OnInit {
 
   constructor(
     private _store: Store,
+    private _snackbar: MatSnackBar
   ) {
     this._store.dispatch(actionDashboard.INIT())
   }
@@ -51,6 +54,15 @@ export class MainComponent implements OnInit {
               break
           }
         })
+      })
+
+    this._store.select(({ http_error }: any) =>
+      http_error.errors.filter((e: any) => e.source === 'calc_consolidado')).subscribe(err => {
+        if (err.length > 0) {
+          const pay = err[0]
+          console.log(pay)
+          this._snackbar.open('Erro ao calcular consolidado', 'ok', { duration: 3000 })
+        }
       })
   }
 

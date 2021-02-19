@@ -2,9 +2,10 @@
 import { ActionReducerMap } from '@ngrx/store'
 import { reducer } from '../reducers/registers.reducers'
 import { reducerDashboard } from '../reducers/dashboard.reducers'
-
+import { reducerErrors} from '../reducers/errors.reducers'
 
 export const PrimeiroAppStore: ActionReducerMap<any> = {
   registers: reducer,
-  dashboard: reducerDashboard
+  dashboard: reducerDashboard,
+  http_error: reducerErrors
 }

@@ -9,6 +9,8 @@ import { UtilsService } from 'src/app/utils/utis.service'
 import { MatDialog } from '@angular/material/dialog'
 import { DialogFormIncomingComponent } from 'src/app/components/dialog-form-incoming/dialog-form-incoming.component'
 import { DialogConfirmComponent } from 'src/app/components/dialog-confirm/dialog-confirm.component'
+import { filter, map } from 'rxjs/operators'
+import { HttpErrorResponse } from '@angular/common/http'
 
 @Component({
   selector: 'app-registers',
@@ -41,6 +43,7 @@ export class RegistersComponent implements OnInit, AfterViewInit {
   ) {
     this._store.dispatch(actions.INIT())
     this._store.dispatch(actions.GET_TAB({ payload: 'read' }))
+
   }
 
   public ngOnInit(): void {
@@ -51,6 +54,14 @@ export class RegistersComponent implements OnInit, AfterViewInit {
     })
 
     this._store.select(({ registers }: any) => registers.tab).subscribe(tab => this.tab = tab)
+    this._store.select(({ http_error }: any) =>
+      http_error.errors.filter((e: any) => e.source === 'fetch_registers')).subscribe(err => {
+        if (err.length > 0) {
+          const pay = err[0]
+          console.log(pay)
+          this._snackbar.open('Erro ao buscar registros', 'ok', { duration: 3000 })
+        }
+      })
   }
 
   public ngAfterViewInit(): void { }

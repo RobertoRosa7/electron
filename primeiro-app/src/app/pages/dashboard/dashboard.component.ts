@@ -35,7 +35,6 @@ export class DashboardComponent implements OnInit {
   public searchTerms: string | number
 
   constructor(
-    private _router: Router,
     private _ipcService: IpcService
   ) {
   }

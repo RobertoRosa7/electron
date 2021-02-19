@@ -1,4 +1,3 @@
-import { HttpErrorResponse } from '@angular/common/http'
 import { createAction, props } from '@ngrx/store'
 
 export enum actionsTypes { SET_ERRORS = '[SET_ERRORS]' }
