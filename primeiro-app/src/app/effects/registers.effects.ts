@@ -68,4 +68,12 @@ export class RegistersEffect {
     }),
     catchError(err => of(err))
   )
+
+  @Effect()
+  public updateRegister$: Observable<Actions> = this._action.pipe(
+    ofType(actions.actionsTypes.UPDATE_REGISTER),
+    mergeMap(({ payload }: any) => this._dashboardService.updateRegister(payload).pipe(map(() => actions.SET_UPDATE({ payload })))),
+    catchError(err => of(err))
+  )
+
 }

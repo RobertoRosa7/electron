@@ -81,11 +81,18 @@ export class RegistersComponent implements OnInit, AfterViewInit {
   public edit(event: Event, payload: Register): void {
     event.stopPropagation()
     this._dialog.open(DialogFormIncomingComponent, { data: { ...payload, edit: true } })
+      .beforeClosed().subscribe(res => {
+        if (res) {
+          const newpayload = { ...payload, value: res.value, created_at: new Date(res.date).getTime() }
+          this._store.dispatch(actions.UPDATE_REGISTER({ payload: newpayload }))
+          // this._snackbar.open(`Registro de "${payload.category}" foi excluído com sucesso.`, 'Ok', { duration: 3000 })
+        }
+      })
   }
 
   public del(event: Event, payload: Register): void {
     event.stopPropagation()
-    this._dialog.open(DialogConfirmComponent, { data: payload, width: '450px' })
+    this._dialog.open(DialogConfirmComponent, { data: payload })
       .beforeClosed().subscribe(response => {
         if (response) {
           this._store.dispatch(actions.DELETE_REGISTERS({ payload }))
@@ -97,5 +104,5 @@ export class RegistersComponent implements OnInit, AfterViewInit {
   public formatarValor(valor: number): string {
     return new Intl.NumberFormat('pt-BR', { currency: 'BRL', minimumFractionDigits: 2 }).format(valor)
   }
-  
+
 }

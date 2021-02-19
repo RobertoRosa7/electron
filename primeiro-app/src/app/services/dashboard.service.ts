@@ -29,5 +29,8 @@ export class DashboardService {
   public deleteRegister(payload: Register): Observable<Register> {
     return this.http.post<Register>(this.constants.get('delete_register'), payload)
   }
+  public updateRegister(payload: Register): Observable<Register> {
+    return this.http.post<Register>(this.constants.get('update_register'), payload)
+  }
 
 }

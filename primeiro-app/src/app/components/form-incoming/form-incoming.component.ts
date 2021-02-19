@@ -2,6 +2,7 @@ import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Component, Input, OnInit, Output, EventEmitter, Inject } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { Register } from 'src/app/models/models';
 
 @Component({
   selector: 'app-form-incoming',
@@ -50,7 +51,7 @@ export class FormIncomingComponent implements OnInit {
     this.send.emit(payload)
   }
 
-  public close() {
-    this.send.emit('close')
+  public close(options?: any): void {
+    this.send.emit(options)
   }
 }

@@ -5,17 +5,18 @@ export class Constants {
 
   constructor() {
     if (environment) {
-      this.host = 'http://localhost:5000/'
+      this.host = 'http://localhost:6000/'
     } else {
-      this.host = 'http://localhost:5000/'
+      this.host = 'http://localhost:6000/'
     }
   }
 
   public readonly paths: any = {
-    fetch_registers: 'dashboard/fetch_registers',
     fetch_consolidado: 'dashboard/calc_consolidado',
+    fetch_registers: 'dashboard/fetch_registers',
     new_register: 'dashboard/new_register',
-    delete_register: 'dashboard/delete_register'
+    delete_register: 'dashboard/delete_register',
+    update_register: 'dashboard/update_register'
   }
 
   public get(key: string, host?: string): string {

@@ -33,6 +33,7 @@ import { TabsComponent } from '../../components/tabs/tabs.component';
 import { TabMenuComponent } from '../../components/tabs/tab-menu/tab-menu.component';
 import { TabContentComponent } from '../../components/tabs/tab-content/tab-content.component';
 import { TabHeaderComponent } from '../../components/tabs/tab-header/tab-header.component'
+import { DialogConfirmComponent } from "src/app/components/dialog-confirm/dialog-confirm.component"
 
 const routes: Routes = [
   {
@@ -72,7 +73,8 @@ registerLocaleData(localePt, 'pt-BR')
     TabsComponent,
     TabMenuComponent,
     TabContentComponent,
-    TabHeaderComponent
+    TabHeaderComponent,
+    DialogConfirmComponent
   ],
   imports: [
     RouterModule.forChild(routes),
@@ -97,7 +99,8 @@ registerLocaleData(localePt, 'pt-BR')
     HttpClientModule,
   ],
   entryComponents: [
-    DialogFormIncomingComponent
+    DialogFormIncomingComponent,
+    DialogConfirmComponent
   ],
   // exports: [],
   providers: [
