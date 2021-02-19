@@ -3,6 +3,7 @@ import { createAction, props } from '@ngrx/store'
 export enum actionsTypes {
   INIT = '[INIT]',
   ADD_REGISTERS = '[ADD_REGISTERS]',
+  ADDED_REGISTERS = '[ADDED_REGISTERS]',
   UPDATE_REGISTER = '[UPDATE_REGISTER]',
   DELETE_REGISTERS = '[DELETE_REGISTERS]',
 
@@ -16,6 +17,7 @@ export enum actionsTypes {
 }
 export const INIT = createAction(actionsTypes.INIT)
 export const ADD_REGISTERS = createAction(actionsTypes.ADD_REGISTERS, props<{ payload: any }>())
+export const ADDED_REGISTERS = createAction(actionsTypes.ADDED_REGISTERS, props<{ payload: any }>())
 export const UPDATE_REGISTER = createAction(actionsTypes.UPDATE_REGISTER, props<{ payload: any }>())
 
 export const SET_REGISTERS = createAction(actionsTypes.SET_REGISTERS, props<{ payload: any }>())

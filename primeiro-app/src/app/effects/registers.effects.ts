@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core'
 import { Actions, ofType, Effect } from '@ngrx/effects'
 import { Store } from '@ngrx/store'
-import { Observable, of } from 'rxjs'
-import { catchError, map, mergeMap } from 'rxjs/operators'
+import { Observable, of, forkJoin } from 'rxjs'
+import { catchError, delay, map, mergeMap } from 'rxjs/operators'
 import * as actions from '../actions/registers.actions'
 import { SET_ERRORS } from '../actions/errors.actions'
 import { DashboardService } from '../services/dashboard.service'
@@ -12,7 +12,6 @@ import { HttpErrorResponse } from '@angular/common/http'
 @Injectable()
 export class RegistersEffect {
   constructor(
-    private _store: Store,
     private _action: Actions,
     private _dashboardService: DashboardService
   ) {
@@ -35,17 +34,30 @@ export class RegistersEffect {
   )
 
   @Effect()
-  public addRegisters$: Observable<Actions> = this._action.pipe(
-    ofType(actions.actionsTypes.ADD_REGISTERS),
-    mergeMap(({ payload }: any) => this._dashboardService.newRegister(payload).pipe(catchError(e => of(e)))),
-    map(payload => {
-      if (payload instanceof HttpErrorResponse) {
-        const source = { ...payload, source: 'new_register' }
+  public addedRegister$: Observable<Actions> = this._action.pipe(
+    ofType(actions.ADDED_REGISTERS),
+    mergeMap(({ payload }) => this._dashboardService.newRegister(payload).pipe(
+      delay(1000),
+      catchError(e => of(e))
+    )),
+    map(response => {
+      if (response instanceof HttpErrorResponse) {
+        const source = { ...response, source: 'new_register' }
         return SET_ERRORS({ payload: source })
       } else {
-        return actions.SET_REGISTERS({ payload })
+        return actions.INIT()
       }
     }),
+    catchError(e => of(e))
+  )
+
+  @Effect()
+  public addRegisters$: Observable<Actions> = this._action.pipe(
+    ofType(actions.actionsTypes.ADD_REGISTERS),
+    mergeMap(({ payload }) => [
+      actions.ADDED_REGISTERS({ payload }),
+      actions.SET_REGISTERS({ payload }),
+    ]),
     catchError(err => of(err))
   )
 
@@ -65,13 +77,6 @@ export class RegistersEffect {
     catchError(err => of(err))
   )
 
-  public saveRegisters(payload: Register): Promise<any> {
-    return new Promise(resolve => {
-      setTimeout(() => this._dashboardService.newRegister(payload)
-        .subscribe(res => resolve(res)), 1000)
-    })
-  }
-
   @Effect()
   public showTab$: Observable<Actions> = this._action.pipe(
     ofType(actions.actionsTypes.GET_SHOWTAB),
@@ -86,7 +91,18 @@ export class RegistersEffect {
   @Effect()
   public updateRegister$: Observable<Actions> = this._action.pipe(
     ofType(actions.actionsTypes.UPDATE_REGISTER),
-    mergeMap(({ payload }: any) => this._dashboardService.updateRegister(payload).pipe(map(() => actions.SET_UPDATE({ payload })))),
+    mergeMap(({ payload }: any) => forkJoin([
+      this._dashboardService.updateRegister(payload).pipe(catchError(e => of(e))),
+      of(payload)
+    ])),
+    map(([response, payload]) => {
+      if (response instanceof HttpErrorResponse) {
+        const source = { ...response, source: 'update_register' }
+        return SET_ERRORS({ payload: source })
+      } else {
+        return actions.SET_UPDATE({ payload })
+      }
+    }),
     catchError(err => of(err))
   )
 

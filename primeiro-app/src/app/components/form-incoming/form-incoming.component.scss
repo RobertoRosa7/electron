@@ -27,3 +27,12 @@
     }
   }
 }
+
+@media (max-width: 768px) {
+  .form-incoming .form-inline {
+    flex-direction: column;
+    .form {
+      width: 100%;
+    }
+  }
+}
