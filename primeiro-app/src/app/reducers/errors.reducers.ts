@@ -1,17 +1,17 @@
 import { createReducer, on } from "@ngrx/store";
 import * as actions from '../actions/errors.actions'
 
-const initializeState = {
+const INITIAL_STATES = {
   errors: [],
-  status_codes: []
+  status_code: []
 }
 
-const registersReducers = createReducer(
-  initializeState,
+const errorsReducers = createReducer(
+  INITIAL_STATES,
   on(actions.SET_ERRORS, (states, { payload }) => ({ ...states, errors: states.errors.concat(payload) })),
   on(actions.SET_STATUS_CODE, (states, { payload }) => ({ ...states, status_code: payload }))
 )
 
 export function reducerErrors(state: any, action: any) {
-  return registersReducers(state, action)
+  return errorsReducers(state, action)
 }

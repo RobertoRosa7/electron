@@ -39,14 +39,14 @@ export class DashboardEffect {
   public getStatusCodes$: Observable<Actions> = this._action.pipe(
     ofType(GET_STATUS_CODE),
     mergeMap(() => this._indexedb.getById('status_code_id')),
-    mergeMap((status_code) => {
+    mergeMap(({ status_code }) => {
       if (status_code) {
         return [SET_STATUS_CODE({ payload: status_code })]
       } else {
         return this._dashboardService.getStatusCode().pipe(
-          map((statusCode: any) => {
-            if (statusCode) this._indexedb.create({ id: 'status_code_id', statusCode })
-            return SET_STATUS_CODE({ payload: statusCode })
+          map((status_code: any) => {
+            if (status_code) this._indexedb.create({ id: 'status_code_id', status_code })
+            return SET_STATUS_CODE({ payload: status_code })
           }),
           catchError(e => {
             const source = { ...e, source: 'status_code' }

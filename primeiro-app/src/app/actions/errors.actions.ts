@@ -9,4 +9,4 @@ export enum actionsTypes {
 
 export const SET_ERRORS = createAction(actionsTypes.SET_ERRORS, props<{ payload: any }>())
 export const GET_STATUS_CODE = createAction(actionsTypes.GET_STATUS_CODE)
-export const SET_STATUS_CODE = createAction(actionsTypes.SET_STATUS_CODE, props<{ payload: StatusCode[] }>())
+export const SET_STATUS_CODE = createAction(actionsTypes.SET_STATUS_CODE, props<{ payload: any }>())

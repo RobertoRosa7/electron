@@ -9,11 +9,11 @@ const initializeState = {
   }
 }
 
-const registersReducers = createReducer(
+const dashboardReducers = createReducer(
   initializeState,
   on(actions.GET_TOTALS, (states, { payload }) => ({ ...states, consolidado: payload })),
 )
 
 export function reducerDashboard(state: any, action: any) {
-  return registersReducers(state, action)
+  return dashboardReducers(state, action)
 }
