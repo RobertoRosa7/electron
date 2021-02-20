@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { IpcService } from 'src/app/services/ipc.service';
 import * as actionsErrors from '../../actions/errors.actions'
-import * as actionDashboard from '../../actions/dashboard.actions'
+import * as actionsRegister from '../../actions/registers.actions'
 import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
@@ -37,13 +37,14 @@ export class DashboardComponent implements OnInit {
   ]
 
   public searchTerms: string | number
+  public consolidado: number = 0
 
   constructor(
     protected _ipcService?: IpcService,
     protected _store?: Store,
     protected _snackbar?: MatSnackBar
   ) {
-    this._store?.dispatch(actionDashboard.INIT())
+    this._store?.dispatch(actionsRegister.INIT())
     this._store?.dispatch(actionsErrors.GET_STATUS_CODE())
   }
 
@@ -57,6 +58,9 @@ export class DashboardComponent implements OnInit {
     this._ipcService?.on('got', (event: Electron.IpcMessageEvent, message: any) => {
       console.log(message)
     })
+
+    this._store?.select(({ registers }: any) => registers.consolidado)
+      .subscribe(dash => this.consolidado = dash.total_consolidado)
 
     this._store?.select(({ http_error }: any) => http_error.errors).subscribe(err => {
       if (err.length > 0) {

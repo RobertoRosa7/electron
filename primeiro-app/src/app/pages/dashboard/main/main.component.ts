@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Store } from '@ngrx/store';
-import * as actionDashboard from '../../../actions/dashboard.actions'
 import { DashboardComponent } from '../dashboard.component';
 
 @Component({
@@ -39,7 +38,7 @@ export class MainComponent extends DashboardComponent implements OnInit {
   }
 
   public ngOnInit(): void {
-    this._store.select(({ dashboard }: any) => dashboard.consolidado)
+    this._store.select(({ registers }: any) => registers.consolidado)
       .subscribe(dash => {
         this.cards.forEach(value => {
           switch (value.type) {

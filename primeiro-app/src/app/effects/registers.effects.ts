@@ -69,6 +69,7 @@ export class RegistersEffect {
         const source = { ...payload, source: 'delete_register' }
         return SET_ERRORS({ payload: source })
       } else {
+        console.log('delete register: ', payload)
         return actions.GET_REGISTERS({ payload })
       }
     }),

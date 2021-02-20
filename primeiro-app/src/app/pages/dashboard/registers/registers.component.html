@@ -10,7 +10,7 @@
     <app-tab-content style="display: block; margin: 15px 0; height: 100%;">
       <div *ngIf="tab === 'read'" read>
         <div *ngIf="ELEMENT_DATA.length > 0; else noneOfExtracts" class="histories">
-          <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
+          <table mat-table [dataSource]="dataSource" matSort>
 
             <ng-container matColumnDef="position">
               <th mat-header-cell *matHeaderCellDef mat-sort-header> No. </th>

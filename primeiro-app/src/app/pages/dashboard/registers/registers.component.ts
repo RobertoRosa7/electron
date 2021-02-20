@@ -39,7 +39,7 @@ export class RegistersComponent extends DashboardComponent implements OnInit, Af
     protected _dialog: MatDialog
   ) {
     super()
-    this._store.dispatch(actionsRegister.INIT())
+    // this._store.dispatch(actionsRegister.INIT())
     this._store.dispatch(actionsRegister.GET_TAB({ payload: 'read' }))
   }
 

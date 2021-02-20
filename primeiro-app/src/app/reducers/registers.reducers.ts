@@ -4,13 +4,14 @@ import * as actions from '../actions/registers.actions'
 const INITIAL_STATE = {
   all: [],
   tab: '',
-  visible: {}
+  visible: {},
+  consolidado: {}
 }
 
 const registersReducers = createReducer(
   INITIAL_STATE,
   on(actions.SET_REGISTERS, (states, { payload }) => ({ ...states, all: states.all.concat(payload) })),
-  on(actions.GET_REGISTERS, (states, { payload }) => ({ ...states, all: payload })),
+  on(actions.GET_REGISTERS, (states, { payload }) => ({ ...states, all: payload.data.results, consolidado: payload.data.consolidado })),
   on(actions.GET_TAB, (states, { payload }) => ({ ...states, tab: payload })),
   on(actions.SET_SHOWTAB, (states, { payload }) => ({ ...states, visible: payload })),
   on(actions.SET_UPDATE, (states, { payload }) => {
