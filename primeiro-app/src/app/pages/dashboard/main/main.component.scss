@@ -3,11 +3,19 @@
     display: flex;
     flex: 1;
     justify-content: space-between;
+    flex-wrap: wrap;
+
+    app-cards {
+      width: 32.33%;
+    }
   }
 }
 
 @media (max-width: 768px) {
   .main .cards-main {
     flex-direction: column;
+    app-cards {
+      width: 100%;
+    }
   }
 }

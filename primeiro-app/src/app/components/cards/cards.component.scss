@@ -1,16 +1,12 @@
 @import '../../../styles.scss';
-
 .cards {
   min-height: 78.33px;
-  margin-top: 8px;
-  margin-bottom: 8px;
-  margin-right: 8px;
   overflow: hidden;
-
+  margin: 8px 0;
+  width: 100%;
   h1 {
     font-weight: 500;
   }
-
   .cards-header {
     display: flex;
     align-items: center;
