@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { StatusCode } from 'aws-sdk/clients/apigateway';
 import { Observable } from 'rxjs';
 import { Consolidado, Register } from '../models/models';
 import { Constants } from './constants';
@@ -29,8 +30,12 @@ export class DashboardService {
   public deleteRegister(payload: Register): Observable<Register> {
     return this.http.post<Register>(this.constants.get('delete_register'), payload)
   }
+  
   public updateRegister(payload: Register): Observable<Register> {
     return this.http.post<Register>(this.constants.get('update_register'), payload)
   }
 
+  public getStatusCode(): Observable<StatusCode[]> {
+    return this.http.get<StatusCode[]>(this.constants.get('get_status_code'))
+  }
 }

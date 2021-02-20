@@ -40,3 +40,8 @@ export interface Consolidado {
   total_debit: number
   total_consolidado: number
 }
+
+export interface StatusCode {
+  status: number
+  text: string
+}

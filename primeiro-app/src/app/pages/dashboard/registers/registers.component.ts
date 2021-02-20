@@ -4,10 +4,11 @@ import { MatSort } from '@angular/material/sort'
 import { MatTableDataSource } from '@angular/material/table'
 import { Register, User } from '../../../models/models'
 import { Store } from '@ngrx/store'
-import * as actions from '../../../actions/registers.actions'
+import * as actionsRegister from '../../../actions/registers.actions'
 import { MatDialog } from '@angular/material/dialog'
 import { DialogFormIncomingComponent } from 'src/app/components/dialog-form-incoming/dialog-form-incoming.component'
 import { DialogConfirmComponent } from 'src/app/components/dialog-confirm/dialog-confirm.component'
+import { DashboardComponent } from '../dashboard.component'
 
 @Component({
   selector: 'app-registers',
@@ -15,7 +16,7 @@ import { DialogConfirmComponent } from 'src/app/components/dialog-confirm/dialog
   styleUrls: ['./registers.component.scss']
 })
 
-export class RegistersComponent implements OnInit, AfterViewInit {
+export class RegistersComponent extends DashboardComponent implements OnInit, AfterViewInit {
   public ELEMENT_DATA: Register[] = []
   public tab: string = ''
 
@@ -33,12 +34,13 @@ export class RegistersComponent implements OnInit, AfterViewInit {
   @ViewChild(MatSort) public sort: MatSort
 
   constructor(
-    private _snackbar: MatSnackBar,
-    private _store: Store,
-    private _dialog: MatDialog
+    protected _store: Store,
+    protected _snackbar: MatSnackBar,
+    protected _dialog: MatDialog
   ) {
-    this._store.dispatch(actions.INIT())
-    this._store.dispatch(actions.GET_TAB({ payload: 'read' }))
+    super()
+    this._store.dispatch(actionsRegister.INIT())
+    this._store.dispatch(actionsRegister.GET_TAB({ payload: 'read' }))
   }
 
   public ngOnInit(): void {
@@ -47,12 +49,6 @@ export class RegistersComponent implements OnInit, AfterViewInit {
       this.ELEMENT_DATA = register
       this.dataSource = new MatTableDataSource(this.ELEMENT_DATA)
       this.dataSource.sort = this.sort
-    })
-
-    this._store.select(({ http_error }: any) => http_error.errors).subscribe(err => {
-      if(err.length > 0) {
-        this.handleError(err)
-      }
     })
   }
 
@@ -72,7 +68,7 @@ export class RegistersComponent implements OnInit, AfterViewInit {
       description: event.description || 'Sem descrição'
     }
 
-    this._store.dispatch(actions.ADD_REGISTERS({ payload }))
+    this._store.dispatch(actionsRegister.ADD_REGISTERS({ payload }))
   }
 
   public openDetails(event: Event, payload: Register): void {
@@ -86,7 +82,7 @@ export class RegistersComponent implements OnInit, AfterViewInit {
       .beforeClosed().subscribe(res => {
         if (res) {
           const newpayload = { ...payload, value: res.value, created_at: new Date(res.date).getTime() }
-          this._store.dispatch(actions.UPDATE_REGISTER({ payload: newpayload }))
+          this._store.dispatch(actionsRegister.UPDATE_REGISTER({ payload: newpayload }))
         }
       })
   }
@@ -96,32 +92,8 @@ export class RegistersComponent implements OnInit, AfterViewInit {
     this._dialog.open(DialogConfirmComponent, { data: payload })
       .beforeClosed().subscribe(response => {
         if (response) {
-          this._store.dispatch(actions.DELETE_REGISTERS({ payload }))
+          this._store.dispatch(actionsRegister.DELETE_REGISTERS({ payload }))
         }
       })
-  }
-
-  public formatarValor(valor: number): string {
-    return new Intl.NumberFormat('pt-BR', { currency: 'BRL', minimumFractionDigits: 2 }).format(valor)
-  }
-
-  private handleError(error: any): void {
-    let name: string = ''
-    switch (error.source) {
-      case 'fetch_registers':
-        name = 'Registros carregados'
-        break
-      case 'update_register':
-        name = 'Registro atualizado'
-        break
-      case 'delete_register':
-        name = 'Registro excluído'
-        break
-      case 'new_register':
-        name = 'Novo registro'
-        break
-    }
-
-    this._snackbar.open(`Error - ${name}`, 'Ok', { duration: 3000 })
   }
 }

@@ -9,7 +9,7 @@ import { DashboardComponent } from '../dashboard.component';
   templateUrl: './main.component.html',
   styleUrls: ['./main.component.scss']
 })
-export class MainComponent implements OnInit {
+export class MainComponent extends DashboardComponent implements OnInit {
   public cards: any[] = [
     {
       title: 'Consolidado',
@@ -32,14 +32,14 @@ export class MainComponent implements OnInit {
   ]
 
   constructor(
-    private _store: Store,
-    private _snackbar: MatSnackBar
+    protected _store: Store,
+    protected _snackbar: MatSnackBar
   ) {
-    this._store.dispatch(actionDashboard.INIT())
+    super()
   }
 
   public ngOnInit(): void {
-    this._store.select(({ dashboard }: any) => ({ ...dashboard }))
+    this._store.select(({ dashboard }: any) => dashboard.consolidado)
       .subscribe(dash => {
         this.cards.forEach(value => {
           switch (value.type) {
@@ -54,15 +54,6 @@ export class MainComponent implements OnInit {
               break
           }
         })
-      })
-
-    this._store.select(({ http_error }: any) =>
-      http_error.errors.filter((e: any) => e.source === 'calc_consolidado')).subscribe(err => {
-        if (err.length > 0) {
-          const pay = err[0]
-          console.log(pay)
-          this._snackbar.open('Erro ao calcular consolidado', 'ok', { duration: 3000 })
-        }
       })
   }
 

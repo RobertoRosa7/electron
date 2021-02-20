@@ -1,12 +1,13 @@
 import { Component, OnInit, Renderer2, RendererFactory2 } from '@angular/core';
 import { MatSlideToggleChange } from '@angular/material/slide-toggle';
+import { DashboardComponent } from '../dashboard.component';
 
 @Component({
   selector: 'app-settings',
   templateUrl: './settings.component.html',
   styleUrls: ['./settings.component.scss']
 })
-export class SettingsComponent implements OnInit {
+export class SettingsComponent extends DashboardComponent implements OnInit {
   public isDark: boolean
   private renderer: Renderer2
   private colorTheme: string = ''
@@ -14,12 +15,13 @@ export class SettingsComponent implements OnInit {
   constructor(
     private renderedFactory: RendererFactory2
   ) {
+    super()
     this.renderer = this.renderedFactory.createRenderer(null, null)
     this.initTheme()
     this.isDark = this.isDarkMode()
   }
 
-  ngOnInit(): void {
+  public ngOnInit(): void {
   }
   // init theme
   public initTheme(): void {

@@ -2,7 +2,7 @@ import { createAction, props } from '@ngrx/store'
 
 export enum actionsTypes {
   INIT = '[INIT]',
-  GET_TOTALS = '[GET_TOTALS]'
+  GET_TOTALS = '[GET_TOTALS]',
 }
 
 export const INIT = createAction(actionsTypes.INIT)

@@ -16,7 +16,8 @@ export class Constants {
     fetch_registers: 'dashboard/fetch_registers',
     new_register: 'dashboard/new_register',
     delete_register: 'dashboard/delete_register',
-    update_register: 'dashboard/update_register'
+    update_register: 'dashboard/update_register',
+    get_status_code: 'dashboard/get_status_code'
   }
 
   public get(key: string, host?: string): string {
