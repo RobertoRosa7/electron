@@ -64,7 +64,6 @@ export class RegistersEffect {
     ofType(actions.actionsTypes.DELETE_REGISTERS),
     mergeMap(({ payload }: any) => this._dashboardService.deleteRegister(payload).pipe(catchError(e => of(e)))),
     map(payload => {
-      if (!payload) return actions.GET_REGISTERS({ payload: [] })
       if (payload instanceof HttpErrorResponse) {
         const source = { ...payload, source: 'delete_register' }
         return SET_ERRORS({ payload: source })

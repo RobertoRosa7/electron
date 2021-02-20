@@ -1,3 +1,5 @@
+@import '../../../styles.scss';
+
 .cards {
   min-height: 78.33px;
   margin-top: 8px;
@@ -36,7 +38,7 @@
     margin: 16px 0;
   }
   .cards-debit {
-    color: #e67e22;
+    color: var(--text-accent)
   }
   .cards-label {
     font-size: 12px;

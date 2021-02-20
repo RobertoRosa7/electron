@@ -1,6 +1,16 @@
 @import "~@angular/material/theming";
 @include mat-core();
 
+:root {
+  --text-accent: #ff4081;
+  --text-light: #303030;
+  --text-middle-orange: #e67e22;
+  --text-middle-light: #585858;
+  --text-dark: #d65a31;
+  --bg-light-color: #fafafa;
+  --bg-dark-color: #505050;
+}
+
 $mat-primary-pallete: mat-palette($mat-deep-orange);
 $mat-accent-pallete: mat-palette($mat-pink);
 
@@ -14,16 +24,9 @@ $bg-dark-mode: #303030;
 $bg-light-mode: #fafafa;
 $color-dark-mode: white;
 
-$text-dark: #d65a31;
-$text-light: #585858;
-$text-accent: #f50057;
-
-:root {
-  --text-accent: #ff4081;
-  --text-light: #303030;
-  --bg-light-color: #fafafa;
-  --bg-dark-color: #505050;
-}
+$text-dark: var(--text-dark);
+$text-light: var(--text-midlle-light);
+$text-accent: var(--text-accent);
 
 @mixin span-cash {
   font-size: 35px;
@@ -52,7 +55,7 @@ $text-accent: #f50057;
 
   mat-card span.cards-money-off {
     @include span-cash;
-    color: #f50057;
+    color: var(--text-accent);
   }
 
   table tr .table-delete-icon {
@@ -93,12 +96,12 @@ $text-accent: #f50057;
 
   mat-card span.cards-money-off {
     @include span-cash;
-    color: #f50057;
+    color: var(--text-accent);
   }
   table tr .table-delete-icon {
     color: $bg-light-mode;
   }
-  
+
   .histories table tr:nth-child(even) {
     background: linear-gradient(-90deg, #393939 100%, #42424290 0);
   }
