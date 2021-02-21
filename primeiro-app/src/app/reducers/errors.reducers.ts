@@ -3,13 +3,15 @@ import * as actions from '../actions/errors.actions'
 
 const INITIAL_STATES = {
   errors: [],
-  status_code: []
+  status_code: [],
+  success: ''
 }
 
 const errorsReducers = createReducer(
   INITIAL_STATES,
   on(actions.SET_ERRORS, (states, { payload }) => ({ ...states, errors: states.errors.concat(payload) })),
-  on(actions.SET_STATUS_CODE, (states, { payload }) => ({ ...states, status_code: payload }))
+  on(actions.SET_STATUS_CODE, (states, { payload }) => ({ ...states, status_code: payload })),
+  on(actions.SET_SUCCESS, (states, { payload }) => ({ ...states, success: payload })),
 )
 
 export function reducerErrors(state: any, action: any) {

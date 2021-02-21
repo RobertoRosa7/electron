@@ -1,10 +1,12 @@
-import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { Store } from '@ngrx/store';
-import { IpcService } from 'src/app/services/ipc.service';
+import { Component, OnInit } from '@angular/core'
+import { Router } from '@angular/router'
+import { ActionsSubject, Store } from '@ngrx/store'
+import { IpcService } from 'src/app/services/ipc.service'
 import * as actionsErrors from '../../actions/errors.actions'
 import * as actionsRegister from '../../actions/registers.actions'
-import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatSnackBar } from '@angular/material/snack-bar'
+import { filter } from 'rxjs/operators'
+
 
 @Component({
   selector: 'app-dashboard',
@@ -42,10 +44,12 @@ export class DashboardComponent implements OnInit {
   constructor(
     protected _ipcService?: IpcService,
     protected _store?: Store,
-    protected _snackbar?: MatSnackBar
+    protected _snackbar?: MatSnackBar,
+    protected _as?: ActionsSubject,
   ) {
     this._store?.dispatch(actionsRegister.INIT())
     this._store?.dispatch(actionsErrors.GET_STATUS_CODE())
+    this._store?.dispatch(actionsRegister.GET_TAB({ payload: 'read' }))
   }
 
   public ngOnInit(): void {
@@ -59,14 +63,20 @@ export class DashboardComponent implements OnInit {
       console.log(message)
     })
 
-    this._store?.select(({ registers }: any) => registers.consolidado)
-      .subscribe(dash => this.consolidado = dash.total_consolidado)
+    this._store?.select(({ http_error, registers }: any) =>
+      ({ http_error, consolidado: registers.consolidado })).subscribe(state => {
+        this.consolidado = state.consolidado.total_consolidado
 
-    this._store?.select(({ http_error }: any) => http_error.errors).subscribe(err => {
-      if (err.length > 0) {
-        err.forEach((e: any) => this.handleError(e))
-      }
-    })
+        if (state.http_error.error) {
+          state.http_error.errors.forEach((e: any) => this.handleError(e))
+        }
+      })
+    
+    this._as?.pipe(filter(a => a.type === actionsErrors.actionsTypes.SET_SUCCESS))
+      .subscribe(({ payload }: any) => {
+        const name: string = this.fetchNames(payload)
+        this._snackbar?.open(`${name}`, 'Ok', { duration: 3000 })
+      })
   }
 
   public onSubmit(): void {
@@ -84,29 +94,28 @@ export class DashboardComponent implements OnInit {
   }
 
   public handleError(error: any): void {
-    let name: string = ''
-    switch (error.source) {
-      case 'fetch_registers':
-        name = 'Registros carregados'
-        break
-      case 'update_register':
-        name = 'Registro atualizado'
-        break
-      case 'delete_register':
-        name = 'Registro excluído'
-        break
-      case 'new_register':
-        name = 'Novo registro'
-        break
-      case 'status_code':
-        name = 'Status code: ' + error.status
-        break
-    }
-
-    this._snackbar?.open(`Error - ${name}`, 'Ok', { duration: 3000 })
+    const name: string = this.fetchNames(error.source)
+    this._snackbar?.open(`Error: ${name} code: ${error.status}`, 'Ok', { duration: 3000 })
   }
 
   public formatarValor(valor: number): string {
     return new Intl.NumberFormat('pt-BR', { currency: 'BRL', minimumFractionDigits: 2 }).format(valor)
+  }
+
+  private fetchNames(name: string): string {
+    switch (name) {
+      case 'fetch_registers':
+        return 'Registros carregados'
+      case 'update_register':
+        return 'Registro atualizado'
+      case 'delete_register':
+        return 'Registro excluído'
+      case 'new_register':
+        return 'Novo registro'
+      case 'status_code':
+        return 'Status code: '
+      default:
+        return ''
+    }
   }
 }

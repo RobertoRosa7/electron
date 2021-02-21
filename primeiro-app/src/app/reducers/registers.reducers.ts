@@ -5,7 +5,7 @@ const INITIAL_STATE = {
   all: [],
   tab: '',
   visible: {},
-  consolidado: {}
+  consolidado: {},
 }
 
 const registersReducers = createReducer(
