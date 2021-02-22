@@ -9,7 +9,7 @@
     </app-tab-header>
     <app-tab-content style="display: block; margin: 15px 0; height: 100%;">
       <div *ngIf="tab === 'read'" read>
-        <ng-container *ngIf="!isMobile && ELEMENT_DATA.length > 0; else noneOfExtracts">
+        <ng-container *ngIf="ELEMENT_DATA.length > 0; else noneOfExtracts">
           <app-list-registers *ngFor="let item of ELEMENT_DATA" [item]="item" (send)="receivedPayload($event)">
           </app-list-registers>
         </ng-container>

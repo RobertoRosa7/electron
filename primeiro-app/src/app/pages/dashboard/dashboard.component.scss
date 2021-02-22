@@ -93,6 +93,11 @@
         align-items: center;
         width: 100%;
         max-width: 150px;
+        @media (max-width: 600px) {
+          max-width: 100%;
+          flex: 1;
+          align-items: flex-start;
+        }
         span {
           display: inline-block;
           font-size: 14px;

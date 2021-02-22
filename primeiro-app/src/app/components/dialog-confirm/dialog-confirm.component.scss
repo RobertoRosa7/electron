@@ -12,3 +12,12 @@
     }
   }
 }
+@media (max-width: 768px) {
+  .dialog-confirm .container-buttons {
+    flex-direction: column;
+    button {
+      max-width: 100%;
+      margin: 8px 0;
+    }
+  }
+}
