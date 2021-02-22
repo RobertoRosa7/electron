@@ -10,8 +10,9 @@
     <app-tab-content style="display: block; margin: 15px 0; height: 100%;">
       <div *ngIf="tab === 'read'" read>
         <div *ngIf="!isMobile" class="container-cards">
-          <mat-card class="cards" *ngFor="let item of ELEMENT_DATA"
-            [ngStyle]="{'border-left': item.type == 'outcoming' ? '1px solid var(--text-accent)' : '1px solid var(--text-green)'}">
+          <mat-card class="cards" *ngFor="let item of ELEMENT_DATA" [ngStyle]="{
+              'border-left': item.type == 'outcoming' ? '1px solid var(--text-accent)' : '1px solid var(--text-green)'
+            }">
             <div class="itens date">
               <strong>Data:</strong>
               <span>{{item.created_at | date:'dd/MM/yyyy'}}</span>
@@ -51,8 +52,9 @@
 
         <!-- novo layout pra mobile -->
         <ul *ngIf="isMobile" class="container-cards-mobile">
-          <mat-card class="cards" *ngFor="let item of ELEMENT_DATA"
-            [ngStyle]="{'border-left': item.type == 'outcoming' ? '1px solid var(--text-accent)' : '1px solid var(--text-green)'}">
+          <mat-card class="cards" *ngFor="let item of ELEMENT_DATA" [ngStyle]="{
+            'border-left': item.type == 'outcoming' ? '1px solid var(--text-accent)' : '1px solid var(--text-green)'
+          }">
 
             <li class="line">
               <p class="value">
