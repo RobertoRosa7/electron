@@ -34,6 +34,9 @@ import { TabMenuComponent } from '../../components/tabs/tab-menu/tab-menu.compon
 import { TabContentComponent } from '../../components/tabs/tab-content/tab-content.component';
 import { TabHeaderComponent } from '../../components/tabs/tab-header/tab-header.component'
 import { DialogConfirmComponent } from "src/app/components/dialog-confirm/dialog-confirm.component"
+import { MatListModule } from '@angular/material/list'
+import { MatMenuModule } from '@angular/material/menu'
+
 
 const routes: Routes = [
   {
@@ -97,6 +100,8 @@ registerLocaleData(localePt, 'pt-BR')
     MatToolbarModule,
     MatSidenavModule,
     HttpClientModule,
+    MatListModule,
+    MatMenuModule
   ],
   entryComponents: [
     DialogFormIncomingComponent,

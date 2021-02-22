@@ -13,6 +13,9 @@ export class DialogFormIncomingComponent implements OnInit {
   public label: string = ''
   public value: string | number
   public edit: boolean | undefined
+  public description: string | undefined
+
+  public payload: Register
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: Register,
@@ -20,9 +23,11 @@ export class DialogFormIncomingComponent implements OnInit {
   ) { }
 
   public ngOnInit(): void {
+    this.payload = this.data
     this.type = this.data.type
     this.value = this.data.value
     this.edit = this.data.edit
+    this.description = this.data.description
     this.data.type === 'incoming' ? this.label = "Entrada" : this.label = "Saída"
   }
 

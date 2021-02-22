@@ -2,10 +2,8 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  // max-width: 450px;
   flex-wrap: wrap;
-  margin: 8px 0;
-
+  padding: 8px;
   .form-inline {
     display: flex;
     justify-content: space-between;
@@ -15,6 +13,9 @@
   }
   .form {
     width: 49%;
+  }
+  .form-textarea {
+    width: 100%;
   }
   .container-button {
     width: 100%;

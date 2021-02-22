@@ -1,11 +1,18 @@
 .registers {
   .histories {
-    // margin: 30px 15px;
     table {
       width: 100%;
       position: relative;
       tr {
         cursor: pointer;
+        td {
+          span {
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            display: inline-block;
+          }
+        }
         &:hover .table-delete-icon {
           display: flex;
         }
@@ -28,14 +35,83 @@
       width: 130px;
     }
   }
+  .container-cards {
+    .cards {
+      display: flex;
+      margin: 8px 0;
+      align-items: center;
+    }
+    .value,
+    .category,
+    .data,
+    .description {
+      width: 25%;
+    }
+    .value {
+      max-width: 120px;
+    }
+    .category {
+      max-width: 120px;
+    }
+    .date {
+      max-width: 120px;
+    }
+    .actions {
+      max-width: 30px;
+    }
+    .itens {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      span {
+        font-size: 14px;
+      }
+      strong {
+        font-size: 12px;
+        font-weight: 100;
+      }
+    }  
+  }
+
   .create {
     display: flex;
     justify-content: space-between;
   }
+  .container-cards-mobile {
+    font-size: 14px;
+    mat-card {
+      margin: 8px 0;
+    }
+    strong {
+      font-weight: 100;
+    }
+    .first-row{
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .second-row {
+      display: flex;
+      flex-direction: column;
+    }
+    span {
+      line-height: 20px;
+      height: 20px;
+    }
+    .actions button {
+      line-height: 20px;
+      height: 20px;
+    }
+  }
 }
-
-@media (max-width: 768px) {
+@media (max-width: 350px) {
+}
+@media (min-width: 351px) and (max-width: 557px) {
+}
+@media (min-width: 558px) and (max-width: 768px) {
   .registers .create {
     flex-direction: column;
   }
+}
+@media (min-width: 769px) and (max-width: 1024px) {
 }

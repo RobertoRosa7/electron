@@ -9,6 +9,7 @@ import { MatDialog } from '@angular/material/dialog'
 import { DialogFormIncomingComponent } from 'src/app/components/dialog-form-incoming/dialog-form-incoming.component'
 import { DialogConfirmComponent } from 'src/app/components/dialog-confirm/dialog-confirm.component'
 import { DashboardComponent } from '../dashboard.component'
+import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout'
 
 @Component({
   selector: 'app-registers',
@@ -28,25 +29,28 @@ export class RegistersComponent extends DashboardComponent implements OnInit, Af
     credit_card: { brand: 'visa' }
   }
 
-  public displayedColumns: string[] = ['position', 'category', 'value', 'created_at', 'actions']
+  public displayedColumns: string[] = ['position', 'category', 'description', 'value', 'created_at', 'actions']
   public dataSource: any
+  public isMobile: boolean
 
   @ViewChild(MatSort) public sort: MatSort
 
   constructor(
     protected _store: Store,
     protected _snackbar: MatSnackBar,
-    protected _dialog: MatDialog
+    protected _dialog: MatDialog,
+    protected _breakpointObserver: BreakpointObserver
   ) {
     super()
+    _breakpointObserver.observe([Breakpoints.XSmall]).subscribe(result => {
+      this.isMobile = !!result.matches
+    })
   }
 
   public ngOnInit(): void {
-    this._store.select(({ registers }: any) => registers.tab).subscribe(tab => this.tab = tab)
-    this._store.select(({ registers }: any) => [...registers.all]).subscribe(register => {
-      this.ELEMENT_DATA = register
-      this.dataSource = new MatTableDataSource(this.ELEMENT_DATA)
-      this.dataSource.sort = this.sort
+    this._store.select(({ registers }: any) => ({ all: [...registers.all], tab: registers.tab })).subscribe(state => {
+      this.tab = state.tab
+      this.ELEMENT_DATA = state.all
     })
   }
 
@@ -79,7 +83,11 @@ export class RegistersComponent extends DashboardComponent implements OnInit, Af
     this._dialog.open(DialogFormIncomingComponent, { data: { ...payload, edit: true } })
       .beforeClosed().subscribe(res => {
         if (res) {
-          const newpayload = { ...payload, value: res.value, created_at: new Date(res.date).getTime() }
+          const newpayload = {
+            ...payload, value: res.value,
+            created_at: new Date(res.date).getTime(),
+            description: res.description
+          }
           this._store.dispatch(actionsRegister.UPDATE_REGISTER({ payload: newpayload }))
         }
       })

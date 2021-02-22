@@ -9,27 +9,109 @@
     </app-tab-header>
     <app-tab-content style="display: block; margin: 15px 0; height: 100%;">
       <div *ngIf="tab === 'read'" read>
-        <div *ngIf="ELEMENT_DATA.length > 0; else noneOfExtracts" class="histories">
+        <div *ngIf="!isMobile" class="container-cards">
+          <mat-card
+            [ngStyle]="{'border-left': item.type == 'outcoming' ? '1px solid var(--text-accent)' : '1px solid var(--text-green)'}"
+            class="cards" *ngFor="let item of ELEMENT_DATA">
+            <div class="itens date">
+              <strong>Data:</strong>
+              <span>{{item.created_at | date:'dd/MM/yyyy'}}</span>
+            </div>
+            <div class="itens description">
+              <strong>Descrição:</strong>
+              <span>{{item.description}}</span>
+            </div>
+            <div class="itens value">
+              <strong>Valor:</strong>
+              <span [ngStyle]="{'color': item.type == 'outcoming' ? 'var(--text-accent)' : 'var(--text-green)'}">R$ {{
+                formatarValor(item.value) }}</span>
+            </div>
+            <div class="itens category">
+              <strong>Categoria:</strong>
+              <span>{{item.category}}</span>
+            </div>
+            <div class="itens actions">
+              <button mat-icon-button [matMenuTriggerFor]="menu">
+                <mat-icon>more_vert</mat-icon>
+              </button>
+            </div>
+            <mat-menu #menu="matMenu" overlapTrigger="true">
+              <button (click)="edit($event, item)" mat-menu-item>
+                <mat-icon style="color: #323232">edit</mat-icon>
+                <span style="font-weight: 500">EDITAR</span>
+              </button>
+
+              <button (click)="del($event, item)" mat-menu-item>
+                <mat-icon style="color:black;" class="icon-mat-menu">delete</mat-icon>
+                <span style="font-weight: 500">DELETAR</span>
+              </button>
+            </mat-menu>
+          </mat-card>
+        </div>
+
+        <div *ngIf="isMobile" class="container-cards-mobile">
+          <mat-card [ngStyle]="{'border-left': item.type == 'outcoming' ? '1px solid var(--text-accent)' : '1px solid var(--text-green)'}"
+            class="cards" *ngFor="let item of ELEMENT_DATA">
+            <div class="first-row">
+              <span>
+                <strong>Valor:</strong>
+                <span [ngStyle]="{'color': item.type == 'outcoming' ? 'var(--text-accent)' : 'var(--text-green)'}">R$
+                  {{formatarValor(item.value) }}</span>
+              </span>
+
+              <div class="itens actions">
+                <button mat-icon-button [matMenuTriggerFor]="menu">
+                  <mat-icon>more_vert</mat-icon>
+                </button>
+              </div>
+            </div>
+
+            <div class="second-row">
+              <span><strong>Data:</strong> {{item.created_at | date:'dd/MM/yyyy'}}</span>
+              <span><strong>Categoria:</strong> {{item.category}}</span>
+              <span><strong>Descrição:</strong> {{item.description}}</span>
+            </div>
+
+            <mat-menu #menu="matMenu" overlapTrigger="true">
+              <button (click)="edit($event, item)" mat-menu-item>
+                <mat-icon style="color: #323232">edit</mat-icon>
+                <span style="font-weight: 500">EDITAR</span>
+              </button>
+
+              <button (click)="del($event, item)" mat-menu-item>
+                <mat-icon style="color:black;" class="icon-mat-menu">delete</mat-icon>
+                <span style="font-weight: 500">DELETAR</span>
+              </button>
+            </mat-menu>
+          </mat-card>
+        </div>
+
+        <!-- <div *ngIf="ELEMENT_DATA.length > 0; else noneOfExtracts" class="histories">
           <table mat-table [dataSource]="dataSource" matSort>
 
             <ng-container matColumnDef="position">
               <th mat-header-cell *matHeaderCellDef mat-sort-header> No. </th>
-              <td mat-cell *matCellDef="let element"> {{element.position}} </td>
+              <td mat-cell *matCellDef="let element"> <span>{{element.position}}</span> </td>
             </ng-container>
 
             <ng-container matColumnDef="category">
               <th mat-header-cell *matHeaderCellDef mat-sort-header> Categoria </th>
-              <td mat-cell *matCellDef="let element"> {{element.category}} </td>
+              <td mat-cell *matCellDef="let element"> <span>{{element.category}}</span> </td>
+            </ng-container>
+
+            <ng-container matColumnDef="description">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> Descrição </th>
+              <td mat-cell *matCellDef="let element"> <span>{{element.description}}</span> </td>
             </ng-container>
 
             <ng-container matColumnDef="value">
               <th mat-header-cell *matHeaderCellDef mat-sort-header> Valor </th>
-              <td mat-cell *matCellDef="let element"> R$ {{ formatarValor(element.value) }} </td>
+              <td mat-cell *matCellDef="let element"> <span>R$ {{ formatarValor(element.value) }}</span> </td>
             </ng-container>
 
             <ng-container matColumnDef="created_at">
               <th mat-header-cell *matHeaderCellDef mat-sort-header> Data </th>
-              <td mat-cell *matCellDef="let element"> {{element.created_at | date:'dd/MM/yyyy'}} </td>
+              <td mat-cell *matCellDef="let element"> <span>{{element.created_at | date:'dd/MM/yyyy'}}</span> </td>
             </ng-container>
 
             <ng-container matColumnDef="actions">
@@ -49,11 +131,11 @@
               [ngClass]="{'outcoming': (row.type === 'outcoming'), 'pending': (row.status === 'pending') }" mat-row
               *matRowDef="let row; columns: displayedColumns;"></tr>
           </table>
-        </div>
+        </div> -->
 
         <ng-template #noneOfExtracts>
           <ng-container *ngFor="let i of [0,1,2,3,4,5,6,7]"><br></ng-container>
-          <h2 class="welcome-subtitle">Não há extratos</h2>
+          <h2 class="welcome-subtitle">Não há registros</h2>
         </ng-template>
       </div>
 

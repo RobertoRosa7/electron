@@ -6,6 +6,7 @@ import * as actionsErrors from '../../actions/errors.actions'
 import * as actionsRegister from '../../actions/registers.actions'
 import { MatSnackBar } from '@angular/material/snack-bar'
 import { filter } from 'rxjs/operators'
+import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout'
 
 
 @Component({
@@ -40,13 +41,16 @@ export class DashboardComponent implements OnInit {
 
   public searchTerms: string | number
   public consolidado: number = 0
+  public isMobile: boolean
 
   constructor(
     protected _ipcService?: IpcService,
     protected _store?: Store,
     protected _snackbar?: MatSnackBar,
     protected _as?: ActionsSubject,
+    protected _breakpoint?: BreakpointObserver
   ) {
+    this._breakpoint?.observe([Breakpoints.XSmall]).subscribe(result => this.isMobile = !!result.matches)
     this._store?.dispatch(actionsRegister.INIT())
     this._store?.dispatch(actionsErrors.GET_STATUS_CODE())
     this._store?.dispatch(actionsRegister.GET_TAB({ payload: 'read' }))

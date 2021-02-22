@@ -1,7 +1,13 @@
 <section class="dialog-form-incoming">
   <app-title [title]="type === 'incoming' ? 'Receita' : 'Despesa'"></app-title>
   <div class="container-form-incoming">
-    <app-form-incoming (send)="listeningEventForm($event)" [type]="type" [label]="label" [value]="value" [edit]="edit"
-      [placeholder]="'R$ 0,00'"></app-form-incoming>
+    <app-form-incoming (send)="listeningEventForm($event)" 
+                      [type]="type" 
+                      [label]="label" 
+                      [value]="value" 
+                      [edit]="edit"
+                      [description]="description"
+                      [payload]="payload"
+                      [placeholder]="'R$ 0,00'"></app-form-incoming>
   </div>
 </section>
