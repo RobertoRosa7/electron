@@ -35,7 +35,8 @@ import { TabContentComponent } from '../../components/tabs/tab-content/tab-conte
 import { TabHeaderComponent } from '../../components/tabs/tab-header/tab-header.component'
 import { DialogConfirmComponent } from "src/app/components/dialog-confirm/dialog-confirm.component"
 import { MatListModule } from '@angular/material/list'
-import { MatMenuModule } from '@angular/material/menu'
+import { MatMenuModule } from '@angular/material/menu';
+import { ListRegistersComponent } from '../../components/list-registers/list-registers.component'
 
 
 const routes: Routes = [
@@ -77,7 +78,8 @@ registerLocaleData(localePt, 'pt-BR')
     TabMenuComponent,
     TabContentComponent,
     TabHeaderComponent,
-    DialogConfirmComponent
+    DialogConfirmComponent,
+    ListRegistersComponent
   ],
   imports: [
     RouterModule.forChild(routes),

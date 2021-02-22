@@ -42,9 +42,7 @@ export class RegistersComponent extends DashboardComponent implements OnInit, Af
     protected _breakpointObserver: BreakpointObserver
   ) {
     super()
-    _breakpointObserver.observe([Breakpoints.XSmall]).subscribe(result => {
-      this.isMobile = !!result.matches
-    })
+    _breakpointObserver.observe([Breakpoints.XSmall]).subscribe(result => this.isMobile = !!result.matches)
   }
 
   public ngOnInit(): void {
@@ -83,12 +81,14 @@ export class RegistersComponent extends DashboardComponent implements OnInit, Af
     this._dialog.open(DialogFormIncomingComponent, { data: { ...payload, edit: true } })
       .beforeClosed().subscribe(res => {
         if (res) {
-          const newpayload = {
-            ...payload, value: res.value,
-            created_at: new Date(res.date).getTime(),
-            description: res.description
-          }
-          this._store.dispatch(actionsRegister.UPDATE_REGISTER({ payload: newpayload }))
+          this._store.dispatch(actionsRegister.UPDATE_REGISTER({
+            payload: {
+              ...payload,
+              value: res.value,
+              created_at: new Date(res.date).getTime(),
+              description: res.description
+            }
+          }))
         }
       })
   }
@@ -101,5 +101,9 @@ export class RegistersComponent extends DashboardComponent implements OnInit, Af
           this._store.dispatch(actionsRegister.DELETE_REGISTERS({ payload }))
         }
       })
+  }
+
+  public receivedPayload(payload: any) {
+    payload.action === 'edit' ? this.edit(payload.event, payload.payload) : this.del(payload.event, payload.payload)
   }
 }
