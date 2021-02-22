@@ -21,6 +21,7 @@ import { MatSelectChange } from '@angular/material/select'
 export class RegistersComponent extends DashboardComponent implements OnInit, AfterViewInit {
   public ELEMENT_DATA: Register[] = []
   public tab: string = ''
+  public inOutComing: string = ''
 
   private user_temp: User = {
     name: 'Anominous',
@@ -88,7 +89,7 @@ export class RegistersComponent extends DashboardComponent implements OnInit, Af
   }
 
   public edit(event: Event, payload: Register): void {
-    event.stopPropagation()
+    // event.stopPropagation()
     this._dialog.open(DialogFormIncomingComponent, { data: { ...payload, edit: true } })
       .beforeClosed().subscribe(res => {
         if (res) {
@@ -105,7 +106,7 @@ export class RegistersComponent extends DashboardComponent implements OnInit, Af
   }
 
   public del(event: Event, payload: Register): void {
-    event.stopPropagation()
+    // event.stopPropagation()
     this._dialog.open(DialogConfirmComponent, { data: payload })
       .beforeClosed().subscribe(response => {
         if (response) {
@@ -122,7 +123,21 @@ export class RegistersComponent extends DashboardComponent implements OnInit, Af
     this.makingOrdering(event.value)
   }
 
-  private makingOrdering(value: string) {
+  public inOutComingChange(event: MatSelectChange) {
+    this.makingInOutComing(event.value)
+  }
+
+  private makingInOutComing(value: string): void {
+    this._store.select(({ registers }: any) => [...registers.all]).subscribe(registers => {
+      if (value === 'all') {
+        this.ELEMENT_DATA = registers
+      } else {
+        this.ELEMENT_DATA = registers.filter(v => v.type === value)
+      }
+    })
+  }
+
+  private makingOrdering(value: string): void {
     this.ELEMENT_DATA.sort((a: any, b: any) => {
       switch (value) {
         case 'Data + crescente':

@@ -8,10 +8,26 @@
         <app-tab-menu label="Alterar" icon="change_circle" target="update"></app-tab-menu>
         <app-tab-menu label="Deletar" icon="delete" target="delete"></app-tab-menu>
       </div>
-      <div class="control">
+      <div *ngIf="tab === 'read'" class="control">
         <mat-form-field class="form" floatLabel="always" appearance="outline">
           <mat-select [(value)]="orderby" (selectionChange)="orderbyChange($event)" placeholder="Ordenar por">
             <mat-option [value]="option" *ngFor="let option of displayedColumns">{{option}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field class="form" floatLabel="always" appearance="outline">
+          <mat-select placeholder="Ultimos 7 dias">
+            <mat-option value="7">Ultimos 7 dias</mat-option>
+            <mat-option value="15">Ultimos 15 dias</mat-option>
+            <mat-option value="30">Ultimos 30 dias</mat-option>
+            <mat-option value="60">Ultimos 60 dias</mat-option>
+            <mat-option value="todos">Todos dias</mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field class="form" floatLabel="always" appearance="outline">
+          <mat-select [(value)]="inOutComing" (selectionChange)="inOutComingChange($event)" placeholder="Entradas/Saídas">
+            <mat-option value="incoming">Entradas</mat-option>
+            <mat-option value="outcoming">Saídas</mat-option>
+            <mat-option value="all">Entrada/Saídas</mat-option>
           </mat-select>
         </mat-form-field>
       </div>

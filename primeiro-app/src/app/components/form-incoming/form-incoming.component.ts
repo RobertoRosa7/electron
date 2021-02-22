@@ -16,6 +16,7 @@ export class FormIncomingComponent implements OnInit {
   @Input('edit') public edit: boolean | undefined
   @Input('description') public description: string | undefined
   @Input('payload') public payload: Register
+  @Input('date') public date: number
 
   @Output() public send = new EventEmitter()
 
@@ -35,7 +36,7 @@ export class FormIncomingComponent implements OnInit {
 
   public ngOnInit(): void {
     if (this.edit) {
-      this.form.patchValue({ value: this.value, description: this.description })
+      this.form.patchValue({ value: this.value, description: this.description, date:  new Date(this.date)})
       let totalString = this.description?.length || 0
       this.charCount = (this.charTotal - totalString)
     }
