@@ -17,6 +17,15 @@
   </div>
 
   <div class="form-inline">
+    <mat-form-field class="form" floatLabel="always" appearance="outline">
+      <mat-label>Categoria</mat-label>
+      <mat-select formControlName="category" placeholder="Categoria">
+        <mat-option [value]="option" *ngFor="let option of categories">{{option}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+
+  <div class="form-inline">
     <mat-form-field class="form-textarea" floatLabel="always" appearance="outline">
       <mat-label>Descrição</mat-label>
       <!-- <textarea matInput cdkTextareaAutosize #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="1" cdkAutosizeMaxRows="5"></textarea> -->

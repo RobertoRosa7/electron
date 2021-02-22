@@ -89,8 +89,7 @@ export class RegistersComponent extends DashboardComponent implements OnInit, Af
   }
 
   public edit(event: Event, payload: Register): void {
-    // event.stopPropagation()
-    this._dialog.open(DialogFormIncomingComponent, { data: { ...payload, edit: true } })
+    this._dialog.open(DialogFormIncomingComponent, { data: { ...payload, edit: true }, maxWidth: 600 })
       .beforeClosed().subscribe(res => {
         if (res) {
           this._store.dispatch(actionsRegister.UPDATE_REGISTER({
@@ -98,7 +97,8 @@ export class RegistersComponent extends DashboardComponent implements OnInit, Af
               ...payload,
               value: res.value,
               created_at: new Date(res.date).getTime(),
-              description: res.description
+              description: res.description,
+              category: res.category
             }
           }))
         }
@@ -106,7 +106,6 @@ export class RegistersComponent extends DashboardComponent implements OnInit, Af
   }
 
   public del(event: Event, payload: Register): void {
-    // event.stopPropagation()
     this._dialog.open(DialogConfirmComponent, { data: payload })
       .beforeClosed().subscribe(response => {
         if (response) {
