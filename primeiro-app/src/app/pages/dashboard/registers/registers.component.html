@@ -1,11 +1,20 @@
 <div class="registers">
   <app-title title="Registros" subtitle="cadastro"></app-title>
   <app-tabs style="display: block; margin: 15px 0;">
-    <app-tab-header style="display: flex;">
-      <app-tab-menu label="Listar" icon="list" target="read"></app-tab-menu>
-      <app-tab-menu label="Incluir" icon="create" target="create"></app-tab-menu>
-      <app-tab-menu label="Alterar" icon="change_circle" target="update"></app-tab-menu>
-      <app-tab-menu label="Deletar" icon="delete" target="delete"></app-tab-menu>
+    <app-tab-header style="display: flex; justify-content: space-between; flex-wrap: wrap;">
+      <div class="control">
+        <app-tab-menu label="Listar" icon="list" target="read"></app-tab-menu>
+        <app-tab-menu label="Incluir" icon="create" target="create"></app-tab-menu>
+        <app-tab-menu label="Alterar" icon="change_circle" target="update"></app-tab-menu>
+        <app-tab-menu label="Deletar" icon="delete" target="delete"></app-tab-menu>
+      </div>
+      <div class="control">
+        <mat-form-field class="form" floatLabel="always" appearance="outline">
+          <mat-select [(value)]="orderby" (selectionChange)="orderbyChange($event)" placeholder="Ordenar por">
+            <mat-option [value]="option" *ngFor="let option of displayedColumns">{{option}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
     </app-tab-header>
     <app-tab-content style="display: block; margin: 15px 0; height: 100%;">
       <div *ngIf="tab === 'read'" read>

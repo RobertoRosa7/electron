@@ -55,6 +55,7 @@ export class FormIncomingComponent implements OnInit {
     switch (type) {
       case this.type:
         this.form.get('value')?.reset()
+        this.form.get('description')?.reset()
         break
     }
     this.send.emit(payload)

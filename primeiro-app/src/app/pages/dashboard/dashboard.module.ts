@@ -11,9 +11,9 @@ import { CurrencyMaskModule } from "ng2-currency-mask"
 import { MatSnackBarModule } from '@angular/material/snack-bar'
 import { MatSortModule } from '@angular/material/sort'
 import { MatTableModule } from '@angular/material/table'
-import { MatDatepickerModule } from '@angular/material/datepicker';
-import { DateAdapter, MatNativeDateModule, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
-import { MomentDateAdapter, MomentDateModule } from '@angular/material-moment-adapter';
+import { MatDatepickerModule } from '@angular/material/datepicker'
+import { DateAdapter, MatNativeDateModule, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core'
+import { MomentDateAdapter, MomentDateModule } from '@angular/material-moment-adapter'
 import localePt from '@angular/common/locales/pt'
 import { MatToolbarModule } from '@angular/material/toolbar'
 import { RouterModule, Routes } from "@angular/router"
@@ -23,20 +23,21 @@ import { RegistersComponent } from "./registers/registers.component"
 import { FormIncomingComponent } from "src/app/components/form-incoming/form-incoming.component"
 import { GridComponent } from "src/app/components/grid/grid.component"
 import { DashboardComponent } from "./dashboard.component"
-import { CardsComponent } from "src/app/components/cards/cards.component";
-import { MainComponent } from './main/main.component';
+import { CardsComponent } from "src/app/components/cards/cards.component"
+import { MainComponent } from './main/main.component'
 import { ResultSearchComponent } from './result-search/result-search.component'
 import { DialogFormIncomingComponent } from "src/app/components/dialog-form-incoming/dialog-form-incoming.component"
 import { HttpClientModule } from "@angular/common/http"
-import { TitleComponent } from "src/app/components/title/title.component";
-import { TabsComponent } from '../../components/tabs/tabs.component';
-import { TabMenuComponent } from '../../components/tabs/tab-menu/tab-menu.component';
-import { TabContentComponent } from '../../components/tabs/tab-content/tab-content.component';
+import { TitleComponent } from "src/app/components/title/title.component"
+import { TabsComponent } from '../../components/tabs/tabs.component'
+import { TabMenuComponent } from '../../components/tabs/tab-menu/tab-menu.component'
+import { TabContentComponent } from '../../components/tabs/tab-content/tab-content.component'
 import { TabHeaderComponent } from '../../components/tabs/tab-header/tab-header.component'
 import { DialogConfirmComponent } from "src/app/components/dialog-confirm/dialog-confirm.component"
 import { MatListModule } from '@angular/material/list'
-import { MatMenuModule } from '@angular/material/menu';
+import { MatMenuModule } from '@angular/material/menu'
 import { ListRegistersComponent } from '../../components/list-registers/list-registers.component'
+import { MatSelectModule } from '@angular/material/select'
 
 
 const routes: Routes = [
@@ -48,7 +49,7 @@ const routes: Routes = [
       { path: 'result-search', component: ResultSearchComponent },
     ]
   },
-];
+]
 
 export const MY_FORMATS = {
   parse: { dateInput: 'DD MM YYYY' },
@@ -103,7 +104,8 @@ registerLocaleData(localePt, 'pt-BR')
     MatSidenavModule,
     HttpClientModule,
     MatListModule,
-    MatMenuModule
+    MatMenuModule,
+    MatSelectModule
   ],
   entryComponents: [
     DialogFormIncomingComponent,

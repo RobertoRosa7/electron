@@ -10,6 +10,7 @@ import { DialogFormIncomingComponent } from 'src/app/components/dialog-form-inco
 import { DialogConfirmComponent } from 'src/app/components/dialog-confirm/dialog-confirm.component'
 import { DashboardComponent } from '../dashboard.component'
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout'
+import { MatSelectChange } from '@angular/material/select'
 
 @Component({
   selector: 'app-registers',
@@ -29,9 +30,19 @@ export class RegistersComponent extends DashboardComponent implements OnInit, Af
     credit_card: { brand: 'visa' }
   }
 
-  public displayedColumns: string[] = ['position', 'category', 'description', 'value', 'created_at', 'actions']
+  public displayedColumns: string[] = [
+    'Valor + crescente',
+    'Valor - decrescente',
+    'Data + crescente',
+    'Data - decrescente',
+    'Categoria + crescente',
+    'Categoria - decrescente',
+    'Descrição + crescente',
+    'Descrição - decrescente',
+  ]
   public dataSource: any
   public isMobile: boolean
+  public orderby: string = ''
 
   @ViewChild(MatSort) public sort: MatSort
 
@@ -48,7 +59,7 @@ export class RegistersComponent extends DashboardComponent implements OnInit, Af
   public ngOnInit(): void {
     this._store.select(({ registers }: any) => ({ all: [...registers.all], tab: registers.tab })).subscribe(state => {
       this.tab = state.tab
-      this.ELEMENT_DATA = state.all
+      this.orderby ? this.makingOrdering(this.orderby) : this.ELEMENT_DATA = state.all
     })
   }
 
@@ -105,5 +116,34 @@ export class RegistersComponent extends DashboardComponent implements OnInit, Af
 
   public receivedPayload(payload: any) {
     payload.action === 'edit' ? this.edit(payload.event, payload.payload) : this.del(payload.event, payload.payload)
+  }
+
+  public orderbyChange(event: MatSelectChange): void {
+    this.makingOrdering(event.value)
+  }
+
+  private makingOrdering(value: string) {
+    this.ELEMENT_DATA.sort((a: any, b: any) => {
+      switch (value) {
+        case 'Data + crescente':
+          return a.created_at - b.created_at
+        case 'Data - decrescente':
+          return b.created_at - a.created_at
+        case 'Categoria + crescente':
+          return b.category < a.category ? 1 : -1
+        case 'Categoria - decrescente':
+          return b.category > a.category ? 1 : -1
+        case 'Valor + crescente':
+          return a.value - b.value
+        case 'Valor - decrescente':
+          return b.value - a.value
+        case 'Descrição + crescente':
+          return a.description > b.description ? 1 : -1
+        case 'Descrição - decrescente':
+          return a.description < b.description ? 1 : -1
+        default:
+          return 0
+      }
+    })
   }
 }
