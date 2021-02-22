@@ -70,7 +70,7 @@
         font-size: 12px;
         font-weight: 100;
       }
-    }  
+    }
   }
 
   .create {
@@ -78,27 +78,29 @@
     justify-content: space-between;
   }
   .container-cards-mobile {
-    font-size: 14px;
     mat-card {
       margin: 8px 0;
-      position: relative;
     }
     strong {
       font-weight: 100;
     }
-    .first-row, .second-row{
+    .line {
       display: flex;
-    }
-    .first-row{
-      align-items: center;
       justify-content: space-between;
-    }
-    .second-row {
-      flex-direction: column;
-    }
-    span {
-      line-height: 20px;
-      height: 20px;
+      align-items: center;
+      p {
+        font-size: 14px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: flex-start;
+      }
+      p.menu {
+        width: 30px;
+      }
+      p.value {
+        flex: 1;
+      }
     }
   }
 }
