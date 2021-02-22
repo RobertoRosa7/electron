@@ -10,9 +10,8 @@
     <app-tab-content style="display: block; margin: 15px 0; height: 100%;">
       <div *ngIf="tab === 'read'" read>
         <div *ngIf="!isMobile" class="container-cards">
-          <mat-card
-            [ngStyle]="{'border-left': item.type == 'outcoming' ? '1px solid var(--text-accent)' : '1px solid var(--text-green)'}"
-            class="cards" *ngFor="let item of ELEMENT_DATA">
+          <mat-card class="cards" *ngFor="let item of ELEMENT_DATA"
+            [ngStyle]="{'border-left': item.type == 'outcoming' ? '1px solid var(--text-accent)' : '1px solid var(--text-green)'}">
             <div class="itens date">
               <strong>Data:</strong>
               <span>{{item.created_at | date:'dd/MM/yyyy'}}</span>
@@ -23,8 +22,9 @@
             </div>
             <div class="itens value">
               <strong>Valor:</strong>
-              <span [ngStyle]="{'color': item.type == 'outcoming' ? 'var(--text-accent)' : 'var(--text-green)'}">R$ {{
-                formatarValor(item.value) }}</span>
+              <span [ngStyle]="{'color': item.type == 'outcoming' ? 'var(--text-accent)' : 'var(--text-green)'}">
+                R$ {{formatarValor(item.value) }}
+              </span>
             </div>
             <div class="itens category">
               <strong>Categoria:</strong>
@@ -49,28 +49,42 @@
           </mat-card>
         </div>
 
-        <div *ngIf="isMobile" class="container-cards-mobile">
-          <mat-card [ngStyle]="{'border-left': item.type == 'outcoming' ? '1px solid var(--text-accent)' : '1px solid var(--text-green)'}"
-            class="cards" *ngFor="let item of ELEMENT_DATA">
-            <div class="first-row">
-              <span>
+        <!-- novo layout pra mobile -->
+        <ul *ngIf="isMobile" class="container-cards-mobile">
+          <mat-card class="cards" *ngFor="let item of ELEMENT_DATA"
+            [ngStyle]="{'border-left': item.type == 'outcoming' ? '1px solid var(--text-accent)' : '1px solid var(--text-green)'}">
+
+            <li class="first-row">
+              <p>
+                <strong>Categoria:</strong>
+                <span>{{item.category}}</span>
+              </p>
+
+              <button mat-icon-button [matMenuTriggerFor]="menu">
+                <mat-icon>more_vert</mat-icon>
+              </button>
+            </li>
+
+            <li class="first-row">
+              <p>
                 <strong>Valor:</strong>
-                <span [ngStyle]="{'color': item.type == 'outcoming' ? 'var(--text-accent)' : 'var(--text-green)'}">R$
-                  {{formatarValor(item.value) }}</span>
-              </span>
+                <span [ngStyle]="{'color': item.type == 'outcoming' ? 'var(--text-accent)' : 'var(--text-green)'}">
+                  R$ {{formatarValor(item.value) }}
+                </span>
+              </p>
 
-              <div class="itens actions">
-                <button mat-icon-button [matMenuTriggerFor]="menu">
-                  <mat-icon>more_vert</mat-icon>
-                </button>
-              </div>
-            </div>
+              <p>
+                <strong>Data:</strong>
+                <span>{{item.created_at | date:'dd/MM/yyyy'}}</span>
+              </p>
+            </li>
 
-            <div class="second-row">
-              <span><strong>Data:</strong> {{item.created_at | date:'dd/MM/yyyy'}}</span>
-              <span><strong>Categoria:</strong> {{item.category}}</span>
-              <span><strong>Descrição:</strong> {{item.description}}</span>
-            </div>
+            <li class="second-row description">
+              <p>
+                <strong>Descrição:</strong>
+                <span>{{item.description}}</span>
+              </p>
+            </li>
 
             <mat-menu #menu="matMenu" overlapTrigger="true">
               <button (click)="edit($event, item)" mat-menu-item>
@@ -84,7 +98,7 @@
               </button>
             </mat-menu>
           </mat-card>
-        </div>
+        </ul>
 
         <!-- <div *ngIf="ELEMENT_DATA.length > 0; else noneOfExtracts" class="histories">
           <table mat-table [dataSource]="dataSource" matSort>
