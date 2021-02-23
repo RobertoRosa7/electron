@@ -15,8 +15,13 @@ export class DashboardService {
     private constants: Constants,
   ) { }
 
-  public fetchRegisters(): Observable<Register[]> {
-    return this.http.get<Register[]>(this.constants.get('fetch_registers'))
+  private convertJsonToUrl(payload: any): string {
+    if (!payload) return ''
+    return '?' + Object.entries(payload).map(e => e.join('=')).join('&')
+  }
+  
+  public fetchRegisters(params?: any): Observable<Register[]> {
+    return this.http.get<Register[]>(`${this.constants.get('fetch_registers')}${this.convertJsonToUrl(params)}`)
   }
 
   public newRegister(payload: Register): Observable<Register> {
@@ -30,7 +35,7 @@ export class DashboardService {
   public deleteRegister(payload: Register): Observable<Register> {
     return this.http.post<Register>(this.constants.get('delete_register'), payload)
   }
-  
+
   public updateRegister(payload: Register): Observable<Register> {
     return this.http.post<Register>(this.constants.get('update_register'), payload)
   }

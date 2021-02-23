@@ -43,3 +43,5 @@
 ###### 23/02/2021
 * [x] Reajuste no code refactoring
 * [x] Corrigindo CSS para o uso de variáveis
+* [x] Convertendo JSON para Params URL que será enviado ao endpoint
+* [x] Adaptando Effect com novo payload opcional

@@ -27,8 +27,11 @@ export class FormIncomingComponent implements OnInit {
     'Alimentação',
     'Vestuário',
     'Transporte',
-    'Água & Luz'
-  ]
+    'Água & Luz',
+    'Internet',
+    'Pessoal',
+    'Trabalho'
+  ].sort()
 
   constructor(
     private _fb: FormBuilder,

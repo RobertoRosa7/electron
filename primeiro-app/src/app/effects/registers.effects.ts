@@ -10,7 +10,7 @@ import { Store } from '@ngrx/store'
 
 @Injectable()
 export class RegistersEffect {
-  
+
   private props = {
     fetch_registers: 'fetch_registers',
     new_register: 'new_register',
@@ -28,7 +28,7 @@ export class RegistersEffect {
   @Effect()
   public init$: Observable<Actions> = this._action.pipe(
     ofType(actions.actionsTypes.INIT),
-    mergeMap(() => this._dashboardService.fetchRegisters().pipe(catchError(e => of(e)))),
+    mergeMap(({ payload }) => this._dashboardService.fetchRegisters(payload).pipe(catchError(e => of(e)))),
     map((payload) => {
       if (!payload) return actions.GET_REGISTERS({ payload: [] })
 

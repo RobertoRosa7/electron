@@ -51,7 +51,7 @@ export class DashboardComponent implements OnInit {
     protected _breakpoint?: BreakpointObserver
   ) {
     this._breakpoint?.observe([Breakpoints.XSmall]).subscribe(result => this.isMobile = !!result.matches)
-    this._store?.dispatch(actionsRegister.INIT())
+    this._store?.dispatch(actionsRegister.INIT({ payload: { days: 7 } }))
     this._store?.dispatch(actionsErrors.GET_STATUS_CODE())
     this._store?.dispatch(actionsRegister.GET_TAB({ payload: 'read' }))
   }
@@ -75,7 +75,7 @@ export class DashboardComponent implements OnInit {
           state.http_error.errors.forEach((e: any) => this.handleError(e))
         }
       })
-    
+
     this._as?.pipe(filter(a => a.type === actionsErrors.actionsTypes.SET_SUCCESS))
       .subscribe(({ payload }: any) => {
         const name: string = this.fetchNames(payload)

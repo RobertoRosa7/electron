@@ -15,7 +15,7 @@ export enum actionsTypes {
   SET_REGISTERS = '[SET_REGISTERS]',
   SET_UPDATE = '[SET_UPDATE]',
 }
-export const INIT = createAction(actionsTypes.INIT)
+export const INIT = createAction(actionsTypes.INIT, (payload: any) => payload) // payload opcional
 export const ADD_REGISTERS = createAction(actionsTypes.ADD_REGISTERS, props<{ payload: any }>())
 export const ADDED_REGISTERS = createAction(actionsTypes.ADDED_REGISTERS, props<{ payload: any }>())
 export const UPDATE_REGISTER = createAction(actionsTypes.UPDATE_REGISTER, props<{ payload: any }>())
