@@ -22,8 +22,10 @@ export class TabMenuComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this._store.select(({ registers }: any) => registers.tab).subscribe(tab => this.tabActive = !!(tab === this.target))
-    this._store.select(({ registers }: any) => registers.visible).subscribe(visible => this.visible = !!(visible[this.target]))
+    this._store.select(({ registers }: any) => registers.tab)
+      .subscribe(tab => this.tabActive = !!(tab === this.target))
+    this._store.select(({ registers }: any) => registers.visible)
+      .subscribe(visible => this.visible = !!(visible[this.target]))
   }
 
   public selectedTab(): void {

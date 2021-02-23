@@ -12,21 +12,17 @@ export class FormIncomingComponent implements OnInit {
   @Input('label') public label: string = ''
   @Input('placeholder') public placeholder: string = ''
   @Input('type') public type: string = ''
-  @Input('value') public value: string | number
-  @Input('edit') public edit: boolean | undefined
-  @Input('description') public description: string | undefined = ''
   @Input('payload') public payload: Register
-  @Input('date') public date: number
-  @Input('category') public category: string | undefined = ''
+  @Input('edit') public edit: boolean
 
   @Output() public send = new EventEmitter()
 
   public form: FormGroup
   public isDisabled: boolean = true
-  public isMobile: boolean
+  public isMobile: boolean = false
   public charTotal: number = 50
   public charCount: number = 50
-  public categories = [
+  public categories: string[] = [
     'Banco',
     'Alimentação',
     'Vestuário',
@@ -45,13 +41,14 @@ export class FormIncomingComponent implements OnInit {
   public ngOnInit(): void {
     if (this.edit) {
       this.form.patchValue({
-        value: this.value,
-        description: this.description,
-        date: new Date(this.date),
-        category: this.category
+        value: this.payload.value,
+        description: this.payload.description,
+        date: new Date(this.payload.created_at),
+        category: this.payload.category
       })
-      let totalString = this.description?.length || 0
+      const totalString = this.payload.description?.length || 0
       this.charCount = (this.charTotal - totalString)
+      this.isDisabled = !this.payload.value
     }
 
     this.form.get('value')?.valueChanges.subscribe(val => this.isDisabled = !val)

@@ -41,7 +41,7 @@ export class DashboardComponent implements OnInit {
 
   public searchTerms: string | number
   public consolidado: number = 0
-  public isMobile: boolean
+  public isMobile: boolean = false
 
   constructor(
     protected _ipcService?: IpcService,
@@ -63,7 +63,7 @@ export class DashboardComponent implements OnInit {
       payload: []
     }))
 
-    this._ipcService?.on('got', (event: Electron.IpcMessageEvent, message: any) => {
+    this._ipcService?.on('got', (_: Electron.IpcMessageEvent, message: any) => {
       console.log(message)
     })
 

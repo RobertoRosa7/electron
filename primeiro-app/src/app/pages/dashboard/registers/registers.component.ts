@@ -1,7 +1,7 @@
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core'
 import { MatSnackBar } from '@angular/material/snack-bar'
-import { MatSort } from '@angular/material/sort'
-import { MatTableDataSource } from '@angular/material/table'
+// import { MatSort } from '@angular/material/sort'
+// import { MatTableDataSource } from '@angular/material/table'
 import { Register, User } from '../../../models/models'
 import { Store } from '@ngrx/store'
 import * as actionsRegister from '../../../actions/registers.actions'
@@ -45,8 +45,6 @@ export class RegistersComponent extends DashboardComponent implements OnInit, Af
   public isMobile: boolean
   public orderby: string = ''
 
-  @ViewChild(MatSort) public sort: MatSort
-
   constructor(
     protected _store: Store,
     protected _snackbar: MatSnackBar,
@@ -71,6 +69,7 @@ export class RegistersComponent extends DashboardComponent implements OnInit, Af
       position: ((this.ELEMENT_DATA.length - 1) < 0) ? 1 : (this.ELEMENT_DATA.length + 1),
       category: event.category || 'Outros',
       created_at: event.created_at,
+      updated_at: event.created_at,
       type: event.type,
       value: event.value,
       status: 'pending',
@@ -88,7 +87,7 @@ export class RegistersComponent extends DashboardComponent implements OnInit, Af
     console.log('open details: ', payload)
   }
 
-  public edit(event: Event, payload: Register): void {
+  public edit(_: Event, payload: Register): void {
     this._dialog.open(DialogFormIncomingComponent, { data: { ...payload, edit: true }, maxWidth: 600 })
       .beforeClosed().subscribe(res => {
         if (res) {
@@ -96,7 +95,7 @@ export class RegistersComponent extends DashboardComponent implements OnInit, Af
             payload: {
               ...payload,
               value: res.value,
-              created_at: new Date(res.date).getTime(),
+              updated_at: new Date(res.date).getTime(),
               description: res.description,
               category: res.category
             }
@@ -105,7 +104,7 @@ export class RegistersComponent extends DashboardComponent implements OnInit, Af
       })
   }
 
-  public del(event: Event, payload: Register): void {
+  public del(_: Event, payload: Register): void {
     this._dialog.open(DialogConfirmComponent, { data: payload })
       .beforeClosed().subscribe(response => {
         if (response) {

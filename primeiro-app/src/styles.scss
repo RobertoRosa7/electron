@@ -6,24 +6,30 @@
   --text-light: #303030;
   --text-middle-orange: #e67e22;
   --text-middle-light: #585858;
-  --text-green: #00af91;
+  // --text-green: #00af91;
+  --text-green: #009688;
   --text-dark: #d65a31;
   --bg-light-color: #fafafa;
   --bg-dark-color: #505050;
+
+  --color-white: white;
+  --color-whitesmoke: whitesmoke;
+  --color-medium-white: #fafafa;
+  --color-default-dark: #303030;
 }
 
-$mat-primary-pallete: mat-palette($mat-deep-orange);
+$mat-primary-pallete: mat-palette($mat-teal);
 $mat-accent-pallete: mat-palette($mat-pink);
 
-$mat-dark-primary: mat-palette($mat-deep-orange);
+$mat-dark-primary: mat-palette($mat-teal);
 $mat-dark-accent: mat-palette($mat-red);
 
 $app-light-theme: mat-light-theme($mat-primary-pallete, $mat-accent-pallete);
 $app-dark-theme: mat-dark-theme($mat-dark-primary, $mat-dark-accent);
 
-$bg-dark-mode: #303030;
-$bg-light-mode: #fafafa;
-$color-dark-mode: white;
+$bg-dark-mode: var(--color-default-dark);
+$bg-light-mode: var(--color-medium-white);
+$color-dark-mode: var(--color-white);
 
 $text-dark: var(--text-dark);
 $text-light: var(--text-midlle-light);
@@ -51,7 +57,7 @@ $text-accent: var(--text-accent);
 
   mat-card span.cards-money-on {
     @include span-cash;
-    color: #00af91;
+    color: var(--text-green);
   }
 
   mat-card span.cards-money-off {
@@ -63,16 +69,16 @@ $text-accent: var(--text-accent);
     color: $bg-dark-mode;
   }
   .histories table tr:nth-child(even) {
-    background: linear-gradient(-90deg, whitesmoke 100%, transparent);
+    background: linear-gradient(-90deg, var(--color-whitesmoke) 100%, transparent);
   }
   .bg-mode {
-    background: whitesmoke;
+    background: var(--color-whitesmoke);
   }
   .bg-mode-custom {
-    background: linear-gradient(-90deg, whitesmoke, transparent);
+    background: linear-gradient(-90deg, var(--color-whitesmoke), transparent);
 
     button:hover {
-      background: white;
+      background: var(--color-white);
     }
   }
 }
@@ -92,7 +98,7 @@ $text-accent: var(--text-accent);
 
   mat-card span.cards-money-on {
     @include span-cash;
-    color: #00af91;
+    color: var(--text-green);
   }
 
   mat-card span.cards-money-off {

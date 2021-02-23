@@ -8,12 +8,14 @@
         <app-tab-menu label="Alterar" icon="change_circle" target="update"></app-tab-menu>
         <app-tab-menu label="Deletar" icon="delete" target="delete"></app-tab-menu>
       </div>
+
       <div *ngIf="tab === 'read'" class="control">
         <mat-form-field class="form" floatLabel="always" appearance="outline">
           <mat-select [(value)]="orderby" (selectionChange)="orderbyChange($event)" placeholder="Ordenar por">
             <mat-option [value]="option" *ngFor="let option of displayedColumns">{{option}}</mat-option>
           </mat-select>
         </mat-form-field>
+
         <mat-form-field class="form" floatLabel="always" appearance="outline">
           <mat-select placeholder="Ultimos 7 dias">
             <mat-option value="7">Ultimos 7 dias</mat-option>
@@ -23,15 +25,19 @@
             <mat-option value="todos">Todos dias</mat-option>
           </mat-select>
         </mat-form-field>
+
         <mat-form-field class="form" floatLabel="always" appearance="outline">
-          <mat-select [(value)]="inOutComing" (selectionChange)="inOutComingChange($event)" placeholder="Entradas/Saídas">
+          <mat-select [(value)]="inOutComing" (selectionChange)="inOutComingChange($event)"
+            placeholder="Entradas/Saídas">
             <mat-option value="incoming">Entradas</mat-option>
             <mat-option value="outcoming">Saídas</mat-option>
             <mat-option value="all">Entrada/Saídas</mat-option>
           </mat-select>
         </mat-form-field>
       </div>
+
     </app-tab-header>
+
     <app-tab-content style="display: block; margin: 15px 0; height: 100%;">
       <div *ngIf="tab === 'read'" read>
         <ng-container *ngIf="ELEMENT_DATA.length > 0; else noneOfExtracts">
@@ -48,17 +54,18 @@
       <mat-card *ngIf="tab === 'create'" class="create" create>
         <div class="form-group">
           <app-title title="Receita"></app-title>
-          <app-form-incoming (send)="listeningEventForm($event)" [type]="'incoming'" [label]="'Entrada'"
-            [placeholder]="'R$ 0,00'"></app-form-incoming>
+          <app-form-incoming (send)="listeningEventForm($event)" type="incoming" label="Entrada" placeholder="R$ 0,00">
+          </app-form-incoming>
         </div>
         <div class="form-group">
           <app-title title="Despesa"></app-title>
-          <app-form-incoming (send)="listeningEventForm($event)" [type]="'outcoming'" [label]="'Saída'"
-            [placeholder]="'R$ 0,00'"></app-form-incoming>
+          <app-form-incoming (send)="listeningEventForm($event)" type="outcoming" label="Saída" placeholder="R$ 0,00">
+          </app-form-incoming>
         </div>
       </mat-card>
 
       <div *ngIf="tab === 'update'" update>atualizar</div>
+
       <div *ngIf="tab === 'delete'" delete>deletar</div>
     </app-tab-content>
   </app-tabs>
