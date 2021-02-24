@@ -24,7 +24,7 @@
     ::ng-deep .mat-select-arrow-wrapper {
       display: block;
     }
-    ::ng-deep .mat-select-placeholder{
+    ::ng-deep .mat-select-placeholder {
       font-size: 14px;
     }
   }
@@ -34,42 +34,6 @@
   }
   .control.forms {
     justify-content: center;
-  }
-  .histories {
-    table {
-      width: 100%;
-      position: relative;
-      tr {
-        cursor: pointer;
-        td {
-          span {
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            display: inline-block;
-          }
-        }
-        &:hover .table-delete-icon {
-          display: flex;
-        }
-      }
-    }
-    .outcoming td:not(.table-delete-icon) {
-      color: var(--text-accent);
-    }
-    .pending {
-      opacity: 0.5;
-    }
-    .table-delete-icon {
-      display: none;
-      position: absolute;
-      border: none;
-      align-items: center;
-      justify-content: center;
-      height: 48px;
-      right: 0;
-      width: 130px;
-    }
   }
   .container-cards {
     .cards {
@@ -140,11 +104,47 @@
     }
   }
 }
+.control.mobile {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 16px;
+
+  ::ng-deep .mat-form-field-appearance-outline .mat-form-field-outline {
+    color: transparent;
+  }
+  ::ng-deep .mat-form-field-appearance-outline .mat-form-field-flex {
+    padding: 12px;
+  }
+  ::ng-deep .mat-form-field-appearance-outline .mat-form-field-infix {
+    padding: 0;
+  }
+  ::ng-deep .mat-form-field-wrapper {
+    padding-bottom: 0;
+  }
+  ::ng-deep .mat-form-field-infix {
+    border-top: 0;
+  }
+  ::ng-deep .mat-input-element {
+    font-size: 14px;
+    height: 20px;
+  }
+  ::ng-deep .mat-form-field-appearance-outline .mat-form-field-infix {
+    padding: 0px;
+  }
+  ::ng-deep .mat-select-arrow-wrapper {
+    display: block;
+  }
+  ::ng-deep .mat-select-placeholder {
+    font-size: 14px;
+  }
+}
 @media (max-width: 600px) {
   .registers .create {
     flex-direction: column;
   }
-  .registers .control.forms {
-    display: none;
+  .btn-classificar{
+    margin: 8px 0;
   }
 }
