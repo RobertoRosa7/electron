@@ -17,7 +17,7 @@
         </mat-form-field>
 
         <mat-form-field class="form" floatLabel="always" appearance="outline">
-          <mat-select placeholder="Ultimos 7 dias">
+          <mat-select [(value)]="filterByDays" placeholder="Ultimos 7 dias" (selectionChange)="filterByDaysChange($event)">
             <mat-option value="7">Ultimos 7 dias</mat-option>
             <mat-option value="15">Ultimos 15 dias</mat-option>
             <mat-option value="30">Ultimos 30 dias</mat-option>

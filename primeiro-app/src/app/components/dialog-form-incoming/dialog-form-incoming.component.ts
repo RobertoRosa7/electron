@@ -12,7 +12,7 @@ export class DialogFormIncomingComponent implements OnInit {
   public type: string = ''
   public label: string = ''
   public value: string | number
-  public edit: boolean | undefined
+  public edit: boolean
   public description: string | undefined
 
   public payload: Register
@@ -26,7 +26,7 @@ export class DialogFormIncomingComponent implements OnInit {
     this.payload = this.data
     this.type = this.data.type
     this.value = this.data.value
-    this.edit = this.data.edit
+    this.edit = this.data.edit || false
     this.description = this.data.description
     this.data.type === 'incoming' ? this.label = "Entrada" : this.label = "Saída"
   }

@@ -42,6 +42,7 @@ export class DashboardComponent implements OnInit {
   public searchTerms: string | number
   public consolidado: number = 0
   public isMobile: boolean = false
+  public json: any
 
   constructor(
     protected _ipcService?: IpcService,
@@ -55,6 +56,7 @@ export class DashboardComponent implements OnInit {
     this._store?.dispatch(actionsErrors.GET_STATUS_CODE())
     this._store?.dispatch(actionsRegister.GET_TAB({ payload: 'read' }))
   }
+
 
   public ngOnInit(): void {
     this._ipcService?.send('get', JSON.stringify({
@@ -90,7 +92,7 @@ export class DashboardComponent implements OnInit {
         collection_dashboard: 'collection_registers',
         search: this.searchTerms
       }))
-      this._ipcService?.on('searched', (event: Electron.IpcMessageEvent, message: any) => {
+      this._ipcService?.on('searched', (_: Electron.IpcMessageEvent, message: any) => {
         console.log(message)
       })
     }

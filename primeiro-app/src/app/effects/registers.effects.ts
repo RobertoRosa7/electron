@@ -55,7 +55,7 @@ export class RegistersEffect {
         return SET_ERRORS({ payload: source })
       } else {
         this._store.dispatch(SET_SUCCESS({ payload: this.props.new_register }))
-        return actions.INIT()
+        return actions.INIT({ payload: {} })
       }
     }),
     catchError(e => of(e))

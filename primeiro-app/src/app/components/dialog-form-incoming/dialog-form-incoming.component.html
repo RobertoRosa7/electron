@@ -1,8 +1,8 @@
 <section class="dialog-form-incoming">
   <app-title [title]="type === 'incoming' ? 'Receita' : 'Despesa'"></app-title>
   <div class="container-form-incoming">
-    <app-form-incoming [type]="type" [date]="payload.created_at" (send)="listeningEventForm($event)" [label]="label"
-      [payload]="payload" placeholder="R$ 0,00" [edit]="payload.edit">
+    <app-form-incoming [type]="type" (send)="listeningEventForm($event)" [label]="label"
+      [payload]="payload" placeholder="R$ 0,00" [edit]="payload.edit || false">
     </app-form-incoming>
   </div>
 </section>

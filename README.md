@@ -45,3 +45,6 @@
 * [x] Corrigindo CSS para o uso de variáveis
 * [x] Convertendo JSON para Params URL que será enviado ao endpoint
 * [x] Adaptando Effect com novo payload opcional
+
+###### 24/02/2021
+* [x] Fazendo filtro por dias e definindo propriedades default

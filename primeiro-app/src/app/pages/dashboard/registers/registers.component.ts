@@ -21,7 +21,11 @@ import { MatSelectChange } from '@angular/material/select'
 export class RegistersComponent extends DashboardComponent implements OnInit, AfterViewInit {
   public ELEMENT_DATA: Register[] = []
   public tab: string = ''
-  public inOutComing: string = ''
+  public inOutComing: string = 'all'
+  public filterByDays: string = '7'
+  public dataSource: any
+  public isMobile: boolean
+  public orderby: string = 'Data - decrescente'
 
   private user_temp: User = {
     name: 'Anominous',
@@ -41,9 +45,6 @@ export class RegistersComponent extends DashboardComponent implements OnInit, Af
     'Descrição + crescente',
     'Descrição - decrescente',
   ]
-  public dataSource: any
-  public isMobile: boolean
-  public orderby: string = ''
 
   constructor(
     protected _store: Store,
@@ -58,7 +59,7 @@ export class RegistersComponent extends DashboardComponent implements OnInit, Af
   public ngOnInit(): void {
     this._store.select(({ registers }: any) => ({ all: [...registers.all], tab: registers.tab })).subscribe(state => {
       this.tab = state.tab
-      this.orderby ? this.makingOrdering(this.orderby) : this.ELEMENT_DATA = state.all
+      this.orderby ? this.makingOrdering(this.orderby, state.all) : this.ELEMENT_DATA = state.all
     })
   }
 
@@ -121,8 +122,14 @@ export class RegistersComponent extends DashboardComponent implements OnInit, Af
     this.makingOrdering(event.value)
   }
 
-  public inOutComingChange(event: MatSelectChange) {
+  public inOutComingChange(event: MatSelectChange): void {
     this.makingInOutComing(event.value)
+  }
+
+  public filterByDaysChange(event: MatSelectChange): void {
+    const payload: any = {}
+    event.value === 'todos' ? payload['todos'] = event.value : payload['days'] = parseInt(event.value)
+    this._store.dispatch(actionsRegister.INIT({ payload }))
   }
 
   private makingInOutComing(value: string): void {
@@ -135,7 +142,9 @@ export class RegistersComponent extends DashboardComponent implements OnInit, Af
     })
   }
 
-  private makingOrdering(value: string): void {
+  private makingOrdering(value: string, registers?: Register[]): void {
+    if (registers) this.ELEMENT_DATA = registers
+
     this.ELEMENT_DATA.sort((a: any, b: any) => {
       switch (value) {
         case 'Data + crescente':

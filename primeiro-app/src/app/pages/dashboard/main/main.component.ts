@@ -43,13 +43,13 @@ export class MainComponent extends DashboardComponent implements OnInit {
         this.cards.forEach(value => {
           switch (value.type) {
             case 'incoming':
-              value.value = dash.total_credit
+              value.value = dash.total_credit || 0
               break
             case 'outcoming':
-              value.value = dash.total_debit
+              value.value = dash.total_debit || 0
               break
             case 'consolidado':
-              value.value = dash.total_consolidado
+              value.value = dash.total_consolidado || 0
               break
           }
         })
