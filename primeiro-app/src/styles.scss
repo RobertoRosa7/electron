@@ -133,6 +133,7 @@ $text-accent: var(--text-accent);
 html,
 body {
   height: 100%;
+  scroll-behavior: smooth;
 }
 body {
   font-family: Roboto, "Helvetica Neue", sans-serif;

@@ -1,6 +1,13 @@
 .dashboard {
-  height: 100vh;
-
+  // height: 100vh;
+  position: relative;
+  
+  .button-top {
+    position: fixed;
+    bottom: 50px;
+    right: 50px;
+    z-index: 99;
+  }
   .cards {
     display: flex;
     justify-content: space-around;
@@ -86,7 +93,7 @@
     }
     .app-custom-toolbar-row {
       width: 100%;
-      
+
       .prev-consolidado {
         display: flex;
         flex-direction: column;

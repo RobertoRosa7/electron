@@ -7,7 +7,9 @@ import * as actionsRegister from '../../actions/registers.actions'
 import { MatSnackBar } from '@angular/material/snack-bar'
 import { filter } from 'rxjs/operators'
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout'
+import { ScrollService } from 'src/app/services/scroll.service'
 
+type Target = Document | Element;
 
 @Component({
   selector: 'app-dashboard',
@@ -43,20 +45,22 @@ export class DashboardComponent implements OnInit {
   public consolidado: number = 0
   public isMobile: boolean = false
   public json: any
+  public scroll: number
+  public buttonToTop: boolean
 
   constructor(
     protected _ipcService?: IpcService,
     protected _store?: Store,
     protected _snackbar?: MatSnackBar,
     protected _as?: ActionsSubject,
-    protected _breakpoint?: BreakpointObserver
+    protected _breakpoint?: BreakpointObserver,
+    protected _scrollService?: ScrollService
   ) {
     this._breakpoint?.observe([Breakpoints.XSmall]).subscribe(result => this.isMobile = !!result.matches)
     this._store?.dispatch(actionsRegister.INIT({ payload: { days: 7 } }))
     this._store?.dispatch(actionsErrors.GET_STATUS_CODE())
     this._store?.dispatch(actionsRegister.GET_TAB({ payload: 'read' }))
   }
-
 
   public ngOnInit(): void {
     this._ipcService?.send('get', JSON.stringify({
@@ -83,6 +87,8 @@ export class DashboardComponent implements OnInit {
         const name: string = this.fetchNames(payload)
         this._snackbar?.open(`${name}`, 'Ok', { duration: 3000 })
       })
+
+    this._scrollService?.getScrollAsStream().subscribe(per => this.buttonToTop = (per >= 30))
   }
 
   public onSubmit(): void {
@@ -123,5 +129,9 @@ export class DashboardComponent implements OnInit {
       default:
         return ''
     }
+  }
+
+  public goToTop() {
+    window.scrollTo(0, 0)
   }
 }

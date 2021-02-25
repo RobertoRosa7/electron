@@ -48,3 +48,4 @@
 
 ###### 24/02/2021
 * [x] Fazendo filtro por dias e definindo propriedades default
+* [x] Classificar mobile

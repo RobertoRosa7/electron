@@ -11,6 +11,7 @@ import { DialogConfirmComponent } from 'src/app/components/dialog-confirm/dialog
 import { DashboardComponent } from '../dashboard.component'
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout'
 import { MatSelectChange } from '@angular/material/select'
+import { ScrollService } from 'src/app/services/scroll.service'
 
 @Component({
   selector: 'app-registers',
@@ -50,7 +51,7 @@ export class RegistersComponent extends DashboardComponent implements OnInit, Af
     protected _store: Store,
     protected _snackbar: MatSnackBar,
     protected _dialog: MatDialog,
-    protected _breakpointObserver: BreakpointObserver
+    protected _breakpointObserver: BreakpointObserver,
   ) {
     super()
     _breakpointObserver.observe([Breakpoints.XSmall]).subscribe(result => this.isMobile = !!result.matches)

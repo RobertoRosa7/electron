@@ -59,4 +59,8 @@
       </div>
     </mat-drawer-content>
   </mat-drawer-container>
+
+  <button (click)="goToTop()" *ngIf="buttonToTop" mat-fab color="primary" class="button-top">
+    <mat-icon>keyboard_arrow_up</mat-icon>
+  </button>
 </div>

@@ -57,7 +57,7 @@ const indexedConfig: DBConfig = {
     EffectsModule.forRoot([RegistersEffect, DashboardEffect])
   ],
   providers: [
-    { provide: Constants }
+    { provide: Constants },
   ],
   bootstrap: [AppComponent]
 })

@@ -38,6 +38,7 @@ import { MatListModule } from '@angular/material/list'
 import { MatMenuModule } from '@angular/material/menu'
 import { ListRegistersComponent } from '../../components/list-registers/list-registers.component'
 import { MatSelectModule } from '@angular/material/select'
+import { ScrollDirective } from "src/app/directives/scroll.directive"
 
 
 const routes: Routes = [
@@ -80,7 +81,7 @@ registerLocaleData(localePt, 'pt-BR')
     TabContentComponent,
     TabHeaderComponent,
     DialogConfirmComponent,
-    ListRegistersComponent
+    ListRegistersComponent,
   ],
   imports: [
     RouterModule.forChild(routes),
