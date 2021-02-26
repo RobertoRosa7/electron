@@ -1,5 +1,9 @@
 .settings {
-  max-width: 1024px;
+  .application {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
   .choose-mode {
     display: flex;
     justify-content: flex-end;

@@ -1,8 +1,10 @@
 <section class="settings">
-  <div class="application">
-    <p>Applications:</p>
-    <div class="choose-mode">
-      <mat-slide-toggle [checked]="isDark" (change)="toggleDarkMode($event)">Dark Mode</mat-slide-toggle>
+  <mat-card>
+    <div class="application">
+      <p>Applications:</p>
+      <div class="choose-mode">
+        <mat-slide-toggle [checked]="isDark" (change)="toggleDarkMode($event)">Dark Mode</mat-slide-toggle>
+      </div>
     </div>
-  </div>
+  </mat-card>
 </section>
