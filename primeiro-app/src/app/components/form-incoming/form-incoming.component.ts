@@ -46,7 +46,7 @@ export class FormIncomingComponent implements OnInit {
       this.form.patchValue({
         value: this.payload.value,
         description: this.payload.description,
-        date: new Date(this.payload.created_at),
+        date: new Date(this.payload.created_at * 1000),
         category: this.payload.category
       })
       const totalString = this.payload.description?.length || 0
@@ -64,7 +64,7 @@ export class FormIncomingComponent implements OnInit {
 
   public onSubmit(_: any, type: string): void {
     const payload = {
-      created_at: new Date(this.form.value.date).getTime(),
+      created_at: new Date(this.form.value.date).getTime() / 1000,
       value: this.form.value.value,
       description: this.form.value.description,
       category: this.form.value.category,

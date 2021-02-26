@@ -7,12 +7,13 @@ const INITIAL_STATES = {
     total_debit: 0,
     total_consolidado: 0
   },
-  error: true
+  dark_mode:''
 }
 
 const dashboardReducers = createReducer(
   INITIAL_STATES,
-  on(actions.GET_TOTALS, (states, { payload }) => ({ ...states, consolidado: payload, error: false })),
+  on(actions.GET_TOTALS, (states, { payload }) => ({ ...states, consolidado: payload })),
+  on(actions.DARK_MODE, (states, { payload }) => ({ ...states, dark_mode: payload })),
 )
 
 export function reducerDashboard(state: any, action: any) {

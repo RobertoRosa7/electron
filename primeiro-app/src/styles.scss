@@ -81,6 +81,13 @@ $text-accent: var(--text-accent);
       background: var(--color-white);
     }
   }
+  .highchart-tooltip {
+    color: var(--color-default-dark);
+    border-bottom: 1px solid #32323250;
+  }
+  .highchart-text {
+    color: var(--color-default-dark);
+  }
 }
 
 .dark-mode {
@@ -108,11 +115,9 @@ $text-accent: var(--text-accent);
   table tr .table-delete-icon {
     color: $bg-light-mode;
   }
-
   .histories table tr:nth-child(even) {
     background: linear-gradient(-90deg, #393939 100%, #42424290 0);
   }
-
   .bg-mode {
     background: #212121;
   }
@@ -121,6 +126,13 @@ $text-accent: var(--text-accent);
     button:hover {
       background: $bg-dark-mode;
     }
+  }
+  .highchart-tooltip {
+    color: var(--color-whitesmoke);
+    border-bottom: 1px solid var(--color-medium-white);
+  }
+  .highchart-text {
+    color: var(--color-medium-white);
   }
 }
 

@@ -38,7 +38,8 @@ import { MatListModule } from '@angular/material/list'
 import { MatMenuModule } from '@angular/material/menu'
 import { ListRegistersComponent } from '../../components/list-registers/list-registers.component'
 import { MatSelectModule } from '@angular/material/select'
-import { ScrollDirective } from "src/app/directives/scroll.directive"
+import { ScrollDirective } from "src/app/directives/scroll.directive";
+import { HighchartsComponent } from '../../components/highcharts/highcharts.component'
 
 
 const routes: Routes = [
@@ -82,6 +83,7 @@ registerLocaleData(localePt, 'pt-BR')
     TabHeaderComponent,
     DialogConfirmComponent,
     ListRegistersComponent,
+    HighchartsComponent,
   ],
   imports: [
     RouterModule.forChild(routes),

@@ -11,7 +11,6 @@ import { DialogConfirmComponent } from 'src/app/components/dialog-confirm/dialog
 import { DashboardComponent } from '../dashboard.component'
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout'
 import { MatSelectChange } from '@angular/material/select'
-import { ScrollService } from 'src/app/services/scroll.service'
 
 @Component({
   selector: 'app-registers',
@@ -27,11 +26,12 @@ export class RegistersComponent extends DashboardComponent implements OnInit, Af
   public dataSource: any
   public isMobile: boolean
   public orderby: string = 'Data - decrescente'
+  public total: number = 0
 
   private user_temp: User = {
     name: 'Anominous',
     email: 'anonimous@gmail.com',
-    created_at: new Date('10-01-2003').getTime(),
+    created_at: (new Date('2003-10-01').getTime() / 1000),
     edit: false,
     credit_card: { brand: 'visa' }
   }
@@ -58,8 +58,13 @@ export class RegistersComponent extends DashboardComponent implements OnInit, Af
   }
 
   public ngOnInit(): void {
-    this._store.select(({ registers }: any) => ({ all: [...registers.all], tab: registers.tab })).subscribe(state => {
+    this._store.select(({ registers }: any) => ({
+      all: [...registers.all],
+      tab: registers.tab,
+      total: registers.total
+    })).subscribe(state => {
       this.tab = state.tab
+      this.total = state.total
       this.orderby ? this.makingOrdering(this.orderby, state.all) : this.ELEMENT_DATA = state.all
     })
   }
@@ -97,7 +102,7 @@ export class RegistersComponent extends DashboardComponent implements OnInit, Af
             payload: {
               ...payload,
               value: res.value,
-              updated_at: new Date(res.date).getTime(),
+              updated_at: (new Date(res.date).getTime() / 1000),
               description: res.description,
               category: res.category
             }

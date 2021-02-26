@@ -9,8 +9,6 @@ import { filter } from 'rxjs/operators'
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout'
 import { ScrollService } from 'src/app/services/scroll.service'
 
-type Target = Document | Element;
-
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',

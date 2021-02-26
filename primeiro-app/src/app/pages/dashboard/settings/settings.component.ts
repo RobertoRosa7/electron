@@ -1,6 +1,8 @@
-import { Component, OnInit, Renderer2, RendererFactory2 } from '@angular/core';
-import { MatSlideToggleChange } from '@angular/material/slide-toggle';
-import { DashboardComponent } from '../dashboard.component';
+import { Component, OnInit, Renderer2, RendererFactory2 } from '@angular/core'
+import { MatSlideToggleChange } from '@angular/material/slide-toggle'
+import { Store } from '@ngrx/store'
+import { DashboardComponent } from '../dashboard.component'
+import * as actionsDashboard from '../../../actions/dashboard.actions'
 
 @Component({
   selector: 'app-settings',
@@ -13,7 +15,8 @@ export class SettingsComponent extends DashboardComponent implements OnInit {
   private colorTheme: string = ''
 
   constructor(
-    private renderedFactory: RendererFactory2
+    protected renderedFactory: RendererFactory2,
+    protected _store: Store
   ) {
     super()
     this.renderer = this.renderedFactory.createRenderer(null, null)
@@ -23,6 +26,7 @@ export class SettingsComponent extends DashboardComponent implements OnInit {
 
   public ngOnInit(): void {
   }
+
   // init theme
   public initTheme(): void {
     this.getColorTheme()
@@ -60,5 +64,6 @@ export class SettingsComponent extends DashboardComponent implements OnInit {
   // alterna entre light and dark mode
   public toggleDarkMode(event: MatSlideToggleChange) {
     this.updateColorTheme(event.checked ? 'dark-mode' : 'light-mode')
+    this._store.dispatch(actionsDashboard.DARK_MODE({ payload: event.checked ? 'dark-mode' : 'light-mode' }))
   }
 }
