@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Store } from '@ngrx/store';
+import { Register } from 'src/app/models/models';
 import { DashboardComponent } from '../dashboard.component';
 
 @Component({
@@ -29,6 +30,7 @@ export class MainComponent extends DashboardComponent implements OnInit {
       type: 'outcoming'
     }
   ]
+  public ELEMENT_DATA: Register[] = []
 
   constructor(
     protected _store: Store,
@@ -38,18 +40,19 @@ export class MainComponent extends DashboardComponent implements OnInit {
   }
 
   public ngOnInit(): void {
-    this._store.select(({ registers }: any) => registers.consolidado)
-      .subscribe(dash => {
+    this._store.select(({ registers }: any) => ({ all: [...registers.all], consolidado: registers.consolidado }))
+      .subscribe(state => {
+        this.ELEMENT_DATA = state.all.splice(0, 5)
         this.cards.forEach(value => {
           switch (value.type) {
             case 'incoming':
-              value.value = dash.total_credit || 0
+              value.value = state.consolidado.total_credit || 0
               break
             case 'outcoming':
-              value.value = dash.total_debit || 0
+              value.value = state.consolidado.total_debit || 0
               break
             case 'consolidado':
-              value.value = dash.total_consolidado || 0
+              value.value = state.consolidado.total_consolidado || 0
               break
           }
         })

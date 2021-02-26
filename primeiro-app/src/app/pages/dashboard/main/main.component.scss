@@ -9,12 +9,34 @@
       width: 32.33%;
     }
   }
+  .highchart {
+    display: flex;
+    justify-content: space-between;
+    .col-7 {
+      width: 66%;
+    }
+    .col-4 {
+      width: 32%;
+    }
+  }
 }
 
 @media (max-width: 768px) {
   .main .cards-main {
     flex-direction: column;
     app-cards {
+      width: 100%;
+    }
+  }
+}
+
+@media (max-width: 1250px) {
+  .main .highchart {
+    flex-direction: column;
+    .col-7 {
+      width: 100%;
+    }
+    .col-4 {
       width: 100%;
     }
   }

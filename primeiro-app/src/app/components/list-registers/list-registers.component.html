@@ -5,29 +5,32 @@
       }">
       <div class="itens date">
         <strong>Data:</strong>
-        <span>{{(item.created_at * 1000) | date:'dd/MM/yyyy'}}</span>
+        <span class="text-truncate" [title]="(item.created_at * 1000) | date:'dd/MM/yyyy'">
+          {{(item.created_at * 1000) | date:'dd/MM/yyyy'}}
+        </span>
       </div>
 
       <div class="itens description">
         <strong>Descrição:</strong>
-        <span>{{item.description}}</span>
+        <span class="text-truncate" [title]="item.description">{{item.description}}</span>
       </div>
 
       <div class="itens value">
         <strong>Valor:</strong>
-        <span [ngStyle]="{'color': item.type == 'outcoming' ? 'var(--text-accent)' : 'var(--text-green)'}">
-          <span *ngIf="item.type === 'outcoming'">-</span>
+        <span class="text-truncate" [title]="formatarValor(item.value)"
+          [ngStyle]="{'color': item.type == 'outcoming' ? 'var(--text-accent)' : 'var(--text-green)'}">
+          <span class="text-truncate" *ngIf="item.type === 'outcoming'">-</span>
           R$ {{formatarValor(item.value) }}
         </span>
       </div>
 
       <div class="itens category">
         <strong>Categoria:</strong>
-        <span>{{item.category}}</span>
+        <span [title]="item.category" class="text-truncate">{{item.category}}</span>
       </div>
 
       <div class="itens actions">
-        <button mat-icon-button [matMenuTriggerFor]="menu">
+        <button title="Menu" mat-icon-button [matMenuTriggerFor]="menu">
           <mat-icon>more_vert</mat-icon>
         </button>
       </div>

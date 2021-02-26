@@ -3,5 +3,12 @@
   <div class="cards-main">
     <app-cards *ngFor="let item of cards" [title]="item.title" [value]="item.value" [type]="item.type"></app-cards>
   </div>
-  <app-highcharts></app-highcharts>
+  <div class="highchart">
+    <div class="col-7">
+      <app-highcharts></app-highcharts>
+    </div>
+    <div class="col-4">
+      <app-list-registers *ngFor="let item of ELEMENT_DATA" [item]="item"></app-list-registers>
+    </div>
+  </div>
 </section>

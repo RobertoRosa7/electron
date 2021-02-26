@@ -10,6 +10,13 @@
     .data,
     .description {
       width: 25%;
+      overflow: hidden;
+      .text-truncate {
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        display: inline-block;
+        overflow: hidden;
+      }
     }
     .value {
       max-width: 120px;
@@ -23,6 +30,7 @@
     .actions {
       max-width: 30px;
     }
+
     .itens {
       width: 100%;
       display: flex;
