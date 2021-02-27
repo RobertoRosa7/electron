@@ -8,6 +8,7 @@ import { MatSnackBar } from '@angular/material/snack-bar'
 import { filter } from 'rxjs/operators'
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout'
 import { ScrollService } from 'src/app/services/scroll.service'
+import { Register } from 'src/app/models/models'
 
 @Component({
   selector: 'app-dashboard',
@@ -45,6 +46,8 @@ export class DashboardComponent implements OnInit {
   public json: any
   public scroll: number
   public buttonToTop: boolean
+  public type: string
+  public value: number
 
   constructor(
     protected _ipcService?: IpcService,
@@ -72,9 +75,8 @@ export class DashboardComponent implements OnInit {
     })
 
     this._store?.select(({ http_error, registers }: any) =>
-      ({ http_error, consolidado: registers.consolidado })).subscribe(state => {
+      ({ http_error, consolidado: registers.consolidado, all: registers.all })).subscribe(state => {
         this.consolidado = state.consolidado.total_consolidado
-
         if (state.http_error.error) {
           state.http_error.errors.forEach((e: any) => this.handleError(e))
         }
@@ -131,5 +133,17 @@ export class DashboardComponent implements OnInit {
 
   public goToTop() {
     window.scrollTo(0, 0)
+  }
+
+  public returnClass(): string {
+    if (this.consolidado > 0) {
+      return 'cards-money cards-money-on'
+    } else if (this.consolidado > 0 && this.type === 'outcoming') {
+      return 'cards-money cards-debit'
+    } else if (this.consolidado < 0) {
+      return 'cards-money cards-money-off'
+    } else {
+      return 'cards-money'
+    }
   }
 }

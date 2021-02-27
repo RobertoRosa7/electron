@@ -54,13 +54,25 @@ $text-accent: var(--text-accent);
     @include span-cash;
     color: #585858;
   }
+  span.cards-money {
+    @include span-cash;
+    color: #585858;
+  }
 
   mat-card span.cards-money-on {
     @include span-cash;
     color: var(--text-green);
   }
+  span.cards-money-on {
+    @include span-cash;
+    color: var(--text-green);
+  }
 
   mat-card span.cards-money-off {
+    @include span-cash;
+    color: var(--text-accent);
+  }
+  span.cards-money-off {
     @include span-cash;
     color: var(--text-accent);
   }
@@ -102,13 +114,25 @@ $text-accent: var(--text-accent);
     @include span-cash;
     color: #eee;
   }
+  span.cards-money {
+    @include span-cash;
+    color: #eee;
+  }
 
   mat-card span.cards-money-on {
     @include span-cash;
     color: var(--text-green);
   }
+  span.cards-money-on {
+    @include span-cash;
+    color: var(--text-green);
+  }
 
   mat-card span.cards-money-off {
+    @include span-cash;
+    color: var(--text-accent);
+  }
+  span.cards-money-off {
     @include span-cash;
     color: var(--text-accent);
   }

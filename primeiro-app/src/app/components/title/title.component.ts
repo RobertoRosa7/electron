@@ -7,7 +7,7 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class TitleComponent implements OnInit {
   @Input() public title: string | number
-  @Input() public subtitle: string
+  @Input() public subtitle: string | number
   
   constructor() { }
 
