@@ -40,7 +40,7 @@ export class MainComponent extends DashboardComponent implements OnInit {
   }
 
   public ngOnInit(): void {
-    this._store.select(({ registers }: any) => ({ all: [...registers.all], consolidado: registers.consolidado }))
+    this._store.select(({ registers, dashboard }: any) => ({ all: [...registers.all], consolidado: dashboard.consolidado }))
       .subscribe(state => {
         this.ELEMENT_DATA = state.all.splice(0, 5)
         this.cards.forEach(value => {

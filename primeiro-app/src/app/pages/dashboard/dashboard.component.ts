@@ -74,8 +74,8 @@ export class DashboardComponent implements OnInit {
       console.log(message)
     })
 
-    this._store?.select(({ http_error, registers }: any) =>
-      ({ http_error, consolidado: registers.consolidado, all: registers.all })).subscribe(state => {
+    this._store?.select(({ http_error, registers, dashboard }: any) =>
+      ({ http_error, consolidado: dashboard.consolidado, all: registers.all })).subscribe(state => {
         this.consolidado = state.consolidado.total_consolidado
         if (state.http_error.error) {
           state.http_error.errors.forEach((e: any) => this.handleError(e))
