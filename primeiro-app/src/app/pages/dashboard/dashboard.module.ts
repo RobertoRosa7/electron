@@ -1,4 +1,4 @@
-import { NgModule } from "@angular/core"
+import { LOCALE_ID, NgModule } from "@angular/core"
 import { MatSlideToggleModule } from '@angular/material/slide-toggle'
 import { MatCardModule } from '@angular/material/card'
 import { CommonModule, registerLocaleData } from "@angular/common"
@@ -63,7 +63,7 @@ export const MY_FORMATS = {
   }
 }
 
-registerLocaleData(localePt, 'pt-BR')
+registerLocaleData(localePt, 'pt')
 
 @NgModule({
   declarations: [
@@ -117,7 +117,7 @@ registerLocaleData(localePt, 'pt-BR')
   // exports: [],
   providers: [
     { provide: DateAdapter, useClass: MomentDateAdapter, deps: [MAT_DATE_LOCALE] },
-    { provide: MAT_DATE_FORMATS, useValue: MY_FORMATS },
+    { provide: LOCALE_ID, useValue: 'pt' },
   ],
   // entryComponents: []
 })

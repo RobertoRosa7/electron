@@ -9,7 +9,6 @@ const INITIAL_STATE = {
   msg: '',
   total: 0
 }
-
 const registersReducers = createReducer(
   INITIAL_STATE,
   on(actions.SET_REGISTERS, (states, { payload }) => ({ ...states, all: states.all.concat(payload) })),

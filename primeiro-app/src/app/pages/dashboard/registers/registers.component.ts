@@ -20,6 +20,7 @@ import { MatSelectChange } from '@angular/material/select'
 
 export class RegistersComponent extends DashboardComponent implements OnInit, AfterViewInit {
   public ELEMENT_DATA: Register[] = []
+  public ELEMENT_ORDER: any[] = []
   public tab: string = ''
   public inOutComing: string = 'all'
   public filterByDays: string = '7'
@@ -65,7 +66,8 @@ export class RegistersComponent extends DashboardComponent implements OnInit, Af
     })).subscribe(state => {
       this.tab = state.tab
       this.total = state.total
-      this.orderby ? this.makingOrdering(this.orderby, state.all) : this.ELEMENT_DATA = state.all
+      this.ELEMENT_ORDER = state.all
+      this.orderby ? this.makingOrdering(this.orderby) : this.ELEMENT_DATA = this.classificar(state.all)
     })
   }
 
@@ -141,17 +143,16 @@ export class RegistersComponent extends DashboardComponent implements OnInit, Af
   private makingInOutComing(value: string): void {
     this._store.select(({ registers }: any) => [...registers.all]).subscribe(registers => {
       if (value === 'all') {
-        this.ELEMENT_DATA = registers
+        this.ELEMENT_DATA = this.classificar(registers)
       } else {
-        this.ELEMENT_DATA = registers.filter(v => v.type === value)
+        this.ELEMENT_DATA = this.classificar(registers.filter(v => v.type === value))
       }
     })
   }
 
   private makingOrdering(value: string, registers?: Register[]): void {
-    if (registers) this.ELEMENT_DATA = registers
-
-    this.ELEMENT_DATA.sort((a: any, b: any) => {
+    if (registers) this.ELEMENT_ORDER = registers
+    const t = this.ELEMENT_ORDER.sort((a: any, b: any) => {
       switch (value) {
         case 'Data + crescente':
           return a.created_at - b.created_at
@@ -173,5 +174,19 @@ export class RegistersComponent extends DashboardComponent implements OnInit, Af
           return 0
       }
     })
+    this.ELEMENT_DATA = this.classificar(t)
+  }
+
+  public classificar(lista: any) {
+    return lista.map((i: any) =>
+      ({ ...i, month: new Date(i.created_at * 1000) })).reduce((prev: any, current: any) => {
+        var index = prev.findIndex((i: any) => new Date(i.month).getMonth() == new Date(current.month).getMonth())
+        if (index < 0) {
+          index = prev.length
+          prev.push({ month: current.month, lista: [] })
+        }
+        prev[index].lista.push(current)
+        return prev
+      }, []).map((item: any) => ({ ...item, month: new Date(item.month).getTime() }))
   }
 }

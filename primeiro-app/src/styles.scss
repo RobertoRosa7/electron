@@ -44,9 +44,21 @@ $text-accent: var(--text-accent);
   white-space: nowrap;
 }
 
+@mixin text {
+  text-transform: capitalize;
+  margin: 8px 0;
+  display: inline-block;
+}
+
 .light-mode {
   @include angular-material-theme($app-light-theme);
   background: $bg-light-mode;
+
+  .line-month {
+    @include text;
+    color: var(--text-middle-light);
+  }
+
   li:active {
     background: #c3c3c350;
   }
@@ -106,6 +118,10 @@ $text-accent: var(--text-accent);
   @include angular-material-theme($app-dark-theme);
   background: $bg-dark-mode;
   color: $color-dark-mode;
+  .line-month {
+    @include text;
+    color: var(--color-medium-white);
+  }
   li:active {
     background: #10101050;
   }

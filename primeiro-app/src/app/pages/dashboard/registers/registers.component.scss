@@ -1,3 +1,5 @@
+@import '../../../../styles.scss';
+
 .registers {
   .control {
     display: flex;
@@ -140,11 +142,12 @@
     font-size: 14px;
   }
 }
+
 @media (max-width: 600px) {
   .registers .create {
     flex-direction: column;
   }
-  .btn-classificar{
+  .btn-classificar {
     margin: 8px 0;
   }
 }
