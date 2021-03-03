@@ -1,12 +1,11 @@
 import { Injectable } from '@angular/core'
 import { Actions, ofType, Effect } from '@ngrx/effects'
 import { Store } from '@ngrx/store'
-import { forkJoin, from, Observable, of } from 'rxjs'
-import { catchError, filter, map, mergeMap, tap } from 'rxjs/operators'
+import { Observable, of } from 'rxjs'
+import { catchError, map, mergeMap } from 'rxjs/operators'
 import * as actions from '../actions/dashboard.actions'
 import { IndexdbService } from '../services/indexedbs.service'
 import { SET_ERRORS, GET_STATUS_CODE, SET_STATUS_CODE } from '../actions/errors.actions'
-import { Consolidado, Register, StatusCode } from '../models/models'
 import { DashboardService } from '../services/dashboard.service'
 import { HttpErrorResponse } from '@angular/common/http'
 
@@ -56,5 +55,20 @@ export class DashboardEffect {
       }
     }),
     catchError(err => of(err))
+  )
+
+  @Effect()
+  public fetchEvolucao$: Observable<Actions> = this._action.pipe(
+    ofType(actions.FETCH_EVOLUCAO),
+    mergeMap(() => this._dashboardService.fetchEvocucao().pipe(catchError(e => of(e)))),
+    map((payload: any) => {
+      if (payload instanceof HttpErrorResponse) {
+        const source = { ...payload, source: 'fetch_evolucao' }
+        return SET_ERRORS({ payload: source })
+      } else {
+        return actions.SET_EVOLUCAO({ payload })
+      }
+    }),
+    catchError(e => of(e))
   )
 }

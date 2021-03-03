@@ -53,9 +53,14 @@
         </mat-toolbar>
 
         <!-- router-outlet só funciona se existir router children -->
-        <div class="pages">
+        <div *ngIf="showErrors; else showErrors" class="pages">
           <router-outlet></router-outlet>
         </div>
+        <ng-template #showErrors>
+          <div class="pages">
+            <h1>Error - não foi possível carregar a página.</h1>
+          </div>
+        </ng-template>
       </div>
     </mat-drawer-content>
   </mat-drawer-container>

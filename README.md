@@ -39,13 +39,18 @@
 * [x] Integração de ordenação
 * [x] Abstração das lista de registro para componentização
 
-
 ###### 23/02/2021
+
 * [x] Reajuste no code refactoring
 * [x] Corrigindo CSS para o uso de variáveis
 * [x] Convertendo JSON para Params URL que será enviado ao endpoint
 * [x] Adaptando Effect com novo payload opcional
 
 ###### 24/02/2021
+
 * [x] Fazendo filtro por dias e definindo propriedades default
 * [x] Classificar mobile
+
+###### 03/03/2021
+
+* [x] Grafico de evolução com pandas, highchart 

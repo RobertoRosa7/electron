@@ -3,6 +3,7 @@ import { Actions, ofType, Effect } from '@ngrx/effects'
 import { Observable, of, forkJoin } from 'rxjs'
 import { catchError, delay, map, mergeMap } from 'rxjs/operators'
 import * as actions from '../actions/registers.actions'
+import * as actionsDashboard from '../actions/dashboard.actions'
 import { SET_ERRORS, SET_SUCCESS } from '../actions/errors.actions'
 import { DashboardService } from '../services/dashboard.service'
 import { HttpErrorResponse } from '@angular/common/http'
@@ -81,6 +82,7 @@ export class RegistersEffect {
         return SET_ERRORS({ payload: source })
       } else {
         this._store.dispatch(SET_SUCCESS({ payload: this.props.delete_register }))
+        this._store.dispatch(actionsDashboard.INIT())
         return actions.GET_REGISTERS({ payload })
       }
     }),
@@ -111,6 +113,7 @@ export class RegistersEffect {
         return SET_ERRORS({ payload: source })
       } else {
         this._store.dispatch(SET_SUCCESS({ payload: this.props.update_register }))
+        this._store.dispatch(actionsDashboard.INIT())
         return actions.SET_UPDATE({ payload })
       }
     }),

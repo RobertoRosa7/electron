@@ -3,7 +3,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { Store } from '@ngrx/store';
 import { Register } from 'src/app/models/models';
 import { DashboardComponent } from '../dashboard.component';
-
+import * as actionsDashboard from '../../../actions/dashboard.actions'
 @Component({
   selector: 'app-main',
   templateUrl: './main.component.html',
@@ -31,6 +31,7 @@ export class MainComponent extends DashboardComponent implements OnInit {
     }
   ]
   public ELEMENT_DATA: Register[] = []
+  public EVOLUCAO_DATA: any = {}
 
   constructor(
     protected _store: Store,
@@ -40,7 +41,9 @@ export class MainComponent extends DashboardComponent implements OnInit {
   }
 
   public ngOnInit(): void {
-    this._store.select(({ registers, dashboard }: any) => ({ all: [...registers.all], consolidado: dashboard.consolidado }))
+    this._store.select(({ registers, dashboard }: any) => ({
+      all: [...registers.all], consolidado: dashboard.consolidado
+    }))
       .subscribe(state => {
         this.ELEMENT_DATA = state.all.splice(0, 5)
         this.cards.forEach(value => {

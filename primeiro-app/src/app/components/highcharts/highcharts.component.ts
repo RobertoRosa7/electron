@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { Store } from '@ngrx/store';
 import * as Highcharts from 'highcharts'
 import * as actionsDashboard from '../../actions/dashboard.actions'
@@ -19,16 +19,17 @@ noData(Highcharts)
 })
 export class HighchartsComponent implements OnInit {
   @ViewChild('highchartEvoution', { static: true }) highchartEvoution: ElementRef
-
   public chartLine: any = {
-    chart: {},
+    chart: {
+      type: 'column'
+    },
     navigator: { enabled: false },
     scrollbar: { enabled: false },
     rangeSelector: { enabled: false },
     title: { text: '' },
     subtitle: { text: '' },
     credits: { enabled: false },
-    legend: { enabled: false, },
+    legend: { enabled: true, },
     yAxis: {
       gridLineDashStyle: 'longdash',
       title: { text: '' },
@@ -36,7 +37,12 @@ export class HighchartsComponent implements OnInit {
       labels: {
         formatter(): any {
           const self: any = this
-          return self.value + ' %'
+          let str: string = ''
+          if (self.value > 0) {
+            str += `R$ ${Intl.NumberFormat('pt-BR', { currency: 'BRL', minimumFractionDigits: 2 })
+              .format(self.value.toFixed(2))}`
+          }
+          return str
         },
         style: {
           color: ''
@@ -44,8 +50,9 @@ export class HighchartsComponent implements OnInit {
       }
     },
     xAxis: {
-      tickInterval: 20,
+      tickInterval: 30,
       categories: [],
+      crosshair: true,
       labels: {
         formatter: function (): any {
           const self: any = this
@@ -68,82 +75,95 @@ export class HighchartsComponent implements OnInit {
       formatter: function (): any {
         const self: any = this
         let s = `
-          <div class="highchart-tooltip">
-            <strong>${Highcharts.dateFormat('%d/%m/%Y', self.x * 1000)}</strong>
-          </div>`;
+            <div class="highchart-tooltip">
+              <strong>${Highcharts.dateFormat('%d/%m/%Y', self.x * 1000)}</strong>
+            </div>
+          `;
         for (let i in self.points) {
-          s += `<span style="color:${self.points[i].series.color}">●</span>
-                <span class="highchart-text">${self.points[i].series.name}:</span>
-                <b class="highchart-text">${Intl.NumberFormat('pt-BR', { currency: 'BRL', minimumFractionDigits: 2 })
-              .format(self.points[i].y.toFixed(2))} %</b>
-              <br/>
+          if (self.points[i].y > 0) {
+            s += `<span style="color:${self.points[i].series.color}">●</span>
+              <span class="highchart-text">${self.points[i].series.name}: </span>
+              <b class="highchart-text">
+              R$ ${Intl.NumberFormat('pt-BR', { currency: 'BRL', minimumFractionDigits: 2 })
+                .format(self.points[i].y.toFixed(2))}</b>
+            <br/>
           `
+          }
         }
         return s
       }
     },
     plotOptions: {
-      line: {
-        marker: {
-          enabled: false
+      // line: {
+      //   marker: {
+      //     enabled: false
+      //   }
+      // },
+      series: {
+        pointPadding: 0,
+        dataLabels: {
+          enabled: true,
+          formatter: function () {
+            const self: any = this
+            let str: string = ''
+            if (self.point.y > 0) {
+              str += `R$ ${Intl.NumberFormat('pt-BR', { currency: 'BRL', minimumFractionDigits: 2 })
+                .format(self.point.y.toFixed(2))}`
+            }
+            return str
+          },
+          style: {
+            fontSize: '9px',
+          }
         }
+      },
+      column: {
+        pointPadding: 0,
+        borderWidth: 0,
+        pointWidth: 20
       }
     },
-    lang: {
-      noData: ''
-    },
-    series: [{
-      name: 'Alimentação',
-      data: [0, 1, 2, 3, 0.3, 0.4, 1, 0.9, 12, 243]
-    }, {
-      name: 'Água & Luz',
-      data: [0, 1, 2, 3, 0.3, 0.4, 1, 0.9]
-    }, {
-      name: 'Outros',
-      data: [0, 1, 2, 3, 0.3, 0.4, 1, 0.9]
-    }, {
-      name: 'Transporte',
-      data: [0, 1, 2, 3, 0.3, 0.4, 1, 0.9]
-    }, {
-      name: 'Banco',
-      data: [0, 1, 20.5, 3, 0.3, 0.4, 1, 0.9]
-    }],
+    // lang: {
+    //   noData: ''
+    // },
+    series: []
   }
 
+  public data: any = {}
   constructor(
     private _store: Store
-  ) { }
+  ) {
+
+  }
 
   ngOnInit(): void {
+    this._store.select(({ dashboard }: any) =>
+      ({ mode: dashboard.dark_mode, evolucao: dashboard.evolucao })).subscribe(state => {
+        this.data = state.evolucao
+        var theme = state.mode === 'light-mode' ? 'var(--color-white)' : 'var(--color-default-dark)'
+        var themeInverse = state.mode != 'light-mode' ? 'var(--color-white)' : 'var(--color-default-dark)'
 
-    this._store.select(({ dashboard }: any) => dashboard.dark_mode).subscribe(mode => {
-      var theme = mode === 'light-mode' ? 'var(--color-white)' : 'var(--color-default-dark)'
-      var themeInverse = mode != 'light-mode' ? 'var(--color-white)' : 'var(--color-default-dark)'
+        this.chartLine.chart.backgroundColor = theme
+        this.chartLine.tooltip.backgroundColor = theme
+        this.chartLine.yAxis.gridLineColor = themeInverse
+        this.chartLine.yAxis.labels.style.color = themeInverse
+        this.chartLine.xAxis.labels.style.color = themeInverse
 
-      this.chartLine.chart.backgroundColor = theme
-      this.chartLine.tooltip.backgroundColor = theme
-      this.chartLine.yAxis.gridLineColor = themeInverse
-      this.chartLine.yAxis.labels.style.color = themeInverse
-      this.chartLine.xAxis.labels.style.color = themeInverse
-    })
+        if (this.data.graph_evolution) {
+          const values: any = []
+          this.chartLine.xAxis.categories = this.data.graph_evolution.dates
 
-    this.chartLine.xAxis.categories = [
-      1593486000,
-      1593572400,
-      1593658800,
-      1593745200,
-      1593831600,
-      1593918000,
-      1594004400,
-      1594090800,
-      1594177200,
-      1594263600,
-      1594350000,
-      1594436400,
-      1594522800,
-      1594609200,
-      1594695600
-    ]
-    Highcharts.chart(this.highchartEvoution.nativeElement, this.chartLine)
+          for (const i in this.data.graph_evolution) {
+            if (i !== 'dates') {
+              values.push({
+                name: this.data.graph_evolution[i].label,
+                data: this.data.graph_evolution[i].values
+              })
+            }
+          }
+          this.chartLine.series = values
+          Highcharts.chart(this.highchartEvoution.nativeElement, this.chartLine)
+        }
+      })
   }
 }

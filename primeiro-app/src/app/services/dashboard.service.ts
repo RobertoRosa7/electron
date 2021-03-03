@@ -43,4 +43,8 @@ export class DashboardService {
   public getStatusCode(): Observable<StatusCode[]> {
     return this.http.get<StatusCode[]>(this.constants.get('get_status_code'))
   }
+
+  public fetchEvocucao(): Observable<any> {
+    return this.http.get<any>(this.constants.get('fetch_evolucao'))
+  }
 }

@@ -14,6 +14,7 @@ export class Constants {
   public readonly paths: any = {
     fetch_consolidado: 'dashboard/calc_consolidado',
     fetch_registers: 'dashboard/fetch_registers',
+    fetch_evolucao: 'dashboard/fetch_evolucao',
     new_register: 'dashboard/new_register',
     delete_register: 'dashboard/delete_register',
     update_register: 'dashboard/update_register',

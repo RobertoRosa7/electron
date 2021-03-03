@@ -4,11 +4,11 @@ import { ActionsSubject, Store } from '@ngrx/store'
 import { IpcService } from 'src/app/services/ipc.service'
 import * as actionsErrors from '../../actions/errors.actions'
 import * as actionsRegister from '../../actions/registers.actions'
+import * as actionsDashboard from '../../actions/dashboard.actions'
 import { MatSnackBar } from '@angular/material/snack-bar'
 import { filter } from 'rxjs/operators'
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout'
 import { ScrollService } from 'src/app/services/scroll.service'
-import { Register } from 'src/app/models/models'
 
 @Component({
   selector: 'app-dashboard',
@@ -48,6 +48,7 @@ export class DashboardComponent implements OnInit {
   public buttonToTop: boolean
   public type: string
   public value: number
+  public showErrors: boolean = false
 
   constructor(
     protected _ipcService?: IpcService,
@@ -59,6 +60,7 @@ export class DashboardComponent implements OnInit {
   ) {
     this._breakpoint?.observe([Breakpoints.XSmall]).subscribe(result => this.isMobile = !!result.matches)
     this._store?.dispatch(actionsRegister.INIT({ payload: { days: 7 } }))
+    this._store?.dispatch(actionsDashboard.FETCH_EVOLUCAO())
     this._store?.dispatch(actionsErrors.GET_STATUS_CODE())
     this._store?.dispatch(actionsRegister.GET_TAB({ payload: 'read' }))
   }
@@ -106,6 +108,7 @@ export class DashboardComponent implements OnInit {
   }
 
   public handleError(error: any): void {
+    this.showErrors = true
     const name: string = this.fetchNames(error.source)
     this._snackbar?.open(`Error: ${name} code: ${error.status}`, 'Ok', { duration: 3000 })
   }
