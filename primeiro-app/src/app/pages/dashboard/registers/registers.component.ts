@@ -102,7 +102,7 @@ export class RegistersComponent extends DashboardComponent implements OnInit, Af
             payload: {
               ...payload,
               value: res.value,
-              updated_at: (new Date(res.date).getTime() / 1000),
+              created_at: (new Date(res.date).getTime() / 1000),
               description: res.description,
               category: res.category
             }

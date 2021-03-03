@@ -29,7 +29,12 @@ export class HighchartsComponent implements OnInit {
     title: { text: '' },
     subtitle: { text: '' },
     credits: { enabled: false },
-    legend: { enabled: true, },
+    legend: {
+      enabled: true,
+      itemStyle: {
+        color: ''
+      }
+    },
     yAxis: {
       gridLineDashStyle: 'longdash',
       title: { text: '' },
@@ -137,33 +142,42 @@ export class HighchartsComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this._store.select(({ dashboard }: any) =>
-      ({ mode: dashboard.dark_mode, evolucao: dashboard.evolucao })).subscribe(state => {
-        this.data = state.evolucao
-        var theme = state.mode === 'light-mode' ? 'var(--color-white)' : 'var(--color-default-dark)'
-        var themeInverse = state.mode != 'light-mode' ? 'var(--color-white)' : 'var(--color-default-dark)'
+    this.instanceHighchart().then((payload: any) => Highcharts.chart(this.highchartEvoution.nativeElement, this.chartLine))
+  }
 
-        this.chartLine.chart.backgroundColor = theme
-        this.chartLine.tooltip.backgroundColor = theme
-        this.chartLine.yAxis.gridLineColor = themeInverse
-        this.chartLine.yAxis.labels.style.color = themeInverse
-        this.chartLine.xAxis.labels.style.color = themeInverse
-
-        if (this.data.graph_evolution) {
+  public instanceHighchart(): Promise<any> {
+    return new Promise(resolve => {
+      this._store.select(({ dashboard }: any) =>
+        ({ mode: dashboard.dark_mode, evolucao: dashboard.evolucao })).subscribe(state => {
+          this.data = state.evolucao
+          let theme = state.mode === 'light-mode' ? 'var(--color-white)' : 'var(--color-default-dark)'
+          let themeInverse = state.mode != 'light-mode' ? 'var(--color-white)' : 'var(--color-default-dark)'
+          let dates: any = []
           const values: any = []
-          this.chartLine.xAxis.categories = this.data.graph_evolution.dates
 
-          for (const i in this.data.graph_evolution) {
-            if (i !== 'dates') {
-              values.push({
-                name: this.data.graph_evolution[i].label,
-                data: this.data.graph_evolution[i].values
-              })
+          this.chartLine.chart.backgroundColor = theme
+          this.chartLine.tooltip.backgroundColor = theme
+          this.chartLine.yAxis.gridLineColor = themeInverse
+          this.chartLine.yAxis.labels.style.color = themeInverse
+          this.chartLine.xAxis.labels.style.color = themeInverse
+          this.chartLine.legend.itemStyle.color = themeInverse
+
+          if (this.data.graph_evolution) {
+            dates = this.data.graph_evolution.dates
+            for (const i in this.data.graph_evolution) {
+              if (i !== 'dates') {
+                values.push({
+                  name: this.data.graph_evolution[i].label,
+                  data: this.data.graph_evolution[i].values
+                })
+              }
             }
+
+            this.chartLine.series = values
+            this.chartLine.xAxis.categories = this.data.graph_evolution.dates
+            resolve(true)
           }
-          this.chartLine.series = values
-          Highcharts.chart(this.highchartEvoution.nativeElement, this.chartLine)
-        }
-      })
+        })
+    })
   }
 }
