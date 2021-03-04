@@ -1,7 +1,5 @@
-import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core'
+import { AfterViewInit, Component, OnInit, DoCheck, KeyValueDiffers } from '@angular/core'
 import { MatSnackBar } from '@angular/material/snack-bar'
-// import { MatSort } from '@angular/material/sort'
-// import { MatTableDataSource } from '@angular/material/table'
 import { Register, User } from '../../../models/models'
 import { Store } from '@ngrx/store'
 import * as actionsRegister from '../../../actions/registers.actions'
@@ -18,7 +16,7 @@ import { MatSelectChange } from '@angular/material/select'
   styleUrls: ['./registers.component.scss']
 })
 
-export class RegistersComponent extends DashboardComponent implements OnInit, AfterViewInit {
+export class RegistersComponent extends DashboardComponent implements OnInit, AfterViewInit, DoCheck {
   public ELEMENT_DATA: Register[] = []
   public ELEMENT_ORDER: any[] = []
   public tab: string = ''
@@ -29,6 +27,8 @@ export class RegistersComponent extends DashboardComponent implements OnInit, Af
   public orderby: string = 'Data - decrescente'
   public total: number = 0
   public detail: Register
+  private differ: any
+  private onlyComing: string = ''
 
   private user_temp: User = {
     name: 'Anominous',
@@ -54,9 +54,11 @@ export class RegistersComponent extends DashboardComponent implements OnInit, Af
     protected _snackbar: MatSnackBar,
     protected _dialog: MatDialog,
     protected _breakpointObserver: BreakpointObserver,
+    protected _differs: KeyValueDiffers
   ) {
     super()
     _breakpointObserver.observe([Breakpoints.XSmall]).subscribe(result => this.isMobile = !!result.matches)
+    this.differ = this._differs.find({}).create();
   }
 
   public ngOnInit(): void {
@@ -74,6 +76,21 @@ export class RegistersComponent extends DashboardComponent implements OnInit, Af
 
   public ngAfterViewInit(): void { }
 
+  public ngDoCheck() {
+    const change = this.differ.diff(this);
+    if (change) {
+      change.forEachChangedItem((item: any) => {
+        if (item.key === 'total') {
+          this.notification(`Total de registros: ${this.total}`)
+        }
+        if (item.key === 'onlyComing') {
+          let text = this.onlyComing == 'incoming' ? 'Somente entrada' : 'Somente saída'
+          this.notification(text)
+        }
+      })
+    }
+  }
+
   public listeningEventForm(event: Register): void {
     const payload: Register = {
       position: ((this.ELEMENT_DATA.length - 1) < 0) ? 1 : (this.ELEMENT_DATA.length + 1),
@@ -88,7 +105,6 @@ export class RegistersComponent extends DashboardComponent implements OnInit, Af
       user: this.user_temp,
       description: event.description || 'Sem descrição'
     }
-
     this._store.dispatch(actionsRegister.ADD_REGISTERS({ payload }))
   }
 
@@ -157,6 +173,7 @@ export class RegistersComponent extends DashboardComponent implements OnInit, Af
         this.ELEMENT_DATA = this.classificar(registers)
       } else {
         this.ELEMENT_DATA = this.classificar(registers.filter(v => v.type === value))
+        this.onlyComing = value
       }
     })
   }

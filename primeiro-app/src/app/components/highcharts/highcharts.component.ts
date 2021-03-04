@@ -106,21 +106,21 @@ export class HighchartsComponent implements OnInit {
       // },
       series: {
         pointPadding: 0,
-        dataLabels: {
-          enabled: true,
-          formatter: function () {
-            const self: any = this
-            let str: string = ''
-            if (self.point.y > 0) {
-              str += `R$ ${Intl.NumberFormat('pt-BR', { currency: 'BRL', minimumFractionDigits: 2 })
-                .format(self.point.y.toFixed(2))}`
-            }
-            return str
-          },
-          style: {
-            fontSize: '9px',
-          }
-        }
+        // dataLabels: {
+        //   enabled: true,
+        //   formatter: function () {
+        //     const self: any = this
+        //     let str: string = ''
+        //     if (self.point.y > 0) {
+        //       str += `R$ ${Intl.NumberFormat('pt-BR', { currency: 'BRL', minimumFractionDigits: 2 })
+        //         .format(self.point.y.toFixed(2))}`
+        //     }
+        //     return str
+        //   },
+        //   style: {
+        //     fontSize: '9px',
+        //   }
+        // }
       },
       column: {
         pointPadding: 0,

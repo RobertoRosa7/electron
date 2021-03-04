@@ -154,4 +154,8 @@ export class DashboardComponent implements OnInit {
       return 'cards-money'
     }
   }
+
+  public notification(str: string, time: number = 3000): void {
+    this._snackbar?.open(str, 'ok', { duration: time })
+  }
 }
