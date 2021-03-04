@@ -60,15 +60,10 @@ $text-accent: var(--text-accent);
   }
 
   .link-active {
-    border-right: 1px solid var(--text-green);
     background: var(--color-medium-white);
     color: var(--text-green);
   }
 
-  .link-active:focus{
-    border-right: 1px solid var(--text-green) !important;
-  }
-  
   li:active {
     background: #c3c3c350;
   }
@@ -132,6 +127,12 @@ $text-accent: var(--text-accent);
     @include text;
     color: var(--color-medium-white);
   }
+
+  .link-active {
+    background: var(--text-light);
+    color: var(--text-green);
+  }
+
   li:active {
     background: #10101050;
   }

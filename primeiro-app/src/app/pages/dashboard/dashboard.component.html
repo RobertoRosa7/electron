@@ -2,7 +2,7 @@
   <mat-drawer-container class="container">
     <mat-drawer #drawer mode="over" opened="false">
       <ul class="app-menu-list">
-        <li (click)="drawer.toggle()" *ngFor="let item of menuList" [routerLink]="item.link">
+        <li [ngClass]="{'link-active': isActive === item.link}" (click)="drawer.toggle()" *ngFor="let item of menuList" [routerLink]="item.link">
           <a>
             <mat-icon>{{item.icon}}</mat-icon>
           </a>
@@ -18,13 +18,13 @@
             <a>
               <mat-icon>{{item.icon}}</mat-icon>
             </a>
-            <span>{{item.name}}</span>
+            <!-- <span>{{item.name}}</span> -->
           </li>
         </ul>
       </div>
 
       <div class="content-pages">
-        <mat-toolbar>
+        <mat-toolbar style="max-width: 1920px;">
           <mat-toolbar-row class="app-custom-toolbar-row">
             <button mat-icon-button (click)="drawer.open()">
               <mat-icon>menu</mat-icon>

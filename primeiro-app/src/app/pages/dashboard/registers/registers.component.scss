@@ -1,4 +1,4 @@
-@import '../../../../styles.scss';
+@import "../../../../styles.scss";
 
 .registers {
   .control {
@@ -27,6 +27,9 @@
       display: block;
     }
     ::ng-deep .mat-select-placeholder {
+      font-size: 14px;
+    }
+    ::ng-deep .mat-select-trigger {
       font-size: 14px;
     }
   }
@@ -149,5 +152,6 @@
   }
   .btn-classificar {
     margin: 8px 0;
+    width: 140px;
   }
 }
