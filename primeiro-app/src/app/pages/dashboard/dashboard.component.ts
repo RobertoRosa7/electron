@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core'
+import { Component, OnInit, DoCheck, KeyValueDiffers } from '@angular/core'
 import { Router } from '@angular/router'
 import { ActionsSubject, Store } from '@ngrx/store'
 import { IpcService } from 'src/app/services/ipc.service'
@@ -16,7 +16,7 @@ import { ScrollService } from 'src/app/services/scroll.service'
   styleUrls: ['./dashboard.component.scss']
 })
 
-export class DashboardComponent implements OnInit {
+export class DashboardComponent implements OnInit, DoCheck {
   public menuList: any[] = [
     {
       link: '/',
@@ -50,6 +50,7 @@ export class DashboardComponent implements OnInit {
   public value: number
   public showErrors: boolean = false
   public isActive: string = ''
+  public differ: any
 
   constructor(
     protected _ipcService?: IpcService,
@@ -58,16 +59,16 @@ export class DashboardComponent implements OnInit {
     protected _as?: ActionsSubject,
     protected _breakpoint?: BreakpointObserver,
     protected _scrollService?: ScrollService,
-    protected _router?: Router
+    protected _router?: Router,
+    protected _differs?: KeyValueDiffers
   ) {
-
     this._router?.events.subscribe((u: any) => this.isActive = u.url)
-
     this._breakpoint?.observe([Breakpoints.XSmall]).subscribe(result => this.isMobile = !!result.matches)
     this._store?.dispatch(actionsRegister.INIT({ payload: { days: 7 } }))
     this._store?.dispatch(actionsDashboard.FETCH_EVOLUCAO())
     this._store?.dispatch(actionsErrors.GET_STATUS_CODE())
     this._store?.dispatch(actionsRegister.GET_TAB({ payload: 'read' }))
+    this.differ = this._differs?.find({}).create()
   }
 
   public ngOnInit(): void {
@@ -77,9 +78,9 @@ export class DashboardComponent implements OnInit {
       payload: []
     }))
 
-    this._ipcService?.on('got', (_: Electron.IpcMessageEvent, message: any) => {
-      console.log(message)
-    })
+    // this._ipcService?.on('got', (_: Electron.IpcMessageEvent, message: any) => {
+    //   console.log(message)
+    // })
 
     this._store?.select(({ http_error, registers, dashboard }: any) =>
       ({ http_error, consolidado: dashboard.consolidado, all: registers.all })).subscribe(state => {
@@ -98,6 +99,16 @@ export class DashboardComponent implements OnInit {
     this._scrollService?.getScrollAsStream().subscribe(per => this.buttonToTop = (per >= 30))
   }
 
+  public ngDoCheck() {
+    const change = this.differ.diff(this)
+    if (change) {
+      change.forEachChangedItem((item: any) => {
+        if (item.key === 'isActive') {
+          this._store?.dispatch(actionsRegister.GET_TAB({ payload: 'read' }))
+        }
+      })
+    }
+  }
   public onSubmit(): void {
     // this._router.navigate(['dashboard/result-search', { search: this.searchTerms }])
     if (this.searchTerms != '') {

@@ -1,4 +1,4 @@
-import { Component, OnInit, Renderer2, RendererFactory2 } from '@angular/core'
+import { Component, DoCheck, OnInit, Renderer2, RendererFactory2 } from '@angular/core'
 import { MatSlideToggleChange } from '@angular/material/slide-toggle'
 import { Store } from '@ngrx/store'
 import { DashboardComponent } from '../dashboard.component'
@@ -9,7 +9,7 @@ import * as actionsDashboard from '../../../actions/dashboard.actions'
   templateUrl: './settings.component.html',
   styleUrls: ['./settings.component.scss']
 })
-export class SettingsComponent extends DashboardComponent implements OnInit {
+export class SettingsComponent extends DashboardComponent implements OnInit, DoCheck {
   public isDark: boolean
   private renderer: Renderer2
   private colorTheme: string = ''
@@ -25,6 +25,10 @@ export class SettingsComponent extends DashboardComponent implements OnInit {
   }
 
   public ngOnInit(): void {
+  }
+
+  public ngDoCheck() {
+    
   }
 
   // init theme

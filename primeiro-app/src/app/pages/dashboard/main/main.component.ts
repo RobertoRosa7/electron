@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core'
+import { Component, DoCheck, OnInit } from '@angular/core'
 import { MatSnackBar } from '@angular/material/snack-bar'
 import { Store } from '@ngrx/store'
 import { Register } from 'src/app/models/models'
@@ -9,7 +9,7 @@ import * as actionsDashboard from '../../../actions/dashboard.actions'
   templateUrl: './main.component.html',
   styleUrls: ['./main.component.scss']
 })
-export class MainComponent extends DashboardComponent implements OnInit {
+export class MainComponent extends DashboardComponent implements OnInit, DoCheck {
   public cards: any[] = [
     {
       title: 'Consolidado',
@@ -38,6 +38,10 @@ export class MainComponent extends DashboardComponent implements OnInit {
     protected _snackbar: MatSnackBar
   ) {
     super()
+  }
+  
+  public ngDoCheck() {
+
   }
 
   public ngOnInit(): void {

@@ -27,7 +27,7 @@ export class RegistersComponent extends DashboardComponent implements OnInit, Af
   public orderby: string = 'Data - decrescente'
   public total: number = 0
   public detail: Register
-  private differ: any
+  public differ: any
   private onlyComing: string = ''
 
   private user_temp: User = {
