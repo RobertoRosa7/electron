@@ -13,7 +13,8 @@
     <mat-drawer-content>
       <div class="sidebar bg-mode">
         <ul class="app-menu-list">
-          <li *ngFor="let item of menuList" [routerLink]="item.link">
+          <li [ngClass]="{'link-active': isActive === item.link}" *ngFor="let item of menuList"
+            [routerLink]="item.link">
             <a>
               <mat-icon>{{item.icon}}</mat-icon>
             </a>

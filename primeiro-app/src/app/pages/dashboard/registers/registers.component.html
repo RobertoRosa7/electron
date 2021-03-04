@@ -6,8 +6,8 @@
       <div class="control">
         <app-tab-menu label="Listar" icon="list" target="read"></app-tab-menu>
         <app-tab-menu label="Incluir" icon="create" target="create"></app-tab-menu>
-        <app-tab-menu label="Alterar" icon="change_circle" target="update"></app-tab-menu>
-        <app-tab-menu label="Deletar" icon="delete" target="delete"></app-tab-menu>
+        <!-- <app-tab-menu label="Alterar" icon="change_circle" target="update"></app-tab-menu> -->
+        <!-- <app-tab-menu label="Deletar" icon="delete" target="delete"></app-tab-menu> -->
       </div>
 
       <div *ngIf="tab === 'read'">
@@ -106,9 +106,36 @@
         </div>
       </mat-card>
 
-      <div *ngIf="tab === 'update'" update>atualizar</div>
+      <!-- <div *ngIf="tab === 'update'" update>atualizar</div> -->
+      <!-- <div *ngIf="tab === 'delete'" delete>deletar</div> -->
 
-      <div *ngIf="tab === 'delete'" delete>deletar</div>
+      <div *ngIf="tab === 'detail'" detail>
+        <div class="content-details">
+          <p>
+            <span>Descrição:</span>
+            <span>{{detail.description}}</span>
+          </p>
+
+          <p>
+            <span>Data:</span>
+            <span>{{(detail.created_at * 1000) | date:'dd/MM/yyyy'}}</span>
+          </p>
+
+          <p>
+            <span>Categoria:</span>
+            <span>{{detail.category}}</span>
+          </p>
+          <p>
+            <span>Valor:</span>
+            <span>R$ {{formatarValor(detail.value || 0)}}</span>
+          </p>
+          <p>
+            <span>Operação:</span>
+            <span *ngIf="detail.type === 'incoming'">Entrada - <small>(Recebimento)</small></span>
+            <span *ngIf="detail.type === 'outcoming'">Saída - <small>(Despesa)</small></span>
+          </p>
+        </div>
+      </div>
     </app-tab-content>
   </app-tabs>
 </div>

@@ -1,13 +1,25 @@
 import { createReducer, on } from "@ngrx/store";
 import * as actions from '../actions/registers.actions'
 
+const categories: string[] = [
+  'Banco',
+  'Alimentação',
+  'Vestuário',
+  'Transporte',
+  'Água & Luz',
+  'Internet',
+  'Pessoal',
+  'Trabalho'
+].sort()
+
 const INITIAL_STATE = {
   all: [],
   tab: '',
   visible: {},
   consolidado: {},
   msg: '',
-  total: 0
+  total: 0,
+  categories
 }
 const registersReducers = createReducer(
   INITIAL_STATE,

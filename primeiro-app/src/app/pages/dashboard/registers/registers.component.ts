@@ -28,6 +28,7 @@ export class RegistersComponent extends DashboardComponent implements OnInit, Af
   public isMobile: boolean
   public orderby: string = 'Data - decrescente'
   public total: number = 0
+  public detail: Register
 
   private user_temp: User = {
     name: 'Anominous',
@@ -91,11 +92,6 @@ export class RegistersComponent extends DashboardComponent implements OnInit, Af
     this._store.dispatch(actionsRegister.ADD_REGISTERS({ payload }))
   }
 
-  public openDetails(event: Event, payload: Register): void {
-    event.stopPropagation()
-    console.log('open details: ', payload)
-  }
-
   public edit(_: Event, payload: Register): void {
     this._dialog.open(DialogFormIncomingComponent, { data: { ...payload, edit: true }, maxWidth: 600 })
       .beforeClosed().subscribe(res => {
@@ -122,8 +118,23 @@ export class RegistersComponent extends DashboardComponent implements OnInit, Af
       })
   }
 
+  public details({ payload }: any): void {
+    this.detail = payload
+    this._store.dispatch(actionsRegister.GET_TAB({ payload: 'detail' }))
+  }
+
   public receivedPayload(payload: any) {
-    payload.action === 'edit' ? this.edit(payload.event, payload.payload) : this.del(payload.event, payload.payload)
+    switch (payload.action) {
+      case 'edit':
+        this.edit(payload.event, payload.payload)
+        break
+      case 'del':
+        this.del(payload.event, payload.payload)
+        break
+      case 'details':
+        this.details(payload)
+        break
+    }
   }
 
   public orderbyChange(event: MatSelectChange): void {

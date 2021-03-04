@@ -30,7 +30,7 @@ export class DashboardComponent implements OnInit {
     },
     {
       link: '/dashboard/registers',
-      name: 'Cadastro',
+      name: 'Registros',
       icon: 'create'
     },
     {
@@ -49,6 +49,7 @@ export class DashboardComponent implements OnInit {
   public type: string
   public value: number
   public showErrors: boolean = false
+  public isActive: string = ''
 
   constructor(
     protected _ipcService?: IpcService,
@@ -56,8 +57,12 @@ export class DashboardComponent implements OnInit {
     protected _snackbar?: MatSnackBar,
     protected _as?: ActionsSubject,
     protected _breakpoint?: BreakpointObserver,
-    protected _scrollService?: ScrollService
+    protected _scrollService?: ScrollService,
+    protected _router?: Router
   ) {
+
+    this._router?.events.subscribe((u: any) => this.isActive = u.url)
+
     this._breakpoint?.observe([Breakpoints.XSmall]).subscribe(result => this.isMobile = !!result.matches)
     this._store?.dispatch(actionsRegister.INIT({ payload: { days: 7 } }))
     this._store?.dispatch(actionsDashboard.FETCH_EVOLUCAO())

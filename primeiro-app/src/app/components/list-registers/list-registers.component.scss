@@ -5,6 +5,7 @@
       margin: 8px 0;
       align-items: center;
       padding: 5px 16px;
+      cursor: pointer;
     }
     .value,
     .category,
@@ -43,6 +44,11 @@
         font-size: 12px;
         font-weight: 100;
       }
+    }
+    .title-with-icon {
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
     }
   }
 

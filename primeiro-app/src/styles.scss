@@ -59,6 +59,16 @@ $text-accent: var(--text-accent);
     color: var(--text-middle-light);
   }
 
+  .link-active {
+    border-right: 1px solid var(--text-green);
+    background: var(--color-medium-white);
+    color: var(--text-green);
+  }
+
+  .link-active:focus{
+    border-right: 1px solid var(--text-green) !important;
+  }
+  
   li:active {
     background: #c3c3c350;
   }

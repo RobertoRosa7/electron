@@ -1,6 +1,6 @@
 <section class="list">
   <div *ngIf="!isMobile" class="container-cards">
-    <mat-card class="cards" [ngStyle]="{
+    <mat-card class="cards" (click)="details(item)" [ngStyle]="{
         'border-left': item.type == 'outcoming' ? '1px solid var(--text-accent)' : '1px solid var(--text-green)'
       }">
       <div class="itens date">
@@ -16,7 +16,9 @@
       </div>
 
       <div class="itens value">
-        <strong>Valor:</strong>
+        <strong class="title-with-icon">
+          <span>Valor:</span>
+        </strong>
         <span class="text-truncate" [title]="formatarValor(item.value)"
           [ngStyle]="{'color': item.type == 'outcoming' ? 'var(--text-accent)' : 'var(--text-green)'}">
           <span class="text-truncate" *ngIf="item.type === 'outcoming'">-</span>
@@ -24,9 +26,12 @@
         </span>
       </div>
 
-      <div class="itens category">
-        <strong>Categoria:</strong>
-        <span [title]="item.category" class="text-truncate">{{item.category}}</span>
+      <div [title]="item.category" class="itens category">
+        <strong class="title-with-icon">
+          <span>Categoria:</span>
+          <mat-icon style="font-size: 12px; height: inherit; margin-left: 8px;">{{returnIcon(item.category || '')}}</mat-icon>
+        </strong>
+        <span class="text-truncate">{{item.category}}</span>
       </div>
 
       <div class="itens actions">
