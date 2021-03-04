@@ -11,7 +11,9 @@ export interface Register {
   brand?: string
   edit?: boolean
   user?: User
-  _id?: any
+  _id?: any,
+  month?: number,
+  lista?: Register[]
 }
 
 export interface User {

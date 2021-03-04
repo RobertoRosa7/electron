@@ -12,7 +12,7 @@ import { MatSnackBarModule } from '@angular/material/snack-bar'
 import { MatSortModule } from '@angular/material/sort'
 import { MatTableModule } from '@angular/material/table'
 import { MatDatepickerModule } from '@angular/material/datepicker'
-import { DateAdapter, MatNativeDateModule, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core'
+import { DateAdapter, MatNativeDateModule, MAT_DATE_LOCALE } from '@angular/material/core'
 import { MomentDateAdapter, MomentDateModule } from '@angular/material-moment-adapter'
 import localePt from '@angular/common/locales/pt'
 import { MatToolbarModule } from '@angular/material/toolbar'
@@ -38,7 +38,6 @@ import { MatListModule } from '@angular/material/list'
 import { MatMenuModule } from '@angular/material/menu'
 import { ListRegistersComponent } from '../../components/list-registers/list-registers.component'
 import { MatSelectModule } from '@angular/material/select'
-import { ScrollDirective } from "src/app/directives/scroll.directive";
 import { HighchartsComponent } from '../../components/highcharts/highcharts.component'
 
 

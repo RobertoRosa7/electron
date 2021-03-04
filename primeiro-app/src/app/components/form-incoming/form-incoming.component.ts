@@ -1,12 +1,27 @@
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { MomentDateAdapter } from '@angular/material-moment-adapter';
+import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
 import { Register } from 'src/app/models/models';
 
+const MY_FORMATS = {
+  parse: { dateInput: 'DD MM YYYY' },
+  display: {
+    dateInput: 'DD/MM/YYYY',
+    monthYearLabel: 'MMM YYYY',
+    dateA11yLabel: 'LL',
+    monthYearA11yLabel: 'MMMM YYYY',
+  }
+}
 @Component({
   selector: 'app-form-incoming',
   templateUrl: './form-incoming.component.html',
-  styleUrls: ['./form-incoming.component.scss']
+  styleUrls: ['./form-incoming.component.scss'],
+  providers: [
+    { provide: DateAdapter, useClass: MomentDateAdapter, deps: [MAT_DATE_LOCALE] },
+    { provide: MAT_DATE_FORMATS, useValue: MY_FORMATS }
+  ]
 })
 export class FormIncomingComponent implements OnInit {
   @Input('label') public label: string = ''

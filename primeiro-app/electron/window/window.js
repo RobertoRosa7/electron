@@ -2,8 +2,8 @@ const { BrowserWindow, Tray } = require("electron");
 const menu = require("../menu/menu");
 
 const windowSettings = {
-  width: 1254,
-  height: 700,
+  width: 1200,
+  height: 740,
   backgroundColor: "#FAFAFA",
   name: "Primeiro App",
   icon: `${__dirname}/../../dist/assets/icon-512x512-default-android.png`,

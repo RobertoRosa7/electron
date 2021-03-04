@@ -41,37 +41,11 @@ export class MainComponent extends DashboardComponent implements OnInit {
   }
 
   public ngOnInit(): void {
-    const teste = [
-      { "dia": 1, "desc": "Nigth", "mes": 1 },
-      { "dia": 1, "Descricao": "Brilha", "mes": 1 },
-      { "dia": 2, "desc": "Urna", "mes": 2 },
-      { "dia": 3, "Descricao": "Covas", "mes": 1 },
-      { "dia": 2, "desc": "Mario Corvas", "mes": 1 },
-      { "dia": 4, "Desc": "Estrelas", "mes": 2 },
-      { "dia": 4, "Desc": "Estrelas", "mes": 2 },
-      { "dia": 4, "Desc": "Estrelas", "mes": 2 },
-      { "dia": 4, "Desc": "Estrelas", "mes": 2 },
-    ]
-
-    const t = teste.reduce(function (prev: any, current: any) {
-      var index = prev.findIndex((j: any) => j.dia == current.dia && j.mes == current.mes)
-      if (index < 0) {
-        index = prev.length
-        prev.push({
-          dia: current.dia,
-          mes: current.mes,
-          lista: []
-        })
-      }
-      prev[index].lista.push(current)
-      return prev
-    }, []).map((item: any) => item)
-
     this._store.select(({ registers, dashboard }: any) => ({
       all: [...registers.all], consolidado: dashboard.consolidado
     }))
       .subscribe(state => {
-        this.ELEMENT_DATA = state.all.splice(0, 5)
+        this.ELEMENT_DATA = state.all.splice(0, 7)
         this.cards.forEach(value => {
           switch (value.type) {
             case 'incoming':

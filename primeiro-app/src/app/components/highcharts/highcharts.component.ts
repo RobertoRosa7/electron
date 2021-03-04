@@ -21,7 +21,7 @@ export class HighchartsComponent implements OnInit {
   @ViewChild('highchartEvoution', { static: true }) highchartEvoution: ElementRef
   public chartLine: any = {
     chart: {
-      type: 'column'
+      type: 'column',
     },
     navigator: { enabled: false },
     scrollbar: { enabled: false },
@@ -152,7 +152,6 @@ export class HighchartsComponent implements OnInit {
           this.data = state.evolucao
           let theme = state.mode === 'light-mode' ? 'var(--color-white)' : 'var(--color-default-dark)'
           let themeInverse = state.mode != 'light-mode' ? 'var(--color-white)' : 'var(--color-default-dark)'
-          let dates: any = []
           const values: any = []
 
           this.chartLine.chart.backgroundColor = theme
@@ -163,7 +162,6 @@ export class HighchartsComponent implements OnInit {
           this.chartLine.legend.itemStyle.color = themeInverse
 
           if (this.data.graph_evolution) {
-            dates = this.data.graph_evolution.dates
             for (const i in this.data.graph_evolution) {
               if (i !== 'dates') {
                 values.push({
