@@ -3,6 +3,7 @@ import { MatSnackBar } from '@angular/material/snack-bar'
 import { Register, User } from '../../../models/models'
 import { Store } from '@ngrx/store'
 import * as actionsRegister from '../../../actions/registers.actions'
+import * as actionsDashboard from '../../../actions/dashboard.actions'
 import { MatDialog } from '@angular/material/dialog'
 import { DialogFormIncomingComponent } from 'src/app/components/dialog-form-incoming/dialog-form-incoming.component'
 import { DialogConfirmComponent } from 'src/app/components/dialog-confirm/dialog-confirm.component'
@@ -29,6 +30,7 @@ export class RegistersComponent extends DashboardComponent implements OnInit, Af
   public detail: Register
   public differ: any
   private onlyComing: string = ''
+  public evolucaoDetail: any
 
   private user_temp: User = {
     name: 'Anominous',
@@ -62,14 +64,16 @@ export class RegistersComponent extends DashboardComponent implements OnInit, Af
   }
 
   public ngOnInit(): void {
-    this._store.select(({ registers }: any) => ({
+    this._store.select(({ registers, dashboard }: any) => ({
       all: [...registers.all],
       tab: registers.tab,
-      total: registers.total
+      total: registers.total,
+      evolucao_detail: dashboard.evolucao_detail
     })).subscribe(state => {
       this.tab = state.tab
       this.total = state.total
       this.ELEMENT_ORDER = state.all
+      this.evolucaoDetail = state.evolucao_detail
       this.orderby ? this.makingOrdering(this.orderby) : this.ELEMENT_DATA = this.classificar(state.all)
     })
   }
@@ -136,7 +140,6 @@ export class RegistersComponent extends DashboardComponent implements OnInit, Af
 
   public details({ payload }: any): void {
     this.detail = payload
-    this._store.dispatch(actionsRegister.GET_TAB({ payload: 'detail' }))
   }
 
   public receivedPayload(payload: any) {

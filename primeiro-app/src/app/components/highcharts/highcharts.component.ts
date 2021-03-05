@@ -1,4 +1,4 @@
-import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, DoCheck, ElementRef, Input, KeyValueDiffers, OnInit, ViewChild } from '@angular/core';
 import { Store } from '@ngrx/store';
 import * as Highcharts from 'highcharts'
 import * as actionsDashboard from '../../actions/dashboard.actions'
@@ -17,8 +17,10 @@ noData(Highcharts)
   templateUrl: './highcharts.component.html',
   styleUrls: ['./highcharts.component.scss']
 })
-export class HighchartsComponent implements OnInit {
+export class HighchartsComponent implements OnInit, DoCheck {
   @ViewChild('highchartEvoution', { static: true }) highchartEvoution: ElementRef
+  @Input() public evolucao: any
+
   public chartLine: any = {
     chart: {
       type: 'column',
@@ -135,47 +137,56 @@ export class HighchartsComponent implements OnInit {
   }
 
   public data: any = {}
+  public differ: any
+  
   constructor(
-    private _store: Store
+    private _store: Store,
+    protected _differs: KeyValueDiffers
   ) {
-
+    this.differ = this._differs.find({}).create()
   }
 
-  ngOnInit(): void {
-    this.instanceHighchart().then((payload: any) => Highcharts.chart(this.highchartEvoution.nativeElement, this.chartLine))
+  public ngOnInit(): void {
+    this._store.select(({ dashboard }: any) =>
+      ({ mode: dashboard.dark_mode, evolucao: dashboard.evolucao })).subscribe(state => {
+        let theme = state.mode === 'light-mode' ? 'var(--color-white)' : 'var(--color-default-dark)'
+        let themeInverse = state.mode != 'light-mode' ? 'var(--color-white)' : 'var(--color-default-dark)'
+        this.chartLine.chart.backgroundColor = theme
+        this.chartLine.tooltip.backgroundColor = theme
+        this.chartLine.yAxis.gridLineColor = themeInverse
+        this.chartLine.yAxis.labels.style.color = themeInverse
+        this.chartLine.xAxis.labels.style.color = themeInverse
+        this.chartLine.legend.itemStyle.color = themeInverse
+      })
+  }
+
+  public ngDoCheck(): void {
+    const change = this.differ.diff(this)
+    if (change) {
+      change.forEachChangedItem((item: any) => {
+        if (item.key === 'evolucao') {
+          this.instanceHighchart().then(() => Highcharts.chart(this.highchartEvoution.nativeElement, this.chartLine))
+        }
+      })
+    }
   }
 
   public instanceHighchart(): Promise<any> {
     return new Promise(resolve => {
-      this._store.select(({ dashboard }: any) =>
-        ({ mode: dashboard.dark_mode, evolucao: dashboard.evolucao })).subscribe(state => {
-          this.data = state.evolucao
-          let theme = state.mode === 'light-mode' ? 'var(--color-white)' : 'var(--color-default-dark)'
-          let themeInverse = state.mode != 'light-mode' ? 'var(--color-white)' : 'var(--color-default-dark)'
-          const values: any = []
-
-          this.chartLine.chart.backgroundColor = theme
-          this.chartLine.tooltip.backgroundColor = theme
-          this.chartLine.yAxis.gridLineColor = themeInverse
-          this.chartLine.yAxis.labels.style.color = themeInverse
-          this.chartLine.xAxis.labels.style.color = themeInverse
-          this.chartLine.legend.itemStyle.color = themeInverse
-
-          if (this.data.graph_evolution) {
-            for (const i in this.data.graph_evolution) {
-              if (i !== 'dates') {
-                values.push({
-                  name: this.data.graph_evolution[i].label,
-                  data: this.data.graph_evolution[i].values
-                })
-              }
-            }
-
-            this.chartLine.series = values
-            this.chartLine.xAxis.categories = this.data.graph_evolution.dates
-            resolve(true)
+      const values: any = []
+      if (this.evolucao.graph_evolution) {
+        for (const i in this.evolucao.graph_evolution) {
+          if (i !== 'dates') {
+            values.push({
+              name: this.evolucao.graph_evolution[i].label,
+              data: this.evolucao.graph_evolution[i].values
+            })
           }
-        })
+        }
+        this.chartLine.series = values
+        this.chartLine.xAxis.categories = this.evolucao.graph_evolution.dates
+        resolve(true)
+      }
     })
   }
 }

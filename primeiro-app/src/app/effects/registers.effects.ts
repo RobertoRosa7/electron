@@ -82,7 +82,7 @@ export class RegistersEffect {
         return SET_ERRORS({ payload: source })
       } else {
         this._store.dispatch(SET_SUCCESS({ payload: this.props.delete_register }))
-        this._store.dispatch(actionsDashboard.INIT())
+        this._store.dispatch(actionsDashboard.INIT_DASHBOARD())
         return actions.GET_REGISTERS({ payload })
       }
     }),
@@ -113,7 +113,7 @@ export class RegistersEffect {
         return SET_ERRORS({ payload: source })
       } else {
         this._store.dispatch(SET_SUCCESS({ payload: this.props.update_register }))
-        this._store.dispatch(actionsDashboard.INIT())
+        this._store.dispatch(actionsDashboard.INIT_DASHBOARD())
         return actions.SET_UPDATE({ payload })
       }
     }),

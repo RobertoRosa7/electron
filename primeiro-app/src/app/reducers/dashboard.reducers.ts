@@ -8,7 +8,8 @@ const INITIAL_STATES = {
     total_consolidado: 0
   },
   dark_mode: '',
-  evolucao: {}
+  evolucao: {},
+  evolucao_detail: {}
 }
 
 const dashboardReducers = createReducer(
@@ -16,6 +17,7 @@ const dashboardReducers = createReducer(
   on(actions.GET_TOTALS, (states, { payload }) => ({ ...states, consolidado: payload })),
   on(actions.DARK_MODE, (states, { payload }) => ({ ...states, dark_mode: payload })),
   on(actions.SET_EVOLUCAO, (states, { payload }) => ({ ...states, evolucao: payload })),
+  on(actions.SET_EVOLUCAO_DETAIL, (states, { payload }) => ({ ...states, evolucao_detail: payload })),
 )
 
 export function reducerDashboard(state: any, action: any) {

@@ -19,7 +19,7 @@ export class DashboardService {
     if (!payload) return ''
     return '?' + Object.entries(payload).map(e => e.join('=')).join('&')
   }
-  
+
   public fetchRegisters(params?: any): Observable<Register[]> {
     return this.http.get<Register[]>(`${this.constants.get('fetch_registers')}${this.convertJsonToUrl(params)}`)
   }
@@ -46,5 +46,9 @@ export class DashboardService {
 
   public fetchEvocucao(): Observable<any> {
     return this.http.get<any>(this.constants.get('fetch_evolucao'))
+  }
+
+  public fetchEvocucaoDetail(payload: any): Observable<any> {
+    return this.http.post<any>(this.constants.get('fetch_evolucao_detail'), payload)
   }
 }

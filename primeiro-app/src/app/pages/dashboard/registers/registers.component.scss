@@ -77,7 +77,6 @@
       }
     }
   }
-
   .create {
     display: flex;
     justify-content: space-between;
@@ -105,6 +104,16 @@
       }
       p.value {
         flex: 1;
+      }
+    }
+  }
+
+  .content-detail {
+    display: flex;
+    .col {
+      flex: 1;
+      .valor {
+        
       }
     }
   }

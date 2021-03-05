@@ -12,7 +12,6 @@ import { HttpErrorResponse } from '@angular/common/http'
 @Injectable()
 export class DashboardEffect {
   constructor(
-    private _store: Store,
     private _action: Actions,
     private _indexedb: IndexdbService,
     private _dashboardService: DashboardService
@@ -21,7 +20,7 @@ export class DashboardEffect {
 
   @Effect()
   public init$: Observable<Actions> = this._action.pipe(
-    ofType(actions.actionsTypes.INIT),
+    ofType(actions.actionsTypes.INIT_DASHBOARD),
     mergeMap(() => this._dashboardService.fetchConsolidado().pipe(catchError(e => of(e)))),
     map((payload) => {
       if (payload instanceof HttpErrorResponse) {
@@ -67,6 +66,21 @@ export class DashboardEffect {
         return SET_ERRORS({ payload: source })
       } else {
         return actions.SET_EVOLUCAO({ payload })
+      }
+    }),
+    catchError(e => of(e))
+  )
+
+  @Effect()
+  public fetchEvolucaoDetail$: Observable<Actions> = this._action.pipe(
+    ofType(actions.FETCH_EVOLUCAO_DETAIL),
+    mergeMap(({ payload }) => this._dashboardService.fetchEvocucaoDetail(payload).pipe(catchError(e => of(e)))),
+    map((payload: any) => {
+      if (payload instanceof HttpErrorResponse) {
+        const source = { ...payload, source: 'fetch_evolucao_detail' }
+        return SET_ERRORS({ payload: source })
+      } else {
+        return actions.SET_EVOLUCAO_DETAIL({ payload })
       }
     }),
     catchError(e => of(e))

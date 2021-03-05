@@ -110,30 +110,30 @@
       <!-- <div *ngIf="tab === 'delete'" delete>deletar</div> -->
 
       <div *ngIf="tab === 'detail'" detail>
-        <div class="content-details">
-          <p>
-            <span>Descrição:</span>
-            <span>{{detail.description}}</span>
-          </p>
-
-          <p>
-            <span>Data:</span>
-            <span>{{(detail.created_at * 1000) | date:'dd/MM/yyyy'}}</span>
-          </p>
-
-          <p>
-            <span>Categoria:</span>
-            <span>{{detail.category}}</span>
-          </p>
-          <p>
-            <span>Valor:</span>
-            <span>R$ {{formatarValor(detail.value || 0)}}</span>
-          </p>
-          <p>
-            <span>Operação:</span>
-            <span *ngIf="detail.type === 'incoming'">Entrada - <small>(Recebimento)</small></span>
-            <span *ngIf="detail.type === 'outcoming'">Saída - <small>(Despesa)</small></span>
-          </p>
+        <div class="content-detail">
+          <div class="col">
+            <p class="valor">
+              <span>Valor:</span>
+              <span>R$ {{formatarValor(detail.value || 0)}}</span>
+              <small *ngIf="detail.type === 'incoming'">Entrada - (Recebimento)</small>
+              <small *ngIf="detail.type === 'outcoming'">Saída - (Despesa)</small>
+            </p>
+            <p class="descricao">
+              <span>Descrição:</span>
+              <span>{{detail.description}}</span>
+            </p>
+            <p class="date">
+              <span>Data:</span>
+              <span style="text-transform: capitalize;">{{(detail.created_at * 1000) | date:'medium'}}</span>
+            </p>
+            <p class="category">
+              <span>Categoria:</span>
+              <span>{{detail.category}}</span>
+            </p>
+          </div>
+          <div class="col">
+            <!-- <app-highcharts [evolucao]="evolucaoDetail"></app-highcharts> -->
+          </div>
         </div>
       </div>
     </app-tab-content>

@@ -64,8 +64,8 @@ export class DashboardComponent implements OnInit, DoCheck {
   ) {
     this._router?.events.subscribe((u: any) => this.isActive = u.url)
     this._breakpoint?.observe([Breakpoints.XSmall]).subscribe(result => this.isMobile = !!result.matches)
+    this._store?.dispatch(actionsDashboard.INIT_DASHBOARD())
     this._store?.dispatch(actionsRegister.INIT({ payload: { days: 7 } }))
-    this._store?.dispatch(actionsDashboard.FETCH_EVOLUCAO())
     this._store?.dispatch(actionsErrors.GET_STATUS_CODE())
     this._store?.dispatch(actionsRegister.GET_TAB({ payload: 'read' }))
     this.differ = this._differs?.find({}).create()
@@ -85,7 +85,7 @@ export class DashboardComponent implements OnInit, DoCheck {
     this._store?.select(({ http_error, registers, dashboard }: any) =>
       ({ http_error, consolidado: dashboard.consolidado, all: registers.all })).subscribe(state => {
         this.consolidado = state.consolidado.total_consolidado
-        if (state.http_error.error) {
+        if (state.http_error.errors) {
           state.http_error.errors.forEach((e: any) => this.handleError(e))
         }
       })
@@ -126,7 +126,7 @@ export class DashboardComponent implements OnInit, DoCheck {
   public handleError(error: any): void {
     this.showErrors = true
     const name: string = this.fetchNames(error.source)
-    this._snackbar?.open(`Error: ${name} code: ${error.status}`, 'Ok', { duration: 3000 })
+    this.notification(`Error: ${name} code: ${error.status}`)
   }
 
   public formatarValor(valor: number): string {
@@ -145,6 +145,8 @@ export class DashboardComponent implements OnInit, DoCheck {
         return 'Novo registro'
       case 'status_code':
         return 'Status code: '
+      case 'fetch_evolucao_detail':
+        return 'ao carregar gráfico'
       default:
         return ''
     }

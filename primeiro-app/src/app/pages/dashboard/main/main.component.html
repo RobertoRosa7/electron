@@ -5,10 +5,11 @@
   </div>
   <div class="highchart">
     <div class="col-7">
-      <app-highcharts></app-highcharts>
+      <app-highcharts *ngIf="EVOLUCAO_DATA" [evolucao]="EVOLUCAO_DATA"></app-highcharts>
     </div>
     <div class="col-4">
-      <app-list-registers *ngFor="let item of ELEMENT_DATA" [item]="item"></app-list-registers>
+      <app-list-registers (send)="receivedPayload($event)" *ngFor="let item of ELEMENT_DATA" [item]="item">
+      </app-list-registers>
     </div>
   </div>
 </section>
