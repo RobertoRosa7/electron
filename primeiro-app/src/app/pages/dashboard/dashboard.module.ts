@@ -38,7 +38,8 @@ import { MatListModule } from '@angular/material/list'
 import { MatMenuModule } from '@angular/material/menu'
 import { ListRegistersComponent } from '../../components/list-registers/list-registers.component'
 import { MatSelectModule } from '@angular/material/select'
-import { HighchartsComponent } from '../../components/highcharts/highcharts.component'
+import { HighchartsComponent } from '../../components/highcharts/highcharts.component';
+import { DialogsComponent } from '../../components/dialogs/dialogs.component'
 
 
 const routes: Routes = [
@@ -83,6 +84,7 @@ registerLocaleData(localePt, 'pt')
     DialogConfirmComponent,
     ListRegistersComponent,
     HighchartsComponent,
+    DialogsComponent,
   ],
   imports: [
     RouterModule.forChild(routes),
@@ -111,7 +113,8 @@ registerLocaleData(localePt, 'pt')
   ],
   entryComponents: [
     DialogFormIncomingComponent,
-    DialogConfirmComponent
+    DialogConfirmComponent,
+    DialogsComponent
   ],
   // exports: [],
   providers: [

@@ -7,6 +7,8 @@ import * as actionsDashboard from '../../../actions/dashboard.actions'
 import * as actionsRegister from '../../../actions/registers.actions'
 import { delay, filter } from 'rxjs/operators'
 import { Router } from '@angular/router'
+import { DialogsComponent } from 'src/app/components/dialogs/dialogs.component'
+import { MatDialog } from '@angular/material/dialog'
 
 @Component({
   selector: 'app-main',
@@ -40,7 +42,8 @@ export class MainComponent extends DashboardComponent implements OnInit, DoCheck
   constructor(
     protected _store: Store,
     protected _snackbar: MatSnackBar,
-    protected _router: Router
+    protected _router: Router,
+    protected _dialog: MatDialog
   ) {
     super()
     this._store.dispatch(actionsDashboard.FETCH_EVOLUCAO())
@@ -74,6 +77,7 @@ export class MainComponent extends DashboardComponent implements OnInit, DoCheck
 
   public receivedPayload(event: any) {
     if (event.action === 'details') {
+      this.openDialog(DialogsComponent, { data: event.payload })
     }
   }
 }

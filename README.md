@@ -54,3 +54,7 @@
 ###### 03/03/2021
 
 * [x] Grafico de evolução com pandas, highchart 
+
+###### 05/03/2021
+
+* [x] Dialog Geral para mostrar detalhes 

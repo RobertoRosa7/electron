@@ -50,10 +50,17 @@ $text-accent: var(--text-accent);
   display: inline-block;
 }
 
+.dialog-default {
+  width: 100%;
+  height: 100%;
+  max-width: 768px;
+  max-height: 500px;
+  padding: 0;
+}
+
 .light-mode {
   @include angular-material-theme($app-light-theme);
   background: $bg-light-mode;
-
   .line-month {
     @include text;
     color: var(--text-middle-light);

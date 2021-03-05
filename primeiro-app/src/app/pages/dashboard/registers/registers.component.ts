@@ -10,6 +10,7 @@ import { DialogConfirmComponent } from 'src/app/components/dialog-confirm/dialog
 import { DashboardComponent } from '../dashboard.component'
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout'
 import { MatSelectChange } from '@angular/material/select'
+import { DialogsComponent } from 'src/app/components/dialogs/dialogs.component'
 
 @Component({
   selector: 'app-registers',
@@ -112,7 +113,7 @@ export class RegistersComponent extends DashboardComponent implements OnInit, Af
     this._store.dispatch(actionsRegister.ADD_REGISTERS({ payload }))
   }
 
-  public edit(_: Event, payload: Register): void {
+  public edit(event: Event, payload: Register): void {
     this._dialog.open(DialogFormIncomingComponent, { data: { ...payload, edit: true }, maxWidth: 600 })
       .beforeClosed().subscribe(res => {
         if (res) {
@@ -129,7 +130,7 @@ export class RegistersComponent extends DashboardComponent implements OnInit, Af
       })
   }
 
-  public del(_: Event, payload: Register): void {
+  public del(event: Event, payload: Register): void {
     this._dialog.open(DialogConfirmComponent, { data: payload })
       .beforeClosed().subscribe(response => {
         if (response) {
@@ -138,8 +139,8 @@ export class RegistersComponent extends DashboardComponent implements OnInit, Af
       })
   }
 
-  public details({ payload }: any): void {
-    this.detail = payload
+  public details(event: Event, payload: any): void {
+    this.openDialog(DialogsComponent, { data: payload.payload })
   }
 
   public receivedPayload(payload: any) {
@@ -151,7 +152,7 @@ export class RegistersComponent extends DashboardComponent implements OnInit, Af
         this.del(payload.event, payload.payload)
         break
       case 'details':
-        this.details(payload)
+        this.details(payload.event, payload.payload)
         break
     }
   }

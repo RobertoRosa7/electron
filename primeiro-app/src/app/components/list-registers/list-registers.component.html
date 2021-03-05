@@ -1,6 +1,6 @@
 <section class="list">
   <div *ngIf="!isMobile" class="container-cards">
-    <mat-card class="cards" (click)="details(item)" [ngStyle]="{
+    <mat-card class="cards" (click)="details($event, item)" [ngStyle]="{
         'border-left': item.type == 'outcoming' ? '1px solid var(--text-accent)' : '1px solid var(--text-green)'
       }">
       <div class="itens date">
@@ -35,7 +35,7 @@
       </div>
 
       <div class="itens actions">
-        <button title="Menu" mat-icon-button [matMenuTriggerFor]="menu">
+        <button (click)="$event.stopPropagation()" title="Menu" mat-icon-button [matMenuTriggerFor]="menu">
           <mat-icon>more_vert</mat-icon>
         </button>
       </div>

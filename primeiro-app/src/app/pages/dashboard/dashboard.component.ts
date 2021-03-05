@@ -9,6 +9,7 @@ import { MatSnackBar } from '@angular/material/snack-bar'
 import { filter } from 'rxjs/operators'
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout'
 import { ScrollService } from 'src/app/services/scroll.service'
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog'
 
 @Component({
   selector: 'app-dashboard',
@@ -60,7 +61,8 @@ export class DashboardComponent implements OnInit, DoCheck {
     protected _breakpoint?: BreakpointObserver,
     protected _scrollService?: ScrollService,
     protected _router?: Router,
-    protected _differs?: KeyValueDiffers
+    protected _differs?: KeyValueDiffers,
+    protected _dialog?: MatDialog
   ) {
     this._router?.events.subscribe((u: any) => this.isActive = u.url)
     this._breakpoint?.observe([Breakpoints.XSmall]).subscribe(result => this.isMobile = !!result.matches)
@@ -170,5 +172,10 @@ export class DashboardComponent implements OnInit, DoCheck {
 
   public notification(str: string, time: number = 3000): void {
     this._snackbar?.open(str, 'ok', { duration: time })
+  }
+
+  public openDialog(component: any, data: MatDialogConfig = {}) {
+    const settings: MatDialogConfig = { ...data, panelClass: 'dialog-default' }
+    return this._dialog?.open(component, settings)
   }
 }
