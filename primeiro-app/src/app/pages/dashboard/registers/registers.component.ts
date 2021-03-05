@@ -86,7 +86,8 @@ export class RegistersComponent extends DashboardComponent implements OnInit, Af
     if (change) {
       change.forEachChangedItem((item: any) => {
         if (item.key === 'total') {
-          this.notification(`Total de registros: ${this.total}`)
+          console.log(this.total)
+          // this.notification(`Total de registros: ${this.total}`)
         }
         if (item.key === 'onlyComing') {
           let text = this.onlyComing == 'incoming' ? 'Somente entrada' : 'Somente saída'
@@ -113,49 +114,50 @@ export class RegistersComponent extends DashboardComponent implements OnInit, Af
     this._store.dispatch(actionsRegister.ADD_REGISTERS({ payload }))
   }
 
-  public edit(event: Event, payload: Register): void {
-    this._dialog.open(DialogFormIncomingComponent, { data: { ...payload, edit: true }, maxWidth: 600 })
-      .beforeClosed().subscribe(res => {
-        if (res) {
-          this._store.dispatch(actionsRegister.UPDATE_REGISTER({
-            payload: {
-              ...payload,
-              value: res.value,
-              created_at: (new Date(res.date).getTime() / 1000),
-              description: res.description,
-              category: res.category
-            }
-          }))
-        }
-      })
-  }
+  // public edit(_: Event, payload: Register): void {
+  //   this._dialog.open(DialogFormIncomingComponent, { data: { ...payload, edit: true }, maxWidth: 600 })
+  //     .beforeClosed().subscribe(res => {
+  //       if (res) {
+  //         this._store.dispatch(actionsRegister.UPDATE_REGISTER({
+  //           payload: {
+  //             ...payload,
+  //             value: res.value,
+  //             created_at: (new Date(res.date).getTime() / 1000),
+  //             description: res.description,
+  //             category: res.category
+  //           }
+  //         }))
+  //       }
+  //     })
+  // }
 
-  public del(event: Event, payload: Register): void {
-    this._dialog.open(DialogConfirmComponent, { data: payload })
-      .beforeClosed().subscribe(response => {
-        if (response) {
-          this._store.dispatch(actionsRegister.DELETE_REGISTERS({ payload }))
-        }
-      })
-  }
+  // public del(_: Event, payload: Register): void {
+  //   this._dialog.open(DialogConfirmComponent, { data: payload })
+  //     .beforeClosed().subscribe(response => {
+  //       if (response) {
+  //         this._store.dispatch(actionsRegister.DELETE_REGISTERS({ payload }))
+  //       }
+  //     })
+  // }
 
-  public details(event: Event, payload: any): void {
-    this.openDialog(DialogsComponent, { data: payload.payload })
-  }
+  // public details(_: Event, payload: any): void {
+  //   console.log(payload)
+  //   this.openDialog(DialogsComponent, { data: { type: payload.action, data: payload.payload } })
+  // }
 
-  public receivedPayload(payload: any) {
-    switch (payload.action) {
-      case 'edit':
-        this.edit(payload.event, payload.payload)
-        break
-      case 'del':
-        this.del(payload.event, payload.payload)
-        break
-      case 'details':
-        this.details(payload.event, payload.payload)
-        break
-    }
-  }
+  // public receivedPayload(payload: any) {
+  //   switch (payload.action) {
+  //     case 'edit':
+  //       // this.edit(payload.event, payload.payload)
+  //       break
+  //     case 'del':
+  //       // this.del(payload.event, payload.payload)
+  //       break
+  //     case 'details':
+  //       // this.details(payload.event, payload)
+  //       break
+  //   }
+  // }
 
   public orderbyChange(event: MatSelectChange): void {
     this.makingOrdering(event.value)

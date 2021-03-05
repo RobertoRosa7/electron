@@ -47,3 +47,8 @@ export interface StatusCode {
   status: number
   text: string
 }
+
+export interface DIALOG_DATA {
+  type: string
+  data: any
+}

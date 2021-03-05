@@ -34,4 +34,8 @@ export class DialogFormIncomingComponent implements OnInit {
   public listeningEventForm(event: any): void {
     this._dialogRef.close(event)
   }
+
+  public close() {
+    this._dialogRef.close()
+  }
 }

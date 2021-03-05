@@ -1,11 +1,35 @@
-.dialog-confirm {
+.dialog {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+
+  .header {
+    width: 100%;
+    display: flex;
+    padding: 0 15px;
+  }
+  .title {
+    flex: 1;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .container-dialog {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 15px;
+    height: inherit;
+    align-items: center;
+  }
   .container-buttons {
     width: 100%;
     display: flex;
     justify-content: space-between;
     align-items: center;
     flex-wrap: wrap;
-
+    max-width: 450px;
     button {
       width: 100%;
       max-width: 180px;

@@ -74,10 +74,4 @@ export class MainComponent extends DashboardComponent implements OnInit, DoCheck
       })
     })
   }
-
-  public receivedPayload(event: any) {
-    if (event.action === 'details') {
-      this.openDialog(DialogsComponent, { data: event.payload })
-    }
-  }
 }

@@ -178,4 +178,5 @@ export class DashboardComponent implements OnInit, DoCheck {
     const settings: MatDialogConfig = { ...data, panelClass: 'dialog-default' }
     return this._dialog?.open(component, settings)
   }
+  
 }
