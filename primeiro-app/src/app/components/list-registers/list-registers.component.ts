@@ -63,35 +63,4 @@ export class ListRegistersComponent implements OnInit {
   public formatarValor(valor: number): string {
     return new Intl.NumberFormat('pt-BR', { currency: 'BRL', minimumFractionDigits: 2 }).format(valor)
   }
-
-
-  public returnIcon(text: string): string {
-    switch (this.cleanText(text)) {
-      case 'alimentacao':
-        return 'restaurant'
-      case 'transporte':
-        return 'train'
-      case 'banco':
-        return 'account_balance'
-      case 'trabalho':
-        return 'work_outline'
-      case 'vestuario':
-        return 'checkroom'
-      case 'outros':
-        return 'drag_indicator'
-      case 'pessoal':
-        return 'perm_identity'
-      case 'internet':
-        return 'swap_vert'
-      case 'agua_e_luz':
-        return 'payment'
-      default:
-        return ''
-    }
-  }
-
-  public cleanText(text: string | undefined = ''): string {
-    return text.toLowerCase().replace(' ', '_').replace('&', 'e').replace('á', 'a').replace('ã', 'a')
-      .replace('ç', 'c').replace('õ', 'o')
-  }
 }

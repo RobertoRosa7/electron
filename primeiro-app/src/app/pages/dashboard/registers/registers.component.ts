@@ -11,6 +11,7 @@ import { DashboardComponent } from '../dashboard.component'
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout'
 import { MatSelectChange } from '@angular/material/select'
 import { DialogsComponent } from 'src/app/components/dialogs/dialogs.component'
+import { map } from 'rxjs/operators'
 
 @Component({
   selector: 'app-registers',
@@ -65,18 +66,16 @@ export class RegistersComponent extends DashboardComponent implements OnInit, Af
   }
 
   public ngOnInit(): void {
-    this._store.select(({ registers, dashboard }: any) => ({
+    this._store.select(({ registers }: any) => ({
       all: [...registers.all],
       tab: registers.tab,
       total: registers.total,
-      evolucao_detail: dashboard.evolucao_detail
     })).subscribe(state => {
-      this.tab = state.tab
-      this.total = state.total
-      this.ELEMENT_ORDER = state.all
-      this.evolucaoDetail = state.evolucao_detail
-      this.orderby ? this.makingOrdering(this.orderby) : this.ELEMENT_DATA = this.classificar(state.all)
-    })
+        this.tab = state.tab
+        this.total = state.total
+        this.ELEMENT_ORDER = state.all
+        this.orderby ? this.makingOrdering(this.orderby) : this.ELEMENT_DATA = this.classificar(state.all)
+      })
   }
 
   public ngAfterViewInit(): void { }
@@ -86,8 +85,7 @@ export class RegistersComponent extends DashboardComponent implements OnInit, Af
     if (change) {
       change.forEachChangedItem((item: any) => {
         if (item.key === 'total') {
-          console.log(this.total)
-          // this.notification(`Total de registros: ${this.total}`)
+          this.notification(`Total de registros: ${this.total}`)
         }
         if (item.key === 'onlyComing') {
           let text = this.onlyComing == 'incoming' ? 'Somente entrada' : 'Somente saída'
@@ -222,5 +220,5 @@ export class RegistersComponent extends DashboardComponent implements OnInit, Af
         prev[index].lista.push(current)
         return prev
       }, []).map((item: any) => ({ ...item, month: new Date(item.month).getTime() }))
-  }
+  } 
 }

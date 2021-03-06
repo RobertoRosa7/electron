@@ -1,5 +1,6 @@
 <section #contentDialog class="dialog">
-  <div class="dialog-container">
+  <div *ngIf="type === 'details'" class="dialog-container detail">
+
     <div class="header dialog-header-mode">
       <div class="title">{{detail.description}}</div>
       <div class="max-window">
@@ -7,6 +8,31 @@
           <mat-icon>close</mat-icon>
         </button>
       </div>
+    </div>
+
+    <div class="content-dialog">
+      <p class="status">
+        <span>{{detail.status}}</span>
+        <mat-icon *ngIf="(detail.status === 'concluído' || detail.status === 'done'); else pending">done</mat-icon>
+        <ng-template #pending>
+          <mat-icon>query_builder</mat-icon>
+        </ng-template>
+      </p>
+      <p class="valor">
+        <span>R$ {{formatarValor(detail.value)}}</span>
+      </p>
+      <p class="categoria">
+        <span>{{detail.category}}</span>
+        <mat-icon>{{detail.cat_icon}}</mat-icon>
+      </p>
+      <p class="description">
+        <span>{{detail.description}}</span>
+      </p>
+    </div>
+    <div class="content-footer">
+      <p class="date">
+        <span>{{detail.created_at * 1000 | date:'medium'}}</span>
+      </p>
     </div>
   </div>
 </section>

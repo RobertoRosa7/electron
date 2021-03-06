@@ -16,9 +16,7 @@
       </div>
 
       <div class="itens value">
-        <strong class="title-with-icon">
-          <span>Valor:</span>
-        </strong>
+        <strong>Valor:</strong>
         <span class="text-truncate" [title]="formatarValor(item.value)"
           [ngStyle]="{'color': item.type == 'outcoming' ? 'var(--text-accent)' : 'var(--text-green)'}">
           <span class="text-truncate" *ngIf="item.type === 'outcoming'">-</span>
@@ -28,8 +26,8 @@
 
       <div [title]="item.category" class="itens category">
         <strong class="title-with-icon">
-          <span>Categoria:</span>
-          <mat-icon style="font-size: 12px; height: inherit; margin-left: 8px;">{{returnIcon(item.category || '')}}</mat-icon>
+          <strong>Categoria:</strong>
+          <mat-icon style="font-size: 12px; height: inherit; margin-left: 8px;">{{item.cat_icon}}</mat-icon>
         </strong>
         <span class="text-truncate">{{item.category}}</span>
       </div>

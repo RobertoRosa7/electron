@@ -22,7 +22,7 @@ $mat-primary-pallete: mat-palette($mat-teal);
 $mat-accent-pallete: mat-palette($mat-pink);
 
 $mat-dark-primary: mat-palette($mat-teal);
-$mat-dark-accent: mat-palette($mat-red);
+$mat-dark-accent: mat-palette($mat-pink);
 
 $app-light-theme: mat-light-theme($mat-primary-pallete, $mat-accent-pallete);
 $app-dark-theme: mat-dark-theme($mat-dark-primary, $mat-dark-accent);

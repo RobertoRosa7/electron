@@ -30,4 +30,8 @@ export class DialogsComponent implements OnInit {
   public close() {
     this._dialogRef.close()
   }
+
+  public formatarValor(valor: number): string {
+    return new Intl.NumberFormat('pt-BR', { currency: 'BRL', minimumFractionDigits: 2 }).format(valor)
+  }
 }

@@ -13,6 +13,7 @@ export interface Register {
   user?: User
   _id?: any,
   month?: number,
+  cat_icon?: string,
   lista?: Register[]
 }
 

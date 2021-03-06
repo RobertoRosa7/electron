@@ -1,9 +1,16 @@
+$padding-size: 15px;
+
 .dialog {
-  .dialog-container {
+  height: 100%;
+  .dialog-container.detail {
+    height: inherit;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
     .header {
       width: 100%;
       display: flex;
-      padding: 0 15px;
+      padding: 0 $padding-size;
     }
     .title {
       flex: 1;
@@ -11,6 +18,18 @@
       display: flex;
       align-items: center;
       justify-content: center;
+    }
+    .content-dialog {
+      padding: $padding-size;
+      flex: 1;
+    }
+    .content-footer {
+      padding: $padding-size;
+      display: flex;
+      justify-content: flex-end;
+    }
+    .date span{
+      font-size: 12px;
     }
   }
 }
