@@ -1,7 +1,8 @@
-import { Component, ElementRef, Inject, OnInit, ViewChild } from '@angular/core';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { NgNavigatorShareService } from 'ng-navigator-share';
-import { DIALOG_DATA, Register } from 'src/app/models/models';
+import { Component, ElementRef, Inject, OnInit, ViewChild } from '@angular/core'
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog'
+import { NgNavigatorShareService } from 'ng-navigator-share'
+import { DIALOG_DATA, Register } from 'src/app/models/models'
+import html2canvas, { Options } from 'html2canvas'
 
 @Component({
   selector: 'app-dialogs',
@@ -46,20 +47,31 @@ export class DialogsComponent implements OnInit {
     //     title: '`Web Articles and Tutorials',
     //     text: 'Check out my blog — its worth looking.',
     //     url: 'www.codershood.info'
-    //   });
-    //   console.log(sharedResponse);
+    //   })
+    //   console.log(sharedResponse)
     // } catch (error) {
-    //   console.log('You app is not shared, reason: ', error);
+    //   console.log('You app is not shared, reason: ', error)
     // }
-
   }
 
   public btnSave(): void {
     console.log('Save')
   }
 
-  public btnDownload(): void {
-    console.log('Download')
+  public btnDownload(detail: Register): void {
+    const currentTheme = localStorage.getItem('user-theme')
+    const color: string = (currentTheme == 'light-mode') ? '#fafafa' : '#303030'
+    const al: HTMLElement = document.createElement('div')
+    const el: HTMLElement = document.querySelector('.content-dialog') || al
+    if (el) {
+      html2canvas(el, { backgroundColor: color }).then(canvas => {
+        // document.body.appendChild(canvas)
+        var a = document.createElement('a');
+        a.href = canvas.toDataURL()
+        a.download = `${detail.description}-${new Date().getTime()}.png`;
+        a.click()
+      })
+    }
   }
 
   public edit(item: Register): void {
