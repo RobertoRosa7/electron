@@ -66,6 +66,8 @@ export class DashboardComponent implements OnInit, DoCheck {
   ) {
     this._router?.events.subscribe((u: any) => this.isActive = u.url)
     this._breakpoint?.observe([Breakpoints.XSmall]).subscribe(result => this.isMobile = !!result.matches)
+    this._store?.dispatch(actionsDashboard.GET_DEV_MODE({ payload: { mode: 'dev-mode' } }))
+
     this._store?.dispatch(actionsDashboard.INIT_DASHBOARD())
     this._store?.dispatch(actionsRegister.INIT({ payload: { days: 7 } }))
     this._store?.dispatch(actionsErrors.GET_STATUS_CODE())
@@ -178,5 +180,5 @@ export class DashboardComponent implements OnInit, DoCheck {
     const settings: MatDialogConfig = { ...data, panelClass: 'dialog-default' }
     return this._dialog?.open(component, settings)
   }
-  
+
 }

@@ -41,7 +41,6 @@ import { MatSelectModule } from '@angular/material/select'
 import { HighchartsComponent } from '../../components/highcharts/highcharts.component';
 import { DialogsComponent } from '../../components/dialogs/dialogs.component'
 
-
 const routes: Routes = [
   {
     path: '', component: DashboardComponent, children: [
@@ -109,7 +108,7 @@ registerLocaleData(localePt, 'pt')
     HttpClientModule,
     MatListModule,
     MatMenuModule,
-    MatSelectModule
+    MatSelectModule,
   ],
   entryComponents: [
     DialogFormIncomingComponent,

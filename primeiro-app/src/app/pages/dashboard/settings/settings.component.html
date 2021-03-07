@@ -1,9 +1,18 @@
 <section class="settings">
-  <mat-card>
+  <mat-card class="card">
     <div class="application">
       <p>Applications:</p>
       <div class="choose-mode">
         <mat-slide-toggle [checked]="isDark" (change)="toggleDarkMode($event)">Dark Mode</mat-slide-toggle>
+      </div>
+    </div>
+  </mat-card>
+
+  <mat-card class="card">
+    <div class="application">
+      <p>Mode:</p>
+      <div class="choose-mode">
+        <mat-slide-toggle (change)="activeDevMode($event)">Dev Mode</mat-slide-toggle>
       </div>
     </div>
   </mat-card>

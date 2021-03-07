@@ -11,6 +11,10 @@
     </div>
 
     <div class="content-dialog">
+      <p class="tipo">
+        <span *ngIf="detail.type === 'outcoming'">Despesa</span>
+        <span *ngIf="detail.type === 'incoming'">Receita</span>
+      </p>
       <p class="status">
         <span>{{detail.status}}</span>
         <mat-icon *ngIf="(detail.status === 'concluído' || detail.status === 'done'); else pending">done</mat-icon>
@@ -19,7 +23,10 @@
         </ng-template>
       </p>
       <p class="valor">
-        <span>R$ {{formatarValor(detail.value)}}</span>
+        <span [ngClass]="{'cards-money-on':detail.type === 'incoming','cards-money-off':detail.type === 'outcoming'}">
+          <small *ngIf="detail.type === 'outcoming'">-</small>
+          R$ {{formatarValor(detail.value)}}
+        </span>
       </p>
       <p class="categoria">
         <span>{{detail.category}}</span>
@@ -29,7 +36,30 @@
         <span>{{detail.description}}</span>
       </p>
     </div>
-    <div class="content-footer">
+    <div class="container-footer">
+      <div class="container-tools">
+        <p class="save" title="salvar">
+          <button (click)="edit(detail)" mat-icon-button type="button">
+            <mat-icon>edit</mat-icon>
+          </button>
+        </p>
+        <p class="download" title="download">
+          <button disabled (click)="btnDownload()" mat-icon-button type="button">
+            <mat-icon>download</mat-icon>
+          </button>
+        </p>
+        <p class="save" title="salvar">
+          <button disabled (click)="btnSave()" mat-icon-button type="button">
+            <mat-icon>save</mat-icon>
+          </button>
+        </p>
+        <p class="share" title="compartilhar">
+          <button disabled (click)="btnShare()" mat-icon-button type="button">
+            <mat-icon>share</mat-icon>
+          </button>
+        </p>
+      </div>
+
       <p class="date">
         <span>{{detail.created_at * 1000 | date:'medium'}}</span>
       </p>

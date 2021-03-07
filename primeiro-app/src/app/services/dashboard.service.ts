@@ -51,4 +51,8 @@ export class DashboardService {
   public fetchEvocucaoDetail(payload: any): Observable<any> {
     return this.http.post<any>(this.constants.get('fetch_evolucao_detail'), payload)
   }
+
+  public setDevMode(mode: any): Observable<any> {
+    return this.http.post<any>(this.constants.get('set_dev_mode'), mode)
+  }
 }

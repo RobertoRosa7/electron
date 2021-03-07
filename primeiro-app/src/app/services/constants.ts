@@ -19,7 +19,8 @@ export class Constants {
     new_register: 'dashboard/new_register',
     delete_register: 'dashboard/delete_register',
     update_register: 'dashboard/update_register',
-    get_status_code: 'dashboard/get_status_code'
+    get_status_code: 'dashboard/get_status_code',
+    set_dev_mode: 'dashboard/set_dev_mode'
   }
 
   public get(key: string, host?: string): string {

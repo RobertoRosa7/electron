@@ -58,6 +58,13 @@ export class ListRegistersComponent implements OnInit {
 
   public details(_: Event, payload: any): void {
     this._dialog.open(DialogsComponent, { data: { type: 'details', data: payload }, panelClass: 'dialog-default' })
+      .beforeClosed().subscribe((res: any) => {
+        if (res.operation === 'edit') {
+          this.edit(_, res)
+        } else if (res.operation === 'del') {
+          this.del(_, res)
+        }
+      })
   }
 
   public formatarValor(valor: number): string {

@@ -37,9 +37,9 @@ export class DashboardEffect {
   public getStatusCodes$: Observable<Actions> = this._action.pipe(
     ofType(GET_STATUS_CODE),
     mergeMap(() => this._indexedb.getById('status_code_id')),
-    mergeMap(({ status_code }) => {
+    mergeMap((status_code) => {
       if (status_code) {
-        return [SET_STATUS_CODE({ payload: status_code })]
+        return [SET_STATUS_CODE({ payload: status_code.status_code })]
       } else {
         return this._dashboardService.getStatusCode().pipe(
           map((status_code: any) => {
@@ -81,6 +81,21 @@ export class DashboardEffect {
         return SET_ERRORS({ payload: source })
       } else {
         return actions.SET_EVOLUCAO_DETAIL({ payload })
+      }
+    }),
+    catchError(e => of(e))
+  )
+
+  @Effect()
+  public devMode$: Observable<Actions> = this._action.pipe(
+    ofType(actions.GET_DEV_MODE),
+    mergeMap(({ payload }) => this._dashboardService.setDevMode(payload).pipe(catchError(e => of(e)))),
+    map((payload: any) => {
+      if (payload instanceof HttpErrorResponse) {
+        const source = { ...payload, source: 'dev_mode' }
+        return SET_ERRORS({ payload: source })
+      } else {
+        return actions.SET_DEV_MODE({ payload })
       }
     }),
     catchError(e => of(e))

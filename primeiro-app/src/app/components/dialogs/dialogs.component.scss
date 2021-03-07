@@ -23,13 +23,19 @@ $padding-size: 15px;
       padding: $padding-size;
       flex: 1;
     }
-    .content-footer {
+    .container-footer {
       padding: $padding-size;
       display: flex;
-      justify-content: flex-end;
-    }
-    .date span{
-      font-size: 12px;
+      align-items: center;
+
+      .container-tools {
+        flex: 1;
+        display: flex;
+      }
+
+      .date span{
+        font-size: 12px;
+      }
     }
   }
 }
