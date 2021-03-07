@@ -11,29 +11,46 @@
     </div>
 
     <div class="content-dialog">
-      <p class="tipo">
-        <span *ngIf="detail.type === 'outcoming'">Despesa</span>
-        <span *ngIf="detail.type === 'incoming'">Receita</span>
-      </p>
-      <p class="status">
-        <span>{{detail.status}}</span>
-        <mat-icon *ngIf="(detail.status === 'concluído' || detail.status === 'done'); else pending">done</mat-icon>
-        <ng-template #pending>
-          <mat-icon>query_builder</mat-icon>
-        </ng-template>
-      </p>
+      <!-- <div class="line">
+        <p class="tipo">
+          <small>Tipo:
+            <mat-icon *ngIf="detail.type === 'outcoming'">trending_down</mat-icon>
+            <mat-icon *ngIf="detail.type === 'incoming'">trending_up</mat-icon>
+          </small>
+          <span *ngIf="detail.type === 'outcoming'">Despesa</span>
+          <span *ngIf="detail.type === 'incoming'">Receita</span>
+        </p>
+      </div> -->
+      <div class="line">
+        <!-- <p class="status">
+          <small>
+            <mat-icon *ngIf="(detail.status === 'concluído' || detail.status === 'done'); else pending">done</mat-icon>
+            <ng-template #pending>
+              <mat-icon>query_builder</mat-icon>
+            </ng-template>
+          </small>
+          <span>{{detail.status}}</span>
+        </p> -->
+        <p class="categoria">
+          <!-- <small>Categoria:</small> -->
+          <span>{{detail.category}} <mat-icon>{{detail.cat_icon}}</mat-icon></span>
+        </p>
+        <p class="description">
+          <!-- <small>Descrição:</small> -->
+          <span>{{detail.description}}</span>
+        </p>
+        <!-- <p class="description">
+        <small>Descrição:</small>
+        <span>{{detail.description}}</span>
+      </p> -->
+      </div>
       <p class="valor">
+        <!-- <small>Valor:</small> -->
+        <!-- <span>{{detail.status}}</span> -->
         <span [ngClass]="{'cards-money-on':detail.type === 'incoming','cards-money-off':detail.type === 'outcoming'}">
           <small *ngIf="detail.type === 'outcoming'">-</small>
           R$ {{formatarValor(detail.value)}}
         </span>
-      </p>
-      <p class="categoria">
-        <span>{{detail.category}}</span>
-        <mat-icon>{{detail.cat_icon}}</mat-icon>
-      </p>
-      <p class="description">
-        <span>{{detail.description}}</span>
       </p>
     </div>
     <div class="container-footer">
@@ -58,8 +75,12 @@
             <mat-icon>share</mat-icon>
           </button>
         </p>
+        <p class="save" title="salvar">
+          <button (click)="del(detail)" mat-icon-button type="button">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </p>
       </div>
-
       <p class="date">
         <span>{{detail.created_at * 1000 | date:'medium'}}</span>
       </p>

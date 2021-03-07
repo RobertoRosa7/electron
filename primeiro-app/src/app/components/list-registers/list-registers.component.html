@@ -19,7 +19,7 @@
         <strong>Valor:</strong>
         <span class="text-truncate" [title]="formatarValor(item.value)"
           [ngStyle]="{'color': item.type == 'outcoming' ? 'var(--text-accent)' : 'var(--text-green)'}">
-          <span class="text-truncate" *ngIf="item.type === 'outcoming'">-</span>
+          <small *ngIf="item.type === 'outcoming'">-</small>
           R$ {{formatarValor(item.value) }}
         </span>
       </div>
@@ -54,7 +54,7 @@
 
   <!-- novo layout pra mobile -->
   <ul *ngIf="isMobile" class="container-cards-mobile">
-    <mat-card class="cards" [ngStyle]="{
+    <mat-card class="cards" (click)="details($event, item)" [ngStyle]="{
       'border-left': item.type == 'outcoming' ? '1px solid var(--text-accent)' : '1px solid var(--text-green)'
     }">
 

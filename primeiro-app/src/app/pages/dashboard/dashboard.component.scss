@@ -16,10 +16,9 @@
     justify-content: space-around;
     flex-wrap: wrap;
   }
-
-  .container.mat-drawer-container {
-    height: 100vh;
-  }
+  // .container.mat-drawer-container {
+  //   // height: 100vh;
+  // }
   .mat-drawer-content {
     display: flex;
   }
@@ -30,7 +29,6 @@
     .mat-drawer-side {
       border: none;
     }
-
     .app-menu-list {
       list-style: none;
       flex-direction: column;

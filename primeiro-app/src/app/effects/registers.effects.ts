@@ -115,7 +115,7 @@ export class RegistersEffect {
       } else {
         this._store.dispatch(SET_SUCCESS({ payload: this.props.update_register }))
         this._store.dispatch(actionsDashboard.INIT_DASHBOARD())
-        return actions.SET_UPDATE({ payload })
+        return actions.SET_UPDATE({ payload: response.data })
       }
     }),
     catchError(err => of(err))
