@@ -133,7 +133,7 @@ export class DashboardComponent implements OnInit, DoCheck {
     this.notification(`Error: ${name} code: ${error.status}`)
   }
 
-  public formatarValor(valor: number): string {
+  public formatarValor(valor: number = 0): string {
     return new Intl.NumberFormat('pt-BR', { currency: 'BRL', minimumFractionDigits: 2 }).format(valor)
   }
 

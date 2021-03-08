@@ -1,7 +1,9 @@
 <section class="list">
   <div *ngIf="!isMobile" class="container-cards">
     <mat-card class="cards" (click)="details($event, item)" [ngStyle]="{
-        'border-left': item.type == 'outcoming' ? '1px solid var(--text-accent)' : '1px solid var(--text-green)'
+        'border-left': (item.type === 'outcoming' && item.status === 'concluído') ? '1px solid var(--text-accent)' : 
+        (item.type === 'incoming' && item.status === 'concluído') ? '1px solid var(--text-green)' : '1px solid orange',
+        'opacity': item.status === 'concluído' ? '1' : '0.5'
       }">
       <div class="itens date">
         <strong>Data:</strong>
@@ -55,7 +57,9 @@
   <!-- novo layout pra mobile -->
   <ul *ngIf="isMobile" class="container-cards-mobile">
     <mat-card class="cards" (click)="details($event, item)" [ngStyle]="{
-      'border-left': item.type == 'outcoming' ? '1px solid var(--text-accent)' : '1px solid var(--text-green)'
+      'border-left': (item.type === 'outcoming' && item.status === 'concluído') ? '1px solid var(--text-accent)' : 
+      (item.type === 'incoming' && item.status === 'concluído') ? '1px solid var(--text-green)' : '1px solid orange',
+      'opacity': item.status === 'concluído' ? '1' : '0.5'
     }">
 
       <li class="line">

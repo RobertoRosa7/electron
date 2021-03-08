@@ -33,6 +33,9 @@ export class RegistersComponent extends DashboardComponent implements OnInit, Af
   public evolucaoDetail: any
   public totalDespesa: number = 0
   public totalReceita: number = 0
+  public aPagar: number = 0
+  public aReceber: number = 0
+  public totalPercent: number = 0
 
   private user_temp: User = {
     name: 'Anominous',
@@ -67,18 +70,25 @@ export class RegistersComponent extends DashboardComponent implements OnInit, Af
   }
 
   public ngOnInit(): void {
-    this._store.select(({ registers }: any) => ({
+    this._store.select(({ registers, dashboard }: any) => ({
       all: [...registers.all],
       tab: registers.tab,
       total: registers.total,
       despesas: registers.total_despesas,
-      receita: registers.total_receita
+      receita: registers.total_receita,
+      a_pagar: dashboard.consolidado.a_pagar,
+      a_receber: dashboard.consolidado.a_receber,
+      total_credit: dashboard.consolidado.total_credit,
+      total_debit: dashboard.consolidado.total_debit
     })).subscribe(state => {
       this.tab = state.tab
       this.total = state.total
       this.totalDespesa = state.despesas
       this.totalReceita = state.receita
+      this.aPagar = state.a_pagar
+      this.aReceber = state.a_receber
       this.ELEMENT_ORDER = state.all
+      this.totalPercent = (state.total_debit / state.total_credit) * 100
       this.orderby ? this.makingOrdering(this.orderby) : this.ELEMENT_DATA = this.classificar(state.all)
     })
   }
@@ -136,6 +146,9 @@ export class RegistersComponent extends DashboardComponent implements OnInit, Af
     this._store.select(({ registers }: any) => [...registers.all]).subscribe(registers => {
       if (value === 'all') {
         this.ELEMENT_DATA = this.classificar(registers)
+      } else if (value === 'pending') {
+        this.ELEMENT_DATA = this.classificar(registers.filter(v =>
+          (v.status === 'pendente a pagar' || v.status === 'pendente a receber')))
       } else {
         this.ELEMENT_DATA = this.classificar(registers.filter(v => v.type === value))
         this.onlyComing = value

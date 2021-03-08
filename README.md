@@ -65,3 +65,12 @@
 * [x] Download de registro
 * [x] Editar registro
 * [x] Deletar registro
+
+###### 08/03/2021
+
+* [x] Progress bar receita vs despesas
+* [x] A receber, A pagar
+* [x] Download PDF estrutra e modulos implementado - falta página 
+* [x] Grafico despesas, grafico de receita
+* [x] Lançamento futuros
+* [x] Filtro de pendentes

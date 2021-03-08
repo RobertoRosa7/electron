@@ -22,29 +22,39 @@ const INITIAL_STATE = {
   total: 0,
   categories,
   total_despesas: 0,
-  total_receita: 0
+  total_receita: 0,
+  a_receber: 0,
+  a_pagar: 0
 }
 const registersReducers = createReducer(
   INITIAL_STATE,
   on(actions.SET_REGISTERS, (states, { payload }) => ({ ...states, all: states.all.concat(payload) })),
-  on(actions.GET_REGISTERS, (states, { payload }) => ({
-    ...states,
-    all: payload.data.results.map((s: Register) =>
-      ({ ...s, status: statusTrans(s.status, s.type), cat_icon: returnIcon(s.category) })),
-    consolidado: payload.data.consolidado,
-    msg: payload.msg,
-    total: payload.data.total,
-    total_despesas: total(payload.data.results).despesa,
-    total_receita: total(payload.data.results).receita
-  })),
+  on(actions.GET_REGISTERS, (states, { payload }) => {
+    const totals: any = total(payload.data.results)
+    return ({
+      ...states,
+      all: updateAll(payload.data.results),
+      consolidado: payload.data.consolidado,
+      msg: payload.msg,
+      total: payload.data.total,
+      total_despesas: totals.despesa,
+      total_receita: totals.receita,
+      a_pagar: payload.data.consolidado.a_pagar,
+      a_receber: payload.data.consolidado.a_receber
+    })
+  }),
   on(actions.GET_TAB, (states, { payload }) => ({ ...states, tab: payload })),
   on(actions.SET_SHOWTAB, (states, { payload }) => ({ ...states, visible: payload })),
   on(actions.SET_UPDATE, (states, { payload }) => {
     const stateUpdated: any = [...states.all]
     stateUpdated[stateUpdated.findIndex((r: any) => r._id.$oid === payload._id.$oid)] = payload
-    return { ...states, all: stateUpdated }
+    return { ...states, all: updateAll(stateUpdated) }
   }),
 )
+
+function updateAll(all: any) {
+  return all.map((s: Register) => ({ ...s, status: statusTrans(s.status, s.type), cat_icon: returnIcon(s.category) }))
+}
 
 function total(lista: any) {
   const total: any = { despesa: 0, receita: 0 }
@@ -86,8 +96,11 @@ function returnIcon(text: string = ''): string {
 function statusTrans(text: string = '', type: string) {
   switch (text) {
     case 'pending':
+    case 'pendente a pagar':
+    case 'pendente a receber':
       return type === 'incoming' ? 'pendente a receber' : 'pendente a pagar'
     case 'done':
+    case 'concluído':
       return 'concluído'
     default:
       return 'pendente'

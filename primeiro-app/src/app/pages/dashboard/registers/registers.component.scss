@@ -117,16 +117,29 @@
   .panel-header {
     display: flex;
     align-items: center;
+    position: relative;
+    padding: 16px;
     .container-valores {
       display: flex;
       align-items: center;
       justify-content: space-between;
       flex: 1;
+      flex-wrap: wrap;
     }
     .container-buttons {
-      flex: 1;
       display: flex;
       justify-content: flex-end;
+    }
+  }
+  .progress {
+    height: 1px;
+    position: relative;
+    transition: all 0.3s;
+    background-color: var(--text-green);
+    width: 100%;
+    .encapsulate {
+      background-color: var(--text-accent);
+      height: 1px;
     }
   }
 }

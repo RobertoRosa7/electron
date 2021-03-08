@@ -46,10 +46,7 @@ export class RegistersEffect {
   @Effect()
   public addedRegister$: Observable<Actions> = this._action.pipe(
     ofType(actions.ADDED_REGISTERS),
-    mergeMap(({ payload }) => this._dashboardService.newRegister(payload).pipe(
-      delay(1000),
-      catchError(e => of(e))
-    )),
+    mergeMap(({ payload }) => this._dashboardService.newRegister(payload).pipe(catchError(e => of(e)))),
     map(response => {
       if (response instanceof HttpErrorResponse) {
         const source = { ...response, source: this.props.new_register }
