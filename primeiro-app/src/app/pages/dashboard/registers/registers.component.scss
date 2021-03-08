@@ -112,9 +112,21 @@
     display: flex;
     .col {
       flex: 1;
-      .valor {
-        
-      }
+    }
+  }
+  .panel-header {
+    display: flex;
+    align-items: center;
+    .container-valores {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex: 1;
+    }
+    .container-buttons {
+      flex: 1;
+      display: flex;
+      justify-content: flex-end;
     }
   }
 }

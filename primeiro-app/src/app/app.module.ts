@@ -21,7 +21,8 @@ import { registerLocaleData } from '@angular/common'
 import localePt from '@angular/common/locales/pt'
 import { HomeComponent } from './pages/home/home.component'
 import { HttpClientModule } from '@angular/common/http'
-import { Constants } from './services/constants';
+import { Constants } from './services/constants'
+import { AngularCreatePdfModule } from 'angular-create-pdf'
 
 registerLocaleData(localePt, 'pt-BR')
 
@@ -51,6 +52,7 @@ const indexedConfig: DBConfig = {
     NgxElectronModule,
     AppRoutingModule,
     HttpClientModule,
+    AngularCreatePdfModule,
     NgxIndexedDBModule.forRoot(indexedConfig),
     StoreModule.forRoot(PrimeiroAppStore),
     StoreDevtoolsModule.instrument({ maxAge: 45 }),

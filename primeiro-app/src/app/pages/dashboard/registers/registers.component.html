@@ -6,6 +6,7 @@
       <div class="control">
         <app-tab-menu label="Listar" icon="list" target="read"></app-tab-menu>
         <app-tab-menu label="Incluir" icon="add" target="create"></app-tab-menu>
+        <!-- <app-tab-menu label="Download" icon="download" target="download"></app-tab-menu> -->
         <!-- <app-tab-menu label="Alterar" icon="change_circle" target="update"></app-tab-menu> -->
         <!-- <app-tab-menu label="Deletar" icon="delete" target="delete"></app-tab-menu> -->
       </div>
@@ -78,14 +79,31 @@
     </app-tab-header>
 
     <app-tab-content style="display: block; margin: 15px 0; height: 100%;">
-      <div *ngIf="tab === 'read'" read style="margin-bottom: 70px;">
-        <div style="display: flex;">
-          <mat-card>
-            <p>Gastos: R$ {{formatarValor(totalDespesa)}}</p>
-          </mat-card>
-          <mat-card>
-            <p>Receita: R$ {{formatarValor(totalReceita)}}</p>
-          </mat-card>
+      <div *ngIf="tab === 'read'" read style="margin-bottom: 70px;" #extrato id="extrato">
+        <div class="panel-header">
+          <div class="container-valores">
+            <p>
+              <small>Gastos:</small>
+              R$ {{formatarValor(totalDespesa)}}
+            </p>
+            <p>
+              <small>Receita:</small>
+              R$ {{formatarValor(totalReceita)}}
+            </p>
+            <p>
+              <small>Média:</small>
+              R$ {{formatarValor((totalDespesa + totalReceita) / total)}}
+            </p>
+            <p>
+              <small>Período de:</small>
+              {{filterByDays}} dias
+            </p>
+          </div>
+          <div class="container-buttons">
+            <button type="button" (click)="downloadPdf(extrato)" mat-icon-button>
+              <mat-icon>download</mat-icon>
+            </button>
+          </div>
         </div>
 
         <ng-container *ngIf="ELEMENT_DATA.length > 0; else noneOfExtracts">

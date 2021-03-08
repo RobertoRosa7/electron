@@ -34,6 +34,7 @@
     "@angular/platform-browser-dynamic": "~11.0.5",
     "@angular/router": "~11.0.5",
     "@types/electron": "^1.6.10",
+    "angular-create-pdf": "^2.0.0",
     "aws-sdk": "^2.834.0",
     "highcharts": "^9.0.1",
     "html2canvas": "^1.0.0-rc.7",

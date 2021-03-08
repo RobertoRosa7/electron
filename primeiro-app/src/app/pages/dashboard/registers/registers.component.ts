@@ -1,18 +1,14 @@
-import { AfterViewInit, Component, OnInit, DoCheck, KeyValueDiffers } from '@angular/core'
+import { AfterViewInit, Component, OnInit, DoCheck, KeyValueDiffers, ViewChild, ElementRef } from '@angular/core'
 import { MatSnackBar } from '@angular/material/snack-bar'
 import { Register, User } from '../../../models/models'
 import { Store } from '@ngrx/store'
 import * as actionsRegister from '../../../actions/registers.actions'
 import * as actionsDashboard from '../../../actions/dashboard.actions'
 import { MatDialog } from '@angular/material/dialog'
-import { DialogFormIncomingComponent } from 'src/app/components/dialog-form-incoming/dialog-form-incoming.component'
-import { DialogConfirmComponent } from 'src/app/components/dialog-confirm/dialog-confirm.component'
 import { DashboardComponent } from '../dashboard.component'
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout'
 import { MatSelectChange } from '@angular/material/select'
-import { DialogsComponent } from 'src/app/components/dialogs/dialogs.component'
-import { map } from 'rxjs/operators'
-
+import { AngularCreatePdfService } from 'angular-create-pdf'
 @Component({
   selector: 'app-registers',
   templateUrl: './registers.component.html',
@@ -20,6 +16,8 @@ import { map } from 'rxjs/operators'
 })
 
 export class RegistersComponent extends DashboardComponent implements OnInit, AfterViewInit, DoCheck {
+  @ViewChild('extrato') public extrato: ElementRef
+
   public ELEMENT_DATA: Register[] = []
   public ELEMENT_ORDER: any[] = []
   public tab: string = ''
@@ -60,7 +58,8 @@ export class RegistersComponent extends DashboardComponent implements OnInit, Af
     protected _snackbar: MatSnackBar,
     protected _dialog: MatDialog,
     protected _breakpointObserver: BreakpointObserver,
-    protected _differs: KeyValueDiffers
+    protected _differs: KeyValueDiffers,
+    protected _createPdf: AngularCreatePdfService
   ) {
     super()
     _breakpointObserver.observe([Breakpoints.XSmall]).subscribe(result => this.isMobile = !!result.matches)
@@ -182,5 +181,9 @@ export class RegistersComponent extends DashboardComponent implements OnInit, Af
         prev[index].lista.push(current)
         return prev
       }, []).map((item: any) => ({ ...item, month: new Date(item.month).getTime() }))
+  }
+
+  public downloadPdf(el: any): void {
+    // setTimeout(() => this._createPdf.createPdf(el, `extrato${new Date().toLocaleDateString()}`), 200)
   }
 }
