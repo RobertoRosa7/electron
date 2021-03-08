@@ -33,6 +33,8 @@ export class RegistersComponent extends DashboardComponent implements OnInit, Af
   public differ: any
   private onlyComing: string = ''
   public evolucaoDetail: any
+  public totalDespesa: number = 0
+  public totalReceita: number = 0
 
   private user_temp: User = {
     name: 'Anominous',
@@ -70,12 +72,16 @@ export class RegistersComponent extends DashboardComponent implements OnInit, Af
       all: [...registers.all],
       tab: registers.tab,
       total: registers.total,
+      despesas: registers.total_despesas,
+      receita: registers.total_receita
     })).subscribe(state => {
-        this.tab = state.tab
-        this.total = state.total
-        this.ELEMENT_ORDER = state.all
-        this.orderby ? this.makingOrdering(this.orderby) : this.ELEMENT_DATA = this.classificar(state.all)
-      })
+      this.tab = state.tab
+      this.total = state.total
+      this.totalDespesa = state.despesas
+      this.totalReceita = state.receita
+      this.ELEMENT_ORDER = state.all
+      this.orderby ? this.makingOrdering(this.orderby) : this.ELEMENT_DATA = this.classificar(state.all)
+    })
   }
 
   public ngAfterViewInit(): void { }
@@ -87,6 +93,7 @@ export class RegistersComponent extends DashboardComponent implements OnInit, Af
         if (item.key === 'total') {
           this.notification(`Total de registros: ${this.total}`)
         }
+
         if (item.key === 'onlyComing') {
           let text = this.onlyComing == 'incoming' ? 'Somente entrada' : 'Somente saída'
           this.notification(text)
@@ -111,51 +118,6 @@ export class RegistersComponent extends DashboardComponent implements OnInit, Af
     }
     this._store.dispatch(actionsRegister.ADD_REGISTERS({ payload }))
   }
-
-  // public edit(_: Event, payload: Register): void {
-  //   this._dialog.open(DialogFormIncomingComponent, { data: { ...payload, edit: true }, maxWidth: 600 })
-  //     .beforeClosed().subscribe(res => {
-  //       if (res) {
-  //         this._store.dispatch(actionsRegister.UPDATE_REGISTER({
-  //           payload: {
-  //             ...payload,
-  //             value: res.value,
-  //             created_at: (new Date(res.date).getTime() / 1000),
-  //             description: res.description,
-  //             category: res.category
-  //           }
-  //         }))
-  //       }
-  //     })
-  // }
-
-  // public del(_: Event, payload: Register): void {
-  //   this._dialog.open(DialogConfirmComponent, { data: payload })
-  //     .beforeClosed().subscribe(response => {
-  //       if (response) {
-  //         this._store.dispatch(actionsRegister.DELETE_REGISTERS({ payload }))
-  //       }
-  //     })
-  // }
-
-  // public details(_: Event, payload: any): void {
-  //   console.log(payload)
-  //   this.openDialog(DialogsComponent, { data: { type: payload.action, data: payload.payload } })
-  // }
-
-  // public receivedPayload(payload: any) {
-  //   switch (payload.action) {
-  //     case 'edit':
-  //       // this.edit(payload.event, payload.payload)
-  //       break
-  //     case 'del':
-  //       // this.del(payload.event, payload.payload)
-  //       break
-  //     case 'details':
-  //       // this.details(payload.event, payload)
-  //       break
-  //   }
-  // }
 
   public orderbyChange(event: MatSelectChange): void {
     this.makingOrdering(event.value)
@@ -212,7 +174,7 @@ export class RegistersComponent extends DashboardComponent implements OnInit, Af
   public classificar(lista: any) {
     return lista.map((i: any) =>
       ({ ...i, month: new Date(i.created_at * 1000) })).reduce((prev: any, current: any) => {
-        var index = prev.findIndex((i: any) => new Date(i.month).getMonth() == new Date(current.month).getMonth())
+        let index = prev.findIndex((i: any) => new Date(i.month).getMonth() == new Date(current.month).getMonth())
         if (index < 0) {
           index = prev.length
           prev.push({ month: current.month, lista: [] })
@@ -220,5 +182,5 @@ export class RegistersComponent extends DashboardComponent implements OnInit, Af
         prev[index].lista.push(current)
         return prev
       }, []).map((item: any) => ({ ...item, month: new Date(item.month).getTime() }))
-  } 
+  }
 }

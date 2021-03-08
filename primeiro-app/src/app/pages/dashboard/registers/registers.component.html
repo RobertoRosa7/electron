@@ -1,5 +1,5 @@
 <div class="registers">
-  <app-title title="Registros" [subtitle]="total"></app-title>
+  <!-- <app-title title="Registros" [subtitle]="total"></app-title> -->
 
   <app-tabs style="display: block; margin: 15px 0;">
     <app-tab-header style="display: flex; justify-content: space-between; flex-wrap: wrap;">
@@ -78,7 +78,16 @@
     </app-tab-header>
 
     <app-tab-content style="display: block; margin: 15px 0; height: 100%;">
-      <div *ngIf="tab === 'read'" read>
+      <div *ngIf="tab === 'read'" read style="margin-bottom: 70px;">
+        <div style="display: flex;">
+          <mat-card>
+            <p>Gastos: R$ {{formatarValor(totalDespesa)}}</p>
+          </mat-card>
+          <mat-card>
+            <p>Receita: R$ {{formatarValor(totalReceita)}}</p>
+          </mat-card>
+        </div>
+
         <ng-container *ngIf="ELEMENT_DATA.length > 0; else noneOfExtracts">
           <div *ngFor="let item of ELEMENT_DATA">
             <span class="line-month">{{item.month | date:'MMMM' }}</span>

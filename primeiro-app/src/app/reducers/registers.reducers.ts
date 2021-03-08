@@ -20,7 +20,9 @@ const INITIAL_STATE = {
   consolidado: {},
   msg: '',
   total: 0,
-  categories
+  categories,
+  total_despesas: 0,
+  total_receita: 0
 }
 const registersReducers = createReducer(
   INITIAL_STATE,
@@ -31,7 +33,9 @@ const registersReducers = createReducer(
       ({ ...s, status: statusTrans(s.status, s.type), cat_icon: returnIcon(s.category) })),
     consolidado: payload.data.consolidado,
     msg: payload.msg,
-    total: payload.data.total
+    total: payload.data.total,
+    total_despesas: total(payload.data.results).despesa,
+    total_receita: total(payload.data.results).receita
   })),
   on(actions.GET_TAB, (states, { payload }) => ({ ...states, tab: payload })),
   on(actions.SET_SHOWTAB, (states, { payload }) => ({ ...states, visible: payload })),
@@ -41,6 +45,18 @@ const registersReducers = createReducer(
     return { ...states, all: stateUpdated }
   }),
 )
+
+function total(lista: any) {
+  const total: any = { despesa: 0, receita: 0 }
+  lista.forEach((v: any) => {
+    if (v.type === 'outcoming') {
+      total['despesa'] += v.value
+    } else if (v.type === 'incoming') {
+      total['receita'] += v.value
+    }
+  })
+  return total
+}
 
 function returnIcon(text: string = ''): string {
   switch (cleanText(text)) {

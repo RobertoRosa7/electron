@@ -58,3 +58,10 @@
 ###### 05/03/2021
 
 * [x] Dialog Geral para mostrar detalhes 
+
+###### 07/03/2021
+
+* [x] Novo layout para detalhes de registro
+* [x] Download de registro
+* [x] Editar registro
+* [x] Deletar registro
