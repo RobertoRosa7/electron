@@ -57,7 +57,7 @@ export class HighchartsComponent implements OnInit, DoCheck {
       }
     },
     xAxis: {
-      tickInterval: 30,
+      tickInterval: 10,
       categories: [],
       crosshair: true,
       labels: {

@@ -38,6 +38,7 @@ export class MainComponent extends DashboardComponent implements OnInit, DoCheck
   ]
   public ELEMENT_DATA: Register[] = []
   public EVOLUCAO_DATA: any = {}
+  public EVOLUCAO_DESPESAS_DATA: any = {}
 
   constructor(
     protected _store: Store,
@@ -47,6 +48,7 @@ export class MainComponent extends DashboardComponent implements OnInit, DoCheck
   ) {
     super()
     this._store.dispatch(actionsDashboard.FETCH_EVOLUCAO())
+    this._store.dispatch(actionsDashboard.FETCH_EVOLUCAO_DESPESAS())
   }
 
   public ngDoCheck() { }
@@ -55,10 +57,12 @@ export class MainComponent extends DashboardComponent implements OnInit, DoCheck
     this._store.select(({ registers, dashboard }: any) => ({
       all: [...registers.all],
       consolidado: dashboard.consolidado,
-      evolucao: dashboard.evolucao
+      evolucao: dashboard.evolucao,
+      evoucao_despesas: dashboard.evolucao_despesas
     })).subscribe(state => {
       this.ELEMENT_DATA = state.all.splice(0, 7)
       this.EVOLUCAO_DATA = state.evolucao
+      this.EVOLUCAO_DESPESAS_DATA = state.evoucao_despesas
       this.cards.forEach(value => {
         switch (value.type) {
           case 'incoming':

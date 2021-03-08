@@ -47,6 +47,10 @@ export class DashboardService {
   public fetchEvocucao(): Observable<any> {
     return this.http.get<any>(this.constants.get('fetch_evolucao'))
   }
+  
+  public fetchEvocucaoDespesas(): Observable<any> {
+    return this.http.get<any>(this.constants.get('fetch_evolucao_despesas'))
+  }
 
   public fetchEvocucaoDetail(payload: any): Observable<any> {
     return this.http.post<any>(this.constants.get('fetch_evolucao_detail'), payload)

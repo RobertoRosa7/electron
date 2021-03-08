@@ -12,8 +12,10 @@
   .highchart {
     display: flex;
     justify-content: space-between;
+    align-items: center;
     .col-7 {
-      width: 66%;
+      flex: 1;
+      margin: 16px 0;
     }
     .col-4 {
       width: 32%;

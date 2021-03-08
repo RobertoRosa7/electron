@@ -72,6 +72,21 @@ export class DashboardEffect {
   )
 
   @Effect()
+  public fetchEvolucaoDespesas$: Observable<Actions> = this._action.pipe(
+    ofType(actions.FETCH_EVOLUCAO_DESPESAS),
+    mergeMap(() => this._dashboardService.fetchEvocucaoDespesas().pipe(catchError(e => of(e)))),
+    map((payload: any) => {
+      if (payload instanceof HttpErrorResponse) {
+        const source = { ...payload, source: 'fetch_evolucao_despesas' }
+        return SET_ERRORS({ payload: source })
+      } else {
+        return actions.SET_EVOLUCAO_DESPESAS({ payload })
+      }
+    }),
+    catchError(e => of(e))
+  )
+
+  @Effect()
   public fetchEvolucaoDetail$: Observable<Actions> = this._action.pipe(
     ofType(actions.FETCH_EVOLUCAO_DETAIL),
     mergeMap(({ payload }) => this._dashboardService.fetchEvocucaoDetail(payload).pipe(catchError(e => of(e)))),
