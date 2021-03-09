@@ -65,8 +65,10 @@ export class MainComponent extends DashboardComponent implements OnInit, DoCheck
       this.ELEMENT_DATA = state.all.splice(0, 7)
       this.EVOLUCAO_DATA = state.evolucao
       this.EVOLUCAO_DESPESAS_DATA = state.evoucao_despesas
+      
       if (this.EVOLUCAO_DATA) this.showEvolucaoReceita = true
       if (this.EVOLUCAO_DESPESAS_DATA) this.showEvolucaoDespesa = true
+
       this.cards.forEach(value => {
         switch (value.type) {
           case 'incoming':

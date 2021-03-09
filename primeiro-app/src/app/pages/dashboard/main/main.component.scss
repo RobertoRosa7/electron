@@ -4,16 +4,13 @@
     flex: 1;
     justify-content: space-between;
     flex-wrap: wrap;
-
     app-cards {
       width: 32.33%;
     }
   }
   .highchart {
-    // display: flex;
-    // justify-content: space-between;
-    // align-items: center;
-    // flex-wrap: wrap;
+    display: flex;
+    justify-content: space-between;
     .col-7 {
       flex: 1;
       margin: 16px 0;
@@ -23,8 +20,7 @@
     }
   }
 }
-
-@media (max-width: 768px) {
+@media (max-width: 600px) {
   .main .cards-main {
     flex-direction: column;
     app-cards {
@@ -32,7 +28,6 @@
     }
   }
 }
-
 @media (max-width: 1250px) {
   .main .highchart {
     flex-direction: column;

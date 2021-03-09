@@ -62,7 +62,7 @@ export class DialogsComponent implements OnInit {
     const currentTheme = localStorage.getItem('user-theme')
     const color: string = (currentTheme == 'light-mode') ? '#fafafa' : '#303030'
     const al: HTMLElement = document.createElement('div')
-    const el: HTMLElement = document.querySelector('.content-dialog') || al
+    const el: HTMLElement = document.querySelector('.dialog') || al
     if (el) {
       html2canvas(el, { backgroundColor: color }).then(canvas => {
         // document.body.appendChild(canvas)

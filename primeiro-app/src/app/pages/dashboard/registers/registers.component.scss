@@ -83,6 +83,7 @@
   .create {
     display: flex;
     justify-content: space-between;
+    padding: 16px;
   }
   .container-cards-mobile {
     mat-card {
@@ -227,6 +228,7 @@ $marginTopButton: 25px;
     margin: $marginTopButton 0;
     text-align: left;
     font-size: 14px;
+    border-collapse: collapse;
     th {
       text-transform: uppercase;
       font-weight: 400;
@@ -241,7 +243,7 @@ $marginTopButton: 25px;
   }
 }
 
-@media (max-width: 600px) {
+@media screen and (max-width: 600px) {
   .registers .create {
     flex-direction: column;
   }
@@ -252,6 +254,29 @@ $marginTopButton: 25px;
     width: 100%;
     justify-content: space-between;
     flex-wrap: wrap;
+  }
+  .container-imprimir table thead {
+    display: none;
+  }
+  .container-imprimir table,
+  .container-imprimir table tbody,
+  .container-imprimir table tr,
+  .container-imprimir table td {
+    display: block;
+    width: 100%;
+  }
+  .container-imprimir table tr {
+    margin-bottom: 15px;
+  }
+  .container-imprimir table tbody tr td {
+    text-align: right;
+    padding-left: 50%;
+    position: relative;
+  }
+  .container-imprimir table tbody tr td:before {
+    content: attr(data-label);
+    position: absolute;
+    left: 0;
   }
 }
 

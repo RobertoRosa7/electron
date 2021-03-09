@@ -138,7 +138,7 @@
       <div *ngIf="tab === 'print'" print class="container-imprimir">
         <div class="hedaer-print">
           <div class="logo">
-            <img src="../../../../assets/icon-default-green-512x512.svg" alt="logo">
+            <img [src]="logo" alt="logo">
           </div>
           <small>{{dateNow | date:'medium'}}</small>
         </div>
@@ -187,22 +187,22 @@
             </thead>
             <tbody>
               <tr *ngFor="let item of ELEMENT_ORDER">
-                <td>
+                <td data-label="Data">
                   <span class="text-truncate" [title]="(item.created_at * 1000) | date:'dd/MM/yyyy'">
                     {{(item.created_at * 1000) | date:'dd/MM/yyyy'}}
                   </span>
                 </td>
-                <td>
+                <td data-label="Descrição">
                   <span class="text-truncate" [title]="item.description">{{item.description}}</span>
                 </td>
-                <td>
+                <td data-label="Valor">
                   <span class="text-truncate" [title]="formatarValor(item.value)"
                     [ngStyle]="{'color': item.type == 'outcoming' ? 'var(--text-accent)' : 'var(--text-green)'}">
                     <small *ngIf="item.type === 'outcoming'">-</small>
                     R$ {{formatarValor(item.value) }}
                   </span>
                 </td>
-                <td>
+                <td data-label="Categoria">
                   <p [title]="item.category" class="itens category">
                     <strong class="title-with-icon">
                       <mat-icon style="font-size: 12px; height: inherit; margin-left: 8px;">{{item.cat_icon}}</mat-icon>

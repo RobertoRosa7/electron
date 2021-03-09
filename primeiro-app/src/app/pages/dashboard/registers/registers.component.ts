@@ -3,7 +3,6 @@ import { MatSnackBar } from '@angular/material/snack-bar'
 import { Register, User } from '../../../models/models'
 import { Store } from '@ngrx/store'
 import * as actionsRegister from '../../../actions/registers.actions'
-import * as actionsDashboard from '../../../actions/dashboard.actions'
 import { MatDialog } from '@angular/material/dialog'
 import { DashboardComponent } from '../dashboard.component'
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout'
@@ -37,6 +36,7 @@ export class RegistersComponent extends DashboardComponent implements OnInit, Af
   public aReceber: number = 0
   public totalPercent: number = 0
   public dateNow: Date = new Date()
+  public logo:string = './assets/icon-default-green-512x512.svg'
 
   public user_temp: User = {
     name: 'Anominous',

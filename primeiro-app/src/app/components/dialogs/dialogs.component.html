@@ -4,7 +4,7 @@
     <div class="header dialog-header-mode">
       <div class="title">{{detail.description}}</div>
       <div class="max-window">
-        <button mat-icon-button (click)="close()">
+        <button mat-icon-button disableRipple="true" (click)="close()">
           <mat-icon>close</mat-icon>
         </button>
       </div>
@@ -56,12 +56,12 @@
     <div class="container-footer">
       <div class="container-tools">
         <p class="save" title="salvar">
-          <button (click)="edit(detail)" mat-icon-button type="button">
+          <button disableRipple="true" (click)="edit(detail)" mat-icon-button type="button">
             <mat-icon>edit</mat-icon>
           </button>
         </p>
         <p class="download" title="download">
-          <button (click)="btnDownload(detail)" mat-icon-button type="button">
+          <button disableRipple="true" (click)="btnDownload(detail)" mat-icon-button type="button">
             <mat-icon>download</mat-icon>
           </button>
         </p>
@@ -76,7 +76,7 @@
           </button>
         </p>
         <p class="save" title="salvar">
-          <button (click)="del(detail)" mat-icon-button type="button">
+          <button disableRipple="true" (click)="del(detail)" mat-icon-button type="button">
             <mat-icon>delete</mat-icon>
           </button>
         </p>

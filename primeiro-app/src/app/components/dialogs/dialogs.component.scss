@@ -1,5 +1,4 @@
 $padding-size: 15px;
-
 .dialog {
   height: 100%;
   .dialog-container.detail {
@@ -66,17 +65,14 @@ $padding-size: 15px;
       //   display: flex;
       // }
     }
-
     .container-footer {
       padding: $padding-size;
       display: flex;
       align-items: center;
-
       .container-tools {
         flex: 1;
         display: flex;
       }
-
       .date span {
         font-size: 12px;
       }
