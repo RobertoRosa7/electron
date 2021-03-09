@@ -36,13 +36,15 @@ export class RegistersComponent extends DashboardComponent implements OnInit, Af
   public aPagar: number = 0
   public aReceber: number = 0
   public totalPercent: number = 0
+  public dateNow: Date = new Date()
 
-  private user_temp: User = {
+  public user_temp: User = {
     name: 'Anominous',
     email: 'anonimous@gmail.com',
     created_at: (new Date('2003-10-01').getTime() / 1000),
     edit: false,
-    credit_card: { brand: 'visa' }
+    credit_card: { brand: 'visa' },
+    cpf: 36212891869
   }
 
   public displayedColumns: string[] = [
@@ -102,7 +104,6 @@ export class RegistersComponent extends DashboardComponent implements OnInit, Af
         if (item.key === 'total') {
           this.notification(`Total de registros: ${this.total}`)
         }
-
         if (item.key === 'onlyComing') {
           let text = this.onlyComing == 'incoming' ? 'Somente entrada' : 'Somente saída'
           this.notification(text)
@@ -165,17 +166,17 @@ export class RegistersComponent extends DashboardComponent implements OnInit, Af
         case 'Data - decrescente':
           return b.created_at - a.created_at
         case 'Categoria + crescente':
-          return b.category < a.category ? 1 : -1
+          return this.cleanText(b.category) < this.cleanText(a.category) ? 1 : -1
         case 'Categoria - decrescente':
-          return b.category > a.category ? 1 : -1
+          return this.cleanText(b.category) > this.cleanText(a.category) ? 1 : -1
         case 'Valor + crescente':
           return a.value - b.value
         case 'Valor - decrescente':
           return b.value - a.value
         case 'Descrição + crescente':
-          return a.description > b.description ? 1 : -1
+          return this.cleanText(a.description) > this.cleanText(b.description) ? 1 : -1
         case 'Descrição - decrescente':
-          return a.description < b.description ? 1 : -1
+          return this.cleanText(a.description) < this.cleanText(b.description) ? 1 : -1
         default:
           return 0
       }
@@ -198,5 +199,8 @@ export class RegistersComponent extends DashboardComponent implements OnInit, Af
 
   public downloadPdf(el: any): void {
     // setTimeout(() => this._createPdf.createPdf(el, `extrato${new Date().toLocaleDateString()}`), 200)
+  }
+  public imprimir() {
+    window.print()
   }
 }

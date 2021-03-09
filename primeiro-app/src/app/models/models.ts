@@ -26,6 +26,8 @@ export interface User {
   registers?: Register[]
   photo_url?: string
   credit_card?: CreditCard
+  cpf?: number
+  phone?: number
 }
 
 export interface Login {

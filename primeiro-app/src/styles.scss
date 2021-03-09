@@ -68,17 +68,14 @@ $text-accent: var(--text-accent);
   .dialog-header-mode {
     background: var(--color-medium-white);
   }
-
   .line-month {
     @include text;
     color: var(--text-middle-light);
   }
-
   .link-active {
     background: var(--color-medium-white);
     color: var(--text-green);
   }
-
   li:active {
     background: #c3c3c350;
   }
@@ -90,7 +87,6 @@ $text-accent: var(--text-accent);
     @include span-cash;
     color: #585858;
   }
-
   mat-card span.cards-money-on {
     @include span-cash;
     color: var(--text-green);
@@ -99,7 +95,6 @@ $text-accent: var(--text-accent);
     @include span-cash;
     color: var(--text-green);
   }
-
   mat-card span.cards-money-off {
     @include span-cash;
     color: var(--text-accent);
@@ -108,9 +103,11 @@ $text-accent: var(--text-accent);
     @include span-cash;
     color: var(--text-accent);
   }
-
   table tr .table-delete-icon {
     color: $bg-dark-mode;
+  }
+  tbody tr:nth-child(even) {
+    background: #ddd;
   }
   .histories table tr:nth-child(even) {
     background: linear-gradient(-90deg, var(--color-whitesmoke) 100%, transparent);
@@ -179,6 +176,9 @@ $text-accent: var(--text-accent);
   table tr .table-delete-icon {
     color: $bg-light-mode;
   }
+  tbody tr:nth-child(even) {
+    background: linear-gradient(-90deg, #393939 100%, #42424290 0);
+  }
   .histories table tr:nth-child(even) {
     background: linear-gradient(-90deg, #393939 100%, #42424290 0);
   }
@@ -214,12 +214,22 @@ body {
 body {
   font-family: Roboto, "Helvetica Neue", sans-serif;
 }
-
 h2.welcome-subtitle {
   font-weight: 200;
   font-size: 2em;
   text-align: center;
   margin: 15px 0;
+}
+
+@mixin custom-button-icon-width-text {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  font-weight: 400;
+  width: 120px;
+  margin-top: 4px;
+  margin-bottom: 4px;
 }
 
 ::-webkit-scrollbar-track {
@@ -230,7 +240,6 @@ h2.welcome-subtitle {
   width: 6px;
   background: transparent;
 }
-
 ::-webkit-scrollbar-thumb {
   background: #c2bcbc;
   border-radius: 10px;

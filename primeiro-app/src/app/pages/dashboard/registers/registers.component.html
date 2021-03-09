@@ -1,17 +1,13 @@
 <div class="registers">
-  <!-- <app-title title="Registros" [subtitle]="total"></app-title> -->
-
   <app-tabs style="display: block; margin: 15px 0;">
-    <app-tab-header style="display: flex; justify-content: space-between; flex-wrap: wrap;">
-      <div class="control">
-        <app-tab-menu label="Listar" icon="list" target="read"></app-tab-menu>
-        <app-tab-menu label="Incluir" icon="add" target="create"></app-tab-menu>
-        <!-- <app-tab-menu label="Download" icon="download" target="download"></app-tab-menu> -->
-        <!-- <app-tab-menu label="Alterar" icon="change_circle" target="update"></app-tab-menu> -->
-        <!-- <app-tab-menu label="Deletar" icon="delete" target="delete"></app-tab-menu> -->
+    <app-tab-header class="tabs" style="display: flex; justify-content: space-between; flex-wrap: wrap;">
+      <div class="control" style="max-width: 390px;">
+        <app-tab-menu class="btn-menu" label="Listar" icon="list" target="read"></app-tab-menu>
+        <app-tab-menu class="btn-menu" label="Incluir" icon="add" target="create"></app-tab-menu>
+        <app-tab-menu class="btn-menu" label="Imprimir" icon="print" target="print"></app-tab-menu>
       </div>
 
-      <div *ngIf="tab === 'read'">
+      <div *ngIf="tab === 'read'" style="width: 100%; max-width: 470px;">
         <div *ngIf="!isMobile" class="control forms">
           <mat-form-field class="form" floatLabel="always" appearance="outline">
             <mat-select [(value)]="orderby" (selectionChange)="orderbyChange($event)" placeholder="Ordenar por">
@@ -77,7 +73,6 @@
           </mat-menu>
         </div>
       </div>
-
     </app-tab-header>
 
     <app-tab-content style="display: block; margin: 15px 0; height: 100%;">
@@ -140,35 +135,91 @@
         </div>
       </mat-card>
 
-      <!-- <div *ngIf="tab === 'update'" update>atualizar</div> -->
-      <!-- <div *ngIf="tab === 'delete'" delete>deletar</div> -->
-
-      <div *ngIf="tab === 'detail'" detail>
-        <div class="content-detail">
-          <div class="col">
-            <p class="valor">
-              <span>Valor:</span>
-              <span>R$ {{formatarValor(detail.value || 0)}}</span>
-              <small *ngIf="detail.type === 'incoming'">Entrada - (Recebimento)</small>
-              <small *ngIf="detail.type === 'outcoming'">Saída - (Despesa)</small>
-            </p>
-            <p class="descricao">
-              <span>Descrição:</span>
-              <span>{{detail.description}}</span>
-            </p>
-            <p class="date">
-              <span>Data:</span>
-              <span style="text-transform: capitalize;">{{(detail.created_at * 1000) | date:'medium'}}</span>
-            </p>
-            <p class="category">
-              <span>Categoria:</span>
-              <span>{{detail.category}}</span>
-            </p>
+      <div *ngIf="tab === 'print'" print class="container-imprimir">
+        <div class="hedaer-print">
+          <div class="logo">
+            <img src="../../../../assets/icon-default-green-512x512.svg" alt="logo">
           </div>
-          <div class="col">
-            <!-- <app-highcharts [evolucao]="evolucaoDetail"></app-highcharts> -->
-          </div>
+          <small>{{dateNow | date:'medium'}}</small>
         </div>
+        <div class="header-user">
+          <p>
+            <span>{{user_temp.name}}</span>
+            <small>{{user_temp.cpf}}</small>
+          </p>
+          <p>
+            <span>{{user_temp.email}}</span>
+          </p>
+        </div>
+        <div class="container-valores">
+          <p>
+            <small>A receber:</small>
+            R$ {{formatarValor(aReceber || 0)}}
+          </p>
+          <p>
+            <small>A pagar:</small>
+            R$ {{formatarValor(aPagar || 0)}}
+          </p>
+          <p>
+            <small>Gastos:</small>
+            R$ {{formatarValor(totalDespesa)}}
+          </p>
+          <p>
+            <small>Receita:</small>
+            R$ {{formatarValor(totalReceita)}}
+          </p>
+          <p>
+            <small>Média:</small>
+            R$ {{formatarValor(((totalDespesa + totalReceita) / total || 0))}}
+          </p>
+          <p>
+            <small>Período de:</small>
+            {{filterByDays}} dias
+          </p>
+        </div>
+        <ng-container *ngIf="ELEMENT_DATA.length > 0; else noneOfExtractsToPrint">
+          <table>
+            <thead>
+              <th>Data:</th>
+              <th>Descrição:</th>
+              <th>Valor:</th>
+              <th>Categoria:</th>
+            </thead>
+            <tbody>
+              <tr *ngFor="let item of ELEMENT_ORDER">
+                <td>
+                  <span class="text-truncate" [title]="(item.created_at * 1000) | date:'dd/MM/yyyy'">
+                    {{(item.created_at * 1000) | date:'dd/MM/yyyy'}}
+                  </span>
+                </td>
+                <td>
+                  <span class="text-truncate" [title]="item.description">{{item.description}}</span>
+                </td>
+                <td>
+                  <span class="text-truncate" [title]="formatarValor(item.value)"
+                    [ngStyle]="{'color': item.type == 'outcoming' ? 'var(--text-accent)' : 'var(--text-green)'}">
+                    <small *ngIf="item.type === 'outcoming'">-</small>
+                    R$ {{formatarValor(item.value) }}
+                  </span>
+                </td>
+                <td>
+                  <p [title]="item.category" class="itens category">
+                    <strong class="title-with-icon">
+                      <mat-icon style="font-size: 12px; height: inherit; margin-left: 8px;">{{item.cat_icon}}</mat-icon>
+                    </strong>
+                    <span class="text-truncate">{{item.category}}</span>
+                  </p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <button class="btn-print" mat-raised-button (click)="imprimir()">IMPRIMIR</button>
+        </ng-container>
+
+        <ng-template #noneOfExtractsToPrint>
+          <ng-container *ngFor="let i of [0,1,2,3,4,5,6,7]"><br></ng-container>
+          <h2 class="welcome-subtitle">Não há registros</h2>
+        </ng-template>
       </div>
     </app-tab-content>
   </app-tabs>

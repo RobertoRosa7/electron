@@ -1,3 +1,5 @@
+@import "../../../styles.scss";
+
 .dialog {
   .header {
     width: 100%;
@@ -12,6 +14,6 @@
     justify-content: center;
   }
   .container-form-incoming {
-    padding:15px;
+    padding: 15px;
   }
 }

@@ -4,6 +4,7 @@
   .control {
     display: flex;
     align-items: center;
+    width: 100%;
     ::ng-deep .mat-form-field-appearance-outline .mat-form-field-flex {
       padding: 12px;
     }
@@ -32,13 +33,15 @@
     ::ng-deep .mat-select-trigger {
       font-size: 14px;
     }
+    .btn-menu {
+      flex: 1;
+    }
   }
   .control .form {
     max-width: 150px;
-    margin-left: 8px;
   }
   .control.forms {
-    justify-content: center;
+    justify-content: space-between;
   }
   .container-cards {
     .cards {
@@ -107,7 +110,6 @@
       }
     }
   }
-
   .content-detail {
     display: flex;
     .col {
@@ -119,17 +121,17 @@
     align-items: center;
     position: relative;
     padding: 16px;
-    .container-valores {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      flex: 1;
-      flex-wrap: wrap;
-    }
     .container-buttons {
       display: flex;
       justify-content: flex-end;
     }
+  }
+  .container-valores {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex: 1;
+    flex-wrap: wrap;
   }
   .progress {
     height: 1px;
@@ -180,12 +182,86 @@
   }
 }
 
+$marginTopButton: 25px;
+
+.container-imprimir {
+  max-width: 950px;
+  margin: 0 auto;
+  text-align: center;
+  .hedaer-print {
+    margin: $marginTopButton 0;
+    background: var(--text-green);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+    .logo {
+      width: 100%;
+      max-width: 50px;
+      padding: 16px 0;
+      img {
+        width: 100%;
+      }
+    }
+    small {
+      position: absolute;
+      right: 10px;
+      bottom: 10px;
+      color: white;
+    }
+  }
+  .header-user {
+    text-align: left;
+    margin: $marginTopButton 0;
+    max-width: 50%;
+    display: flex;
+    justify-content: space-between;
+    p {
+      display: flex;
+      justify-content: flex-start;
+      flex-direction: column;
+    }
+  }
+  table {
+    width: 100%;
+    margin: $marginTopButton 0;
+    text-align: left;
+    font-size: 14px;
+    th {
+      text-transform: uppercase;
+      font-weight: 400;
+      text-align: left;
+    }
+    tbody td {
+      padding: 4px 0;
+    }
+  }
+  .btn-print {
+    @include custom-button-icon-width-text;
+  }
+}
+
 @media (max-width: 600px) {
   .registers .create {
     flex-direction: column;
   }
   .btn-classificar {
-    margin: 8px 0;
-    width: 140px;
+    @include custom-button-icon-width-text;
+  }
+  .registers .control {
+    width: 100%;
+    justify-content: space-between;
+    flex-wrap: wrap;
+  }
+}
+
+@media print {
+  .registers .tabs,
+  .registers .control,
+  .container-imprimir .btn-print {
+    display: none;
+  }
+  .container-valores p {
+    font-size: 12px;
   }
 }

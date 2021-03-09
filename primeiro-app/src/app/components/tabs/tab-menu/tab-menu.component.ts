@@ -18,7 +18,7 @@ export class TabMenuComponent implements OnInit {
   constructor(
     private _store: Store
   ) {
-    this._store.dispatch(actionsRegisters.GET_SHOWTAB({ payload: ['read', 'create'] }))
+    this._store.dispatch(actionsRegisters.GET_SHOWTAB({ payload: ['read', 'create', 'print'] }))
   }
 
   ngOnInit(): void {

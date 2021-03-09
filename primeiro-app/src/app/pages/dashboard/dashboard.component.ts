@@ -181,4 +181,9 @@ export class DashboardComponent implements OnInit, DoCheck {
     return this._dialog?.open(component, settings)
   }
 
+  public cleanText(text: string | undefined = ''): string {
+    return text.toLowerCase().replace(' ', '_').replace('&', 'e').replace('á', 'a').replace('ã', 'a')
+      .replace('ç', 'c').replace('õ', 'o')
+  }
+
 }

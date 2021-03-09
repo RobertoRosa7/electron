@@ -1,11 +1,9 @@
+@import "../../../../styles.scss";
+
 .tab-menu {
   display: flex;
   list-style: none;
 }
-.tab-menu button {
-  display: flex;
-  text-decoration: none;
-  align-items: center;
-  justify-content: center;
-  margin-right: 8px;
+.btn-tab {
+  @include custom-button-icon-width-text;
 }

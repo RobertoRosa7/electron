@@ -5,11 +5,11 @@
   </div>
   <app-title title="Análise"></app-title>
   <div class="highchart">
-    <div class="col-7" *ngIf="EVOLUCAO_DESPESAS_DATA">
+    <div class="col-7" *ngIf="showEvolucaoDespesa">
       <app-title title="Despesas"></app-title>
       <app-highcharts [evolucao]="EVOLUCAO_DESPESAS_DATA"></app-highcharts>
     </div>
-    <div class="col-7" *ngIf="EVOLUCAO_DATA">
+    <div class="col-7" *ngIf="showEvolucaoReceita">
       <app-title title="Receitas"></app-title>
       <app-highcharts [evolucao]="EVOLUCAO_DATA"></app-highcharts>
     </div>
