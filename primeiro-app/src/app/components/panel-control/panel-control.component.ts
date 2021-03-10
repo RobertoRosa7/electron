@@ -10,15 +10,17 @@ export class PanelControlComponent implements OnInit {
   @Input() public aPagar: number = 0
   @Input() public totalDespesa: number = 0
   @Input() public totalReceita: number = 0
-  @Input() public filterByDays: string = ''
+  @Input() public filterByDays: number = 0
   @Input() public total: number = 0
 
   constructor() { }
 
   ngOnInit(): void {
+    console.log(this.filterByDays)
   }
 
   public formatarValor(valor: number = 0): string {
-    return new Intl.NumberFormat('pt-BR', { currency: 'BRL', minimumFractionDigits: 2 }).format(valor)
+    return new Intl.NumberFormat('pt-BR', { currency: 'BRL', minimumFractionDigits: 2 })
+      .format(parseFloat(valor.toFixed(2)))
   }
 }

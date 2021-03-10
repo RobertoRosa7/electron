@@ -4,10 +4,7 @@ import { Store } from '@ngrx/store'
 import { Register } from 'src/app/models/models'
 import { DashboardComponent } from '../dashboard.component'
 import * as actionsDashboard from '../../../actions/dashboard.actions'
-import * as actionsRegister from '../../../actions/registers.actions'
-import { delay, filter } from 'rxjs/operators'
 import { Router } from '@angular/router'
-import { DialogsComponent } from 'src/app/components/dialogs/dialogs.component'
 import { MatDialog } from '@angular/material/dialog'
 
 @Component({
@@ -41,6 +38,13 @@ export class MainComponent extends DashboardComponent implements OnInit, DoCheck
   public EVOLUCAO_DESPESAS_DATA: any = {}
   public showEvolucaoReceita: boolean = false
   public showEvolucaoDespesa: boolean = false
+  public aPagar: number = 0
+  public aReceber: number = 0
+  public totalPercent: number = 0
+  public totalDespesa: number = 0
+  public totalReceita: number = 0
+  public total: number = 0
+  public filterByDays: number = 0
 
   constructor(
     protected _store: Store,
@@ -60,15 +64,29 @@ export class MainComponent extends DashboardComponent implements OnInit, DoCheck
       all: [...registers.all],
       consolidado: dashboard.consolidado,
       evolucao: dashboard.evolucao,
-      evoucao_despesas: dashboard.evolucao_despesas
+      evoucao_despesas: dashboard.evolucao_despesas,
+      tab: registers.tab,
+      total_geral: registers.total_geral,
+      despesas: registers.total_despesas,
+      receita: registers.total_receita,
+      a_pagar: dashboard.consolidado.a_pagar,
+      a_receber: dashboard.consolidado.a_receber,
+      total_credit: dashboard.consolidado.total_credit,
+      total_debit: dashboard.consolidado.total_debit,
+      all_days_period: registers.all_days_period
     })).subscribe(state => {
+      this.total = state.total_geral
+      this.totalDespesa = state.total_debit
+      this.totalReceita = state.total_credit
+      this.aPagar = state.a_pagar
+      this.aReceber = state.a_receber
+      this.filterByDays = state.all_days_period
       this.ELEMENT_DATA = state.all.splice(0, 7)
       this.EVOLUCAO_DATA = state.evolucao
       this.EVOLUCAO_DESPESAS_DATA = state.evoucao_despesas
-      
+
       if (this.EVOLUCAO_DATA) this.showEvolucaoReceita = true
       if (this.EVOLUCAO_DESPESAS_DATA) this.showEvolucaoDespesa = true
-
       this.cards.forEach(value => {
         switch (value.type) {
           case 'incoming':

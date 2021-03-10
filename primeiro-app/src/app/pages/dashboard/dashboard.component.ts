@@ -134,7 +134,8 @@ export class DashboardComponent implements OnInit, DoCheck {
   }
 
   public formatarValor(valor: number = 0): string {
-    return new Intl.NumberFormat('pt-BR', { currency: 'BRL', minimumFractionDigits: 2 }).format(valor)
+    return new Intl.NumberFormat('pt-BR', { currency: 'BRL', minimumFractionDigits: 2 })
+      .format(parseFloat(valor.toFixed(2)))
   }
 
   private fetchNames(name: string): string {

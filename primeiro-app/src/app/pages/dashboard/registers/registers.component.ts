@@ -39,6 +39,8 @@ export class RegistersComponent extends DashboardComponent implements OnInit, Af
   public dateNow: Date = new Date()
   public logo: string = './assets/icon-default-green-512x512.svg'
   public isNegative: boolean = false
+  public all_days_period: number = 0
+  public days: number = 0;
 
   public user_temp: User = {
     name: 'Anominous',
@@ -83,7 +85,8 @@ export class RegistersComponent extends DashboardComponent implements OnInit, Af
       a_pagar: dashboard.consolidado.a_pagar,
       a_receber: dashboard.consolidado.a_receber,
       total_credit: dashboard.consolidado.total_credit,
-      total_debit: dashboard.consolidado.total_debit
+      total_debit: dashboard.consolidado.total_debit,
+      all_days_period: registers.all_days_period
     })).subscribe(state => {
       this.tab = state.tab
       this.total = state.total
@@ -94,12 +97,16 @@ export class RegistersComponent extends DashboardComponent implements OnInit, Af
       this.ELEMENT_ORDER = state.all
       this.totalPercent = (state.total_debit / state.total_credit) * 100
       this.totalGeral = (this.totalReceita - this.totalDespesa)
+      this.all_days_period = state.all_days_period
+
+      if (this.filterByDays !== 'todos') this.days = parseInt(this.filterByDays)
       if (this.totalGeral < 0) {
         this.isNegative = true
         this.totalGeral = Math.abs(this.totalGeral)
       } else {
         this.isNegative = false
       }
+
       this.orderby ? this.makingOrdering(this.orderby) : this.ELEMENT_DATA = this.classificar(state.all)
     })
   }
@@ -148,7 +155,13 @@ export class RegistersComponent extends DashboardComponent implements OnInit, Af
 
   public filterByDaysChange(event: MatSelectChange): void {
     const payload: any = {}
-    event.value === 'todos' ? payload['todos'] = event.value : payload['days'] = parseInt(event.value)
+    if (event.value === 'todos') {
+      this.days = this.all_days_period
+      payload['todos'] = event.value
+    } else {
+      this.days = parseInt(event.value)
+      payload['days'] = parseInt(event.value)
+    }
     this._store.dispatch(actionsRegister.INIT({ payload }))
   }
 

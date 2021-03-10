@@ -81,7 +81,7 @@
           <div class="encapsulate" [style.width]="totalPercent + '%'"></div>
         </div>
         <mat-card class="panel-header">
-          <app-panel-control [total]="total" [filterByDays]="filterByDays" [totalDespesa]="totalDespesa"
+          <app-panel-control [total]="total" [filterByDays]="days" [totalDespesa]="totalDespesa"
             [totalReceita]="totalReceita" [aReceber]="aReceber" [aPagar]="aPagar" style="width: 100%;">
           </app-panel-control>
         </mat-card>
@@ -128,7 +128,7 @@
             <span>{{user_temp.email}}</span>
           </p>
         </div>
-        <app-panel-control [total]="total" [filterByDays]="filterByDays" [totalDespesa]="totalDespesa"
+        <app-panel-control [total]="total" [filterByDays]="days" [totalDespesa]="totalDespesa"
           [totalReceita]="totalReceita" [aReceber]="aReceber" [aPagar]="aPagar" style="width: 100%;">
         </app-panel-control>
         <ng-container *ngIf="ELEMENT_DATA.length > 0; else noneOfExtractsToPrint">

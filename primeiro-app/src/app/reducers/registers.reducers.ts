@@ -20,11 +20,13 @@ const INITIAL_STATE = {
   consolidado: {},
   msg: '',
   total: 0,
+  total_geral: 0,
   categories,
   total_despesas: 0,
   total_receita: 0,
   a_receber: 0,
-  a_pagar: 0
+  a_pagar: 0,
+  all_days_period: 0
 }
 const registersReducers = createReducer(
   INITIAL_STATE,
@@ -37,10 +39,12 @@ const registersReducers = createReducer(
       consolidado: payload.data.consolidado,
       msg: payload.msg,
       total: payload.data.total,
+      total_geral: payload.data.total_geral,
       total_despesas: totals.despesa,
       total_receita: totals.receita,
       a_pagar: payload.data.consolidado.a_pagar,
-      a_receber: payload.data.consolidado.a_receber
+      a_receber: payload.data.consolidado.a_receber,
+      all_days_period: payload.data.days
     })
   }),
   on(actions.GET_TAB, (states, { payload }) => ({ ...states, tab: payload })),
