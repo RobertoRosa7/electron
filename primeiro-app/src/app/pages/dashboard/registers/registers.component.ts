@@ -35,8 +35,10 @@ export class RegistersComponent extends DashboardComponent implements OnInit, Af
   public aPagar: number = 0
   public aReceber: number = 0
   public totalPercent: number = 0
+  public totalGeral: number = 0
   public dateNow: Date = new Date()
-  public logo:string = './assets/icon-default-green-512x512.svg'
+  public logo: string = './assets/icon-default-green-512x512.svg'
+  public isNegative: boolean = false
 
   public user_temp: User = {
     name: 'Anominous',
@@ -91,6 +93,13 @@ export class RegistersComponent extends DashboardComponent implements OnInit, Af
       this.aReceber = state.a_receber
       this.ELEMENT_ORDER = state.all
       this.totalPercent = (state.total_debit / state.total_credit) * 100
+      this.totalGeral = (this.totalReceita - this.totalDespesa)
+      if (this.totalGeral < 0) {
+        this.isNegative = true
+        this.totalGeral = Math.abs(this.totalGeral)
+      } else {
+        this.isNegative = false
+      }
       this.orderby ? this.makingOrdering(this.orderby) : this.ELEMENT_DATA = this.classificar(state.all)
     })
   }

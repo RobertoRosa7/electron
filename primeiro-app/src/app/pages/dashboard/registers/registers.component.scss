@@ -229,6 +229,7 @@ $marginTopButton: 25px;
     text-align: left;
     font-size: 14px;
     border-collapse: collapse;
+    font-weight: 400;
     th {
       text-transform: uppercase;
       font-weight: 400;
@@ -240,6 +241,9 @@ $marginTopButton: 25px;
   }
   .btn-print {
     @include custom-button-icon-width-text;
+  }
+  .total-geral {
+    font-weight: 700;
   }
 }
 

@@ -150,8 +150,9 @@
                   <span class="text-truncate" [title]="item.description">{{item.description}}</span>
                 </td>
                 <td data-label="Valor">
-                  <span class="text-truncate" [title]="formatarValor(item.value)"
-                    [ngStyle]="{'color': item.type == 'outcoming' ? 'var(--text-accent)' : 'var(--text-green)'}">
+                  <span class="text-truncate" [title]="formatarValor(item.value)" [ngStyle]="{
+                      'color': item.type == 'outcoming' ? 'var(--text-accent)' : 'var(--text-green)'
+                    }">
                     <small *ngIf="item.type === 'outcoming'">-</small>
                     R$ {{formatarValor(item.value) }}
                   </span>
@@ -164,6 +165,19 @@
                     <span class="text-truncate">{{item.category}}</span>
                   </p>
                 </td>
+              </tr>
+              <tr data-label="Total">
+                <td>
+                  <span>{{dateNow | date:'dd/MM/yyyy'}}</span>
+                </td>
+                <td>
+                  <span>Total Geral</span>
+                </td>
+                <td class="total-geral">
+                  <span style="color: var(--text-accent)" *ngIf="isNegative">- R$ {{formatarValor(totalGeral) }}</span>
+                  <span style="color: var(--text-green)" *ngIf="!isNegative">R$ {{formatarValor(totalGeral) }}</span>
+                </td>
+                <td></td>
               </tr>
             </tbody>
           </table>

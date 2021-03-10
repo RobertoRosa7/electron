@@ -5,7 +5,9 @@
   flex-wrap: wrap;
   width: inherit;
 }
-
+.container-valores p {
+  font-size: 14px;
+}
 @media screen and (max-width: 600px) {
   .container-valores {
     justify-content: space-around;
