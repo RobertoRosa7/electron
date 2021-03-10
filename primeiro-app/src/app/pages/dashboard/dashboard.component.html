@@ -2,7 +2,8 @@
   <mat-drawer-container class="container">
     <mat-drawer #drawer mode="over" opened="false">
       <ul class="app-menu-list">
-        <li [ngClass]="{'link-active': isActive === item.link}" (click)="drawer.toggle()" *ngFor="let item of menuList" [routerLink]="item.link">
+        <li [ngClass]="{'link-active': isActive === item.link}" (click)="drawer.toggle()" *ngFor="let item of menuList"
+          [routerLink]="item.link">
           <a>
             <mat-icon>{{item.icon}}</mat-icon>
           </a>
@@ -32,13 +33,33 @@
 
             <div *ngIf="!isMobile" class="menu-toolbar">
               <form (ngSubmit)="onSubmit()">
-                <mat-form-field class="form" appearance="outline">
-                  <input autocomplete="off" name="searchTerms" matInput placeholder="Procurar"
-                    [(ngModel)]="searchTerms">
-                  <mat-icon *ngIf="!searchTerms" matSuffix>search</mat-icon>
-                  <mat-icon (click)="searchTerms = ''" *ngIf="searchTerms" style="cursor: pointer;" matSuffix>close
+                <mat-form-field class="form form-search" appearance="outline">
+                  <input type="text" [formControl]="searchTerms" [matAutocomplete]="auto" autocomplete="off"
+                    name="searchTerms" matInput placeholder="Procurar">
+                  <mat-autocomplete #auto="matAutocomplete" (optionSelected)="setSearch($event)">
+                    <mat-option *ngFor="let option of autocomplete$ | async" [value]="option">{{option}}</mat-option>
+                  </mat-autocomplete>
+                  <mat-icon *ngIf="!searchTerms.value" matSuffix>search</mat-icon>
+                  <mat-icon *ngIf="searchTerms.value" (click)="searchTerms.reset()" style="cursor: pointer;" matSuffix>
+                    close
                   </mat-icon>
                 </mat-form-field>
+
+                <!-- <mat-form-field floatLabel="always" appearance="outline">
+                  <input [matAutocomplete]="auto" required>
+                  <mat-autocomplete #auto="matAutocomplete" (optionSelected)="setCorretora($event)">
+                    <mat-option *ngFor="let option of filteredOptionsCorretorasRendaFixaPrivada | async"
+                      [value]="option">{{option.nom}}</mat-option>
+                  </mat-autocomplete>
+                  <mat-hint fxLayout="row" fxFlex="100"
+                    [ngStyle]="{'justify-content': (rendaFixaForm1.get('distribuidora').hasError('required') && rendaFixaForm1.get('distribuidora').touched) ? 'space-between' : 'flex-end', 'align-items': (!rendaFixaForm1.get('distribuidora').hasError('required') && rendaFixaForm1.get('distribuidora').touched) ? 'center' : 'center'}">
+                    <span
+                      *ngIf="rendaFixaForm1.get('distribuidora').hasError('required') && rendaFixaForm1.get('distribuidora').touched"
+                      class="show-error" fxFlex.xs="44" fxFlex="50">Digite a distribuidora</span>
+                    <span (click)="help('distribuidora')" class="tips" fxFlex="33"
+                      fxFlex.xs="56">{{form.tip}}</span>
+                  </mat-hint>
+                </mat-form-field> -->
               </form>
             </div>
 

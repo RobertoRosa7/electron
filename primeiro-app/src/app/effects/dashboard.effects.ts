@@ -57,6 +57,29 @@ export class DashboardEffect {
   )
 
   @Effect()
+  public getAutocomplete$: Observable<Actions> = this._action.pipe(
+    ofType(actions.FETCH_AUTOCOMPLETE),
+    mergeMap(() => this._indexedb.getById('autocomplete_id')),
+    mergeMap((autocomplete) => {
+      if (autocomplete) {
+        return [actions.SET_AUTOCOMPLETE({ payload: autocomplete.auto_complete })]
+      } else {
+        return this._dashboardService.fetchAutocomplete().pipe(
+          map((autocomplete: any) => {
+            if (autocomplete) this._indexedb.create({ id: 'autocomplete_id', auto_complete: autocomplete.list })
+            return actions.SET_AUTOCOMPLETE({ payload: autocomplete.list })
+          }),
+          catchError(e => {
+            const source = { ...e, source: 'autocomplete' }
+            return [SET_ERRORS({ payload: source })]
+          })
+        )
+      }
+    }),
+    catchError(err => of(err))
+  )
+
+  @Effect()
   public fetchEvolucao$: Observable<Actions> = this._action.pipe(
     ofType(actions.FETCH_EVOLUCAO),
     mergeMap(() => this._dashboardService.fetchEvocucao().pipe(catchError(e => of(e)))),

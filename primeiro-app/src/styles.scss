@@ -64,7 +64,9 @@ $text-accent: var(--text-accent);
 .light-mode {
   @include angular-material-theme($app-light-theme);
   background: $bg-light-mode;
-
+  .form-search {
+    background: $bg-light-mode;
+  }
   .dialog-header-mode {
     background: var(--color-medium-white);
   }
@@ -135,6 +137,9 @@ $text-accent: var(--text-accent);
   @include angular-material-theme($app-dark-theme);
   background: $bg-dark-mode;
   color: $color-dark-mode;
+  .form-search {
+    background: $bg-dark-mode;
+  }
   .dialog-header-mode {
     background: var(--color-default-dark);
   }

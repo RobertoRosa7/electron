@@ -112,15 +112,20 @@
         align-items: center;
         justify-content: space-between;
         flex: 1;
+        form {
+          width: 100%;
+          text-align: center;
+        }
         .form {
-          margin-left: 16px;
+          width: inherit;
+          max-width: 500px;
           mat-icon {
             font-size: 20px;
           }
         }
       }
       ::ng-deep .mat-form-field-appearance-outline .mat-form-field-flex {
-        padding: 12px;
+        padding: 6px 12px;
       }
       ::ng-deep .mat-form-field-appearance-outline .mat-form-field-infix {
         padding: 0;
@@ -134,6 +139,9 @@
       ::ng-deep .mat-input-element {
         font-size: 14px;
         height: 20px;
+      }
+      ::ng-deep .mat-form-field-appearance-outline .mat-form-field-outline {
+        color: transparent;
       }
     }
   }

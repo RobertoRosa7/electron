@@ -59,4 +59,8 @@ export class DashboardService {
   public setDevMode(mode: any): Observable<any> {
     return this.http.post<any>(this.constants.get('set_dev_mode'), mode)
   }
+
+  public fetchAutocomplete(): Observable<any> {
+    return this.http.get<any>(this.constants.get('get_list_autocomplete'))
+  }
 }

@@ -15,9 +15,7 @@ export class PanelControlComponent implements OnInit {
 
   constructor() { }
 
-  ngOnInit(): void {
-    console.log(this.filterByDays)
-  }
+  ngOnInit(): void { }
 
   public formatarValor(valor: number = 0): string {
     return new Intl.NumberFormat('pt-BR', { currency: 'BRL', minimumFractionDigits: 2 })

@@ -11,7 +11,8 @@ const INITIAL_STATES = {
   mode: '',
   evolucao: {},
   evolucao_detail: {},
-  evolucao_despesas: {}
+  evolucao_despesas: {},
+  auto_complete: []
 }
 
 const dashboardReducers = createReducer(
@@ -22,6 +23,7 @@ const dashboardReducers = createReducer(
   on(actions.SET_EVOLUCAO_DETAIL, (states, { payload }) => ({ ...states, evolucao_detail: payload })),
   on(actions.SET_DEV_MODE, (states, { payload }) => ({ ...states, mode: payload.mode })),
   on(actions.SET_EVOLUCAO_DESPESAS, (states, { payload }) => ({ ...states, evolucao_despesas: payload })),
+  on(actions.SET_AUTOCOMPLETE, (states, { payload }) => ({ ...states, auto_complete: payload })),
 )
 
 export function reducerDashboard(state: any, action: any) {

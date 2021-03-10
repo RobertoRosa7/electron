@@ -6,10 +6,13 @@ import * as actionsErrors from '../../actions/errors.actions'
 import * as actionsRegister from '../../actions/registers.actions'
 import * as actionsDashboard from '../../actions/dashboard.actions'
 import { MatSnackBar } from '@angular/material/snack-bar'
-import { filter } from 'rxjs/operators'
+import { filter, map, startWith } from 'rxjs/operators'
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout'
 import { ScrollService } from 'src/app/services/scroll.service'
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog'
+import { Observable } from 'rxjs'
+import { FormControl } from '@angular/forms'
+import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete'
 
 @Component({
   selector: 'app-dashboard',
@@ -41,7 +44,7 @@ export class DashboardComponent implements OnInit, DoCheck {
     },
   ]
 
-  public searchTerms: string | number
+  public searchTerms: FormControl = new FormControl()
   public consolidado: number = 0
   public isMobile: boolean = false
   public json: any
@@ -52,6 +55,8 @@ export class DashboardComponent implements OnInit, DoCheck {
   public showErrors: boolean = false
   public isActive: string = ''
   public differ: any
+  public autocomplete: string[] = []
+  public autocomplete$: Observable<string[]>
 
   constructor(
     protected _ipcService?: IpcService,
@@ -66,33 +71,42 @@ export class DashboardComponent implements OnInit, DoCheck {
   ) {
     this._router?.events.subscribe((u: any) => this.isActive = u.url)
     this._breakpoint?.observe([Breakpoints.XSmall]).subscribe(result => this.isMobile = !!result.matches)
-    this._store?.dispatch(actionsDashboard.GET_DEV_MODE({ payload: { mode: 'dev-mode' } }))
+    this.initialize()
 
-    this._store?.dispatch(actionsDashboard.INIT_DASHBOARD())
-    this._store?.dispatch(actionsRegister.INIT({ payload: { days: 7 } }))
-    this._store?.dispatch(actionsErrors.GET_STATUS_CODE())
+    this._store?.dispatch(actionsDashboard.GET_DEV_MODE({ payload: { mode: 'dev-mode' } }))
     this._store?.dispatch(actionsRegister.GET_TAB({ payload: 'read' }))
     this.differ = this._differs?.find({}).create()
+
+    this.autocomplete$ = this.searchTerms.valueChanges.pipe(
+      startWith(''),
+      map(value => value ? this.filterAutocomplete(value) : this.autocomplete)
+    )
   }
 
   public ngOnInit(): void {
-    this._ipcService?.send('get', JSON.stringify({
-      collection_dashboard: 'collection_dashboard',
-      method: "POST",
-      payload: []
-    }))
-
+    // this._ipcService?.send('get', JSON.stringify({
+    //   collection_dashboard: 'collection_dashboard',
+    //   method: "POST",
+    //   payload: []
+    // }))
     // this._ipcService?.on('got', (_: Electron.IpcMessageEvent, message: any) => {
     //   console.log(message)
     // })
 
     this._store?.select(({ http_error, registers, dashboard }: any) =>
-      ({ http_error, consolidado: dashboard.consolidado, all: registers.all })).subscribe(state => {
-        this.consolidado = state.consolidado.total_consolidado
-        if (state.http_error.errors) {
-          state.http_error.errors.forEach((e: any) => this.handleError(e))
-        }
-      })
+    ({
+      http_error,
+      consolidado: dashboard.consolidado,
+      all: registers.all,
+      autocomplete: dashboard.auto_complete
+    })).subscribe(state => {
+      this.consolidado = state.consolidado.total_consolidado
+      this.autocomplete = state.autocomplete
+
+      if (state.http_error.errors) {
+        state.http_error.errors.forEach((e: any) => this.handleError(e))
+      }
+    })
 
     this._as?.pipe(filter(a => a.type === actionsErrors.actionsTypes.SET_SUCCESS))
       .subscribe(({ payload }: any) => {
@@ -113,18 +127,52 @@ export class DashboardComponent implements OnInit, DoCheck {
       })
     }
   }
+
+  private filterAutocomplete(value: string = ''): string[] {
+    return this.autocomplete.filter(option => option.toLowerCase().includes(value.toLowerCase())).sort()
+  }
+
+  private async initialize() {
+    await this.fetchRegisters()
+    await this.initDashboard()
+    await this.fetchAutocomplete()
+    await this.fetchStatusCode()
+  }
+
+  private async initDashboard(): Promise<any> {
+    this._store?.dispatch(actionsDashboard.INIT_DASHBOARD())
+  }
+
+  private async fetchRegisters(): Promise<any> {
+    this._store?.dispatch(actionsRegister.INIT({ payload: { days: 7 } }))
+  }
+
+  private async fetchAutocomplete(): Promise<any> {
+    this._store?.dispatch(actionsDashboard.FETCH_AUTOCOMPLETE())
+  }
+
+  private async fetchStatusCode(): Promise<any> {
+    this._store?.dispatch(actionsErrors.GET_STATUS_CODE())
+  }
+
   public onSubmit(): void {
     // this._router.navigate(['dashboard/result-search', { search: this.searchTerms }])
-    if (this.searchTerms != '') {
-      this._ipcService?.send('search', JSON.stringify({
-        collection_dashboard: 'collection_registers',
-        search: this.searchTerms
-      }))
-      this._ipcService?.on('searched', (_: Electron.IpcMessageEvent, message: any) => {
-        console.log(message)
-      })
-    }
-    this.searchTerms = ''
+    // if (this.searchTerms.value != '') {
+    //   this._ipcService?.send('search', JSON.stringify({
+    //     collection_dashboard: 'collection_registers',
+    //     search: this.searchTerms
+    //   }))
+    //   this._ipcService?.on('searched', (_: Electron.IpcMessageEvent, message: any) => {
+    //     console.log(message)
+    //   })
+    // }
+    // this.searchTerms.value = ''
+
+    console.log(this.searchTerms.value)
+  }
+
+  public setSearch(event: MatAutocompleteSelectedEvent) {
+    console.log(event.option.value)
   }
 
   public handleError(error: any): void {

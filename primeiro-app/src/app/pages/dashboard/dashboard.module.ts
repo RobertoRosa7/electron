@@ -41,6 +41,7 @@ import { MatSelectModule } from '@angular/material/select'
 import { HighchartsComponent } from '../../components/highcharts/highcharts.component';
 import { DialogsComponent } from '../../components/dialogs/dialogs.component';
 import { PanelControlComponent } from '../../components/panel-control/panel-control.component'
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
 
 const routes: Routes = [
   {
@@ -111,6 +112,7 @@ registerLocaleData(localePt, 'pt')
     MatListModule,
     MatMenuModule,
     MatSelectModule,
+    MatAutocompleteModule
   ],
   entryComponents: [
     DialogFormIncomingComponent,

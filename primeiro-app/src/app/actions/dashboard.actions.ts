@@ -9,7 +9,9 @@ export enum actionsTypes {
   FETCH_EVOLUCAO = '[FETCH_EVOLUCAO]',
   FETCH_EVOLUCAO_DESPESAS = '[FETCH_EVOLUCAO_DESPESAS]',
   FETCH_EVOLUCAO_DETAIL = '[FETCH_EVOLUCAO_DETAIL]',
+  FETCH_AUTOCOMPLETE = '[FETCH_AUTOCOMPLETE]',
 
+  SET_AUTOCOMPLETE = '[SET_AUTOCOMPLETE]',
   SET_EVOLUCAO = '[SET_EVOLUCAO]',
   SET_EVOLUCAO_DESPESAS = '[SET_EVOLUCAO_DESPESAS]',
   SET_EVOLUCAO_DETAIL = '[SET_EVOLUCAO_DETAIL]',
@@ -23,6 +25,7 @@ export const INIT_DASHBOARD = createAction(actionsTypes.INIT_DASHBOARD)
 export const FETCH_EVOLUCAO = createAction(actionsTypes.FETCH_EVOLUCAO)
 export const FETCH_EVOLUCAO_DESPESAS = createAction(actionsTypes.FETCH_EVOLUCAO_DESPESAS)
 export const FETCH_EVOLUCAO_DETAIL = createAction(actionsTypes.FETCH_EVOLUCAO_DETAIL, props<{ payload: any }>())
+export const FETCH_AUTOCOMPLETE = createAction(actionsTypes.FETCH_AUTOCOMPLETE)
 
 export const GET_TOTALS = createAction(actionsTypes.GET_TOTALS, props<{ payload: any }>())
 export const GET_DEV_MODE = createAction(actionsTypes.GET_DEV_MODE, props<{ payload: any }>())
@@ -31,5 +34,6 @@ export const SET_DEV_MODE = createAction(actionsTypes.SET_DEV_MODE, props<{ payl
 export const SET_EVOLUCAO = createAction(actionsTypes.SET_EVOLUCAO, props<{ payload: any }>())
 export const SET_EVOLUCAO_DESPESAS = createAction(actionsTypes.SET_EVOLUCAO_DESPESAS, props<{ payload: any }>())
 export const SET_EVOLUCAO_DETAIL = createAction(actionsTypes.SET_EVOLUCAO_DETAIL, props<{ payload: any }>())
+export const SET_AUTOCOMPLETE = createAction(actionsTypes.SET_AUTOCOMPLETE, props<{ payload: any }>())
 
 export const DARK_MODE = createAction(actionsTypes.DARK_MODE, props<{ payload: any }>())
