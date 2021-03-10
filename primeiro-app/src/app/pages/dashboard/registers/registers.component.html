@@ -132,7 +132,7 @@
           [totalReceita]="totalReceita" [aReceber]="aReceber" [aPagar]="aPagar" style="width: 100%;">
         </app-panel-control>
         <ng-container *ngIf="ELEMENT_DATA.length > 0; else noneOfExtractsToPrint">
-          <table>
+          <table class="table-print">
             <thead>
               <th>Data:</th>
               <th>Descrição:</th>

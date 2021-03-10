@@ -13,11 +13,12 @@
     </mat-card>
   </div>
   <div class="highchart">
-    <div class="col-7" *ngIf="showEvolucaoDespesa">
+    <div class="col-7">
       <app-title title="Despesas"></app-title>
       <app-highcharts [evolucao]="EVOLUCAO_DESPESAS_DATA"></app-highcharts>
     </div>
-    <div class="col-7" *ngIf="showEvolucaoReceita">
+
+    <div class="col-7">
       <app-title title="Receitas"></app-title>
       <app-highcharts [evolucao]="EVOLUCAO_DATA"></app-highcharts>
     </div>

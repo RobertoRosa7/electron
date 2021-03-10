@@ -108,7 +108,7 @@ $text-accent: var(--text-accent);
   table tr .table-delete-icon {
     color: $bg-dark-mode;
   }
-  tbody tr:nth-child(even) {
+  .table-print tbody tr:nth-child(even) {
     background: #ddd;
   }
   .histories table tr:nth-child(even) {
@@ -181,7 +181,7 @@ $text-accent: var(--text-accent);
   table tr .table-delete-icon {
     color: $bg-light-mode;
   }
-  tbody tr:nth-child(even) {
+  .table-print tbody tr:nth-child(even) {
     background: linear-gradient(-90deg, #393939 100%, #42424290 0);
   }
   .histories table tr:nth-child(even) {

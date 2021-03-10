@@ -82,8 +82,8 @@ export class RegistersComponent extends DashboardComponent implements OnInit, Af
       total: registers.total,
       despesas: registers.total_despesas,
       receita: registers.total_receita,
-      a_pagar: dashboard.consolidado.a_pagar,
-      a_receber: dashboard.consolidado.a_receber,
+      a_pagar: registers.a_pagar,
+      a_receber: registers.a_receber,
       total_credit: dashboard.consolidado.total_credit,
       total_debit: dashboard.consolidado.total_debit,
       all_days_period: registers.all_days_period

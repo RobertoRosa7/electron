@@ -26,7 +26,7 @@ const INITIAL_STATE = {
   total_receita: 0,
   a_receber: 0,
   a_pagar: 0,
-  all_days_period: 0
+  all_days_period: 1
 }
 const registersReducers = createReducer(
   INITIAL_STATE,
@@ -44,7 +44,7 @@ const registersReducers = createReducer(
       total_receita: totals.receita,
       a_pagar: payload.data.consolidado.a_pagar,
       a_receber: payload.data.consolidado.a_receber,
-      all_days_period: payload.data.days
+      all_days_period: payload.data.days <= 0 ? 1 : payload.data.days
     })
   }),
   on(actions.GET_TAB, (states, { payload }) => ({ ...states, tab: payload })),

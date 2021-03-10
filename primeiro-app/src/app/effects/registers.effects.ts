@@ -54,6 +54,8 @@ export class RegistersEffect {
       } else {
         this._store.dispatch(SET_SUCCESS({ payload: this.props.new_register }))
         this._store.dispatch(actionsDashboard.INIT_DASHBOARD())
+        this._store.dispatch(actionsDashboard.FETCH_EVOLUCAO())
+        this._store.dispatch(actionsDashboard.FETCH_EVOLUCAO_DESPESAS())
         return actions.INIT({ payload: {} })
       }
     }),
@@ -81,6 +83,8 @@ export class RegistersEffect {
       } else {
         this._store.dispatch(SET_SUCCESS({ payload: this.props.delete_register }))
         this._store.dispatch(actionsDashboard.INIT_DASHBOARD())
+        this._store.dispatch(actionsDashboard.FETCH_EVOLUCAO())
+        this._store.dispatch(actionsDashboard.FETCH_EVOLUCAO_DESPESAS())
         return actions.GET_REGISTERS({ payload })
       }
     }),
@@ -112,6 +116,8 @@ export class RegistersEffect {
       } else {
         this._store.dispatch(SET_SUCCESS({ payload: this.props.update_register }))
         this._store.dispatch(actionsDashboard.INIT_DASHBOARD())
+        this._store.dispatch(actionsDashboard.FETCH_EVOLUCAO())
+        this._store.dispatch(actionsDashboard.FETCH_EVOLUCAO_DESPESAS())
         return actions.SET_UPDATE({ payload: response.data })
       }
     }),
