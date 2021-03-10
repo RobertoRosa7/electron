@@ -74,3 +74,16 @@
 * [x] Grafico despesas, grafico de receita
 * [x] Lançamento futuros
 * [x] Filtro de pendentes
+
+###### 09/03/2021
+
+* [x] Ajustes no CSS e HTML para pagina de registros
+* [x] Método de imprimir
+* [x] Novo Layout de impressão
+
+###### 10/03/2021
+
+* [x] Alteração no campo de busca
+* [x] Implementação de autocomplete
+* [x] Actions, mais redux com effect busca autocomplete lista
+* [x] Salvar cópia da lista autocomplete no indexedb
