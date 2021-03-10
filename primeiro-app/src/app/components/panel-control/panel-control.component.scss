@@ -1,0 +1,17 @@
+.container-valores {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  width: inherit;
+}
+
+@media screen and (max-width: 600px) {
+  .container-valores {
+    justify-content: space-around;
+  }
+  .container-valores p {
+    width: 160px;
+    text-align: left;
+  }
+}
