@@ -57,6 +57,7 @@ export class RegistersEffect {
         this._store.dispatch(actionsDashboard.INIT_DASHBOARD())
         this._store.dispatch(actionsDashboard.FETCH_EVOLUCAO())
         this._store.dispatch(actionsDashboard.FETCH_EVOLUCAO_DESPESAS())
+        this._store.dispatch(actionsDashboard.UPDATE_AUTOCOMPLETE())
         return actions.INIT({ payload: {} })
       }
     }),
@@ -86,6 +87,7 @@ export class RegistersEffect {
         this._store.dispatch(actionsDashboard.INIT_DASHBOARD())
         this._store.dispatch(actionsDashboard.FETCH_EVOLUCAO())
         this._store.dispatch(actionsDashboard.FETCH_EVOLUCAO_DESPESAS())
+        this._store.dispatch(actionsDashboard.UPDATE_AUTOCOMPLETE())
         return actions.GET_REGISTERS({ payload })
       }
     }),
@@ -119,6 +121,7 @@ export class RegistersEffect {
         this._store.dispatch(actionsDashboard.INIT_DASHBOARD())
         this._store.dispatch(actionsDashboard.FETCH_EVOLUCAO())
         this._store.dispatch(actionsDashboard.FETCH_EVOLUCAO_DESPESAS())
+        this._store.dispatch(actionsDashboard.UPDATE_AUTOCOMPLETE())
         return actions.SET_UPDATE({ payload: response.data })
       }
     }),
@@ -137,10 +140,6 @@ export class RegistersEffect {
         const source = { ...response, source: this.props.fetch_search }
         return SET_ERRORS({ payload: source })
       } else {
-        // this._store.dispatch(SET_SUCCESS({ payload: this.props.fetch_search }))
-        // this._store.dispatch(actionsDashboard.INIT_DASHBOARD())
-        // this._store.dispatch(actionsDashboard.FETCH_EVOLUCAO())
-        // this._store.dispatch(actionsDashboard.FETCH_EVOLUCAO_DESPESAS())
         return actions.SET_SEARCH({ payload: response.search })
       }
     }),

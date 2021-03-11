@@ -92,3 +92,5 @@
 
 * [x] Página offline
 * [x] Request ao endpoint para verificação
+* [x] Tela de login
+* [x] Update lista de autocomplete

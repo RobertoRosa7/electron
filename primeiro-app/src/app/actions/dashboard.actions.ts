@@ -18,6 +18,7 @@ export enum actionsTypes {
   SET_DEV_MODE = '[SET_DEV_MODE]',
 
   DARK_MODE = '[DARK_MODE]',
+  UPDATE_AUTOCOMPLETE = '[UPDATE_AUTOCOMPLETE]',
 }
 
 export const INIT_DASHBOARD = createAction(actionsTypes.INIT_DASHBOARD)
@@ -37,3 +38,4 @@ export const SET_EVOLUCAO_DETAIL = createAction(actionsTypes.SET_EVOLUCAO_DETAIL
 export const SET_AUTOCOMPLETE = createAction(actionsTypes.SET_AUTOCOMPLETE, props<{ payload: any }>())
 
 export const DARK_MODE = createAction(actionsTypes.DARK_MODE, props<{ payload: any }>())
+export const UPDATE_AUTOCOMPLETE = createAction(actionsTypes.UPDATE_AUTOCOMPLETE)

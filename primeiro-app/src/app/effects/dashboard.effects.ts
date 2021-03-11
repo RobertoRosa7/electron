@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core'
 import { Actions, ofType, Effect } from '@ngrx/effects'
-import { Store } from '@ngrx/store'
 import { Observable, of } from 'rxjs'
 import { catchError, map, mergeMap } from 'rxjs/operators'
 import * as actions from '../actions/dashboard.actions'
@@ -74,6 +73,28 @@ export class DashboardEffect {
             return [SET_ERRORS({ payload: source })]
           })
         )
+      }
+    }),
+    catchError(err => of(err))
+  )
+
+  @Effect()
+  public updateAutocomplete$: Observable<Actions> = this._action.pipe(
+    ofType(actions.UPDATE_AUTOCOMPLETE),
+    mergeMap(() => this._dashboardService.fetchAutocomplete().pipe(catchError(e => of(e)))),
+    map((autocomplete) => {
+      if (autocomplete instanceof HttpErrorResponse) {
+        const source = { ...autocomplete, source: 'update_autocomplete' }
+        return SET_ERRORS({ payload: source })
+      } else {
+        this._indexedb.getById('autocomplete_id').pipe(map((lists) => {
+          if (lists) {
+            this._indexedb.update({ id: 'autocomplete_id', auto_complete: lists.list })
+          } else {
+            this._indexedb.create({ id: 'autocomplete_id', auto_complete: autocomplete.list })
+          }
+        }))
+        return actions.SET_AUTOCOMPLETE({ payload: autocomplete.list })
       }
     }),
     catchError(err => of(err))
