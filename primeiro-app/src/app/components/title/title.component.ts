@@ -6,8 +6,8 @@ import { Component, Input, OnInit } from '@angular/core';
   styleUrls: ['./title.component.scss']
 })
 export class TitleComponent implements OnInit {
-  @Input() public title: string | number
-  @Input() public subtitle: string | number
+  @Input() public title: any
+  @Input() public subtitle: any
   
   constructor() { }
 

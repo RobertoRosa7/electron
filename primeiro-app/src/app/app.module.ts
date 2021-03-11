@@ -25,6 +25,10 @@ import { Constants } from './services/constants'
 import { AngularCreatePdfModule } from 'angular-create-pdf'
 import { AppService } from './services/app.service'
 import { AppEffect } from './effects/app.effects'
+import { DialogsComponent } from './components/dialogs/dialogs.component'
+import { MatCheckboxModule } from '@angular/material/checkbox'
+import { MatInputModule } from '@angular/material/input'
+import { MatFormFieldModule } from '@angular/material/form-field'
 
 registerLocaleData(localePt, 'pt-BR')
 
@@ -41,6 +45,7 @@ const indexedConfig: DBConfig = {
   declarations: [
     AppComponent,
     HomeComponent,
+    DialogsComponent,
   ],
   imports: [
     BrowserModule,
@@ -55,10 +60,16 @@ const indexedConfig: DBConfig = {
     AppRoutingModule,
     HttpClientModule,
     AngularCreatePdfModule,
+    MatCheckboxModule,
+    MatFormFieldModule,
+    MatInputModule,
     NgxIndexedDBModule.forRoot(indexedConfig),
     StoreModule.forRoot(PrimeiroAppStore),
     StoreDevtoolsModule.instrument({ maxAge: 45 }),
     EffectsModule.forRoot([AppEffect, RegistersEffect, DashboardEffect])
+  ],
+  entryComponents: [
+    DialogsComponent
   ],
   providers: [
     { provide: Constants },

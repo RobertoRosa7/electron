@@ -123,7 +123,6 @@ $text-accent: var(--text-accent);
   }
   .bg-mode-custom {
     background: linear-gradient(-90deg, var(--color-whitesmoke), transparent);
-
     button:hover {
       background: var(--color-white);
     }
@@ -212,13 +211,11 @@ $text-accent: var(--text-accent);
     color: var(--color-medium-white);
   }
 }
-
 * {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
 }
-
 html,
 body {
   height: 100%;
@@ -233,7 +230,6 @@ h2.welcome-subtitle {
   text-align: center;
   margin: 15px 0;
 }
-
 @mixin custom-button-icon-width-text {
   display: flex;
   align-items: center;
@@ -252,7 +248,6 @@ h2.welcome-subtitle {
 ::-webkit-scrollbar-track {
   background: #ff408190;
 }
-
 ::-webkit-scrollbar {
   width: 6px;
   background: transparent;

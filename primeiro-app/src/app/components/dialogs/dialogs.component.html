@@ -86,4 +86,41 @@
       </p>
     </div>
   </div>
+
+  <div *ngIf="type === 'login'" class="dialog-container login">
+    <div class="header dialog-header-mode">
+      <div class="title login">Login</div>
+      <div class="max-window">
+        <button mat-icon-button disableRipple="true" (click)="close()">
+          <mat-icon>close</mat-icon>
+        </button>
+      </div>
+    </div>
+
+    <form class="container-form" (ngSubmit)="onSubmit()">
+      <div class="form-inline">
+        <mat-form-field class="form" floatLabel="always" appearance="outline">
+          <mat-label>Email</mat-label>
+          <input type="email" matInput placeholder="E-mail" required>
+        </mat-form-field>
+      </div>
+
+      <div class="form-inline">
+        <mat-form-field class="form" floatLabel="always" appearance="outline">
+          <mat-label>Senha</mat-label>
+          <input [type]="textIcon" matInput placeholder="Senha" required>
+          <mat-icon style="cursor: pointer;" (click)="changeVisibility(textIcon)" matSuffix>{{changeIcon}}</mat-icon>
+        </mat-form-field>
+      </div>
+
+      <div class="checkbox">
+        <mat-checkbox>Manter conectado</mat-checkbox>
+      </div>
+
+      <div class="container-buttons">
+        <button type="button" color="accent" (click)="close()" mat-raised-button>Fechar</button>
+        <button type="submit" mat-raised-button>Login</button>
+      </div>
+    </form>
+  </div>
 </section>

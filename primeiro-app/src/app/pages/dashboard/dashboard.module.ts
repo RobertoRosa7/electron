@@ -85,7 +85,6 @@ registerLocaleData(localePt, 'pt')
     DialogConfirmComponent,
     ListRegistersComponent,
     HighchartsComponent,
-    DialogsComponent,
     PanelControlComponent,
   ],
   imports: [
@@ -112,7 +111,7 @@ registerLocaleData(localePt, 'pt')
     MatListModule,
     MatMenuModule,
     MatSelectModule,
-    MatAutocompleteModule
+    MatAutocompleteModule,
   ],
   entryComponents: [
     DialogFormIncomingComponent,
