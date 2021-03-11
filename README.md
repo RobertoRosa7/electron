@@ -87,3 +87,8 @@
 * [x] Implementação de autocomplete
 * [x] Actions, mais redux com effect busca autocomplete lista
 * [x] Salvar cópia da lista autocomplete no indexedb
+
+###### 11/03/2021
+
+* [x] Página offline
+* [x] Request ao endpoint para verificação

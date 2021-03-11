@@ -1,5 +1,51 @@
-<!-- <div>not conection</div>
-<p class="print">
-  <input type="button" name="print" class="botao" value="IMPRIMIR" onclick="window.location='javascript:self.print();'">
-  </p> -->
-<router-outlet></router-outlet>
+<router-outlet *ngIf="isOnline; else offline"></router-outlet>
+<ng-template #offline>
+  <section class="offline">
+    <div class="container-offline">
+      <p class="title">Página Offline</p>
+      <p class="wifi-off">
+        <mat-icon>wifi_off</mat-icon>
+      </p>
+      <div class="causas">
+        <p>Possíveis causas:</p>
+        <ul>
+          <li>O Servidor está fora do ar <small>(caiu)</small></li>
+          <li>Sem conexão com a internet</li>
+        </ul>
+      </div>
+
+      <div class="solucoes">
+        <p>Soluções:</p>
+        <ul>
+          <li>Recarregar a página <small>refresh</small></li>
+          <li>Verificar sua conexão com a internet</li>
+          <li>Entrar em contato com suporte</li>
+        </ul>
+      </div>
+
+      <div class="suporte">
+        <p>Suporte:</p>
+        <ul>
+          <li>
+            <span>Desenvolvedor:</span>
+            <small>Roberto Rosa</small>
+          </li>
+          <li>
+            <span>Email:</span>
+            <small>roberto.rosa7@gmail.com</small>
+          </li>
+          <li>
+            <span>LinkedIn</span>
+            <small>
+              <a href="https://www.linkedin.com/in/roberto-rosa-da-silva-71911259/">Perfil</a>
+            </small>
+          </li>
+          <li>
+            <span>Whatsapp</span>
+            <small>+55 11 94161-6008</small>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </section>
+</ng-template>

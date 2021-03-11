@@ -1,66 +1,44 @@
-// @import "../styles.scss";
+.offline {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 
-// ::ng-deep mat-toolbar {
-//   position: fixed;
-//   z-index: 99;
-// }
+  .container-offline {
+    height: inherit;
+    width: inherit;
+    max-width: 600px;
+    max-height: 500px;
+    font-weight: 100;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 
-// .app-custom-toolbar-row {
-//   display: flex;
-//   justify-content: space-between;
-// }
-// .container.mat-drawer-container {
-//   height: 100%;
-// }
-// .container {
-//   .mat-drawer-container ::ng-deep .mat-drawer-inner-container {
-//     min-width: 75px;
-//   }
-//   .mat-drawer-side {
-//     border: none;
-//   }
-
-//   .app-menu-list {
-//     list-style: none;
-//     flex-direction: column;
-//     display: flex;
-//     justify-content: center;
-//     align-items: center;
-
-//     li:active,
-//     li:focus,
-//     li a:focus,
-//     li a:active {
-//       outline: none;
-//       border: none;
-//     }
-//     li {
-//       width: 100%;
-//       text-align: center;
-//       min-width: 200px;
-//       min-height: 64px;
-//       display: flex;
-//       justify-content: flex-start;
-//       align-items: center;
-//       cursor: pointer;
-//       padding: 0 16px;
-//       overflow: hidden;
-//     }
-//     li a {
-//       display: flex;
-//       justify-content: center;
-//       align-items: center;
-//       height: 40px;
-//       width: 40px;
-//     }
-//     li span {
-//       font-size: 12px;
-//       white-space: nowrap;
-//       text-transform: uppercase;
-//       text-overflow: ellipsis;
-//       overflow: hidden;
-//       display: inline-block;
-//       max-width: 200px;
-//     }
-//   }
-// }
+    .title {
+      text-align: center;
+      font-size: 2em;
+    }
+    .wifi-off {
+      text-align: center;
+      mat-icon {
+        font-size: 6em;
+        width: inherit;
+        height: inherit;
+      }
+    }
+    .causas,
+    .solucoes {
+      margin: 16px 0;
+    }
+    .suporte ul {
+      display: flex;
+      justify-content: space-between;
+    }
+    .suporte li {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+  }
+}

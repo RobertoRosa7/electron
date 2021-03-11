@@ -23,6 +23,8 @@ import { HomeComponent } from './pages/home/home.component'
 import { HttpClientModule } from '@angular/common/http'
 import { Constants } from './services/constants'
 import { AngularCreatePdfModule } from 'angular-create-pdf'
+import { AppService } from './services/app.service'
+import { AppEffect } from './effects/app.effects'
 
 registerLocaleData(localePt, 'pt-BR')
 
@@ -56,10 +58,11 @@ const indexedConfig: DBConfig = {
     NgxIndexedDBModule.forRoot(indexedConfig),
     StoreModule.forRoot(PrimeiroAppStore),
     StoreDevtoolsModule.instrument({ maxAge: 45 }),
-    EffectsModule.forRoot([RegistersEffect, DashboardEffect])
+    EffectsModule.forRoot([AppEffect, RegistersEffect, DashboardEffect])
   ],
   providers: [
     { provide: Constants },
+    { provide: AppService }
   ],
   bootstrap: [AppComponent]
 })
