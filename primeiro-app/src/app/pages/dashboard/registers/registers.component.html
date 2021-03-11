@@ -10,13 +10,14 @@
       <div *ngIf="tab === 'read'" style="width: 100%; max-width: 470px;">
         <div *ngIf="!isMobile" class="control forms">
           <mat-form-field class="form" floatLabel="always" appearance="outline">
-            <mat-select [(value)]="orderby" (selectionChange)="orderbyChange($event)" placeholder="Ordenar por">
+            <mat-select panelClass="custom-select" [(value)]="orderby" (selectionChange)="orderbyChange($event)"
+              placeholder="Ordenar por">
               <mat-option [value]="option" *ngFor="let option of displayedColumns">{{option}}</mat-option>
             </mat-select>
           </mat-form-field>
 
           <mat-form-field class="form" floatLabel="always" appearance="outline">
-            <mat-select [(value)]="filterByDays" placeholder="Ultimos 7 dias"
+            <mat-select panelClass="custom-select" [(value)]="filterByDays" placeholder="Ultimos 7 dias"
               (selectionChange)="filterByDaysChange($event)">
               <mat-option value="7">Ultimos 7 dias</mat-option>
               <mat-option value="15">Ultimos 15 dias</mat-option>
@@ -27,7 +28,7 @@
           </mat-form-field>
 
           <mat-form-field class="form" floatLabel="always" appearance="outline">
-            <mat-select [(value)]="inOutComing" (selectionChange)="inOutComingChange($event)"
+            <mat-select panelClass="custom-select" [(value)]="inOutComing" (selectionChange)="inOutComingChange($event)"
               placeholder="Entradas/Saídas">
               <mat-option value="incoming">Entradas</mat-option>
               <mat-option value="outcoming">Saídas</mat-option>
@@ -44,13 +45,14 @@
           <mat-menu #menu="matMenu">
             <div class="control mobile">
               <mat-form-field class="form" floatLabel="always" appearance="outline">
-                <mat-select [(value)]="orderby" (selectionChange)="orderbyChange($event)" placeholder="Ordenar por">
+                <mat-select panelClass="custom-select" [(value)]="orderby" (selectionChange)="orderbyChange($event)"
+                  placeholder="Ordenar por">
                   <mat-option [value]="option" *ngFor="let option of displayedColumns">{{option}}</mat-option>
                 </mat-select>
               </mat-form-field>
 
               <mat-form-field class="form" floatLabel="always" appearance="outline">
-                <mat-select [(value)]="filterByDays" placeholder="Ultimos 7 dias"
+                <mat-select panelClass="custom-select" [(value)]="filterByDays" placeholder="Ultimos 7 dias"
                   (selectionChange)="filterByDaysChange($event)">
                   <mat-option value="7">Ultimos 7 dias</mat-option>
                   <mat-option value="15">Ultimos 15 dias</mat-option>
@@ -61,8 +63,8 @@
               </mat-form-field>
 
               <mat-form-field class="form" floatLabel="always" appearance="outline">
-                <mat-select [(value)]="inOutComing" (selectionChange)="inOutComingChange($event)"
-                  placeholder="Entradas/Saídas">
+                <mat-select panelClass="custom-select" [(value)]="inOutComing"
+                  (selectionChange)="inOutComingChange($event)" placeholder="Entradas/Saídas">
                   <mat-option value="incoming">Entradas</mat-option>
                   <mat-option value="outcoming">Saídas</mat-option>
                   <mat-option value="pending">Lançamento</mat-option>

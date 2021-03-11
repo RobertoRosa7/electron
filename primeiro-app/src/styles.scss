@@ -17,6 +17,7 @@
   --color-whitesmoke: whitesmoke;
   --color-medium-white: #fafafa;
   --color-default-dark: #303030;
+  --color-dark: #212121;
 }
 
 $mat-primary-pallete: mat-palette($mat-teal);
@@ -66,6 +67,9 @@ $text-accent: var(--text-accent);
   background: $bg-light-mode;
   .form-search {
     background: $bg-light-mode;
+  }
+  .hedaer-print {
+    background-color: var(--color-whitesmoke);
   }
   .dialog-header-mode {
     background: var(--color-medium-white);
@@ -137,6 +141,10 @@ $text-accent: var(--text-accent);
   @include angular-material-theme($app-dark-theme);
   background: $bg-dark-mode;
   color: $color-dark-mode;
+  .hedaer-print {
+    // background-color: var(--color-dark);
+    background: linear-gradient(-90deg, #393939 100%, #42424290 0);
+  }
   .form-search {
     background: $bg-dark-mode;
   }
@@ -236,7 +244,11 @@ h2.welcome-subtitle {
   margin-top: 4px;
   margin-bottom: 4px;
 }
-
+.custom-select {
+  .mat-option-text {
+    padding: 0 16px;
+  }
+}
 ::-webkit-scrollbar-track {
   background: #ff408190;
 }

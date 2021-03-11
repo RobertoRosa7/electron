@@ -24,6 +24,10 @@ export class DashboardService {
     return this.http.get<Register[]>(`${this.constants.get('fetch_registers')}${this.convertJsonToUrl(params)}`)
   }
 
+  public fetchSearch(params?: any): Observable<Register[]> {
+    return this.http.get<Register[]>(`${this.constants.get('fetch_search')}${this.convertJsonToUrl(params)}`)
+  }
+
   public newRegister(payload: Register): Observable<Register> {
     return this.http.post<Register>(this.constants.get('new_register'), payload)
   }
@@ -47,7 +51,7 @@ export class DashboardService {
   public fetchEvocucao(): Observable<any> {
     return this.http.get<any>(this.constants.get('fetch_evolucao'))
   }
-  
+
   public fetchEvocucaoDespesas(): Observable<any> {
     return this.http.get<any>(this.constants.get('fetch_evolucao_despesas'))
   }

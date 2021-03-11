@@ -26,7 +26,8 @@ const INITIAL_STATE = {
   total_receita: 0,
   a_receber: 0,
   a_pagar: 0,
-  all_days_period: 1
+  all_days_period: 1,
+  result_search: []
 }
 const registersReducers = createReducer(
   INITIAL_STATE,
@@ -54,6 +55,7 @@ const registersReducers = createReducer(
     stateUpdated[stateUpdated.findIndex((r: any) => r._id.$oid === payload._id.$oid)] = payload
     return { ...states, all: updateAll(stateUpdated) }
   }),
+  on(actions.SET_SEARCH, (states, { payload }) => ({ ...states, result_search: updateAll(payload) })),
 )
 
 function updateAll(all: any) {

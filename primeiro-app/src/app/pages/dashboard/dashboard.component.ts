@@ -156,23 +156,13 @@ export class DashboardComponent implements OnInit, DoCheck {
   }
 
   public onSubmit(): void {
-    // this._router.navigate(['dashboard/result-search', { search: this.searchTerms }])
-    // if (this.searchTerms.value != '') {
-    //   this._ipcService?.send('search', JSON.stringify({
-    //     collection_dashboard: 'collection_registers',
-    //     search: this.searchTerms
-    //   }))
-    //   this._ipcService?.on('searched', (_: Electron.IpcMessageEvent, message: any) => {
-    //     console.log(message)
-    //   })
-    // }
-    // this.searchTerms.value = ''
-
-    console.log(this.searchTerms.value)
+    this._router?.navigate(['dashboard/result-search', { s: this.searchTerms.value }])
+    this.searchTerms.reset()
   }
 
   public setSearch(event: MatAutocompleteSelectedEvent) {
-    console.log(event.option.value)
+    this._router?.navigate(['dashboard/result-search', { s: event.option.value }])
+    this.searchTerms.reset()
   }
 
   public handleError(error: any): void {

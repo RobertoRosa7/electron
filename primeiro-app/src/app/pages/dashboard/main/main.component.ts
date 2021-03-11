@@ -71,11 +71,19 @@ export class MainComponent extends DashboardComponent implements OnInit, DoCheck
 
   public ngOnInit(): void {
     this._store.select(({ registers, dashboard }: any) => ({
-      all: [...registers.all], consolidado: dashboard.consolidado, evolucao: dashboard.evolucao,
-      evoucao_despesas: dashboard.evolucao_despesas, tab: registers.tab, total_geral: registers.total_geral,
-      despesas: registers.total_despesas, receita: registers.total_receita, a_pagar: dashboard.consolidado.a_pagar,
-      a_receber: dashboard.consolidado.a_receber, total_credit: dashboard.consolidado.total_credit,
-      total_debit: dashboard.consolidado.total_debit, all_days_period: registers.all_days_period
+      all: [...registers.all],
+      consolidado: dashboard.consolidado,
+      evolucao: dashboard.evolucao,
+      evoucao_despesas: dashboard.evolucao_despesas,
+      tab: registers.tab,
+      total_geral: registers.total_geral,
+      despesas: registers.total_despesas,
+      receita: registers.total_receita,
+      a_pagar: dashboard.consolidado.a_pagar,
+      a_receber: dashboard.consolidado.a_receber,
+      total_credit: dashboard.consolidado.total_credit,
+      total_debit: dashboard.consolidado.total_debit,
+      all_days_period: registers.all_days_period
     })).subscribe(state => {
       this.total = state.total_geral
       this.totalDespesa = state.total_debit

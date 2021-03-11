@@ -138,7 +138,7 @@ export class HighchartsComponent implements OnInit, DoCheck {
 
   public data: any = {}
   public differ: any
-  
+
   constructor(
     private _store: Store,
     protected _differs: KeyValueDiffers

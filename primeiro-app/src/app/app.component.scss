@@ -42,3 +42,15 @@
     }
   }
 }
+
+@media screen and (max-width: 600px) {
+  .offline .container-offline {
+    max-width: 300px;
+  }
+  .offline .container-offline .suporte ul {
+    display: block;
+  }
+  .offline .container-offline .suporte li {
+    margin: 8px 0;
+  }
+}

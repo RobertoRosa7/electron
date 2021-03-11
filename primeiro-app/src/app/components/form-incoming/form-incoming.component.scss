@@ -12,12 +12,15 @@
     align-items: center;
     flex-wrap: wrap;
     width: 100%;
-  }
-  .form {
-    width: 49%;
-  }
-  .form-textarea {
-    width: 100%;
+    .form {
+      width: 49%;
+    }
+    .form-textarea {
+      width: 100%;
+    }
+    .mat-option{
+      padding: 0 16px;
+    }
   }
   .container-button {
     width: 100%;

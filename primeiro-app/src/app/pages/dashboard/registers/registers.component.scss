@@ -191,7 +191,6 @@ $marginTopButton: 25px;
   text-align: center;
   .hedaer-print {
     margin: $marginTopButton 0;
-    background: var(--text-green);
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -199,7 +198,7 @@ $marginTopButton: 25px;
     .logo {
       width: 100%;
       max-width: 50px;
-      padding: 16px 0;
+      padding: 16px 8px;
       img {
         width: 100%;
       }
@@ -208,7 +207,6 @@ $marginTopButton: 25px;
       position: absolute;
       right: 10px;
       bottom: 10px;
-      color: white;
     }
   }
   .header-user {

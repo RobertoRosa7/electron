@@ -18,7 +18,7 @@ export class Constants {
     fetch_evolucao: 'dashboard/fetch_evolucao',
     fetch_evolucao_despesas: 'dashboard/fetch_evolucao_despesas',
     fetch_evolucao_detail: 'dashboard/fetch_evolucao_detail',
-    
+    fetch_search:'dashboard/search',
     new_register: 'dashboard/new_register',
     delete_register: 'dashboard/delete_register',
     update_register: 'dashboard/update_register',

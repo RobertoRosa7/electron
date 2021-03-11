@@ -22,7 +22,6 @@ export class AppEffect {
     ofType(actionsApp.ONLINE),
     mergeMap(() => this._appService.isOnline().pipe(catchError(e => of(e)))),
     map((payload) => {
-      console.log(payload)
       if (payload instanceof HttpErrorResponse) {
         const source = { ...payload, source: 'offline' }
         return SET_ERRORS({ payload: source })

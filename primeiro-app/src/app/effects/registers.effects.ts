@@ -16,7 +16,8 @@ export class RegistersEffect {
     fetch_registers: 'fetch_registers',
     new_register: 'new_register',
     delete_register: 'delete_register',
-    update_register: 'update_register'
+    update_register: 'update_register',
+    fetch_search: 'fetch_search'
   }
 
   constructor(
@@ -119,6 +120,28 @@ export class RegistersEffect {
         this._store.dispatch(actionsDashboard.FETCH_EVOLUCAO())
         this._store.dispatch(actionsDashboard.FETCH_EVOLUCAO_DESPESAS())
         return actions.SET_UPDATE({ payload: response.data })
+      }
+    }),
+    catchError(err => of(err))
+  )
+
+  @Effect()
+  public fetchSearch$: Observable<Actions> = this._action.pipe(
+    ofType(actions.actionsTypes.GET_SEARCH),
+    mergeMap(({ payload }: any) => forkJoin([
+      this._dashboardService.fetchSearch(payload).pipe(catchError(e => of(e))),
+      of(payload)
+    ])),
+    map(([response, payload]) => {
+      if (response instanceof HttpErrorResponse) {
+        const source = { ...response, source: this.props.fetch_search }
+        return SET_ERRORS({ payload: source })
+      } else {
+        // this._store.dispatch(SET_SUCCESS({ payload: this.props.fetch_search }))
+        // this._store.dispatch(actionsDashboard.INIT_DASHBOARD())
+        // this._store.dispatch(actionsDashboard.FETCH_EVOLUCAO())
+        // this._store.dispatch(actionsDashboard.FETCH_EVOLUCAO_DESPESAS())
+        return actions.SET_SEARCH({ payload: response.search })
       }
     }),
     catchError(err => of(err))
