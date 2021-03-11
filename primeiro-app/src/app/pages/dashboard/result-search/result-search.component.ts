@@ -46,4 +46,8 @@ export class ResultSearchComponent extends DashboardComponent implements OnInit,
     this.RESULT_DATA$ = this._store.select(({ registers }: any) => registers.result_search)
     this.TOTAL_RESULT$ = this._store.select(({ registers }: any) => registers.result_search.length)
   }
+
+  public onEvent(_: any): void {
+    this._store.dispatch(actionsRegisters.GET_SEARCH({ payload: { search: this.searchTerm } }))
+  }
 }

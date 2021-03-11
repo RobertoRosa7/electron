@@ -43,6 +43,7 @@ export class ListRegistersComponent implements OnInit {
               category: res.category
             }
           }))
+          this.send.emit('edit')
         }
       })
   }
@@ -52,6 +53,7 @@ export class ListRegistersComponent implements OnInit {
       .beforeClosed().subscribe(response => {
         if (response) {
           this._store.dispatch(actionsRegister.DELETE_REGISTERS({ payload }))
+          this.send.emit('delete')
         }
       })
   }
