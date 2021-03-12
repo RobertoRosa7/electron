@@ -29,6 +29,8 @@ import { DialogsComponent } from './components/dialogs/dialogs.component'
 import { MatCheckboxModule } from '@angular/material/checkbox'
 import { MatInputModule } from '@angular/material/input'
 import { MatFormFieldModule } from '@angular/material/form-field'
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { LoginComponent } from './components/login/login.component'
 
 registerLocaleData(localePt, 'pt-BR')
 
@@ -46,6 +48,7 @@ const indexedConfig: DBConfig = {
     AppComponent,
     HomeComponent,
     DialogsComponent,
+    LoginComponent,
   ],
   imports: [
     BrowserModule,
@@ -63,6 +66,8 @@ const indexedConfig: DBConfig = {
     MatCheckboxModule,
     MatFormFieldModule,
     MatInputModule,
+    FormsModule,
+    ReactiveFormsModule,
     NgxIndexedDBModule.forRoot(indexedConfig),
     StoreModule.forRoot(PrimeiroAppStore),
     StoreDevtoolsModule.instrument({ maxAge: 45 }),

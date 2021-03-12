@@ -12,8 +12,6 @@ export class DialogsComponent implements OnInit {
   @ViewChild('contentDialog', { static: false }) public contentDialog: ElementRef
   public type: string = ''
   public detail: Register
-  public textIcon: string = 'password'
-  public changeIcon: string = 'visibility_off'
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public DIALOG_DATA: DIALOG_DATA,
@@ -83,12 +81,7 @@ export class DialogsComponent implements OnInit {
     this._dialogRef.close({ operation: 'del', payload: item })
   }
 
-  public onSubmit(): void {
-    console.log('Bingo')
-  }
-
-  public changeVisibility(str: string): void {
-    this.textIcon = str == 'password' ? 'text' : 'password'
-    this.changeIcon = str == 'password' ? 'visibility' : 'visibility_off'
+  public onTrigger(event: any): void {
+    this._dialogRef.close({ operation: event })
   }
 }

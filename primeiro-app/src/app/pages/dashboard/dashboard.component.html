@@ -19,7 +19,6 @@
             <a>
               <mat-icon>{{item.icon}}</mat-icon>
             </a>
-            <!-- <span>{{item.name}}</span> -->
           </li>
         </ul>
       </div>
@@ -44,22 +43,6 @@
                     close
                   </mat-icon>
                 </mat-form-field>
-
-                <!-- <mat-form-field floatLabel="always" appearance="outline">
-                  <input [matAutocomplete]="auto" required>
-                  <mat-autocomplete #auto="matAutocomplete" (optionSelected)="setCorretora($event)">
-                    <mat-option *ngFor="let option of filteredOptionsCorretorasRendaFixaPrivada | async"
-                      [value]="option">{{option.nom}}</mat-option>
-                  </mat-autocomplete>
-                  <mat-hint fxLayout="row" fxFlex="100"
-                    [ngStyle]="{'justify-content': (rendaFixaForm1.get('distribuidora').hasError('required') && rendaFixaForm1.get('distribuidora').touched) ? 'space-between' : 'flex-end', 'align-items': (!rendaFixaForm1.get('distribuidora').hasError('required') && rendaFixaForm1.get('distribuidora').touched) ? 'center' : 'center'}">
-                    <span
-                      *ngIf="rendaFixaForm1.get('distribuidora').hasError('required') && rendaFixaForm1.get('distribuidora').touched"
-                      class="show-error" fxFlex.xs="44" fxFlex="50">Digite a distribuidora</span>
-                    <span (click)="help('distribuidora')" class="tips" fxFlex="33"
-                      fxFlex.xs="56">{{form.tip}}</span>
-                  </mat-hint>
-                </mat-form-field> -->
               </form>
             </div>
 
@@ -75,19 +58,13 @@
         </mat-toolbar>
 
         <!-- router-outlet só funciona se existir router children -->
-        <div *ngIf="showErrors; else showErrors" class="pages">
+        <div class="pages">
           <router-outlet></router-outlet>
         </div>
-        <ng-template #showErrors>
-          <div class="pages">
-            <h1>Error - não foi possível carregar a página.</h1>
-          </div>
-        </ng-template>
       </div>
+      <button (click)="goToTop()" *ngIf="buttonToTop" mat-fab color="primary" class="button-top">
+        <mat-icon>keyboard_arrow_up</mat-icon>
+      </button>
     </mat-drawer-content>
   </mat-drawer-container>
-
-  <button (click)="goToTop()" *ngIf="buttonToTop" mat-fab color="primary" class="button-top">
-    <mat-icon>keyboard_arrow_up</mat-icon>
-  </button>
 </div>

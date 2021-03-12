@@ -4,49 +4,22 @@
     <div class="header dialog-header-mode">
       <div class="title">{{detail.description}}</div>
       <div class="max-window">
-        <button mat-icon-button disableRipple="true" (click)="close()">
+        <button type="button" mat-icon-button disableRipple="true" (click)="close()">
           <mat-icon>close</mat-icon>
         </button>
       </div>
     </div>
 
     <div class="content-dialog">
-      <!-- <div class="line">
-        <p class="tipo">
-          <small>Tipo:
-            <mat-icon *ngIf="detail.type === 'outcoming'">trending_down</mat-icon>
-            <mat-icon *ngIf="detail.type === 'incoming'">trending_up</mat-icon>
-          </small>
-          <span *ngIf="detail.type === 'outcoming'">Despesa</span>
-          <span *ngIf="detail.type === 'incoming'">Receita</span>
-        </p>
-      </div> -->
       <div class="line">
-        <!-- <p class="status">
-          <small>
-            <mat-icon *ngIf="(detail.status === 'concluído' || detail.status === 'done'); else pending">done</mat-icon>
-            <ng-template #pending>
-              <mat-icon>query_builder</mat-icon>
-            </ng-template>
-          </small>
-          <span>{{detail.status}}</span>
-        </p> -->
         <p class="categoria">
-          <!-- <small>Categoria:</small> -->
           <span>{{detail.category}} <mat-icon>{{detail.cat_icon}}</mat-icon></span>
         </p>
         <p class="description">
-          <!-- <small>Descrição:</small> -->
           <span>{{detail.description}}</span>
         </p>
-        <!-- <p class="description">
-        <small>Descrição:</small>
-        <span>{{detail.description}}</span>
-      </p> -->
       </div>
       <p class="valor">
-        <!-- <small>Valor:</small> -->
-        <!-- <span>{{detail.status}}</span> -->
         <span [ngClass]="{'cards-money-on':detail.type === 'incoming','cards-money-off':detail.type === 'outcoming'}">
           <small *ngIf="detail.type === 'outcoming'">-</small>
           R$ {{formatarValor(detail.value)}}
@@ -91,36 +64,11 @@
     <div class="header dialog-header-mode">
       <div class="title login">Login</div>
       <div class="max-window">
-        <button mat-icon-button disableRipple="true" (click)="close()">
+        <button type="button" mat-icon-button disableRipple="true" (click)="close()">
           <mat-icon>close</mat-icon>
         </button>
       </div>
     </div>
-
-    <form class="container-form" (ngSubmit)="onSubmit()">
-      <div class="form-inline">
-        <mat-form-field class="form" floatLabel="always" appearance="outline">
-          <mat-label>Email</mat-label>
-          <input type="email" matInput placeholder="E-mail" required>
-        </mat-form-field>
-      </div>
-
-      <div class="form-inline">
-        <mat-form-field class="form" floatLabel="always" appearance="outline">
-          <mat-label>Senha</mat-label>
-          <input [type]="textIcon" matInput placeholder="Senha" required>
-          <mat-icon style="cursor: pointer;" (click)="changeVisibility(textIcon)" matSuffix>{{changeIcon}}</mat-icon>
-        </mat-form-field>
-      </div>
-
-      <div class="checkbox">
-        <mat-checkbox>Manter conectado</mat-checkbox>
-      </div>
-
-      <div class="container-buttons">
-        <button type="button" color="accent" (click)="close()" mat-raised-button>Fechar</button>
-        <button type="submit" mat-raised-button>Login</button>
-      </div>
-    </form>
+    <app-login (trigger)="onTrigger($event)" style="height: inherit;"></app-login>
   </div>
 </section>

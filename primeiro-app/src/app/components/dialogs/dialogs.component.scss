@@ -85,42 +85,5 @@ $padding-size: 15px;
       }
     }
   }
-  .container-form {
-    height: inherit;
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    .form-inline {
-      width: inherit;
-      text-align: center;
-      .form {
-        width: inherit;
-        max-width: 384px;
-      }
-    }
-    .checkbox {
-      text-align: left;
-      width: 100%;
-      max-width: 384px;
-    }
-    .container-buttons {
-      max-width: 384px;
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: space-between;
-      width: 100%;
-    }
-    .container-buttons button {
-      @include custom-button-icon-width-text;
-      text-transform: uppercase;
-    }
-  }
-}
-
-@media screen and (max-width: 600px) {
-  .dialog .dialog-container.login .container-form {
-    padding: 16px;
-  }
+  
 }
