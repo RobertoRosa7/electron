@@ -1,12 +1,21 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { HttpErrorResponse } from '@angular/common/http'
+import { Component, DoCheck, KeyValueDiffers, OnInit } from '@angular/core'
+import { FormBuilder, FormGroup, Validators } from '@angular/forms'
+import { MatSnackBar } from '@angular/material/snack-bar'
+import { Router } from '@angular/router'
+import { Store } from '@ngrx/store'
+import { User } from 'aws-sdk/clients/budgets'
+import { delay } from 'rxjs/operators'
+import { Signup } from 'src/app/models/models'
+import { LoginService } from 'src/app/services/login.service'
+import * as actionsLogin from '../../../actions/login.actions'
 
 @Component({
   selector: 'app-sign-up',
   templateUrl: './sign-up.component.html',
   styleUrls: ['./sign-up.component.scss']
 })
-export class SignUpComponent implements OnInit {
+export class SignUpComponent implements OnInit, DoCheck {
   public textIcon: string = 'password'
   public changeIcon: string = 'visibility_off'
   public changeTextLogin: string = 'Não tenho conta'
@@ -14,6 +23,8 @@ export class SignUpComponent implements OnInit {
   public isLoginText: string = 'login'
   public isLoading: boolean = false
   public isPasswordSame: boolean = false
+  public differ: any
+  public cadastro: boolean = false
 
   public formSignup: FormGroup = this._fb.group({
     email: ['', [Validators.required, Validators.email]],
@@ -23,10 +34,42 @@ export class SignUpComponent implements OnInit {
   }, { validator: this.checkPassword('password', 'confirm_password') })
 
   constructor(
-    private _fb: FormBuilder
-  ) { }
+    private _fb: FormBuilder,
+    private _store: Store,
+    private _snackbar: MatSnackBar,
+    private _router: Router,
+    private _diff: KeyValueDiffers,
+    private _loginService: LoginService
+  ) {
+    this.differ = this._diff.find({}).create()
+  }
 
-  ngOnInit(): void {
+  public ngDoCheck() {
+    const change = this.differ.diff(this)
+    if (change) {
+      change.forEachChangedItem((item: any) => {
+        if (item.key === 'cadastro') {
+          if (this.cadastro) {
+            this.isLoading = false
+            this._snackbar.open('E-mail cadastrado, verifique seu e-mail', 'ok')
+          }
+        }
+      })
+    }
+  }
+
+  public ngOnInit(): void {
+    this._store.select(({ login, http_error }: any) => ({ errors: http_error.errors, cadastro: login.cadastro }))
+      .pipe(delay(3000))
+      .subscribe(state => {
+        if (state.errors.length > 0) {
+          this.isLoading = false
+          state.errors.forEach((e: HttpErrorResponse) => {
+            this._snackbar.open(e.error.message, 'ok')
+          })
+        }
+        this.cadastro = state.cadastro
+      })
   }
 
   public checkPassword(controlName: string, matchingControlName: string) {
@@ -51,7 +94,15 @@ export class SignUpComponent implements OnInit {
   public onSubmit(event: any): void {
     event.preventDefault()
     this.isLoading = true
-    console.log(this.formSignup.value)
+
+    const user: Signup = {
+      password: this.formSignup.value.password,
+      email: this.formSignup.value.email,
+      created_at: new Date().getTime() / 1000,
+      verified: false
+    }
+    
+    this._store.dispatch(actionsLogin.CREATE_USER({ payload: user }))
   }
 
   public changeVisibility(str: string): void {
@@ -59,14 +110,14 @@ export class SignUpComponent implements OnInit {
     this.changeIcon = str == 'password' ? 'visibility' : 'visibility_off'
   }
 
-  public forgetPassword(str: string) {
+  public forgetPassword(event: any) {
+    this.isLoading ? event.preventDefault() : undefined
   }
 
-  public noAccount(str: string) {
-    this.close()
+  public noAccount(event: any) {
+    this.isLoading ? event.preventDefault() : this._router.navigateByUrl('/login')
   }
 
   public close(options?: any): void {
   }
-
 }

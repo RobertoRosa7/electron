@@ -8,6 +8,7 @@ import { DashboardComponent } from '../dashboard.component'
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout'
 import { MatSelectChange } from '@angular/material/select'
 import { AngularCreatePdfService } from 'angular-create-pdf'
+import { ScrollService } from 'src/app/services/scroll.service'
 @Component({
   selector: 'app-registers',
   templateUrl: './registers.component.html',
@@ -43,8 +44,8 @@ export class RegistersComponent extends DashboardComponent implements OnInit, Af
   public days: number = 0;
 
   public user_temp: User = {
-    name: 'Anominous',
-    email: 'anonimous@gmail.com',
+    name: 'Roberto Rosa',
+    email: 'roberto.rosa7@gmail.com',
     created_at: (new Date('2003-10-01').getTime() / 1000),
     edit: false,
     credit_card: { brand: 'visa' },
@@ -68,7 +69,7 @@ export class RegistersComponent extends DashboardComponent implements OnInit, Af
     protected _dialog: MatDialog,
     protected _breakpointObserver: BreakpointObserver,
     protected _differs: KeyValueDiffers,
-    protected _createPdf: AngularCreatePdfService
+    protected _createPdf: AngularCreatePdfService,
   ) {
     super()
     _breakpointObserver.observe([Breakpoints.XSmall]).subscribe(result => this.isMobile = !!result.matches)

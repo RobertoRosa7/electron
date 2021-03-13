@@ -49,21 +49,17 @@
       </div>
 
       <div class="container-forget">
-        <p (click)="forgetPassword(changeTextLogin)" class="forget-password">
+        <p (click)="forgetPassword($event)" class="forget-password">
           <small>Esqueci a senha</small>
         </p>
-        <p (click)="noAccount(changeTextLogin)" class="no-account">
-          <small>Login</small>
+        <p (click)="noAccount($event)" class="no-account">
+          <small>Já tenho conta</small>
         </p>
-      </div>
-
-      <div class="checkbox">
-        <mat-checkbox formControlName="keep_connect">Manter conectado</mat-checkbox>
       </div>
 
       <div class="container-buttons">
-        <button [disabled]="!formSignup.valid || isLoading" type="submit" mat-raised-button>Login</button>
-        <button (click)="close()" type="button" color="accent" mat-raised-button>Fechar</button>
+        <button [disabled]="!formSignup.valid || isLoading" type="submit" mat-raised-button>Cadastrar</button>
+        <button [disabled]="isLoading" routerLink="/" type="button" color="accent" mat-raised-button>Voltar</button>
       </div>
     </form>
   </div>

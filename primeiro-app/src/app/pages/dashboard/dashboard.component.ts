@@ -114,7 +114,10 @@ export class DashboardComponent implements OnInit, DoCheck {
         this._snackbar?.open(`${name}`, 'Ok', { duration: 3000 })
       })
 
-    this._scrollService?.getScrollAsStream().subscribe(per => this.buttonToTop = (per >= 30))
+    this._scrollService?.getScrollAsStream().subscribe(per =>{
+      console.log(per)
+      this.buttonToTop = (per >= 30)
+    })
   }
 
   public ngDoCheck() {
@@ -190,6 +193,8 @@ export class DashboardComponent implements OnInit, DoCheck {
         return 'Status code: '
       case 'fetch_evolucao_detail':
         return 'ao carregar gráfico'
+      case 'signin':
+        return 'Login'
       default:
         return ''
     }

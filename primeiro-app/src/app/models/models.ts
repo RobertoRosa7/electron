@@ -28,6 +28,7 @@ export interface User {
   credit_card?: CreditCard
   cpf?: number
   phone?: number
+  token?: string
 }
 
 export interface Login {
@@ -36,6 +37,12 @@ export interface Login {
   phone_number?: number
 }
 
+export interface Signup {
+  password: string
+  email: string
+  created_at: number
+  verified: boolean
+}
 export interface CreditCard {
   brand: string
 }

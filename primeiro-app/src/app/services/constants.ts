@@ -27,6 +27,7 @@ export class Constants {
     set_dev_mode: 'dashboard/set_dev_mode',
 
     signup: 'login/signup',
+    signin: 'login/signin',
   }
 
   public get(key: string, host?: string): string {

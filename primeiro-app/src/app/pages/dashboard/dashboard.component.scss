@@ -83,6 +83,7 @@
     flex: 1;
     overflow-x: hidden !important;
     position: relative;
+    height: inherit;
     ::ng-deep mat-toolbar {
       position: fixed;
       z-index: 9;
@@ -168,6 +169,9 @@
 }
 
 @media print {
+  .dashboard {
+    height: inherit;
+  }
   mat-toolbar,
   .dashboard .button-top {
     display: none;

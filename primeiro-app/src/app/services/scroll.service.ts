@@ -20,12 +20,12 @@ export class ScrollService {
   }
 
   public getCurrentScroll(node: Target): number {
-    // return (node instanceof Document) ? window.pageYOffset : node.scrollTop
-    if (node instanceof Document) {
-      return window.pageYOffset
-    } else {
-      return node.scrollTop
-    }
+    return (node instanceof Document) ? window.pageYOffset : node.scrollTop
+    // if (node instanceof Document) {
+    //   return window.pageYOffset
+    // } else {
+    //   return node.scrollTop
+    // }
   }
 
   public getMaxScroll(node: Target): number {

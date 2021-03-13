@@ -2,6 +2,8 @@ import { Component, ElementRef, Inject, OnInit, ViewChild } from '@angular/core'
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog'
 import { DIALOG_DATA, Register } from 'src/app/models/models'
 import html2canvas from 'html2canvas'
+import { Store } from '@ngrx/store'
+import { delay } from 'rxjs/operators'
 
 @Component({
   selector: 'app-dialogs',
@@ -10,13 +12,16 @@ import html2canvas from 'html2canvas'
 })
 export class DialogsComponent implements OnInit {
   @ViewChild('contentDialog', { static: false }) public contentDialog: ElementRef
+
   public type: string = ''
   public detail: Register
   public showProgressbar: boolean = false
+  public user: any
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public DIALOG_DATA: DIALOG_DATA,
     private _dialogRef: MatDialogRef<DialogsComponent>,
+    private _store: Store,
   ) {
   }
 
@@ -30,6 +35,15 @@ export class DialogsComponent implements OnInit {
         this.type = this.DIALOG_DATA.type
         break
     }
+
+    this._store.select(({ login }: any) => ({ user: login.user })).pipe(delay(3000))
+      .subscribe(state => {
+        if (state.user['access_token']) {
+          this.showProgressbar = false
+          this.user = state.user
+          this._dialogRef.close('login')
+        }
+      })
   }
 
   public close() {
@@ -83,9 +97,10 @@ export class DialogsComponent implements OnInit {
   }
 
   public onTrigger(event: any): void {
-    if (event.operation === 'submit') {
-      console.log(event)
+    if (event.operation === 'show-progressbar') {
       this.showProgressbar = true
+    } else if (event.operation === 'hide-progressbar') {
+      this.showProgressbar = false
     }
     if (event.operation === 'close') {
       this._dialogRef.close(event)
