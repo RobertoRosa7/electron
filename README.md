@@ -98,3 +98,4 @@
 ###### 12/03/2021
 
 * [x] Validacao component login
+* [x] Tela de cadastro

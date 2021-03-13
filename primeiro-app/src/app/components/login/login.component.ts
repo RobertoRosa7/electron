@@ -33,25 +33,6 @@ export class LoginComponent implements OnInit {
   public ngOnInit(): void {
   }
 
-  // public checkPassword(controlName: string, matchingControlName: string) {
-  //   return (formGroup: FormGroup) => {
-  //     const control = formGroup.controls[controlName]
-  //     const matchingControl = formGroup.controls[matchingControlName]
-
-  //     if (matchingControl.errors && !matchingControl.errors.mustMatch) {
-  //       return
-  //     }
-
-  //     if (control.value !== matchingControl.value) {
-  //       matchingControl.setErrors({ mustMatch: true })
-  //       this.isPasswordSame = (matchingControl.status == 'VALID') ? true : false
-  //     } else {
-  //       matchingControl.setErrors(null)
-  //       this.isPasswordSame = (matchingControl.status == 'VALID') ? true : false
-  //     }
-  //   }
-  // }
-
   public onSubmit(event: any): void {
     event.preventDefault()
     this.isLoading = true

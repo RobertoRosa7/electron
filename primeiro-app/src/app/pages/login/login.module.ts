@@ -5,11 +5,11 @@ import { LoginComponent } from 'src/app/components/login/login.component';
 import { DialogsComponent } from 'src/app/components/dialogs/dialogs.component';
 import { MaterialModule } from 'src/app/material.module';
 import { SignInComponent } from './sign-in/sign-in.component';
-import { SignInSignUpComponent } from './sign-in-sign-up/sign-in-sign-up.component';
+import { SignUpComponent } from './sign-up/sign-up.component';
 
 const routes: Routes = [
   { path: '', component: SignInComponent },
-  { path: 'signup', component: SignInSignUpComponent }
+  { path: 'signup', component: SignUpComponent }
 ]
 
 @NgModule({
@@ -17,7 +17,7 @@ const routes: Routes = [
     LoginComponent,
     DialogsComponent,
     SignInComponent,
-    SignInSignUpComponent
+    SignUpComponent
   ],
   imports: [
     CommonModule,
