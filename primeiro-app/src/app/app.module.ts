@@ -20,6 +20,7 @@ import { AppEffect } from './effects/app.effects'
 import { DialogsComponent } from './components/dialogs/dialogs.component'
 import { LoginModule } from './pages/login/login.module'
 import { MaterialModule } from './material.module'
+import { LoginEffect } from './effects/login.effects'
 
 registerLocaleData(localePt, 'pt-BR')
 
@@ -47,14 +48,14 @@ const indexedConfig: DBConfig = {
     NgxIndexedDBModule.forRoot(indexedConfig),
     StoreModule.forRoot(PrimeiroAppStore),
     StoreDevtoolsModule.instrument({ maxAge: 45 }),
-    EffectsModule.forRoot([AppEffect, RegistersEffect, DashboardEffect])
+    EffectsModule.forRoot([LoginEffect, AppEffect, RegistersEffect, DashboardEffect])
   ],
   entryComponents: [
     DialogsComponent
   ],
   providers: [
     { provide: Constants },
-    { provide: AppService }
+    { provide: AppService },
   ],
   bootstrap: [AppComponent]
 })

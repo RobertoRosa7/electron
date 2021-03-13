@@ -6,6 +6,7 @@ import { DialogsComponent } from 'src/app/components/dialogs/dialogs.component';
 import { MaterialModule } from 'src/app/material.module';
 import { SignInComponent } from './sign-in/sign-in.component';
 import { SignUpComponent } from './sign-up/sign-up.component';
+import { LoginService } from 'src/app/services/login.service';
 
 const routes: Routes = [
   { path: '', component: SignInComponent },
@@ -23,6 +24,9 @@ const routes: Routes = [
     CommonModule,
     RouterModule.forChild(routes),
     MaterialModule
-  ]
+  ],
+  providers: [
+    { provide: LoginService },
+  ],
 })
 export class LoginModule { }

@@ -22,11 +22,11 @@ export class Constants {
     new_register: 'dashboard/new_register',
     delete_register: 'dashboard/delete_register',
     update_register: 'dashboard/update_register',
-
     get_status_code: 'dashboard/get_status_code',
     get_list_autocomplete: 'dashboard/get_list_autocomplete',
+    set_dev_mode: 'dashboard/set_dev_mode',
 
-    set_dev_mode: 'dashboard/set_dev_mode'
+    signup: 'login/signup',
   }
 
   public get(key: string, host?: string): string {
