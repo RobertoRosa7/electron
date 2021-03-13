@@ -12,6 +12,7 @@ export class DialogsComponent implements OnInit {
   @ViewChild('contentDialog', { static: false }) public contentDialog: ElementRef
   public type: string = ''
   public detail: Register
+  public showProgressbar: boolean = false
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public DIALOG_DATA: DIALOG_DATA,
@@ -82,6 +83,12 @@ export class DialogsComponent implements OnInit {
   }
 
   public onTrigger(event: any): void {
-    this._dialogRef.close({ operation: event })
+    if (event.operation === 'submit') {
+      console.log(event)
+      this.showProgressbar = true
+    }
+    if (event.operation === 'close') {
+      this._dialogRef.close(event)
+    }
   }
 }

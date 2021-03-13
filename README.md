@@ -94,3 +94,7 @@
 * [x] Request ao endpoint para verificação
 * [x] Tela de login
 * [x] Update lista de autocomplete
+
+###### 12/03/2021
+
+* [x] Validacao component login

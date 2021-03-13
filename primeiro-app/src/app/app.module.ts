@@ -3,13 +3,6 @@ import { NgModule } from '@angular/core'
 import { AppRoutingModule } from './app-routing.module'
 import { AppComponent } from './app.component'
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
-import { MatSidenavModule } from '@angular/material/sidenav'
-import { MatSlideToggleModule } from '@angular/material/slide-toggle'
-import { MatToolbarModule } from '@angular/material/toolbar'
-import { MatDialogModule } from '@angular/material/dialog'
-import { MatButtonModule } from '@angular/material/button'
-import { MatIconModule } from '@angular/material/icon'
-import { NgxElectronModule } from 'ngx-electron'
 import { DBConfig, NgxIndexedDBModule } from 'ngx-indexed-db'
 import { StoreModule } from '@ngrx/store'
 import { EffectsModule } from '@ngrx/effects'
@@ -20,17 +13,13 @@ import { DashboardEffect } from './effects/dashboard.effects'
 import { registerLocaleData } from '@angular/common'
 import localePt from '@angular/common/locales/pt'
 import { HomeComponent } from './pages/home/home.component'
-import { HttpClientModule } from '@angular/common/http'
 import { Constants } from './services/constants'
 import { AngularCreatePdfModule } from 'angular-create-pdf'
 import { AppService } from './services/app.service'
 import { AppEffect } from './effects/app.effects'
 import { DialogsComponent } from './components/dialogs/dialogs.component'
-import { MatCheckboxModule } from '@angular/material/checkbox'
-import { MatInputModule } from '@angular/material/input'
-import { MatFormFieldModule } from '@angular/material/form-field'
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { LoginComponent } from './components/login/login.component'
+import { LoginModule } from './pages/login/login.module'
+import { MaterialModule } from './material.module'
 
 registerLocaleData(localePt, 'pt-BR')
 
@@ -47,27 +36,14 @@ const indexedConfig: DBConfig = {
   declarations: [
     AppComponent,
     HomeComponent,
-    DialogsComponent,
-    LoginComponent,
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
-    MatSidenavModule,
-    MatSlideToggleModule,
-    MatButtonModule,
-    MatDialogModule,
-    MatToolbarModule,
-    MatIconModule,
-    NgxElectronModule,
-    AppRoutingModule,
-    HttpClientModule,
     AngularCreatePdfModule,
-    MatCheckboxModule,
-    MatFormFieldModule,
-    MatInputModule,
-    FormsModule,
-    ReactiveFormsModule,
+    MaterialModule,
+    AppRoutingModule,
+    LoginModule,
     NgxIndexedDBModule.forRoot(indexedConfig),
     StoreModule.forRoot(PrimeiroAppStore),
     StoreDevtoolsModule.instrument({ maxAge: 45 }),

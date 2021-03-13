@@ -58,7 +58,7 @@
   </div>
 
   <div class="container-buttons">
-    <button [disabled]="!formLogin.valid" type="submit" mat-raised-button>Login</button>
+    <button [disabled]="!formLogin.valid || isLoading" type="submit" mat-raised-button>Login</button>
     <button (click)="close()" type="button" color="accent" mat-raised-button>Fechar</button>
   </div>
 </form>

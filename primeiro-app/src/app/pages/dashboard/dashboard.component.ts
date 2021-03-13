@@ -73,7 +73,7 @@ export class DashboardComponent implements OnInit, DoCheck {
     this._breakpoint?.observe([Breakpoints.XSmall]).subscribe(result => this.isMobile = !!result.matches)
     this.initialize()
 
-    this._store?.dispatch(actionsDashboard.GET_DEV_MODE({ payload: { mode: 'dev-mode' } }))
+    // this._store?.dispatch(actionsDashboard.GET_DEV_MODE({ payload: { mode: 'dev-mode' } }))
     this._store?.dispatch(actionsRegister.GET_TAB({ payload: 'read' }))
     this.differ = this._differs?.find({}).create()
 
