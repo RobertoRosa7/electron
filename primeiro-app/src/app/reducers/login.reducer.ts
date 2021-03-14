@@ -3,13 +3,16 @@ import * as actions from '../actions/login.actions'
 
 const INITIAL_STATES = {
   user: {},
-  cadastro: false
+  cadastro: false,
+  created_user: false,
+  logged_user: false
 }
 
 const appReducer = createReducer(
   INITIAL_STATES,
-  on(actions.SET_USER, (states, { payload }) => ({ ...states, cadastro: payload })),
-  on(actions.SET_USER_LOGGED, (states, { payload }) => ({ ...states, user: payload })),
+  on(actions.CREATED_USER, (states, { payload }) => ({ ...states, created_user: payload })),
+  on(actions.LOGGED_USER, (states, { payload }) => ({ ...states, logged_user: payload })),
+  on(actions.SET_USER, (states, { payload }) => ({ ...states, user: payload })),
 )
 
 export function reducerLogin(state: any, action: any) {

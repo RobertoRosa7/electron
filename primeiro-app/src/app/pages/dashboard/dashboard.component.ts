@@ -5,6 +5,7 @@ import { IpcService } from 'src/app/services/ipc.service'
 import * as actionsErrors from '../../actions/errors.actions'
 import * as actionsRegister from '../../actions/registers.actions'
 import * as actionsDashboard from '../../actions/dashboard.actions'
+import * as actionsLogin from '../../actions/login.actions'
 import { MatSnackBar } from '@angular/material/snack-bar'
 import { filter, map, startWith } from 'rxjs/operators'
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout'
@@ -57,6 +58,7 @@ export class DashboardComponent implements OnInit, DoCheck {
   public differ: any
   public autocomplete: string[] = []
   public autocomplete$: Observable<string[]>
+  public user: any
 
   constructor(
     protected _ipcService?: IpcService,
@@ -71,9 +73,7 @@ export class DashboardComponent implements OnInit, DoCheck {
   ) {
     this._router?.events.subscribe((u: any) => this.isActive = u.url)
     this._breakpoint?.observe([Breakpoints.XSmall]).subscribe(result => this.isMobile = !!result.matches)
-    this.initialize()
 
-    // this._store?.dispatch(actionsDashboard.GET_DEV_MODE({ payload: { mode: 'dev-mode' } }))
     this._store?.dispatch(actionsRegister.GET_TAB({ payload: 'read' }))
     this.differ = this._differs?.find({}).create()
 
@@ -84,6 +84,8 @@ export class DashboardComponent implements OnInit, DoCheck {
   }
 
   public ngOnInit(): void {
+    this.initialize()
+
     // this._ipcService?.send('get', JSON.stringify({
     //   collection_dashboard: 'collection_dashboard',
     //   method: "POST",
@@ -102,7 +104,7 @@ export class DashboardComponent implements OnInit, DoCheck {
     })).subscribe(state => {
       this.consolidado = state.consolidado.total_consolidado
       this.autocomplete = state.autocomplete
-
+      this.user = state.user
       if (state.http_error.errors) {
         state.http_error.errors.forEach((e: any) => this.handleError(e))
       }
@@ -133,10 +135,15 @@ export class DashboardComponent implements OnInit, DoCheck {
   }
 
   private async initialize() {
+    await this.fetchUser()
     await this.fetchRegisters()
     await this.initDashboard()
     await this.fetchAutocomplete()
     await this.fetchStatusCode()
+  }
+
+  private async fetchUser(): Promise<any> {
+    this._store?.dispatch(actionsLogin.GET_USER())
   }
 
   private async initDashboard(): Promise<any> {

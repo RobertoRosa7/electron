@@ -29,10 +29,12 @@ export class LoginService {
         if (user) {
           if (payload.keep_connect) {
             localStorage.setItem('token', user.access_token)
+            localStorage.setItem('user', JSON.stringify(user))
             this.loggedIn$.next(true)
             this.user$.next(user)
           } else {
             sessionStorage.setItem('token', user.access_token)
+            sessionStorage.setItem('user', JSON.stringify(user))
             this.loggedIn$.next(true)
             this.user$.next(user)
           }
@@ -41,7 +43,7 @@ export class LoginService {
     )
   }
 
-  public fetchToken() {
+  private fetchToken() {
     if (localStorage.getItem('token')) {
       return localStorage.getItem('token')
     } else if (sessionStorage.getItem('token')) {
@@ -54,5 +56,20 @@ export class LoginService {
   public isAuthenticated(): Observable<boolean> {
     if (this.fetchToken()) this.loggedIn$.next(true)
     return this.loggedIn$.asObservable()
+  }
+
+  private getUser() {
+    if (localStorage.getItem('user')) {
+      this.user$.next(JSON.parse(localStorage.getItem('user') || '{}'))
+    } else if (sessionStorage.getItem('user')) {
+      this.user$.next(JSON.parse(sessionStorage.getItem('user') || '{}'))
+    } else {
+      this.user$.next(null)
+    }
+  }
+
+  public fetchUser(): Observable<any> {
+    this.getUser()
+    return this.user$.asObservable()
   }
 }

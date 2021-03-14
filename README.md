@@ -103,3 +103,4 @@
 ###### 14/03/2021
 
 * [x] Login validação com Angular Guard
+* [x] Correções das actions para login
