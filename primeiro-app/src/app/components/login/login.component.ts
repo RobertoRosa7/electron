@@ -1,4 +1,4 @@
-import { Component, DoCheck, EventEmitter, KeyValueDiffers, OnInit, Output } from '@angular/core'
+import { Component, DoCheck, EventEmitter, Input, KeyValueDiffers, OnInit, Output } from '@angular/core'
 import { FormBuilder, FormGroup, Validators } from '@angular/forms'
 import { MatSnackBar } from '@angular/material/snack-bar'
 import { Router } from '@angular/router'
@@ -13,17 +13,16 @@ import * as actionsErrors from '../../actions/errors.actions'
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit, DoCheck {
-  @Output() trigger = new EventEmitter()
+  @Input() public dialog: string = ''
+  @Output() public trigger = new EventEmitter()
 
   public textIcon: string = 'password'
   public changeIcon: string = 'visibility_off'
   public changeTextLogin: string = 'Não tenho conta'
   public isLogin: boolean = false
-  public isLoginText: string = 'login'
+  public isLoginText: string = 'Fechar'
   public isLoading: boolean = false
-  public token: string = ''
   public differ: any
-  public user: any
 
   public formLogin: FormGroup = this._fb.group({
     email: ['', [Validators.required, Validators.email]],
@@ -43,10 +42,9 @@ export class LoginComponent implements OnInit, DoCheck {
   }
 
   public ngOnInit(): void {
-    this._store.select(({ http_error, login }: any) => ({ errors: http_error.errors, user: login.user }))
+    this._store.select(({ http_error }: any) => ({ errors: http_error.errors }))
       .pipe(delay(3000))
       .subscribe(state => {
-        this.user = state.user
         if (state.errors.length > 0) {
           state.errors.forEach((e: any) => {
             const msg = e.error['message'] ? e.error.message : e.error
@@ -62,19 +60,17 @@ export class LoginComponent implements OnInit, DoCheck {
       .subscribe(({ payload }: any) => {
         if (payload === 'login') {
           this._snackbar.open('Login realizado com sucesso', 'Ok', { duration: 3000 })
-          this.trigger.emit({ operation: 'close', data: payload  })
+          this.trigger.emit({ operation: 'close', data: payload })
         }
       })
+
+    this.isLoginText = this.dialog == 'page-login' ? 'voltar' : 'fechar'
   }
 
   public ngDoCheck() {
     const change = this.differ.diff(this)
     if (change) {
-      change.forEachChangedItem((item: any) => {
-        if (item.key === 'user') {
-          this.isLoading = false
-        }
-      })
+      change.forEachChangedItem((item: any) => { })
     }
   }
 
@@ -109,6 +105,6 @@ export class LoginComponent implements OnInit, DoCheck {
   }
 
   public close(options?: any): void {
-    this.trigger.emit({ operation: 'close', data: options })
+    options == 'page-login' ? this._router.navigateByUrl('/') : this.trigger.emit({ operation: 'close', data: options })
   }
 }

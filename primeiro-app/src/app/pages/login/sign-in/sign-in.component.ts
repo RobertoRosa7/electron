@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-sign-in',
@@ -7,9 +8,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SignInComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    private _router: Router
+  ) { }
 
-  ngOnInit(): void {
+  public ngOnInit(): void {
   }
 
+  public onTrigger(event: any): void {
+    if (event.operation === 'close' && event.data === 'login') {
+      this._router.navigateByUrl('/dashboard')
+    }
+  }
 }

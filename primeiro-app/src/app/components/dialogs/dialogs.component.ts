@@ -2,8 +2,6 @@ import { Component, ElementRef, Inject, OnInit, ViewChild } from '@angular/core'
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog'
 import { DIALOG_DATA, Register } from 'src/app/models/models'
 import html2canvas from 'html2canvas'
-import { Store } from '@ngrx/store'
-import { delay } from 'rxjs/operators'
 
 @Component({
   selector: 'app-dialogs',
@@ -16,12 +14,10 @@ export class DialogsComponent implements OnInit {
   public type: string = ''
   public detail: Register
   public showProgressbar: boolean = false
-  public user: any
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public DIALOG_DATA: DIALOG_DATA,
     private _dialogRef: MatDialogRef<DialogsComponent>,
-    private _store: Store,
   ) {
   }
 
