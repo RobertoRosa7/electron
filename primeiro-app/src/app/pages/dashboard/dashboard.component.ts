@@ -93,12 +93,12 @@ export class DashboardComponent implements OnInit, DoCheck {
     //   console.log(message)
     // })
 
-    this._store?.select(({ http_error, registers, dashboard }: any) =>
-    ({
+    this._store?.select(({ http_error, registers, dashboard, login }: any) => ({
       http_error,
       consolidado: dashboard.consolidado,
       all: registers.all,
-      autocomplete: dashboard.auto_complete
+      autocomplete: dashboard.auto_complete,
+      user: login.user
     })).subscribe(state => {
       this.consolidado = state.consolidado.total_consolidado
       this.autocomplete = state.autocomplete
@@ -114,10 +114,7 @@ export class DashboardComponent implements OnInit, DoCheck {
         this._snackbar?.open(`${name}`, 'Ok', { duration: 3000 })
       })
 
-    this._scrollService?.getScrollAsStream().subscribe(per =>{
-      console.log(per)
-      this.buttonToTop = (per >= 30)
-    })
+    this._scrollService?.getScrollAsStream().subscribe(per => this.buttonToTop = (per >= 30))
   }
 
   public ngDoCheck() {
@@ -195,6 +192,8 @@ export class DashboardComponent implements OnInit, DoCheck {
         return 'ao carregar gráfico'
       case 'signin':
         return 'Login'
+      case 'login':
+        return 'Login sucesso'
       default:
         return ''
     }

@@ -10,12 +10,10 @@ import { DialogsComponent } from "src/app/components/dialogs/dialogs.component";
 })
 export class HomeComponent implements OnInit {
 
-
   constructor(
     private _dialog: MatDialog,
     private _router: Router
   ) {
-
   }
 
   public ngOnInit(): void {

@@ -35,15 +35,6 @@ export class DialogsComponent implements OnInit {
         this.type = this.DIALOG_DATA.type
         break
     }
-
-    this._store.select(({ login }: any) => ({ user: login.user })).pipe(delay(3000))
-      .subscribe(state => {
-        if (state.user['access_token']) {
-          this.showProgressbar = false
-          this.user = state.user
-          this._dialogRef.close('login')
-        }
-      })
   }
 
   public close() {
@@ -101,8 +92,9 @@ export class DialogsComponent implements OnInit {
       this.showProgressbar = true
     } else if (event.operation === 'hide-progressbar') {
       this.showProgressbar = false
-    }
-    if (event.operation === 'close') {
+    } else if (event.operation === 'close' && event.data === 'login') {
+      this._dialogRef.close(event.data)
+    } else {
       this._dialogRef.close(event)
     }
   }

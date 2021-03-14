@@ -2,8 +2,8 @@ import { Component, DoCheck, EventEmitter, KeyValueDiffers, OnInit, Output } fro
 import { FormBuilder, FormGroup, Validators } from '@angular/forms'
 import { MatSnackBar } from '@angular/material/snack-bar'
 import { Router } from '@angular/router'
-import { Store } from '@ngrx/store'
-import { delay } from 'rxjs/operators'
+import { ActionsSubject, Store } from '@ngrx/store'
+import { delay, filter } from 'rxjs/operators'
 import * as actionsLogin from '../../actions/login.actions'
 import * as actionsErrors from '../../actions/errors.actions'
 
@@ -37,6 +37,7 @@ export class LoginComponent implements OnInit, DoCheck {
     private _store: Store,
     private _snackbar: MatSnackBar,
     private _diff: KeyValueDiffers,
+    private _as?: ActionsSubject,
   ) {
     this.differ = this._diff.find({}).create()
   }
@@ -51,8 +52,17 @@ export class LoginComponent implements OnInit, DoCheck {
             const msg = e.error['message'] ? e.error.message : e.error
             this._snackbar.open(msg, 'ok')
             this.isLoading = false
+            this.trigger.emit({ operation: 'hide-progressbar', data: {} })
             this._store.dispatch(actionsErrors.RESET_ERRORS())
           })
+        }
+      })
+
+    this._as?.pipe(filter(a => a.type === actionsErrors.actionsTypes.SET_SUCCESS))
+      .subscribe(({ payload }: any) => {
+        if (payload === 'login') {
+          this._snackbar.open('Login realizado com sucesso', 'Ok', { duration: 3000 })
+          this.trigger.emit({ operation: 'close', data: payload  })
         }
       })
   }
@@ -67,7 +77,7 @@ export class LoginComponent implements OnInit, DoCheck {
       })
     }
   }
-  
+
   public onSubmit(event: any): void {
     event.preventDefault()
     this.isLoading = true
