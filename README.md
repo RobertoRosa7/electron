@@ -99,3 +99,7 @@
 
 * [x] Validacao component login
 * [x] Tela de cadastro
+
+###### 14/03/2021
+
+* [x] Login validação com Angular Guard
