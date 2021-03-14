@@ -8,7 +8,7 @@ import { DashboardComponent } from '../dashboard.component'
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout'
 import { MatSelectChange } from '@angular/material/select'
 import { AngularCreatePdfService } from 'angular-create-pdf'
-import { ScrollService } from 'src/app/services/scroll.service'
+
 @Component({
   selector: 'app-registers',
   templateUrl: './registers.component.html',
@@ -96,7 +96,7 @@ export class RegistersComponent extends DashboardComponent implements OnInit, Af
       this.aPagar = state.a_pagar
       this.aReceber = state.a_receber
       this.ELEMENT_ORDER = state.all
-      this.totalPercent = (state.total_debit / state.total_credit) * 100
+      this.totalPercent = ((state.total_debit / state.total_credit) * 100) >= 100 ? 100 : (state.total_debit / state.total_credit) * 100
       this.totalGeral = (this.totalReceita - this.totalDespesa)
       this.all_days_period = state.all_days_period
 

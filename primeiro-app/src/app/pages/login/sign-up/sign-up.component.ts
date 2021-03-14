@@ -4,10 +4,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms'
 import { MatSnackBar } from '@angular/material/snack-bar'
 import { Router } from '@angular/router'
 import { Store } from '@ngrx/store'
-import { User } from 'aws-sdk/clients/budgets'
 import { delay } from 'rxjs/operators'
 import { Signup } from 'src/app/models/models'
-import { LoginService } from 'src/app/services/login.service'
 import * as actionsLogin from '../../../actions/login.actions'
 
 @Component({
@@ -39,7 +37,6 @@ export class SignUpComponent implements OnInit, DoCheck {
     private _snackbar: MatSnackBar,
     private _router: Router,
     private _diff: KeyValueDiffers,
-    private _loginService: LoginService
   ) {
     this.differ = this._diff.find({}).create()
   }

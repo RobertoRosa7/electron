@@ -2,7 +2,6 @@ import { Component, Renderer2, RendererFactory2 } from '@angular/core'
 import { Store } from '@ngrx/store'
 import * as actionsDashboard from './actions/dashboard.actions'
 import * as actionsApp from './actions/app.actions'
-import { ScrollService } from './services/scroll.service'
 
 @Component({
   selector: 'app-root',
@@ -33,7 +32,6 @@ export class AppComponent {
       })
   }
 
-  // init theme
   public initTheme(): void {
     if (localStorage.getItem('user-theme')) {
       this.colorTheme = localStorage.getItem('user-theme') || ''
@@ -43,7 +41,6 @@ export class AppComponent {
     this.renderer.addClass(document.body, this.colorTheme)
   }
 
-  // is dark or light
   public isDarkMode(): boolean {
     return this.colorTheme === 'dark-mode'
   }

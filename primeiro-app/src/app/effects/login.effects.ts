@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core'
 import { Actions, ofType, Effect } from '@ngrx/effects'
-import { forkJoin, Observable, of } from 'rxjs'
+import { Observable, of } from 'rxjs'
 import { catchError, map, mergeMap } from 'rxjs/operators'
 import { SET_ERRORS, SET_SUCCESS } from '../actions/errors.actions'
 import { HttpErrorResponse } from '@angular/common/http'
@@ -50,21 +50,6 @@ export class LoginEffect {
     }),
     catchError(err => of(err))
   )
-
-  // @Effect()
-  // public fetch$: Observable<Actions> = this._action.pipe(
-  //   ofType(actionsLogin.GET_USER),
-  //   mergeMap(() => this._loginService.fetchUser().pipe(catchError(e => of(e)))),
-  //   map((payload) => {
-  //     if (!payload) {
-  //       const source = { ...payload, source: 'fetch_user' }
-  //       return SET_ERRORS({ payload: source })
-  //     } else {
-  //       return actionsLogin.SET_USER({ payload })
-  //     }
-  //   }),
-  //   catchError(err => of(err))
-  // )
 
   @Effect()
   public fetch$: Observable<Actions> = this._action.pipe(

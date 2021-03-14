@@ -1,7 +1,6 @@
-import { AfterViewInit, Component, DoCheck, ElementRef, Input, KeyValueDiffers, OnInit, ViewChild } from '@angular/core';
+import { Component, DoCheck, ElementRef, Input, KeyValueDiffers, OnInit, ViewChild } from '@angular/core';
 import { Store } from '@ngrx/store';
 import * as Highcharts from 'highcharts'
-import * as actionsDashboard from '../../actions/dashboard.actions'
 
 const Boost = require('highcharts/modules/boost')
 const noData = require('highcharts/modules/no-data-to-display')
@@ -108,6 +107,14 @@ export class HighchartsComponent implements OnInit, DoCheck {
       // },
       series: {
         pointPadding: 0,
+        // states: {
+        //   hover: {
+        //     color: 'rgba(68, 188, 93, 1)'
+        //   }
+        // }
+        
+        // enableMouseTracking: false,
+
         // dataLabels: {
         //   enabled: true,
         //   formatter: function () {
@@ -179,7 +186,7 @@ export class HighchartsComponent implements OnInit, DoCheck {
           if (i !== 'dates') {
             values.push({
               name: this.evolucao.graph_evolution[i].label,
-              data: this.evolucao.graph_evolution[i].values
+              data: this.evolucao.graph_evolution[i].values,
             })
           }
         }
