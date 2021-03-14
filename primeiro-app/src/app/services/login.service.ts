@@ -72,4 +72,16 @@ export class LoginService {
     this.getUser()
     return this.user$.asObservable()
   }
+
+  public logout(): Observable<any> {
+    localStorage.removeItem('user')
+    localStorage.removeItem('token')
+
+    sessionStorage.removeItem('user')
+    sessionStorage.removeItem('token')
+    this.user$.next(null)
+    this.loggedIn$.next(false)
+
+    return this.loggedIn$.asObservable()
+  }
 }

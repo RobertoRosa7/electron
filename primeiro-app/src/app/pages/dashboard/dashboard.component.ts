@@ -236,4 +236,9 @@ export class DashboardComponent implements OnInit, DoCheck {
       .replace('ç', 'c').replace('õ', 'o')
   }
 
+  public logout() {
+    this._router?.navigateByUrl('/')
+    this._store?.dispatch(actionsLogin.LOGOUT())
+  }
+
 }

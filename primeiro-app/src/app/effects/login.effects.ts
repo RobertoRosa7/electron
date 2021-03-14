@@ -51,18 +51,33 @@ export class LoginEffect {
     catchError(err => of(err))
   )
 
+  // @Effect()
+  // public fetch$: Observable<Actions> = this._action.pipe(
+  //   ofType(actionsLogin.GET_USER),
+  //   mergeMap(() => this._loginService.fetchUser().pipe(catchError(e => of(e)))),
+  //   map((payload) => {
+  //     if (!payload) {
+  //       const source = { ...payload, source: 'fetch_user' }
+  //       return SET_ERRORS({ payload: source })
+  //     } else {
+  //       return actionsLogin.SET_USER({ payload })
+  //     }
+  //   }),
+  //   catchError(err => of(err))
+  // )
+
   @Effect()
   public fetch$: Observable<Actions> = this._action.pipe(
     ofType(actionsLogin.GET_USER),
     mergeMap(() => this._loginService.fetchUser().pipe(catchError(e => of(e)))),
-    map((payload) => {
-      if (!payload) {
-        const source = { ...payload, source: 'fetch_user' }
-        return SET_ERRORS({ payload: source })
-      } else {
-        return actionsLogin.SET_USER({ payload })
-      }
-    }),
+    map((payload) => actionsLogin.SET_USER({ payload })),
+    catchError(err => of(err))
+  )
+
+  @Effect()
+  public logout$: Observable<Actions> = this._action.pipe(
+    ofType(actionsLogin.LOGOUT),
+    mergeMap(() => this._loginService.logout().pipe(map(() => actionsLogin.RESET()))),
     catchError(err => of(err))
   )
 }

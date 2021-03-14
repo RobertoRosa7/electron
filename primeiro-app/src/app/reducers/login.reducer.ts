@@ -13,6 +13,7 @@ const appReducer = createReducer(
   on(actions.CREATED_USER, (states, { payload }) => ({ ...states, created_user: payload })),
   on(actions.LOGGED_USER, (states, { payload }) => ({ ...states, logged_user: payload })),
   on(actions.SET_USER, (states, { payload }) => ({ ...states, user: payload })),
+  on(actions.RESET, (states) => ({ ...states, user: {}, logged_user: false })),
 )
 
 export function reducerLogin(state: any, action: any) {

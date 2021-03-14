@@ -9,6 +9,12 @@
           </a>
           <span>{{item.name}}</span>
         </li>
+        <li (click)="logout()" class="btn-logout">
+          <a>
+            <mat-icon>logout</mat-icon>
+          </a>
+          <span>Sair</span>
+        </li>
       </ul>
     </mat-drawer>
     <mat-drawer-content>
@@ -18,6 +24,11 @@
             [routerLink]="item.link">
             <a>
               <mat-icon>{{item.icon}}</mat-icon>
+            </a>
+          </li>
+          <li (click)="logout()" class="btn-logout">
+            <a>
+              <mat-icon>logout</mat-icon>
             </a>
           </li>
         </ul>
