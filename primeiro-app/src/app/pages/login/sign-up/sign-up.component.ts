@@ -22,7 +22,7 @@ export class SignUpComponent implements OnInit, DoCheck {
   public isLoading: boolean = false
   public isPasswordSame: boolean = false
   public differ: any
-  public cadastro: boolean = false
+  public created_user: boolean = false
 
   public formSignup: FormGroup = this._fb.group({
     email: ['', [Validators.required, Validators.email]],
@@ -45,8 +45,8 @@ export class SignUpComponent implements OnInit, DoCheck {
     const change = this.differ.diff(this)
     if (change) {
       change.forEachChangedItem((item: any) => {
-        if (item.key === 'cadastro') {
-          if (this.cadastro) {
+        if (item.key === 'created_user') {
+          if (this.created_user) {
             this.isLoading = false
             this._snackbar.open('E-mail cadastrado, verifique seu e-mail', 'ok')
           }
@@ -56,7 +56,7 @@ export class SignUpComponent implements OnInit, DoCheck {
   }
 
   public ngOnInit(): void {
-    this._store.select(({ login, http_error }: any) => ({ errors: http_error.errors, cadastro: login.cadastro }))
+    this._store.select(({ login, http_error }: any) => ({ errors: http_error.errors, created_user: login.created_user }))
       .pipe(delay(3000))
       .subscribe(state => {
         if (state.errors.length > 0) {
@@ -65,7 +65,7 @@ export class SignUpComponent implements OnInit, DoCheck {
             this._snackbar.open(e.error.message, 'ok')
           })
         }
-        this.cadastro = state.cadastro
+        this.created_user = state.created_user
       })
   }
 
@@ -108,13 +108,10 @@ export class SignUpComponent implements OnInit, DoCheck {
   }
 
   public forgetPassword(event: any) {
-    this.isLoading ? event.preventDefault() : undefined
+    this.isLoading ? event.preventDefault() : this._router.navigateByUrl('/login/reset')
   }
 
   public noAccount(event: any) {
     this.isLoading ? event.preventDefault() : this._router.navigateByUrl('/login')
-  }
-
-  public close(options?: any): void {
   }
 }

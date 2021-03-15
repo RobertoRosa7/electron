@@ -1,9 +1,9 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
-import { tap } from 'rxjs/operators';
-import { User } from '../models/models';
-import { Constants } from './constants';
+import { HttpClient } from '@angular/common/http'
+import { Injectable } from '@angular/core'
+import { BehaviorSubject, Observable } from 'rxjs'
+import { tap } from 'rxjs/operators'
+import { User } from '../models/models'
+import { Constants } from './constants'
 
 @Injectable({
   providedIn: 'root'
@@ -20,6 +20,10 @@ export class LoginService {
 
   public signup(payload: User): Observable<User> {
     return this.http.post<User>(this.constants.get('signup'), payload)
+  }
+
+  public resetPassword(payload: string): Observable<any> {
+    return this.http.post<any>(this.constants.get('reset_password'), payload)
   }
 
   public signin(payload: any): Observable<any> {

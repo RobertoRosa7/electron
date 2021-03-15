@@ -13,6 +13,7 @@ export class Constants {
 
   public readonly paths: any = {
     fetch_is_online: '',
+
     fetch_consolidado: 'dashboard/calc_consolidado',
     fetch_registers: 'dashboard/fetch_registers',
     fetch_evolucao: 'dashboard/fetch_evolucao',
@@ -28,6 +29,7 @@ export class Constants {
 
     signup: 'login/signup',
     signin: 'login/signin',
+    reset_password: 'login/reset_password'
   }
 
   public get(key: string, host?: string): string {

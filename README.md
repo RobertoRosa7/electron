@@ -104,3 +104,4 @@
 
 * [x] Login validação com Angular Guard
 * [x] Correções das actions para login
+* [x] Email de recuperação de senha
