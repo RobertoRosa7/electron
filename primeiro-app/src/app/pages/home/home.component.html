@@ -1,19 +1,29 @@
 <section class="home content" role="main">
-  <!-- <div class="background-green"></div> -->
-  <!-- <div class="title">
-    <h1>
-      Página inicial de apresentação - onde será redirecionado para tela de login
-    </h1>
-  </div> -->
-  <div class="wrapper">
-    <div class="middle">
-      <!-- <img src="../../../assets/icon-default-green-512x512.svg" alt=""> -->
-    </div>
-    <div class="middle">
-      <h3 class="display">Acesse sua conta!</h3>
-      <div class="container-buttons">
-        <button type="button" routerLink="/dashboard" color="primary" mat-raised-button>Dashboard</button>
-        <button (click)="login()" type="button" mat-raised-button>Login</button>
+  <div class="background"></div>
+  <div class="container-home">
+    <mat-toolbar class="toolbar-home">
+      <mat-toolbar-row class="toolbar-row">
+        <div class="container-logo">
+          <img [src]="logo" alt="logo">
+        </div>
+        <div class="container-buttons">
+          <button type="button" routerLink="/login/signup" mat-raised-button>Cadastrar</button>
+          &nbsp;&nbsp;&nbsp;
+          <button routerLink="/login" type="button" mat-raised-button>Login</button>
+        </div>
+      </mat-toolbar-row>
+    </mat-toolbar>
+    <div class="wrapper">
+      <div class="middle">
+        <h1>Organize seus gastos diários</h1>
+        <p>Mantenha suas contas em dias</p>
+      </div>
+      <div class="middle">
+        <h3 class="display">Acesse sua conta!</h3>
+        <div class="container-buttons">
+          <button type="button" routerLink="/dashboard" color="primary" mat-raised-button>Dashboard</button>
+          <button (click)="login()" type="button" mat-raised-button>Login</button>
+        </div>
       </div>
     </div>
   </div>

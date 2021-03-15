@@ -44,7 +44,7 @@ export class DashboardComponent implements OnInit, DoCheck {
       icon: 'settings'
     },
   ]
-
+  public logo: string = './assets/icon-default-transparent-512x512.svg'
   public searchTerms: FormControl = new FormControl()
   public consolidado: number = 0
   public isMobile: boolean = false
@@ -117,6 +117,7 @@ export class DashboardComponent implements OnInit, DoCheck {
       })
 
     this._scrollService?.getScrollAsStream().subscribe(per => this.buttonToTop = (per >= 30))
+    this.logo = './assets/' + this.getTheme()
   }
 
   public ngDoCheck() {
@@ -239,6 +240,18 @@ export class DashboardComponent implements OnInit, DoCheck {
   public logout() {
     this._router?.navigateByUrl('/')
     this._store?.dispatch(actionsLogin.LOGOUT())
+  }
+
+  public getTheme(): string {
+    if (localStorage.getItem('user-theme')) {
+      if (localStorage.getItem('user-theme') === 'dark-mode') {
+        return 'icon-default-dark-512x512.svg'
+      } else {
+        return 'icon-default-white2-512x512.svg'
+      }
+    } else {
+      return 'icon-deffault-transparent-512x512.svg'
+    }
   }
 
 }

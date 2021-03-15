@@ -38,7 +38,6 @@ export class RegistersComponent extends DashboardComponent implements OnInit, Af
   public totalPercent: number = 0
   public totalGeral: number = 0
   public dateNow: Date = new Date()
-  public logo: string = './assets/icon-default-green-512x512.svg'
   public isNegative: boolean = false
   public all_days_period: number = 0
   public days: number = 0;
@@ -109,6 +108,7 @@ export class RegistersComponent extends DashboardComponent implements OnInit, Af
       }
 
       this.orderby ? this.makingOrdering(this.orderby) : this.ELEMENT_DATA = this.classificar(state.all)
+      this.logo = './assets/' + this.getTheme()
     })
   }
 
