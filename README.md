@@ -2,6 +2,8 @@
 
 ###### 12/01/2021
 
+### Novo projeto Angular Gerenciamento de despesas
+
 * [x] Projeto Begins - introdução ao Electron
 
 ###### 17/01/2021
@@ -105,3 +107,16 @@
 * [x] Login validação com Angular Guard
 * [x] Correções das actions para login
 * [x] Email de recuperação de senha
+
+###### 15/03/2021
+
+* [x] Novo layout do logo
+* [x] Endpoint para validação de verificação do email
+
+###### 16/03/2021
+
+* [] Component para novo password
+* [] Reset de senha
+* [] Validação caso exista senha e queira reset
+* [] Validação de route no angular para component de nova senha
+* [] Implementar endpoint para reset password
