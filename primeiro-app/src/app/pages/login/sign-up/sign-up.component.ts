@@ -56,7 +56,8 @@ export class SignUpComponent implements OnInit, DoCheck {
   }
 
   public ngOnInit(): void {
-    this._store.select(({ login, http_error }: any) => ({ errors: http_error.errors, created_user: login.created_user }))
+    this._store.select(({ login, http_error }: any) =>
+      ({ errors: http_error.errors, created_user: login.created_user }))
       .pipe(delay(3000))
       .subscribe(state => {
         if (state.errors.length > 0) {
@@ -98,7 +99,7 @@ export class SignUpComponent implements OnInit, DoCheck {
       created_at: new Date().getTime() / 1000,
       verified: false
     }
-    
+
     this._store.dispatch(actionsLogin.CREATE_USER({ payload: user }))
   }
 

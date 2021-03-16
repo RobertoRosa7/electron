@@ -19,7 +19,6 @@ export class ResetPasswordComponent implements OnInit {
 
   constructor(
     private _fb: FormBuilder,
-    private _store: Store,
     private _snackbar: MatSnackBar,
     private _router: Router,
     private _loginService: LoginService
@@ -32,7 +31,7 @@ export class ResetPasswordComponent implements OnInit {
     event.preventDefault()
     this.isLoading = true
 
-    this._loginService.resetPassword(this.formReset.value)
+    this._loginService.mailToReset({ email: this.formReset.value.email })
       .subscribe(res => {
         this._snackbar.open(res.message, 'ok', { duration: 3000 })
         this.isLoading = false

@@ -115,8 +115,12 @@
 
 ###### 16/03/2021
 
-* [] Component para novo password
-* [] Reset de senha
-* [] Validação caso exista senha e queira reset
-* [] Validação de route no angular para component de nova senha
-* [] Implementar endpoint para reset password
+* [x] Component para novo password
+* [x] Padronização de Error response
+* [x] Validação de route para new password
+* [x] Reset de senha
+* [x] Validação caso exista senha e queira reset
+* [x] Validação de route no angular para component de nova senha
+* [x] Implementar endpoint para reset password
+* [x] Cadastrar nova senha
+* [x] Encriptografia da nova senha antes de enviar ao backend

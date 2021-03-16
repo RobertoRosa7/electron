@@ -33,29 +33,6 @@ export class DashboardEffect {
   )
 
   @Effect()
-  public getStatusCodes$: Observable<Actions> = this._action.pipe(
-    ofType(GET_STATUS_CODE),
-    mergeMap(() => this._indexedb.getById('status_code_id')),
-    mergeMap((status_code) => {
-      if (status_code) {
-        return [SET_STATUS_CODE({ payload: status_code.status_code })]
-      } else {
-        return this._dashboardService.getStatusCode().pipe(
-          map((status_code: any) => {
-            if (status_code) this._indexedb.create({ id: 'status_code_id', status_code })
-            return SET_STATUS_CODE({ payload: status_code })
-          }),
-          catchError(e => {
-            const source = { ...e, source: 'status_code' }
-            return [SET_ERRORS({ payload: source })]
-          })
-        )
-      }
-    }),
-    catchError(err => of(err))
-  )
-
-  @Effect()
   public getAutocomplete$: Observable<Actions> = this._action.pipe(
     ofType(actions.FETCH_AUTOCOMPLETE),
     mergeMap(() => this._indexedb.getById('autocomplete_id')),

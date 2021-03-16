@@ -140,7 +140,6 @@ export class DashboardComponent implements OnInit, DoCheck {
     await this.fetchRegisters()
     await this.initDashboard()
     await this.fetchAutocomplete()
-    await this.fetchStatusCode()
   }
 
   private async fetchUser(): Promise<any> {
@@ -157,10 +156,6 @@ export class DashboardComponent implements OnInit, DoCheck {
 
   private async fetchAutocomplete(): Promise<any> {
     this._store?.dispatch(actionsDashboard.FETCH_AUTOCOMPLETE())
-  }
-
-  private async fetchStatusCode(): Promise<any> {
-    this._store?.dispatch(actionsErrors.GET_STATUS_CODE())
   }
 
   public onSubmit(): void {

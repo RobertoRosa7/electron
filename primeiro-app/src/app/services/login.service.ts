@@ -1,7 +1,8 @@
 import { HttpClient } from '@angular/common/http'
 import { Injectable } from '@angular/core'
+import { ActivatedRoute } from '@angular/router'
 import { BehaviorSubject, Observable } from 'rxjs'
-import { tap } from 'rxjs/operators'
+import { map, switchMap, tap } from 'rxjs/operators'
 import { User } from '../models/models'
 import { Constants } from './constants'
 
@@ -16,14 +17,12 @@ export class LoginService {
   constructor(
     private http: HttpClient,
     private constants: Constants,
-  ) { }
+  ) {
+
+  }
 
   public signup(payload: User): Observable<User> {
     return this.http.post<User>(this.constants.get('signup'), payload)
-  }
-
-  public resetPassword(payload: string): Observable<any> {
-    return this.http.post<any>(this.constants.get('reset_password'), payload)
   }
 
   public signin(payload: any): Observable<any> {
@@ -91,5 +90,14 @@ export class LoginService {
 
   public loginVerified(payload: any): Observable<any> {
     return this.http.post<any>(this.constants.get('login_verified'), payload)
+  }
+
+  public resetPassword(payload: any): Observable<any> {
+    const authorization = { 'Authorization': `${btoa(payload.password)}:access:${payload.token}` }
+    return this.http.get<any>(this.constants.get('reset_password'), { headers: authorization })
+  }
+
+  public mailToReset(payload: any): Observable<any> {
+    return this.http.post<any>(this.constants.get('email_to_reset'), payload)
   }
 }

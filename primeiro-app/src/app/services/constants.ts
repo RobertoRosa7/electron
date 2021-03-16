@@ -30,7 +30,8 @@ export class Constants {
     signup: 'login/signup',
     signin: 'login/signin',
     reset_password: 'login/reset_password',
-    login_verified: 'login/login_verified'
+    login_verified: 'login/login_verified',
+    email_to_reset: 'login/email_to_reset'
   }
 
   public get(key: string, host?: string): string {
