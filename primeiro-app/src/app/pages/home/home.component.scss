@@ -122,9 +122,9 @@
   .home .wrapper .container-buttons {
     flex-direction: column;
     align-items: center;
-    button {
-      margin: 8px 0;
-    }
+  }
+  .home .wrapper .container-buttons button {
+    margin: 8px 0;
   }
   .home .wrapper {
     flex-direction: column;
@@ -133,6 +133,7 @@
   .home .container-home {
     padding-left: 16px;
     padding-right: 16px;
+    height: calc(100% - 15%);
   }
   .home .container-home .wrapper .middle h1 {
     font-size: 2.2em;
@@ -147,5 +148,19 @@
   }
   .home .container-home .toolbar-home .toolbar-row .container-buttons {
     display: none;
+  }
+}
+
+@media screen and (min-width: 769px) and (max-width: 1280px) {
+  .home .container-home {
+    padding-left: 16px;
+    padding-right: 16px;
+  } 
+
+  .home .container-home .wrapper .middle h1 {
+    font-size: 2.5em;
+  }
+  .home .container-home .wrapper .middle .container-buttons button {
+    max-width: 180px;
   }
 }
