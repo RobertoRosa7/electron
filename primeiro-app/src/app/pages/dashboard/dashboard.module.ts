@@ -24,6 +24,8 @@ import { HighchartsComponent } from '../../components/highcharts/highcharts.comp
 import { DialogsComponent } from '../../components/dialogs/dialogs.component';
 import { PanelControlComponent } from '../../components/panel-control/panel-control.component'
 import { MaterialModule } from "src/app/material.module"
+import { HTTP_INTERCEPTORS } from "@angular/common/http"
+import { DashboardInterceptor } from "./dashboard.interceptor"
 
 const routes: Routes = [
   {
@@ -80,6 +82,7 @@ registerLocaleData(localePt, 'pt')
   ],
   // exports: [],
   providers: [
+    // { provide: HTTP_INTERCEPTORS, useClass: DashboardInterceptor, multi: true },
     { provide: DateAdapter, useClass: MomentDateAdapter, deps: [MAT_DATE_LOCALE] },
     { provide: LOCALE_ID, useValue: 'pt' },
   ],

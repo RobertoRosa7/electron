@@ -21,6 +21,8 @@ import { DialogsComponent } from './components/dialogs/dialogs.component'
 import { LoginModule } from './pages/login/login.module'
 import { MaterialModule } from './material.module'
 import { LoginEffect } from './effects/login.effects'
+import { HTTP_INTERCEPTORS } from '@angular/common/http'
+import { DashboardInterceptor } from './pages/dashboard/dashboard.interceptor'
 
 registerLocaleData(localePt, 'pt-BR')
 
@@ -54,6 +56,7 @@ const indexedConfig: DBConfig = {
     DialogsComponent
   ],
   providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: DashboardInterceptor, multi: true },
     { provide: Constants },
     { provide: AppService },
   ],

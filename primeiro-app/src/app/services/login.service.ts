@@ -46,7 +46,7 @@ export class LoginService {
     )
   }
 
-  private fetchToken() {
+  public fetchToken() {
     if (localStorage.getItem('token')) {
       return localStorage.getItem('token')
     } else if (sessionStorage.getItem('token')) {
