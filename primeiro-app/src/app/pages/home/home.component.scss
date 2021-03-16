@@ -10,11 +10,12 @@
   .background {
     position: absolute;
     top: 0;
-    background: url("../../../assets/backgroun-home-5.svg");
+    background: url("../../../assets/background-home-5.svg");
     background-repeat: no-repeat;
     background-position: center;
     height: 100%;
     width: 100%;
+    z-index: -1;
   }
   .container-home {
     @include size-container;

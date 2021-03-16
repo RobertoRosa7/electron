@@ -8,11 +8,13 @@ import { SignInComponent } from './sign-in/sign-in.component';
 import { SignUpComponent } from './sign-up/sign-up.component';
 import { LoginService } from 'src/app/services/login.service';
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
+import { VerifyComponent } from './verify/verify.component';
 
 const routes: Routes = [
   { path: '', component: SignInComponent },
   { path: 'signup', component: SignUpComponent },
   { path: 'reset', component: ResetPasswordComponent },
+  { path: 'verify', component: VerifyComponent },
 ]
 
 @NgModule({
@@ -21,7 +23,8 @@ const routes: Routes = [
     DialogsComponent,
     SignInComponent,
     SignUpComponent,
-    ResetPasswordComponent
+    ResetPasswordComponent,
+    VerifyComponent
   ],
   imports: [
     CommonModule,

@@ -29,7 +29,8 @@ export class Constants {
 
     signup: 'login/signup',
     signin: 'login/signin',
-    reset_password: 'login/reset_password'
+    reset_password: 'login/reset_password',
+    login_verified: 'login/login_verified'
   }
 
   public get(key: string, host?: string): string {

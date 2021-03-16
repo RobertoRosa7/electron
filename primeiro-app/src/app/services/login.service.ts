@@ -88,4 +88,8 @@ export class LoginService {
 
     return this.loggedIn$.asObservable()
   }
+
+  public loginVerified(payload: any): Observable<any> {
+    return this.http.post<any>(this.constants.get('login_verified'), payload)
+  }
 }

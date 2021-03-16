@@ -2,11 +2,11 @@ const { BrowserWindow, Tray } = require("electron");
 const menu = require("../menu/menu");
 
 const windowSettings = {
-  width: 1200,
+  width: 1280,
   height: 740,
   backgroundColor: "#FAFAFA",
   name: "Primeiro App",
-  icon: `${__dirname}/../../dist/assets/icon-512x512-default-android.png`,
+  icon: `${__dirname}/../../dist/assets/icon-default-white-512x512.png`,
   webPreferences: {
     nodeIntegration: true,
   },
@@ -29,7 +29,7 @@ module.exports = function createDefaultWindow() {
   win.webContents.openDevTools()
 
   // system tray - mini icon on system tray
-  new Tray(`${__dirname}/../../dist/assets/icon-512x512-default-android.png`);
+  new Tray(`${__dirname}/../../dist/assets/icon-default-white-512x512.png`);
 
   // Event when the window is closed
   win.on("closed", () => (win = null));
